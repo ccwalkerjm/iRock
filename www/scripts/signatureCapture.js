@@ -2,9 +2,7 @@ function SignatureCapture( canvasID ) {
 	this.touchSupported = Modernizr.touch;
 	this.canvasID = canvasID;
 	this.canvas = $("#" + canvasID);
-	this.context = this.canvas.get(0).getContext("2d");
-	//this.canvas = document.getElementById(canvasID);
-	//this.context = canvas.getContext('2d');	
+	this.context = this.canvas.get(0).getContext("2d");	
 	this.context.strokeStyle = "#000000";
 	this.context.lineWidth = 1;
 	this.lastMousePoint = {x:0, y:0};

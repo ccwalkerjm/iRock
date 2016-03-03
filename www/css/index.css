@@ -34,15 +34,6 @@ form {
 }
 
 /* Signature*/
-body {
-	padding: 25px;
-	font-size:x-large;
-}
-
-#email {
-	width:95%;
-	font-size:x-large;
-}
 
 #canvasContainer {
 	position:relative;
@@ -56,20 +47,6 @@ body {
 #signature {
   height: 200px;
   width: 100%;
+  border:1px solid #000000;
 }
 
-#lowerControls {
-	position:relative;
-	padding-top: 25px;	
-}
-
-#buttonsContainer {
-	position:absolute;
-	right:0px;
-	width:300px;	
-	text-align:right;
-}
-#feedback {
-	position:absolute;
-	left:0px;
-}
