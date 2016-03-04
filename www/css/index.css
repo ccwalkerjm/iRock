@@ -1,14 +1,10 @@
-﻿.not-displayed {
+﻿/*.not-displayed {
     display: none;
-}
+}*/
 
-form {
+/*form {
     border-bottom: 1px solid #ddd;
     padding-bottom: 5px;
-}
-
-#zip-code-input {
-    font-size: 25px;
 }
 
 #submit-btn {
@@ -31,9 +27,19 @@ form {
     text-align: center;
     margin-top:  50%;
     font-weight: bold;    
-}
+}*/
 
 /* Signature*/
+
+/*body {
+	padding: 25px;
+	font-size:x-large;
+}
+
+#email {
+	width:95%;
+	font-size:x-large;
+}*/
 
 #canvasContainer {
 	position:relative;
@@ -50,3 +56,18 @@ form {
   border:1px solid #000000;
 }
 
+/*#lowerControls {
+	position:relative;
+	padding-top: 25px;	
+}
+
+#buttonsContainer {
+	position:absolute;
+	right:0px;
+	width:300px;	
+	text-align:right;
+}
+#feedback {
+	position:absolute;
+	left:0px;
+}*/

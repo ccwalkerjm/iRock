@@ -7,7 +7,7 @@
         For details, see http://go.microsoft.com/fwlink/?LinkID=617521
     -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://cdn.courserv.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
-    
+
     <!-- IronRockApplication references -->
     <title>Iron Rock Insurance-Application</title>
 
@@ -16,20 +16,51 @@
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
     <link rel="stylesheet" href="css/index.css" />
 
-    <script src="scripts/jquery-2.2.1.min.js"></script>    
+    <script src="scripts/jquery-2.2.1.min.js"></script>
     <script src="scripts/modernizr.custom.34982.js"></script>
 </head>
 <body>
 
 
+    <div data-role="page" id="page-signature">
+        <div data-role="header" class="header" data-position="fixed">
+            <h1 id="app-title">Signature</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+        <div role="main" class="ui-content">
+            <form>
+                <p>Sign below and press the submit button.</p>
+                
+                <div id="canvasContainer" width="100%">
+                    <canvas id="signature" height="200px" />
+                </div>
+
+                <div id="lowerControls">
+                    <div id="feedback"></div>
+                    <div id="buttonsContainer">
+                        <div data-role="controlgroup">
+                            <a href="#main-page" data-role="button" data-inline="true" data-icon="delete">Cancel</a>
+                            <a id="submit-btn" data-role="button" data-inline="true" data-icon="check" href="#">Submit</a>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
     <div data-role="page" id="main-page">
 
-        <div data-role="header" class="header">
+        <div data-role="header" class="header" data-position="fixed">
             <h1 id="app-title">Name</h1>
             <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
 
-        <div role="main" class="ui-content" data-scroll="true">
+        <div role="main" class="ui-content">
             <form>
                 <label for="Surname">Surname:</label>
                 <input type="text" id="Surname" placeholder="Enter Surname">
@@ -87,13 +118,11 @@
         <footer data-role="footer" data-position="fixed">
             <h4>Iron Rock Insurance-Mobile App</h4>
         </footer>
-
     </div>
-
 
     <div data-role="page" id="address-page">
 
-        <div data-role="header" class="header">
+        <div data-role="header" class="header" data-position="fixed">
             <h1 id="app-title">Physical Address</h1>
             <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
@@ -191,74 +220,10 @@
             </form>
 
         </div>
-
         <footer data-role="footer" data-position="fixed">
             <h4>Iron Rock Insurance-Mobile App</h4>
         </footer>
-
     </div>
-
-
-    <div data-role="page" id="page-signature">
-
-        <div data-role="header" class="header">
-            <h1 id="app-title">Signature</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
-        </div>
-
-        <div role="main" class="ui-content">
-            <form>
-                <p>Enter your signature and Press the submit button below</p>
-                <div id="canvasContainer">
-                    <canvas id="signature" />
-                </div>
-                <button id="submit-btn" data-role="button" data-icon="check">Submit</button>
-                <div data-role="controlgroup"><a href="#mailing-address-page" data-role="button" data-inline="true" data-icon="arrow-l">Previous</a></div>
-            </form>
-        </div>
-
-        <footer data-role="footer" data-position="fixed">
-            <h4>Iron Rock Insurance-Mobile App</h4>
-        </footer>
-
-    </div>
-
-
-
-    <!--<div data-role="page" id="second-page">
-
-        <div data-role="header" class="header">
-            <h1 id="app-title">Iron Rock App</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
-        </div>
-
-        <div role="main" data-role="content" class="ui-content">
-            <form>
-                <label for="zip-code">Type your zip code:</label>
-                <input id="zip-code-input" name="zip-code" placeholder="eg. 98001" required />
-                <button id="submit-btn" data-role="button" data-icon="search">Submit</button>
-            </form>
-
-            <ul id="status-data" data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow not-displayed">
-                <li data-role="list-divider" id="title" class="ui-li-divider ui-bar-a"></li>
-                <li><span id="summary"><span id="temperature"></span> F <img src="" /></span></li>
-                <li>Wind: <span id="wind"></span> knots</li>
-                <li>Humidity: <span id="humidity"></span> %</li>
-                <li>Visibility: <span id="visibility"></span> miles</li>
-                <li>Sunrise: <span id="sunrise"></span></li>
-                <li>Sunset: <span id="sunset"></span></li>
-            </ul>
-
-            <div id="error-msg" class="not-displayed">
-            </div>
-
-        </div>
-
-        <footer data-role="footer" data-position="fixed">
-            <h4>Iron Rock Insurance-Mobile App</h4>
-        </footer>
-
-    </div>-->
 
 
     <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
