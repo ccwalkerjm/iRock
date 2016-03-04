@@ -28,24 +28,23 @@
             <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
         <div role="main" class="ui-content">
-            <form>
-                <p>Sign below and press the submit button.</p>
-                
-                <div id="canvasContainer" width="100%">
-                    <canvas id="signature" height="200px" />
-                </div>
 
-                <div id="lowerControls">
-                    <div id="feedback"></div>
-                    <div id="buttonsContainer">
-                        <div data-role="controlgroup">
-                            <a href="#main-page" data-role="button" data-inline="true" data-icon="delete">Cancel</a>
-                            <a id="submit-btn" data-role="button" data-inline="true" data-icon="check" href="#">Submit</a>
-                        </div>
+            <p>Sign below and press the submit button.</p>
+
+            <div id="canvasContainer" width="100%">
+                <canvas id="signature" height="200px" />
+            </div>
+
+            <div id="lowerControls">
+                <div id="feedback"></div>
+                <div id="buttonsContainer">
+                    <div data-role="controlgroup">
+                        <a href="#main-page" data-role="button" data-inline="true" data-mini="true" data-icon="delete">Return</a>
+                        <a  id="clear-canvas" href="#" data-role="button" data-inline="true" data-icon="back"  data-mini="true">Clear</a>
+                        <a id="submit-btn" href="#" data-role="button" data-inline="true" data-icon="check"  data-mini="true">Submit</a>
                     </div>
                 </div>
-
-            </form>
+            </div>
         </div>
 
         <footer data-role="footer" data-position="fixed">
@@ -62,16 +61,17 @@
 
         <div role="main" class="ui-content">
             <form>
+                <input type="hidden" id="signatureBytes"  name="signatureBytes" />
                 <label for="Surname">Surname:</label>
                 <input type="text" id="Surname" placeholder="Enter Surname">
 
 
                 <label for="FirstName">FirstName:</label>
-                <input type="text" id="FirstName" placeholder="Enter FirstName">
+                <input type="text" id="FirstName"  name="FirstName" placeholder="Enter FirstName">
 
 
                 <label for="MiddleName">MiddleName:</label>
-                <input type="text" id="MiddleName" placeholder="Enter MiddleName">
+                <input type="text" id="MiddleName" name="MiddleName" placeholder="Enter MiddleName">
 
 
                 <label for="Title" class="select">Title:</label>
@@ -110,7 +110,7 @@
 
                 <label for="SourceOfFunds">Source of Funds:</label>
                 <input type="text" id="SourceOfFunds" placeholder="Enter Source of Funds">
-                <div data-role="controlgroup"><a href="#address-page" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">Next</a></div>
+                <div data-role="controlgroup"><a href="#address-page" data-role="button" data-inline="true" data-mini="true"  data-icon="arrow-r" data-iconpos="right">Next</a></div>
             </form>
 
         </div>
@@ -158,7 +158,7 @@
 
                 <label for="Work Number">Work Number:</label>
                 <input type="number" id="Work Number" placeholder="Enter Work Number">
-                <div data-role="controlgroup"><a href="#main-page" data-role="button" data-inline="true" data-icon="arrow-l">Previous</a><a href="#mailing-address-page" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">Next</a></div>
+                <div data-role="controlgroup"><a href="#main-page" data-role="button" data-inline="true" data-mini="true"  data-icon="arrow-l">Previous</a><a href="#mailing-address-page" data-role="button" data-inline="true" data-mini="true"  data-icon="arrow-r" data-iconpos="right">Next</a></div>
             </form>
 
         </div>
@@ -216,7 +216,10 @@
 
                 <label for="ExpiryDate">Expiry Date:</label>
                 <input type="date" id="ExpiryDate" placeholder="Enter Expiry Date">
-                <div data-role="controlgroup"><a href="#address-page" data-role="button" data-inline="true" data-icon="arrow-l">Previous</a><a href="#page-signature" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">Next</a></div>
+                <div data-role="controlgroup">
+                    <a href="#address-page" data-role="button" data-inline="true" data-mini="true"  data-icon="arrow-l">Previous</a>
+                    <a href="#page-signature" data-role="button" data-inline="true" data-mini="true"  data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
             </form>
 
         </div>

@@ -12,8 +12,13 @@ $(document).ready(function (e) {
 
     $('#submit-btn').click(function () {
         var sig = sigCapture.toString();
-        alert(sig);
+        $('#signatureBytes').val(sig);
+        var data = $('form').serialize();
+        alert(data);
+    });
 
+    $('#clear-canvas').click(function () {
+        var sig = sigCapture.clear();
     });
 
 });
