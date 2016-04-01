@@ -5,9 +5,14 @@
 ////////////outside functions
 
 
-$(document).one("pagebeforeshow", "#page-signature", function () {
-    $(':mobile-pagecontainer').pagecontainer('change', '#main-page');
-});
+////stop default initialization
+//$(document).on("mobileinit", function () {
+//    $.mobile.autoInitializePage = false;
+//});
+
+//$(document).one("pagebeforeshow", "#page-signature", function () {
+//    $(':mobile-pagecontainer').pagecontainer('change', '#main-page');
+//});
 
 document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 
@@ -26,9 +31,16 @@ function onResume() {
     // TODO: This application has been reactivated. Restore application state here.
 };
 
+
+
+
 var sigCapture = null;
 
 $(document).ready(function (e) {
+    //window.location.hash = 'main-page';
+    //// #initialise jQM
+    //$.mobile.initializePage();
+           
     $('form').validate({
         rules: {
             applicantSurname: {
@@ -63,18 +75,18 @@ $(document).ready(function (e) {
         }
     });
 
-    sigCapture = new SignatureCapture("signature");
+    //sigCapture = new SignatureCapture("signature");
 
-    $('#submit-btn').click(function () {
-        var sig = sigCapture.toString();
-        $('#signatureBytes').val(sig);
-        var data = $('form').serialize();
-        alert(data);
-    });
+    //$('#submit-btn').click(function () {
+    //    var sig = sigCapture.toString();
+    //    $('#signatureBytes').val(sig);
+    //    var data = $('form').serialize();
+    //    alert(data);
+    //});
 
-    $('#clear-canvas').click(function () {
-        var sig = sigCapture.clear();
-    });
+    //$('#clear-canvas').click(function () {
+    //    var sig = sigCapture.clear();
+    //});
 
     //applicantRelativeInPublicOffice
     $('#applicantRelativeInPublicOffice').change(function () {

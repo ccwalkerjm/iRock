@@ -22,38 +22,6 @@
 </head>
 <body>
 
-    
-
-    <div data-role="page" id="page-signature">
-        <div data-role="header" class="header" data-position="fixed">
-            <h1 id="app-title">Signature</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
-        </div>
-        <div role="main" class="ui-content">
-
-            <p>Sign below and press the submit button.</p>
-
-            <div id="canvasContainer" width="100%">
-                <canvas id="signature" height="200px" />
-            </div>
-
-            <div id="lowerControls">
-                <div id="feedback"></div>
-                <div id="buttonsContainer">
-                    <div data-role="controlgroup">
-                        <a href="#personal-main-page" data-role="button" data-inline="true" data-mini="true" data-icon="delete">Return</a>
-                        <a id="clear-canvas" href="#" data-role="button" data-inline="true" data-icon="back" data-mini="true">Clear</a>
-                        <a id="submit-btn" href="#" data-role="button" data-inline="true" data-icon="check" data-mini="true">Submit</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <footer data-role="footer" data-position="fixed">
-            <h4>Iron Rock Insurance-Mobile App</h4>
-        </footer>
-    </div>
-
 
     <div data-role="page" id="main-page">
 
@@ -62,9 +30,12 @@
         </div>
 
         <div role="main" class="ui-content">
+            <!--<div style="width: 100%; height: 100%; position: relative; background-color: #fbfbfb; border: 1px solid #b8b8b8;">
+                <img src="images/IronRockLogo.png" alt="image" style="position: absolute; top: 50%; left: 50%; margin-left: -16px; margin-top: -18px" />
+            </div>-->
             <div class="">
                 <a id="menu-vehicle" href="#" class="ui-btn">Motor Vehicle Insurance</a>
-                <a  id="menu-property" href="#" class="ui-btn">Property Insurance</a>
+                <a id="menu-property" href="#" class="ui-btn">Property Insurance</a>
             </div>
 
         </div>
@@ -73,7 +44,7 @@
             <h4>Iron Rock Insurance-Mobile App</h4>
         </footer>
     </div>
-    
+
     <div data-role="page" id="personal-main-page">
 
         <div data-role="header" class="header" data-position="fixed">
@@ -87,14 +58,11 @@
                 <label for="applicantSurname">Surname:</label>
                 <input type="text" id="applicantSurname" name="applicantSurname" placeholder="Enter Surname">
 
-
                 <label for="applicantFirstName">FirstName:</label>
                 <input type="text" id="applicantFirstName" name="FirstName" placeholder="Enter FirstName">
 
-
                 <label for="applicantMiddleName">MiddleName:</label>
                 <input type="text" id="applicantMiddleName" name="applicantMiddleName" placeholder="Enter MiddleName">
-
 
                 <label for="applicantTitle" class="select">Title:</label>
                 <select id="Title">
@@ -105,14 +73,11 @@
                     <option>Prof</option>
                 </select>
 
-
                 <label for="applicantMothersMaidenName">Mother's Maiden Name:</label>
                 <input type="text" id="applicantMothersMaidenName" name="applicantMothersMaidenName" placeholder="Enter your maiden name">
 
-
                 <label for="applicantAlias">Other Names/Aliases:</label>
                 <input type="text" id="applicantAlias" name="applicantAlias" placeholder="Enter other name/alias">
-
 
                 <label for="applicantIDType" class="select">ID Type:</label>
                 <select id="IDType">
@@ -124,19 +89,16 @@
                 <label for="applicantIDNumber">ID Number:</label>
                 <input type="number" id="applicantIDNumber" name="applicantIDnumber" placeholder="Enter ID Number">
 
-
                 <label for="applicationIDExpirationDate">Expiration Date:</label>
                 <input type="date" id="applicationIDExpirationDate" name="applicationIDExpirationDate" placeholder="Enter Expiration Date">
-
             </form>
-
         </div>
 
         <footer data-role="footer" data-position="fixed">
             <h4>Insurance App</h4>
         </footer>
     </div>
-    
+
     <div data-role="page" id="personal-contact-page">
 
         <div data-role="header" class="header" data-position="fixed">
@@ -385,36 +347,36 @@
                 <div id="publicofficerelation" style="display:none">
                     <div class="publicofficerelations">
                         <h4>Relative 1</h4>
-                        <hr/>
+                        <hr />
                         <fieldset class="ui-grid-a office">
-                            <div class="ui-block-a" style="width:25%">
+                            <div class="ui-block-a" style="width:50%">
                                 <label for="applicantRelativeTypePublicOffice0">Office</label>
                             </div>
-                            <div class="ui-block-b" style="width:75%">
+                            <div class="ui-block-b" style="width:50%">
                                 <input type="text" name="applicantRelativeTypePublicOffice0" id="applicantRelativeTypePublicOffice0" value="">
                             </div>
                         </fieldset>
                         <fieldset class="ui-grid-a name">
-                            <div class="ui-block-a" style="width:25%">
+                            <div class="ui-block-a" style="width:50%">
                                 <label for="applicantRelativeInPublicOfficeName0">Name</label>
                             </div>
-                            <div class="ui-block-b" style="width:75%">
+                            <div class="ui-block-b" style="width:50%">
                                 <input type="text" name="applicantRelativeInPublicOfficeName0" id="applicantRelativeInPublicOfficeName0" value="">
                             </div>
                         </fieldset>
                         <fieldset class="ui-grid-a address">
-                            <div class="ui-block-a" style="width:25%">
+                            <div class="ui-block-a" style="width:50%">
                                 <label for="applicantRelativeInPublicOfficeAddress0">Address</label>
                             </div>
-                            <div class="ui-block-b" style="width:75%">
+                            <div class="ui-block-b" style="width:50%">
                                 <input type="text" name="applicantRelativeInPublicOfficeAddress0" id="applicantRelativeInPublicOfficeAddress0" value="">
                             </div>
                         </fieldset>
                         <fieldset class="ui-grid-a relation">
-                            <div class="ui-block-a" style="width:25%">
+                            <div class="ui-block-a" style="width:50%">
                                 <label for="applicantRelativeInPublicOfficeRelation0">Relation</label>
                             </div>
-                            <div class="ui-block-b" style="width:75%">
+                            <div class="ui-block-b" style="width:50%">
                                 <select name="applicantRelativeInPublicOfficeRelation0" id="applicantRelativeInPublicOfficeRelation0">
                                     <option value="spouse">Spouse</option>
                                     <option value="child">Child</option>
@@ -451,39 +413,39 @@
 
                 <div class="vehicleToBeInsured">
                     <h4>Vehicle 1</h4>
-                    <hr/>
+                    <hr />
                     <fieldset class="ui-grid-a registration">
-                        <div class="ui-block-a" >
+                        <div class="ui-block-a">
                             <label for="vehicleRegistrationNo0">Registration No.:</label>
                         </div>
-                        <div class="ui-block-b" >
+                        <div class="ui-block-b">
                             <input type="text" name="vehicleRegistrationNo0" id="vehicleRegistrationNo0" value="">
                         </div>
                     </fieldset>
 
                     <fieldset class="ui-grid-a make">
-                        <div class="ui-block-a" >
+                        <div class="ui-block-a">
                             <label for="vehicleMake0">Make:</label>
                         </div>
-                        <div class="ui-block-b" >
+                        <div class="ui-block-b">
                             <input type="text" name="vehicleMake0" id="vehicleMake0" value="">
                         </div>
                     </fieldset>
 
                     <fieldset class="ui-grid-a model">
-                        <div class="ui-block-a" >
+                        <div class="ui-block-a">
                             <label for="vehicleModel0">Model:</label>
                         </div>
-                        <div class="ui-block-b" >
+                        <div class="ui-block-b">
                             <input type="text" name="vehicleModel0" id="vehicleModel0" value="">
                         </div>
                     </fieldset>
 
                     <fieldset class="ui-grid-a chassis">
-                        <div class="ui-block-a" >
+                        <div class="ui-block-a">
                             <label for="vehicleChassisNo0">Chassis No.:</label>
                         </div>
-                        <div class="ui-block-b" >
+                        <div class="ui-block-b">
                             <input type="text" name="vehicleChassisNo0" id="vehicleChassisNo0" value="">
                         </div>
                     </fieldset>
@@ -498,53 +460,53 @@
                     </fieldset>
 
                     <fieldset class="ui-grid-a year">
-                        <div class="ui-block-a" >
+                        <div class="ui-block-a">
                             <label for="vehicleYearOfMake0">Year:</label>
                         </div>
-                        <div class="ui-block-b" >
+                        <div class="ui-block-b">
                             <input type="text" name="vehicleYearOfMake0" id="vehicleYearOfMake0" value="">
                         </div>
                     </fieldset>
 
                     <fieldset class="ui-grid-a rating">
-                        <div class="ui-block-a" >
+                        <div class="ui-block-a">
                             <label for="vehicleCcRating0">C.C. Rating:</label>
                         </div>
-                        <div class="ui-block-b" >
+                        <div class="ui-block-b">
                             <input type="text" name="vehicleCcRating0" id="vehicleCcRating0" value="">
                         </div>
                     </fieldset>
                     <fieldset class="ui-grid-a seating">
-                        <div class="ui-block-a" >
+                        <div class="ui-block-a">
                             <label for="vehicleSeating0">Seating:</label>
                         </div>
-                        <div class="ui-block-b" >
+                        <div class="ui-block-b">
                             <input type="text" name="vehicleSeating0" id="vehicleSeating0" value="">
                         </div>
                     </fieldset>
 
                     <fieldset class="ui-grid-a body">
-                        <div class="ui-block-a" >
+                        <div class="ui-block-a">
                             <label for="vehicleTypeOfBody0">Type of Body:</label>
                         </div>
-                        <div class="ui-block-b" >
+                        <div class="ui-block-b">
                             <input type="text" name="vehicleTypeOfBody0" id="vehicleTypeOfBody0" value="">
                         </div>
                     </fieldset>
                     <fieldset class="ui-grid-a insured">
-                        <div class="ui-block-a" >
+                        <div class="ui-block-a">
                             <label for="vehicleSumInsured0">Sum Insured</label>
                         </div>
-                        <div class="ui-block-b" >
+                        <div class="ui-block-b">
                             <input type="text" name="vehicleSumInsured0" id="vehicleSumInsured0" value="">
                         </div>
                     </fieldset>
 
                     <fieldset class="ui-grid-a trailer">
-                        <div class="ui-block-a" >
+                        <div class="ui-block-a">
                             <label for="vehicleTrailerUsed0">Is Trailer Used?</label>
                         </div>
-                        <div class="ui-block-b" >
+                        <div class="ui-block-b">
                             <select name="vehicleTrailerUsed0" id="vehicleTrailerUsed0" data-role="slider" data-mini="true">
                                 <option value="no" selected="">No</option>
                                 <option value="yes">Yes</option>
@@ -634,7 +596,7 @@
                     <option value="Social domestic and pleasure purposes and business use">Social domestic and pleasure purposes and business use</option>
                     <option value="Commercial travelling">Commercial travelling</option>
                 </select>
-               
+
             </form>
 
         </div>
@@ -1012,6 +974,7 @@
             </form>
 
         </div>
+
         <footer data-role="footer" data-position="fixed">
             <h4>Insurance App</h4>
         </footer>
@@ -1043,6 +1006,16 @@
                     <label for="homeRoomsNotSelfContained">Rooms not self-contained?</label>
                 </fieldset>
 
+                <label for="homeType">Is the home:</label>
+                <select name="homeType" id="homeType" data-mini="homeType">
+
+                    <option value="A private Dwelling House">A private Dwelling House</option>
+
+                    <option value="A self-contained flat or apartment with seperate entrance exclusively under your control">A self-contained flat or apartment with seperate entrance exclusively under your control</option>
+
+                    <option value="Rooms not self-contained">Rooms not self-contained</option>
+                </select>
+
                 <p>Construction of Dwelling</p>
 
                 <label for="constructionExternalWalls">External Walls:</label>
@@ -1065,9 +1038,13 @@
                 <label for="garageRoof">External Walls:</label>
                 <input type="text" name="garageRoof" id="garageRoof" value="">
 
+                <div data-role="controlgroup">
+                    <a href="#vehicle-medical-history-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#home-particulars-continued-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
             </form>
 
         </div>
+
         <footer data-role="footer" data-position="fixed">
             <h4>Insurance App</h4>
         </footer>
@@ -1083,76 +1060,66 @@
         <div role="main" class="ui-content">
             <form>
 
-                <fieldset data-role="controlgroup">
 
-                    <legend>Are the buildings in good state of repairs and will they be soo maintained?</legend>
+                <label for="homeInGoodState">Are the buildings in good state of repairs and will they be soo maintained?</label>
+                <select name="homeInGoodState" id="homeInGoodState" data-role="slider" data-mini="true">
 
-                    <input type="radio" name="homeInGoodState" id="homeInGoodStateYes" value="on" checked="checked">
-                    <label for="homeInGoodStateYes">Yes</label>
+                    <option value="yes">Yes</option>
 
-                    <input type="radio" name="homeInGoodState" id="homeInGoodStateNo" value="off">
-                    <label for="homeInGoodStateNo">No</label>
-                </fieldset>
+                    <option value="no">No</option>
+                </select>
 
-                <fieldset data-role="controlgroup">
+                <label for="homeOccupiedByApplicantFamily">Is the Dwelling occupied by you, your family and domestic employees?</label>
+                <select name="homeOccupiedByApplicantFamily" id="homeOccupiedByApplicantFamily" data-role="slider" data-mini="true">
 
-                    <legend>Is the Dwelling occupied by you, your family and domestic employees?</legend>
+                    <option value="yes">Yes</option>
 
-                    <input type="radio" name="homeOccupiedByApplicantFamily" id="homeOccupiedByApplicantFamilyYes" value="on" checked="checked">
-                    <label for="homeYes3">Yes</label>
-
-                    <input type="radio" name="homeOccupiedByApplicantFamily" id="homeOccupiedByApplicantFamilyNo" value="off">
-                    <label for="homeOccupiedByApplicantFamilyNo">No</label>
-                </fieldset>
+                    <option value="no">No</option>
+                </select>
 
                 <label for="homeOccupiedByApplicantFamilyIfNo">If no, give the details of other occupants:</label>
                 <input type="text" name="homeOccupiedByApplicantFamilyIfNo" id="homeOccupiedByApplicantFamilyIfNo" value="">
 
-                <fieldset data-role="controlgroup">
+                <label for="homeUsedForIncomeActivity">Is any part of the Dwelling or Outbuilding used for any income-earning activity?</label>
+                <select name="homeUsedForIncomeActivity" id="homeUsedForIncomeActivity" data-role="slider" data-mini="true">
 
-                    <legend>Is any part of the Dwelling or Outbuilding used for any income-earning activity?</legend>
+                    <option value="yes">Yes</option>
 
-                    <input type="radio" name="homeUsedForIncomeActivity" id="homeUsedForIncomeActivityYes" value="on" checked="checked">
-                    <label for="homeUsedForIncomeActivityYes">Yes</label>
-
-                    <input type="radio" name="homeUsedForIncomeActivity" id="homeUsedForIncomeActivityNo" value="off">
-                    <label for="homeUsedForIncomeActivityNo">No</label>
-                </fieldset>
+                    <option value="no">No</option>
+                </select>
 
                 <label for="homeUsedForIncomeActivityDetails">If yes, give details:</label>
                 <input type="text" name="homeUsedForIncomeActivityDetails" id="homeUsedForIncomeActivityDetails" value="">
 
-                <fieldset data-role="controlgroup">
+                <label for="homeHaveInterestFromIndividual">Does any institution or individual have a financial interest in the property</label>
+                <select name="homeHaveInterestFromIndividual" id="homeHaveInterestFromIndividual" data-role="slider" data-mini="true">
 
-                    <legend>Does any institution or individual have a financial interest in the property</legend>
+                    <option value="yes">Yes</option>
 
-                    <input type="radio" name="homeHaveInterestFromIndividual" id="homeHaveInterestFromIndividualYes" value="on">
-                    <label for="homeHaveInterestFromIndividualYes">Yes</label>
-
-                    <input type="radio" name="homeHaveInterestFromIndividual" id="homeHaveInterestFromIndividualNo" value="off">
-                    <label for="homeHaveInterestFromIndividualNo">No</label>
-                </fieldset>
+                    <option value="no">No</option>
+                </select>
 
                 <label for="homeInputBox3">If yes, state their name and address:</label>
                 <input type="text" name="homeInputBox3" id="homeInputBox3" value="">
 
-                <fieldset data-role="controlgroup">
+                <label for="homeHasWatersideStructure">Are there any Waterside Structures i.e. docks, jetties, piers, sea walls and any other structure abutting the sea, a river or any other body of water?</label>
+                <select name="homeHasWatersideStructure" id="homeHasWatersideStructure" data-role="slider" data-mini="true">
 
-                    <legend>Are there any Waterside Structures i.e. docks, jetties, piers, sea walls and any other structure abutting the sea, a river or any other body of water?</legend>
+                    <option value="yes">Yes</option>
 
-                    <input type="radio" name="homeHasWatersideStructure" id="homeHasWatersideStructureYes" value="on" checked="checked">
-                    <label for="homeHasWatersideStructureYes">Yes</label>
-
-                    <input type="radio" name="homeHasWatersideStructure" id="homeHasWatersideStructureNo" value="off">
-                    <label for="homeHasWatersideStructureNo">No</label>
-                </fieldset>
+                    <option value="no">No</option>
+                </select>
 
                 <label for="homeHasWatersideStructureDetails">If yes, please describe:</label>
                 <input type="text" name="homeHasWatersideStructureDetails" id="homeHasWatersideStructureDetails" value="">
 
+                <div data-role="controlgroup">
+                    <a href="#home-particulars-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#home-property-details-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
             </form>
 
         </div>
+
         <footer data-role="footer" data-position="fixed">
             <h4>Insurance App</h4>
         </footer>
@@ -1171,18 +1138,40 @@
                 <h4>Details of Property to be insured</h4>
                 <h5>Buildings and other structures</h5>
 
-                <p>IMPORTANT NOTE: The SUMS TO BE INSURED must represent the FULL NEW REPLACEMENT COST of the Property and should include adequate provision for demolition and debris removal costs in the event of major damage as well as professional fees that would be incurred in reinstatement. As the Company will pay up to 10% of the Sum insured in respect of Rent lost or reasonable costs of alternative accomodation if damage by an Insured Peril renders the home uninhabitable, provision for this should also be included in your Sums Insured.</p>
+                <div data-role="collapsible">
+                    <h4>IMPORTANT NOTE</h4>
+                    <p>: The SUMS TO BE INSURED must represent the FULL NEW REPLACEMENT COST of the Property and should include adequate provision for demolition and debris removal costs in the event of major damage as well as professional fees that would be incurred in reinstatement. As the Company will pay up to 10% of the Sum insured in respect of Rent lost or reasonable costs of alternative accomodation if damage by an Insured Peril renders the home uninhabitable, provision for this should also be included in your Sums Insured.</p>
+                </div>
 
-                <table style="width:100%">
-                    <tr>
-                        <th>Specified Items</th>
-                        <th>Sums to be Insured</th>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </table>
+
+                <div id="homeInsuranceProperty">
+                    <div class="homeInsurancePropertyItems">
+                        <h4>Item 1</h4>
+                        <hr />
+                        <fieldset class="ui-grid-a article-name">
+                            <div class="ui-block-a" style="width:50%">
+                                <label for="homeInsurancePropertyItem">Description</label>
+                            </div>
+                            <div class="ui-block-b" style="width:50%">
+                                <input type="text" name="homeInsurancePropertyItem" id="homeInsurancePropertyItem" value="">
+                            </div>
+                        </fieldset>
+                        <fieldset class="ui-grid-a article-value">
+                            <div class="ui-block-a" style="width:50%">
+                                <label for="homeInsurancePropertyItemValue">Value</label>
+                            </div>
+                            <div class="ui-block-b" style="width:50%">
+                                <input type="text" name="homeInsurancePropertyItemValue" id="homeInsurancePropertyItemValue" value="">
+                            </div>
+                        </fieldset>
+
+                        <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left Add">Add More</a>
+                            <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right Delete" style="display:none">Delete</a>
+                        </div>
+                    </div>
+                    <p>The Total Sum</p>
+                </div>
 
                 <p>The Buildings of the private dwelling together with its garages and outbuildings, including landlord;s fixtures and fittings together with patios, driveways and other paved areas, walls, gates and fences, underground water pipes and cables providing services to and from the home, fixed water storage tanks and sewage disposal systems.(NB Swimming Pools and Waterside Structures are not included in the above item.)</p>
 
@@ -1229,9 +1218,14 @@
                 <label for="totalSumInsured">The Total Sum Insured under the Contents Section of the Policy </label>
                 <input type="text" name="totalSumInsured" id="totalSumInsured" value="">
 
+
+                <div data-role="controlgroup">
+                    <a href="#home-particulars-continued-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#home-all-risk-insurance-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
             </form>
 
         </div>
+
         <footer data-role="footer" data-position="fixed">
             <h4>Insurance App</h4>
         </footer>
@@ -1246,36 +1240,43 @@
 
         <div role="main" class="ui-content">
             <form>
-
                 <h5>ALL RISKS INSURANCE IN RESPECT OF PERSONAL POSSESSIONS</h5>
-
-                <p>IMPORTANT NOTE: Valuation Reports or Receipts in respect of all Articles to be insured should be attached to this Form.</p>
-
+                <div data-role="collapsible">
+                    <h4>IMPORTANT NOTE</h4>
+                    <p>Valuation Reports or Receipts in respect of all Articles to be insured should be attached to this Form.</p>
+                </div>                
                 <p>Full Description of Article(s) to be insured</p>
+                <div id="articleInsured">
+                    <div class="articles">
+                        <h4>Article 1</h4>
+                        <hr />
+                        <fieldset class="ui-grid-a article-name">
+                            <div class="ui-block-a" style="width:50%">
+                                <label for="homeInsuranceArticle">Description</label>
+                            </div>
+                            <div class="ui-block-b" style="width:50%">
+                                <input type="text" name="homeInsuranceArticle" id="homeInsuranceArticle" value="">
+                            </div>
+                        </fieldset>
+                        <fieldset class="ui-grid-a article-value">
+                            <div class="ui-block-a" style="width:50%">
+                                <label for="homeInsuranceArticleValue">Value</label>
+                            </div>
+                            <div class="ui-block-b" style="width:50%">
+                                <input type="text" name="homeInsuranceArticleValue" id="homeInsuranceArticleValue" value="">
+                            </div>
+                        </fieldset>
 
-                <table style="width:100%">
-                    <tr>
-                        <th>Items List</th>
-                        <th>Sum Insured</th>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>The Total Sum Insured under the All Risks Section of the Policy</td>
-                        <td></td>
-                    </tr>
-                </table>
+                        <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left Add">Add More</a>
+                            <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right Delete" style="display:none">Delete</a>
+                        </div>
+                    </div>
+                    <p>The Total Sum Insured under the All Risks Section of the Policy</p>
+                </div>
 
                 <fieldset data-role="controlgroup">
-
                     <legend>Select Territorial Limits required</legend>
-
                     <input type="radio" name="territorialLimit" id="territorialLimitJamaica" value="on" checked="checked">
                     <label for="territorialLimitJamaica">Jamaica Only</label>
 
@@ -1283,53 +1284,95 @@
                     <label for="territorialLimitWorldwide">Worldwide</label>
                 </fieldset>
 
-                <table border="1" style="width:100%">
-                    <tr>
-                        <td></td>
-                        <td>Yes</td>
-                        <td>No</td>
-                        <td>If yes, please give details</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Do you currently have in force any policy whether with us or with any other Company or Insurer covering any of the Property to be insured?
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Have the Building and/or Contents of the Home to which this Proposal relates ever suffered damage by Hurricane, Earthquake or Flood?
-                        </td>
-                        <td>
-                            <ol type="a">
-                                <li>Declined to insure you? </li>
-                                <li>Required special terms to insure you?</li>
-                                <li>Cancelled or refused to renew your policy?</li>
-                                <li>Increased your premium on renewal?</li>
-                            </ol>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Have you ever sustained loss from any Perils to which this Proposal would apply?</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </table>
+
+                <label for="currentPolicyWithCompanyOrInsurer">Do you currently have in force any policy whether with us or with any other Company or Insurer covering any of the Property to be insured?</label>
+                <select name="currentPolicyWithCompanyOrInsurer" id="currentPolicyWithCompanyOrInsurer" data-role="slider" data-mini="true">
+
+                    <option value="yes">Yes</option>
+
+                    <option value="no">No</option>
+                </select>
+
+                <label for="currentPolicyWithCompanyOrInsurerDetails">If yes, please give details:</label>
+                <input type="text" name="currentPolicyWithCompanyOrInsurerDetails" id="currentPolicyWithCompanyOrInsurerDetails" placeholder="Text input" value="" data-mini="true">
+
+                <label for="companyPerils">Has any Company or Insurer, in respect of any of the Perils to which this Proposal applies, ever: </label>
+                <select name="companyPerils" id="companyPerils" data-mini="true">
+
+                    <option value="Declined to insure you?">Declined to insure you?</option>
+
+                    <option value="Required special terms to insure you?">Required special terms to insure you?</option>
+
+                    <option value="Cancelled or refused to renew your policy?">Cancelled or refused to renew your policy?</option>
+                    <option value="Increased your premium on renewal?">Increased your premium on renewal?</option>
+                </select>
+
+                <label for="companyPerilsDetails">If yes, please give details:</label>
+                <input type="text" name="companyPerilsDetails" id="companyPerilsDetails" placeholder="Text input" value="" data-mini="true">
+
+                <label for="homeDamageByNaturalDisaster">Have the Building and/or Contents of the Home to which this Proposal relates ever suffered damage by Hurricane, Earthquake or Flood?</label>
+                <select name="homeDamageByNaturalDisaster" id="homeDamageByNaturalDisaster" data-role="slider" data-mini="true">
+
+                    <option value="yes">Yes</option>
+
+                    <option value="no">No</option>
+                </select>
+
+                <label for="homeDamageByNaturalDisasterDetails">If yes, please give details:</label>
+                <input type="text" name="homeDamageByNaturalDisasterDetails" id="homeDamageByNaturalDisasterDetails" placeholder="Text input" value="" data-mini="true">
+
+                <label for="lossFromPerils">Have you ever sustained loss from any Perils to which this Proposal would apply?</label>
+                <select name="lossFromPerils" id="lossFromPerils" data-role="slider" data-mini="true">
+
+                    <option value="yes">Yes</option>
+
+                    <option value="no">No</option>
+                </select>
+
+                <label for="lossFromPerilsDetails">If yes, please give details:</label>
+                <input type="text" name="lossFromPerilsDetails" id="lossFromPerilsDetails" placeholder="Text input" value="" data-mini="true">
+
+
+                <div data-role="controlgroup">
+                    <a href="#home-property-details-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#page-signature" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
             </form>
 
         </div>
+
         <footer data-role="footer" data-position="fixed">
             <h4>Insurance App</h4>
         </footer>
     </div>
 
+
+    <div data-role="page" id="page-signature">
+        <div data-role="header" class="header" data-position="fixed">
+            <h1 id="app-title">Signature</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <p>Sign below and press the submit button.</p>
+            <div id="canvasContainer" width="100%">
+                <canvas id="signature" height="200px" />
+            </div>
+            <div id="lowerControls">
+                <div id="feedback"></div>
+                <div id="buttonsContainer">
+                    <div data-role="controlgroup">
+                        <a href="#personal-main-page" data-role="button" data-inline="true" data-mini="true" data-icon="delete">Return</a>
+                        <a id="clear-canvas" href="#" data-role="button" data-inline="true" data-icon="back" data-mini="true">Clear</a>
+                        <a id="submit-btn" href="#" data-role="button" data-inline="true" data-icon="check" data-mini="true">Submit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
 
 
     <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
