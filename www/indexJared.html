@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://cdn.courserv.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+
+    <!-- IronRockApplication references -->
+    <title>Iron Rock Insurance-Application</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/index.css" />
+
+    <script src="scripts/jquery-2.2.1.min.js"></script>
+    <script src="scripts/modernizr.custom.34982.js"></script>
+</head>
+
+<body>
+    <div data-role="page" id="welcome">
+
+        <div data-role="header" class="header" data-position="fixed">
+            <h1 id="app-title">IronRock Insurance Application Form</h1>
+        </div>
+
+        <div role="main" class="ui-content">
+            <button id="motor-insurance" class="ui-btn">Apply for Motor Vehicle Insurance</a>
+                <button id="home-insurance" class="ui-btn">Apply for Home Insurance</a>
+        </div>
+
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+
+    </div>
+    <div data-role="page" id="personal-page">
+
+        <div data-role="header" class="header" data-position="fixed">
+            <h1 id="app-title">Personal Details</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+                <input type="hidden" id="signatureBytes" name="signatureBytes" />
+                <label for="applicantSurname">Surname:</label>
+                <input type="text" id="applicantSurname" name="applicantSurname" placeholder="Enter Surname">
+
+
+                <label for="applicantFirstName">FirstName:</label>
+                <input type="text" id="applicantFirstName" name="FirstName" placeholder="Enter FirstName">
+
+
+                <label for="applicantMiddleName">MiddleName:</label>
+                <input type="text" id="applicantMiddleName" name="applicantMiddleName" placeholder="Enter MiddleName">
+
+
+                <label for="Title" class="select">Title:</label>
+                <select id="Title">
+                    <option>Mr</option>
+                    <option>Mrs</option>
+                    <option>Miss</option>
+                    <option>Dr</option>
+                    <option>Prof</option>
+                </select>
+
+
+                <label for="mothersMaidenName">Mother's Maiden Name:</label>
+                <input type="text" id="mothersMaidenName" name="mothersMaidenName" placeholder="Enter your maiden name">
+
+
+                <label for="applicantAlias">Other Names/Aliases:</label>
+                <input type="text" id="applicantAlias" name="applicantAlias" placeholder="Enter other name/alias">
+
+
+                <label for="IDType" class="select">ID Type:</label>
+                <select id="IDType">
+                    <option>National ID</option>
+                    <option>Passport</option>
+                    <option>Driver's License</option>
+                </select>
+
+
+                <label for="applicantIDNumber">ID Number:</label>
+                <input type="number" id="applicantIDNumber" name="applicantIDnumber" placeholder="Enter ID Number">
+
+
+                <label for="applicationIDExpirationDate">Expiration Date:</label>
+                <input type="date" id="applicationIDExpirationDate" name="applicationIDExpirationDate" placeholder="Enter Expiration Date">
+
+
+                <label for="SourceOfFunds">Source of Funds:</label>
+                <input type="text" id="SourceOfFunds" placeholder="Enter Source of Funds">
+
+                <label for="applicantTRN">TRN:</label>
+                <input type="number" id="applicantTRN" name="applicantTRN" placeholder="Enter TRN">
+
+
+                <label for="applicantEmailAddress">Email Address:</label>
+                <input type="email" id="applicantEmailAddress" name="applicantEmailAddress" placeholder="Enter Email Address">
+
+
+                <label for="ApplicantMobileNumber">Mobile Number:</label>
+                <input type="number" id="MobileNumber" name="applicantMobileNumber" placeholder="Enter Mobile Number">
+
+
+                <label for="applicantHomeNumber">Home Number:</label>
+                <input type="number" id="applicantHomeNumber" name="applicantHomeNumber" placeholder="Enter Home Number">
+
+
+                <label for="applicantWorkNumber">Work Number:</label>
+                <input type="number" id="applicantWorkNumber" name="applicantWorkNumber" placeholder="Enter Work Number">
+
+
+                <label for="applicantDateOfBirth">Date Of Birth:</label>
+                <input type="date" id="applicantDateOfBirth" name="applicantDateOfBirth" placeholder="Enter Date of Birth">
+
+
+                <label for="applicantPlaceOfBirth">Place Of Birth:</label>
+                <input type="text" id="applicantPlaceOfBirth" name="applicantPlaceOfBirth" placeholder="Enter Place of Birth">
+
+
+                <label for="applicantNationality">Nationality:</label>
+                <input type="text" id="applicantNationality" name="applicantNationality" placeholder="Enter Nationality">
+
+
+                <label for="applicantDLNumber">D/L Number:</label>
+                <input type="number" id="applicantDLNumber" name="applicantDLNumber" placeholder="Enter D/L Number">
+
+
+                <label for="applicantClass">*Class:</label>
+                <input type="text" id="applicantClass" name="applicantClass" placeholder="Enter Class">
+
+
+                <label for="applicantOriginalDate">*Original Date:</label>
+                <input type="date" id="applicantOriginalDate" name="applicantOriginalDate" placeholder="Enter Original Date">
+
+
+                <label for="applicantExpiryDate">Expiry Date:</label>
+                <input type="date" id="applicantExpiryDate" placeholder="Enter Expiry Date">
+                
+                <div data-role="controlgroup"><a href="#home-address-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
+            </form>
+        </div>
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+    <div data-role="page" id="home-address-page">
+
+        <div data-role="header" class="header" data-position="fixed">
+            <h1 id="app-title">Home Address</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+                <label for="applicantStreetName">Street Number and Name:</label>
+                <input type="text" id="applicantStreetName" name="applicantStreetName" placeholder="Enter Street Number and Name">
+
+
+                <label for="applicantTown">Town:</label>
+                <input type="text" id="applicantTown" name="applicantTown" placeholder="Enter Town">
+
+
+                <label for="applicantParishCountry">Parish/Country:</label>
+                <input type="text" id="applicantParishCountry" name="applicantParishCountry" placeholder="Enter Parish/Country">
+
+
+                <div data-role="controlgroup"><a href="#main-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#mailing-address-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
+            </form>
+
+        </div>
+
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+
+    </div>
+
+    <div data-role="page" id="mailing-address-page">
+
+        <div data-role="header" class="header">
+            <h1 id="app-title">Mailing Address</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+
+                <label for="applicantMailStreetName">Street Number and Name:</label>
+                <input type="text" id="applicantMailStreetName" name="appplicantMailStreetName" placeholder="Enter Street Number and Name">
+
+
+                <label for="applicantMailTown">Town:</label>
+                <input type="text" id="applicantMailTown" name="applicantMailTown" placeholder="Enter Town">
+
+
+                <label for="applicantParishCountry">Parish/Country:</label>
+                <input type="text" id="applicantParishCountry" name="applicantParishCountry" placeholder="Enter Parish/Country">
+
+
+                <div data-role="controlgroup"><a href="#home-address-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#employer-details-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
+            </form>
+
+        </div>
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+    <div data-role="page" id="employer-details-page">
+
+        <div data-role="header" class="header">
+            <h1 id="app-title">Employer Details</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+
+                <label for="employerNameInFull">Name in Full:</label>
+                <input type="text" name="employerNameInFull" id="employerNameInFull" placeholder="Enter Name In Full">
+
+                <label for="employerStreetName">Street Number and Name:</label>
+                <input type="text" name="employerStreetName" id="employerStreetName" placeholder="Enter Street Number and Name">
+
+                <label for="employerTown">Town:</label>
+                <input type="text" name="employerTown" id="employerTown" placeholder="Enter Town">
+
+                <label for="employerParishCountry">Parish/Country:</label>
+                <input type="text" name="employerParishCountry" id="employerParishCountry" placeholder="Enter Parish/Country">
+
+                <label for="employerNationality">Nationality:</label>
+                <input type="text" name="employerNationality" id="employerNationality" placeholder="Enter Nationality">
+
+                <div data-role="controlgroup"><a href="#mailing-address-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#personal-details-continued" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
+            </form>
+
+        </div>
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+    <div data-role="page" id="personal-details-continued">
+
+        <div data-role="header" class="header">
+            <h1 id="app-title">Personal details continued</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+                <fieldset data-role="controlgroup">
+
+                    <legend>Have you or any relative or close associate been entrusted with prominent pubic functions(e.g. Member of Parliament, Senator or Mayor, Senior Government Official, Judiciary, Security forces)?</legend>
+
+                    <input type="radio" name="isyes" id="yes" value="yes" checked="checked">
+                    <label for="Yes">Yes</label>
+
+                    <input type="radio" name="yes" id="no" value="no">
+                    <label for="no">No</label>
+                </fieldset>
+
+                <label for="text1">If Yes, state the type of public office:</label>
+                <input type="text" name="text1" id="text1" value="">
+                <p>If Yes to the above give the name and address of spouse and children:</p>
+
+                <label for="text2">Name of Spouse:</label>
+                <input type="text" name="text2" id="text2" value="">
+                <label for="text3">Address of Spouse:</label>
+                <input type="text" name="text3" id="text3" value="">
+                <label for="text4">Name of Child:</label>
+                <input type="text" name="text4" id="text4" value="">
+                <label for="text5">Address of Child:</label>
+                <input type="text" name="text5" id="text5" value="">
+                <label for="text6">Name of Child:</label>
+                <input type="text" name="text6" id="text6" value="">
+                <label for="text6">Address of Child:</label>
+                <input type="text" name="text6" id="text6" value="">
+                <label for="text7">Name of Child:</label>
+                <input type="text" name="text7" id="text7" value="">
+                <label for="text8">Address of Child:</label>
+                <input type="text" name="text8" id="text8" value="">
+
+                <div data-role="controlgroup"><a href="#employer-details-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#vehicle-particulars-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
+            </form>
+
+        </div>
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+    <div data-role="page" id="vehicle-particulars-page">
+
+        <div data-role="header" class="header">
+            <h1 id="app-title">Particulars Of Vehicle</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+                <p>PARTICULAR OF VEHICLE(S) TO BE INSURED</p>
+
+                <label for="text9">Registration No.:</label>
+                <input type="text" name="text9" id="text9" value="">
+                <label for="vehicleMakeModel">Make and Model:</label>
+                <input type="text" name="text10" id="text10" value="">
+                <label for="text11">Chassis and Engine No.:</label>
+                <input type="text" name="text11" id="text11" value="">
+                <label for="text12">Year of Make:</label>
+                <input type="text" name="text=12" id="text12" value="">
+                <label for="text13">C.C. Rating:</label>
+                <input type="text" name="text13" id="text13" value="">
+                <label for="text14">Seating:</label>
+                <input type="text" name="text14" id="text14" value="">
+                <label for="text15">Type of Body:</label>
+                <input type="text" name="text15" id="text15" value="">
+                <label for="text16">Sum Insured</label>
+                <input type="text" name="text16" id="text16" value="">
+                <br>
+                <label for="text17">Registration No.:</label>
+                <input type="text" name="text17" id="text17" value="">
+                <label for="text18">Make and Model:</label>
+                <input type="text" name="text18" id="text18" value="">
+                <label for="text19">Chassis and Engine No.:</label>
+                <input type="text" name="text19" id="text19" value="">
+                <label for="text20">Year of Make:</label>
+                <input type="text" name="text20" id="text20" value="">
+                <label for="text21">C.C. Rating:</label>
+                <input type="text" name="text21" id="text21" value="">
+                <label for="text22">Seating:</label>
+                <input type="text" name="text22" id="text22" value="">
+                <label for="text23">Type of Body:</label>
+                <input type="text" name="text23" id="text23" value="">
+                <label for="text24">Sum Insured</label>
+                <input type="text" name="text24" id="text24" value="">
+                <br>
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Are you the owner of the vehicle(s) and is it/are they registered in your name:</legend>
+
+                    <input type="radio" name="radio-choice-v-2" id="Yes1" value="on" checked="checked">
+                    <label for="Yes1">Yes</label>
+
+                    <input type="radio" name="radio-choice-v-2" id="No1" value="off">
+                    <label for="No1">No</label>
+                </fieldset>
+                
+                <label for="text25">If not, state the name and address of the owner:</label>
+                <input type="text" name="text25" id="text25" value="">
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Are you the owner of the vehicle(s) and is it/are they registered in your name:</legend>
+
+                    <input type="radio" name="radio-choice-v-3" id="Yes2" value="on" checked="checked">
+                    <label for="Yes2">Yes</label>
+
+                    <input type="radio" name="radio-choice-v-3" id="No2" value="off">
+                    <label for="No2">No</label>
+                </fieldset>
+                <br>
+                
+                <fieldset data-role="controlgroup">
+
+                    <legend>Will a trailer be used?</legend>
+
+                    <input type="radio" name="radio-choice-v-4" id="Yes3" value="on" checked="checked">
+                    <label for="Yes3">Yes</label>
+
+                    <input type="radio" name="radio-choice-v-4" id="No3" value="off">
+                    <label for="No3">No</label>
+                </fieldset>
+
+                <div data-role="controlgroup"><a href="#personal-details-continued" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#mortgagee-details-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
+            </form>
+
+        </div>
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+    <div data-role="page" id="mortgagee-details-page">
+
+        <div data-role="header" class="header">
+            <h1 id="app-title">Mortgagee</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+
+                <p>NOTE: You are required to ensure that the Sum Insured is revised annually to reflect the current market value. Claims will be settled based on the market value at the time of the loss. For total losses you will be paid based on the market value or Policy Sum Insured whichever is lesser.</p>
+                <p><b>Mortgagee</b>
+                </p>
+                <label for="textarea1">Name in full:</label>
+                <textarea cols="40" rows="8" name="textarea1" id="textarea1">Textarea</textarea>
+                <label for="text25">Street Number and Name:</label>
+                <input type="text" name="text25" id="text25" value="">
+                <label for="text26">Town:</label>
+                <input type="text" name="text26" id="text26" value="">
+                <label for="text27">Parish:</label>
+                <input type="text" name="text27" id="text27" value="">
+                <p>Insurance coveragies available:</p>
+                <fieldset data-role="controlgroup">
+
+                    <legend>Select cover required(tick the appropriate box):</legend>
+
+                    <input type="radio" name="tickbox5" id="tickbox5a" value="on" checked="checked">
+                    <label for="tickbox5a">Comprehensive-Liability for Third Party Bodily Injury and Property Damage and loss of or damage to the Insured's Motor Vehicle</label>
+
+                    <input type="radio" name="tickbox5" id="tickbox5b" value="off">
+                    <label for="tickbox5b">Third Party Fire and Theft- Liability for Third Party Bodily Injury and Property Damage and Loss of or damage to the Insured's Motor Vehicle by Fire or Theft</label>
+
+                    <input type="radio" name="tickbox5" id="tickbox5c" value="other">
+                    <label for="tickbox5c">Third Party- Liability for Third Party Bodily Injury and Property Damage</label>
+                </fieldset>
+
+                <fieldset data-role="controlgroup">
+                    <legend>Please indicate if the vehicle is to be used as:</legend>
+
+                    <input type="radio" name="tickbox6" id="tickbox6a" value="on" checked="checked">
+                    <label for="tickbox6a">Carriage of own goods only(Private Commercial)</label>
+
+                    <input type="radio" name="tickbox6" id="tickbox6b" value="off">
+                    <label for="tickbox6b">Carriage ofpassengers not for hire or reward</label>
+
+                    <input type="radio" name="tickbox6" id="tickbox6c" value="other">
+                    <label for="tickbox6c">Carriage of Passengers for hire or reward</label>
+                    <input type="radio" name="tickbox6" id="tickbox6d" value="other">
+                    <label for="tickbox6d">Social domestic and pleasure purposes only</label>
+                    <input type="radio" name="tickbox6" id="tickbox6e" value="other">
+                    <label for="tickbox6e">General Cartage(Public Commercial)</label>
+                    <input type="radio" name="tickbox6" id="tickbox6f" value="other">
+                    <label for="tickbox6f">Social domestic and pleasure purposes and business use</label>
+                    <input type="radio" name="tickbox6" id="tickbox6g" value="other">
+                    <label for="tickbox6g">Commercial travelling</label>
+                </fieldset>
+
+                <div data-role="controlgroup"><a href="#vehicle-particulars-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#vehicle-particular-continued" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
+            </form>
+
+        </div>
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+    <div data-role="page" id="vehicle-particular-continued">
+
+        <div data-role="header" class="header">
+            <h1 id="app-title">Vehicle Particulars continued</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Is the vehicle fitted with an anti-theft device?:</legend>
+
+                    <input type="radio" name="tickbox7" id="tickbox7a" value="on" checked="checked">
+                    <label for="tickbox7a">Yes</label>
+
+                    <input type="radio" name="tickbox7" id="tickbox7b" value="off">
+                    <label for="tickbox7b">No</label>
+                </fieldset>
+                <label for="text28">If yes, state the name, type of device and name of provider:</label>
+                <input type="text" name="text28" id="text28" value="">
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Will you have regular custody of the vehicle?:</legend>
+
+                    <input type="radio" name="tickbox8" id="tickbox8a" value="on" checked="checked">
+                    <label for="tickbox8a">Yes</label>
+
+                    <input type="radio" name="tickbox8" id="tickbox8b" value="off">
+                    <label for="tickbox8b">No</label>
+                </fieldset>
+                <label for="text29">If yes, please provide details:</label>
+                <input type="text" name="text29" id="text29" value="">
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Is the vehicle garaged at the Properser's home address?:</legend>
+
+                    <input type="radio" name="tickbox9" id="tickbox9a" value="on" checked="checked">
+                    <label for="tickbox9a">Yes</label>
+
+                    <input type="radio" name="tickbox9" id="tickbox9b" value="off">
+                    <label for="tickbox9b">No</label>
+                </fieldset>
+                <label for="text30">If yes, please state where:</label>
+                <input type="text" name="text30" id="text30" value="">
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Is the vehicle kept in?:</legend>
+
+                    <input type="radio" name="tickbox10" id="tickbox10a" value="on" checked="checked">
+                    <label for="tickbox10a">A locked garage</label>
+
+                    <input type="radio" name="tickbox10" id="tickbox10b" value="off">
+                    <label for="tickbox10b">A locked area</label>
+                </fieldset>
+                <label for="text31">Other:</label>
+                <input type="text31" name="text31" id="text31" value="">
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Is the Proposer now insured or was previously insured in respect of any vehicles(s)?:</legend>
+
+                    <input type="radio" name="tickbox11" id="tickbox11a" value="on" checked="checked">
+                    <label for="tickbox11a">Yes</label>
+
+                    <input type="radio" name="tickbox11" id="tickbox11b" value="off">
+                    <label for="tickbox11b">No</label>
+                </fieldset>
+
+
+                <label for="text32">If yes, state the name and address of the Insurance Company:</label>
+                <input type="text" name="text32" id="text32" value="">
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Is the proposer entitled to No CLaim Discount from previous insurerer(s) in respect of any vehicle(s) described in the proposal:</legend>
+
+                    <input type="radio" name="tickbox12" id="tickbox12a" value="on" checked="checked">
+                    <label for="tickbox12a">Yes</label>
+
+                    <input type="radio" name="tickbox12" id="tickbox12b" value="off">
+                    <label for="tickbox12b">No</label>
+                </fieldset>
+
+                <p>If yes, please attach proof of No Claim Discount Letter or Renewal Notice</p>
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Do you have any other insurer(s) with IronRock Insurance Company Ltd.?:</legend>
+
+                    <input type="radio" name="tickbox13" id="tickbox13a" value="on" checked="checked">
+                    <label for="tickbox13a">Yes</label>
+
+                    <input type="radio" name="tickbox13" id="tickbox13b" value="off">
+                    <label for="tickbox13b">No</label>
+                </fieldset>
+
+                <label for="text33">If yes, please state type(s):</label>
+                <input type="text" name="text33" id="text33" value="">
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Has any Insurer(s) in respect of the Proposer or any other person who will regularly drive ever?:</legend>
+
+                    <input type="radio" name="tickbox14" id="tickbox14a" value="on" checked="checked">
+                    <label for="tickbox14a">Declined your proposal?</label>
+
+                    <input type="radio" name="tickbox14" id="tickbox14b" value="off">
+                    <label for="tickbox14b">Required and increased premium or imposed special conditions</label>
+                    <input type="radio" name="tickbox14" id="tickbox14c" value="off">
+                    <label for="tickbox14c">Cancelled or refused to renew an existing insurance?</label>
+                </fieldset>
+
+                <label for="text34">If yes, please give details:</label>
+                <input type="text" name="text34" id="text34" value="">
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Type of Authrized Driver Clause:</legend>
+
+                    <input type="radio" name="tickbox15" id="tickbox15a" value="on" checked="checked">
+                    <label for="tickbox15a">Open Driving</label>
+
+                    <input type="radio" name="tickbox15" id="tickbox15b" value="off">
+                    <label for="tickbox15b">Restricted Driving(Restricted Discount Available)</label>
+                </fieldset>
+
+                <div data-role="controlgroup"><a href="#mortgagee-details-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#other-drivers-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
+            </form>
+
+        </div>
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+    <div data-role="page" id="other-drivers-page">
+
+        <div data-role="header" class="header">
+            <h1 id="app-title">Other Drivers</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+                <p>Will anyone driving your motor vehicle:</p>
+                <fieldset data-role="controlgroup">
+
+                    <legend>Be under the age of:</legend>
+
+                    <input type="checkbox" name="checkbox1" id="checkbox1" checked="">
+                    <label for="checkbox1">21 Years Old- Private Cars</label>
+
+                    <input type="checkbox" name="checkbox2" id="checkbox2">
+                    <label for="checkbox2">23 Years Old- Private Commercial</label>
+
+                    <input type="checkbox" name="checkbox3" id="checkbox3">
+                    <label for="checkbox3">25 Years Old- General Cartage</label>
+                </fieldset>
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Have Driving Experience less than:</legend>
+
+                    <input type="checkbox" name="checkbox4" id="checkbox4" checked="">
+                    <label for="checkbox4">24 Months Private Licence</label>
+
+                    <input type="checkbox" name="checkbox5" id="checkbox5">
+                    <label for="checkbox5">36 Months- General Licence- Private Commercial</label>
+
+                    <input type="checkbox" name="checkbox6" id="checkbox6">
+                    <label for="checkbox6">5 Years- Genral Licence- Public Commercial</label>
+                </fieldset>
+
+                <p>If yes, please give particulars of drivers below:</p>
+
+                <label for="text35">Name:</label>
+                <input type="text" name="text35" id="text35" value="">
+                <label for="text36">Occupation:</label>
+                <input type="text" name="text36" id="text36" value="">
+                <label for="text37">Date of Birth:</label>
+                <input type="date" name="text37" id="text37" value="">
+                <label for="text38">Driver's Licence:</label>
+                <input type="text" name="text38" id="text38" value="">
+                <label for="text39">Original Date of Issue:</label>
+                <input type="date" name="text39" id="text39" value="">
+                <label for="text40">Relationship to Proposer:</label>
+                <input type="text" name="text40" id="text40" value="">
+
+                <label for="text41">Name:</label>
+                <input type="text" name="text41" id="text41" value="">
+                <label for="text42">Occupation:</label>
+                <input type="text" name="text42" id="text42" value="">
+                <label for="text43">Date of Birth:</label>
+                <input type="date" name="text43" id="text43" value="">
+                <label for="text44">Driver's Licence:</label>
+                <input type="text" name="text44" id="text44" value="">
+                <label for="text45">Original Date of Issue:</label>
+                <input type="date" name="text45" id="text45" value="">
+                <label for="text46">Relationship to Proposer:</label>
+                <input type="text" name="text46" id="text46" value="">
+
+                <label for="text47">Name:</label>
+                <input type="text" name="text47" id="text47" value="">
+                <label for="text36">Occupation:</label>
+                <input type="text" name="text48" id="text48" value="">
+                <label for="text49">Date of Birth:</label>
+                <input type="date" name="text49" id="text49" value="">
+                <label for="text50">Driver's Licence:</label>
+                <input type="text" name="text50" id="text50" value="">
+                <label for="text51">Original Date of Issue:</label>
+                <input type="date" name="text51" id="text51" value="">
+                <label for="text52">Relationship to Proposer:</label>
+                <input type="text" name="text52" id="text52" value="">
+
+
+                <div data-role="controlgroup"><a href="#vehicle-particular-continued" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#driver-details-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
+            </form>
+
+        </div>
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+    <div data-role="page" id="driver-details-page">
+
+        <div data-role="header" class="header">
+            <h1 id="app-title">Driver details</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+                <fieldset data-role="controlgroup">
+
+                    <legend>Will you be the regular driver of the vehicle:</legend>
+
+                    <input type="radio" name="tickbox16" id="tickbox16a" value="on" checked="checked">
+                    <label for="tickbox16a">Yes</label>
+
+                    <input type="radio" name="tickbox16" id="tickbox16b" value="off">
+                    <label for="tickbox16b">No</label>
+                </fieldset>
+
+                <p>Please provide details of the drivers likely to drive the motor vehicle:</p>
+
+                <label for="text53">Name:</label>
+                <input type="text" name="text53" id="text53" value="">
+                <label for="text54">Occupation:</label>
+                <input type="text" name="text54" id="text54" value="">
+                <label for="text55">Date of Birth:</label>
+                <input type="date" name="text55" id="text55" value="">
+                <label for="text56">Driver's Licence:</label>
+                <input type="text" name="text56" id="text56" value="">
+                <label for="text57">Original Date of Issue:</label>
+                <input type="date" name="text57" id="text57" value="">
+                <label for="text58">Relationship to Proposer:</label>
+                <input type="text" name="text58" id="text58" value="">
+
+                <label for="text59">Name:</label>
+                <input type="text" name="text59" id="text59" value="">
+                <label for="text60">Occupation:</label>
+                <input type="text" name="text60" id="text60" value="">
+                <label for="text61">Date of Birth:</label>
+                <input type="date" name="text61" id="text61" value="">
+                <label for="text62">Driver's Licence:</label>
+                <input type="text" name="text62" id="text62" value="">
+                <label for="text63">Original Date of Issue:</label>
+                <input type="date" name="text63" id="text63" value="">
+                <label for="text64">Relationship to Proposer:</label>
+                <input type="text" name="text64" id="text64" value="">
+
+                <label for="text65">Name:</label>
+                <input type="text" name="text65" id="text65" value="">
+                <label for="text66">Occupation:</label>
+                <input type="text" name="text66" id="text66" value="">
+                <label for="text67">Date of Birth:</label>
+                <input type="date" name="text67" id="text67" value="">
+                <label for="text68">Driver's Licence:</label>
+                <input type="text" name="text68" id="text68" value="">
+                <label for="text69">Original Date of Issue:</label>
+                <input type="date" name="text69" id="text69" value="">
+                <label for="text70">Relationship to Proposer:</label>
+                <input type="text" name="text70" id="text70" value="">
+
+
+                <div data-role="controlgroup"><a href="#other-drivers-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#vehicles-owned-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
+            </form>
+
+        </div>
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+    <div data-role="page" id="vehicles-owned-page">
+
+        <div data-role="header" class="header">
+            <h1 id="app-title">Number of Vehicles owned</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+
+                <p>State the number of motor vehicles[including motorcycle(s)] owned by you within the past 3 years</p>
+
+                <label for="text71">Year:</label>
+                <input type="year" name="text71" id="text71" value="">
+                <label for="text72">Number of vehicles owned:</label>
+                <input type="number" name="text72" id="text72" value="">
+
+                <label for="text73">Year:</label>
+                <input type="year" name="text73" id="text73" value="">
+                <label for="text74">Number of vehicles owned:</label>
+                <input type="number" name="text74" id="text74" value="">
+
+                <label for="text75">Year:</label>
+                <input type="year" name="text75" id="text75" value="">
+                <label for="text76">Number of vehicles owned:</label>
+                <input type="number" name="text76" id="text76" value="">
+
+
+                <div data-role="controlgroup"><a href="#driver-details-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#accidents-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
+            </form>
+
+        </div>
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+    <div data-role="page" id="accidents-page">
+
+        <div data-role="header" class="header">
+            <h1 id="app-title">Accidents</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+
+                <p>Have you or any regular drivers had any accidents or losses during the past thre years(whether insured or not) in respect of all vehicles:</p>
+
+                <ol>
+                    <li>Owned by you, whether or not you were the driver at the material time?</li>
+                    <li>Not owned by you, but driven by you or in your custdy at the material time?</li>
+                </ol>
+
+                <label for="text77">Date of Accident:</label>
+                <input type="date" name="text77" id="text77" value="">
+                <label for="text78">Cost(Paid or Estimated):</label>
+                <input type="text" name="text78" id="text78" value="">
+                <label for="text79">Driver:</label>
+                <input type="text" name="text79" id="text79" value="">
+                <label for="text80">Brief details or Accidents, Incident or losses:</label>
+                <input type="text" name="text80" id="text80" value="">
+
+                <label for="text81">Date of Accident:</label>
+                <input type="date" name="text81" id="text81" value="">
+                <label for="text82">Cost(Paid or Estimated):</label>
+                <input type="text" name="text82" id="text82" value="">
+                <label for="text83">Driver:</label>
+                <input type="text" name="text83" id="text83" value="">
+                <label for="text84">Brief details or Accidents, Incident or losses:</label>
+                <input type="text" name="text84" id="text84" value="">
+
+                <label for="text85">Date of Accident:</label>
+                <input type="date" name="text85" id="text85" value="">
+                <label for="text85">Cost(Paid or Estimated):</label>
+                <input type="text" name="text85" id="text85" value="">
+                <label for="text86">Driver:</label>
+                <input type="text" name="text86" id="text86" value="">
+                <label for="text87">Brief details or Accidents, Incident or losses:</label>
+                <input type="text" name="text87" id="text87" value="">
+
+                <div data-role="controlgroup"><a href="#vehicles-owned-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#medical-history-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
+            </form>
+
+        </div>
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+    <div data-role="page" id="medical-history-page">
+
+        <div data-role="header" class="header">
+            <h1 id="app-title">Medical History</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>To the best of your knowledge and beief have you, or any persn who to your knowledge will drive, have suffer or now suffer from?:</legend>
+
+                    <input type="checkbox" name="checkbox7" id="checkbox7" checked="">
+                    <label for="checkbox7">Defective vision or hearing?</label>
+
+                    <input type="checkbox" name="checkbox8" id="checkbox8">
+                    <label for="checkbox8">Diabetes, Epilepsy, complaints of the heart or any other disease</label>
+
+                    <input type="checkbox" name="checkbox9" id="checkbox9">
+                    <label for="checkbox9">Any other physical or mental infirmity</label>
+                </fieldset>
+
+                <label for="text88">If yes, please give details:</label>
+                <input type="text" name="text88" id="text88" value="">
+
+                <fieldset data-role="controlgroup" data-mini="true">
+
+                    <legend>Have you or any person who to your knowledge will drive:</legend>
+
+                    <label for="checkbox10">Received traffic ticket(s) and or have been convicted of any offence in connection with the driving of any motor vehicle within the last three years?</label>
+
+                    <input type="checkbox" name="checkbox10" id="checkbox10">
+                </fieldset>
+
+                <label for="text89">If yes, please give details:</label>
+                <input type="text" name="text89" id="text89" value="">
+
+                <fieldset data-role="controlgroup" data-mini="true">
+
+                    <legend>Has the vehicle been modified or converted from makers' standard specification or do you intend to do so?:</legend>
+
+                    <label for="checkbox11">I agree</label>
+
+                    <input type="checkbox" name="checkbox11" id="checkbox11">
+                </fieldset>
+
+                <label for="text90">If yes, please give details:</label>
+                <input type="text" name="text90" id="text90" value="">
+
+                <p>Have you or any person who to your knowledge will drive:</p>
+                <p>If yes, please state amount:</p>
+
+                <label for="text91">Breakage of Glass(Window or Windscreen):</label>
+                <input type="text" name="text91" id="text91" value="">
+                <label for="text92">Protection and Removal(Wrecker Fee):</label>
+                <input type="text" name="text92" id="text92" value="">
+                <label for="text93">Personal Aaccident Death Benefit(Driver and Passengers):</label>
+                <input type="text" name="text93" id="text93" value="">
+                <label for="text94">Medical Expenses(Including Passengers):</label>
+                <input type="text" name="text94" id="text94" value="">
+                <label for="text95">Manslaughter Defense Costs:</label>
+                <input type="text" name="text95" id="text95" value="">
+                <label for="text96">Third Party Limits(Bodily Injury and Property Damage):</label>
+                <input type="text" name="text96" id="text96" value="">
+
+                <div data-role="controlgroup"><a href="#accidents-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#home-particulars-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
+            </form>
+
+        </div>
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+    <div data-role="page" id="home-particulars-page">
+
+        <div data-role="header" class="header">
+            <h1 id="app-title">Particulars of Home</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+                <label for="homeRiskAddress">Risk Address:</label>
+                <input type="text" name="homeRiskAddress" id="homeRiskAddress" value="">
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Is the home:</legend>
+
+                    <input type="radio" name="homeChoice1" id="homeChoice1" value="homeChoice1" checked="checked">
+                    <label for="homeChoice1">A private Dwelling House?</label>
+
+                    <input type="radio" name="homeChoice1" id="homeChoice2" value="homeChoice2">
+                    <label for="homeChoice2">A self-contained flat or apartment with seperate entrance exclusively under your control?</label>
+
+                    <input type="radio" name="homeChoice1" id="homeChoice3" value="homeChoice3">
+                    <label for="homeChoice3">Rooms not self-contained?</label>
+                </fieldset>
+
+                <p>Construction of Dwelling</p>
+
+                <label for="constructionExternalWalls">External Walls:</label>
+                <input type="text" name="constructionExternalWalls" id="constructionExternalWalls" value="">
+
+                <label for="constructionInternalWalls">Internal Walls:</label>
+                <input type="text" name="constructionInternalWalls" id="constructionInternalWalls" value="">
+
+                <label for="constructionRoof">External Walls:</label>
+                <input type="text" name="constructionRoof" id="constructionRoof" value="">
+
+                <p>Garages or Out Buildings?</p>
+
+                <label for="garageExternalWalls">External Walls:</label>
+                <input type="text" name="garageExternalWalls" id="garageExternalWalls" value="">
+
+                <label for="garageInternalWalls">Internal Walls:</label>
+                <input type="text" name="garageInternalWalls" id="garageInternalWalls" value="">
+
+                <label for="garageRoof">External Walls:</label>
+                <input type="text" name="garageRoof" id="garageRoof" value="">
+
+                <div data-role="controlgroup"><a href="#medical-history-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#home-particulars-continued-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
+            </form>
+
+        </div>
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+    <div data-role="page" id="home-particulars-continued-page">
+
+        <div data-role="header" class="header">
+            <h1 id="app-title">Particulars of Home continued</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Are the buildings in good state of repairs and will they be soo maintained?</legend>
+
+                    <input type="radio" name="homeYes1" id="homeYes1" value="homeYes1" checked="checked">
+                    <label for="homeYes1">Yes</label>
+
+                    <input type="radio" name="homeYes1" id="homeYes2" value="homeYes2">
+                    <label for="homeYes2">No</label>
+                </fieldset>
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Is the Dwelling occupied by you, your family and domestic employees?</legend>
+
+                    <input type="radio" name="homeYes3" id="homeYes3" value="homeYes3" checked="checked">
+                    <label for="homeYes3">Yes</label>
+
+                    <input type="radio" name="homeYes3" id="homeYes4" value="homeYes4">
+                    <label for="homeYes4">No</label>
+                </fieldset>
+
+                <label for="jomeInputBox1">If no, give the details of other occupants:</label>
+                <input type="text" name="homeInputBox1" id="homeInputBox1" value="">
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Is any part of the Dwelling or Outbuilding used for any income-earning activity?</legend>
+
+                    <input type="radio" name="homeYes5" id="homeYes5" value="homeYes5" checked="checked">
+                    <label for="homeYes5">Yes</label>
+
+                    <input type="radio" name="homeYes5" id="homeYes6" value="homeYes6">
+                    <label for="homeYes6">No</label>
+                </fieldset>
+
+                <label for="homeInputBox2">If yes, give details:</label>
+                <input type="text" name="homeInputBox2" id="homeInputBox2" value="">
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Does any institution or individual have a financial interest in the property</legend>
+
+                    <input type="radio" name="homeYes6" id="homeYes6" value="homeYes6" checked="checked">
+                    <label for="homeYes6">Yes</label>
+
+                    <input type="radio" name="homeYes6" id="homeYes7" value="homeYes7">
+                    <label for="homeYes7">No</label>
+                </fieldset>
+
+                <label for="homeInputBox3">If yes, state their name and address:</label>
+                <input type="text" name="homeInputBox3" id="homeInputBox3" value="">
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Are there any Waterside Structures i.e. docks, jetties, piers, sea walls and any other structure abutting the sea, a river or any other body of water?</legend>
+
+                    <input type="radio" name="homeYes8" id="homeYes8" value="homeYes8" checked="checked">
+                    <label for="homeYes8">Yes</label>
+
+                    <input type="radio" name="homeYes8" id="homeYes9" value="homeYes9">
+                    <label for="homeYes9">No</label>
+                </fieldset>
+
+                <label for="homeInputBox4">If yes, please describe:</label>
+                <input type="text" name="homeInputBox4" id="homeInputBox4" value="">
+
+                <div data-role="controlgroup"><a href="#home-particulars-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#property-details-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
+            </form>
+
+        </div>
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+    <div data-role="page" id="property-details-page">
+
+        <div data-role="header" class="header">
+            <h1 id="app-title">Details Of Property</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+
+                <h4>Details of Property to be insured</h4>
+                <h5>Buildings and other structures</h5>
+
+                <p>IMPORTANT NOTE: The SUMS TO BE INSURED must represent the FULL NEW REPLACEMENT COST of the Property and should include adequate provision for demolition and debris removal costs in the event of major damage as well as professional fees that would be incurred in reinstatement. As the Company will pay up to 10% of the Sum insured in respect of Rent lost or reasonable costs of alternative accomodation if damage by an Insured Peril renders the home uninhabitable, provision for this should also be included in your Sums Insured.</p>
+
+                <table style="width:100%">
+                    <tr>
+                        <th>Specified Items</th>
+                        <th>Sums to be Insured</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <p>The Buildings of the private dwelling together with its garages and outbuildings, including landlord;s fixtures and fittings together with patios, driveways and other paved areas, walls, gates and fences, underground water pipes and cables providing services to and from the home, fixed water storage tanks and sewage disposal systems.(NB Swimming Pools and Waterside Structures are not included in the above item.)</p>
+
+                <h5>Contents</h5>
+
+                <p>IMPORTANT NOTES:</p>
+
+                <p> The SUMS TO BE INSURED must represent the FULL COST of replacing all the contents insured with NEW articles of similar size, style and specification. As the Company will pay up to 10% of the Sum Insured in respect of reasonable costs of alternative accomodation if damage by an Insured Peril renders the home uninhabitable, provision for this should be included in your Sum Insured.</p>
+
+                <p>Do not include in your Contents Sum Insured any Article which is to be insured under the All Risks Section</p>
+
+                <p>Unspecified Valuables: Coverage is limited to one-third of the Total Sum Insured on Contents with coverage on individual articles limited to 5% of such Total Sum Insured. Individual articles worth more than 5% of the Total Sum Insured to be insured should be insured separately specified below.</p>
+
+                <p>Valuables include jewellery and other articles of gold, silver or other precious metal, clocks, watches, cameras, camcorders and other photographic equipment, electronic equipment (other than domestic appliances), furs, pictures and other works of art, curios, licensed fire-arms, collections of stamps, coins or other valuable objects.</p>
+
+                <h5>Sums to be Insured</h5>
+
+                <label for="homeInputBox5">Contents: Household Goods, Personal Effects and Fixtures and Fittings which belong to or are the legal responsibility of any member of your household, including personal effects of non-paying guests temporarily staying with you but excluding Valuables which are to be individually specified.</label>
+                <input type="text" name="homeInputBox5" id="homeInputBox5" value="">
+
+                <label for="homeInputBox6">Valuables to be individually specified (Please attach a list of these articles giving detailed descriptions, including model and serial numbers where appropriate and individual values)</label>
+                <input type="text" name="homeInputBox6" id="homeInputBox6" value="">
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Does the total value of your Valuables excluding those listed above and those which you will be insuring under the All Risk Section exceed one-third of the Total Sum to be insured?</legend>
+
+                    <input type="radio" name="homeYes10" id="homeYes10" value="homeYes10" checked="checked">
+                    <label for="homeYes10">Yes</label>
+
+                    <input type="radio" name="homeYes10" id="homeYes11" value="homeYes11">
+                    <label for="homeYes11">No</label>
+                </fieldset>
+
+                <label for="homeInputBox7">If yes, what is the total value of such valuables?</label>
+                <input type="text" name="homeInputBox7" id="homeInputBox7" value="">
+
+                <p>TOTAL SI:</p>
+
+                <label for="homeInputBox8">The Total Sum Insured under the Contents Section of the Policy </label>
+                <input type="text" name="homeInputBox8" id="homeInputBox8" value="">
+
+
+                <div data-role="controlgroup"><a href="#home-particulars-continued-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#all-risk-insurance-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
+            </form>
+
+        </div>
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+    <div data-role="page" id="all-risk-insurance-page">
+
+        <div data-role="header" class="header">
+            <h1 id="app-title">All Risk Insurance</h1>
+            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <form>
+
+                <h5>ALL RISKS INSURANCE IN RESPECT OF PERSONAL POSSESSIONS</h5>
+
+                <p>IMPORTANT NOTE: Valuation Reports or Receipts in respect of all Articles to be insured should be attached to this Form.</p>
+
+                <p>Full Description of Article(s) to be insured</p>
+
+                <table style="width:100%">
+                    <tr>
+                        <th>Items List</th>
+                        <th>Sum Insured</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>The Total Sum Insured under the All Risks Section of the Policy</td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <fieldset data-role="controlgroup">
+
+                    <legend>Select Territorial Limits required</legend>
+
+                    <input type="radio" name="homeYes12" id="homeYes12" value="homeYes12" checked="checked">
+                    <label for="homeYes12">Jamaica Only</label>
+
+                    <input type="radio" name="homeYes12" id="homeYes13" value="homeYes13">
+                    <label for="homeYes13">Worldwide</label>
+                </fieldset>
+
+                <table border="1" style="width:100%">
+                    <tr>
+                        <td></td>
+                        <td>Yes</td>
+                        <td>No</td>
+                        <td>If yes, please give details</td>
+                    </tr>
+                    <tr>
+                        <td>Do you currently have in force any policy whether with us or with any other Company or Insurer covering any of the Property to be insured?
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Have the Building and/or Contents of the Home to which this Proposal relates ever suffered damage by Hurricane, Earthquake or Flood?
+                        </td>
+                        <td>
+                            <ol type="a">
+                                <li>Declined to insure you? </li>
+                                <li>Required special terms to insure you?</li>
+                                <li>Cancelled or refused to renew your policy?</li>
+                                <li>Increased your premium on renewal?</li>
+                            </ol>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Have you ever sustained loss from any Perils to which this Proposal would apply?</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <div data-role="controlgroup"><a href="#property-details-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#page-signature" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
+                </div>
+            </form>
+
+        </div>
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+
+    <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
+
+    <script src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
+    <!--Custom js-->
+    <script src="scripts/index.js"></script>
+    <script src="scripts/signatureCapture.js"></script>
+
+</body>
+
+</html>

@@ -1,47 +1,4 @@
-﻿/*.not-displayed {
-    display: none;
-}*/
-
-/*form {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 5px;
-}
-
-#submit-btn {
-    font-size: 22px;
-}
-
-#title {
-    font-size: 16px;
-}
-
-#summary {
-    font-size: 35px;
-}
-
-#summary img {
-    float: right;
-}
-
-#error-msg {
-    text-align: center;
-    margin-top:  50%;
-    font-weight: bold;    
-}*/
-
-/* Signature*/
-
-/*body {
-	padding: 25px;
-	font-size:x-large;
-}
-
-#email {
-	width:95%;
-	font-size:x-large;
-}*/
-
-#canvasContainer {
+﻿#canvasContainer {
 	position:relative;
 	border: 2px solid #888888;
 	background-color: #EEEEEE;
@@ -56,18 +13,6 @@
   border:1px solid #000000;
 }
 
-/*#lowerControls {
-	position:relative;
-	padding-top: 25px;	
+.error {
+    color:red;
 }
-
-#buttonsContainer {
-	position:absolute;
-	right:0px;
-	width:300px;	
-	text-align:right;
-}
-#feedback {
-	position:absolute;
-	left:0px;
-}*/
