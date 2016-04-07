@@ -6,6 +6,10 @@
 
 
 ////stop default initialization
+$(document).on("mobileinit", function () {
+    $.mobile.autoInitializePage = false;
+});
+
 //$(document).one("pagebeforeshow", "#page-signature", function () {
 //    $(':mobile-pagecontainer').pagecontainer('change', '#main-page');  
 //});
@@ -17,6 +21,9 @@ function onDeviceReady() {
     document.addEventListener('pause', onPause.bind(this), false);
     document.addEventListener('resume', onResume.bind(this), false);
 
+    window.location.hash = 'main-page';
+    // #initialise jQM
+    $.mobile.initializePage();
 };
 
 function onPause() {
@@ -31,10 +38,6 @@ function onResume() {
 
 var sigCapture = null;
 $(document).ready(function (e) {
-    window.location.hash = 'main-page';
-    // #initialise jQM
-    $.mobile.initializePage();
-
     $('form').validate({
         rules: {
             applicantSurname: {
@@ -104,55 +107,6 @@ $(document).ready(function (e) {
         resetApplicantRelativeInPublicOffice();
     });
 
-
-    //resetOtherDriver()
-    $('#otherDriver').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#otherDriversId').show();
-        }
-        else if (select_value == 'no') {
-            $('#otherDriversId').hide();
-        }
-    });
-
-    $('#otherDriversId').on('click', '.Add', function () {
-        var elementGroup = $(this).parent().parent().parent();
-        elementGroup.clone().insertAfter(elementGroup).show().find('input:text').val('');
-        resetOtherDriver();
-    });
-
-    $('#otherDriversId').on('click', '.Delete', function () {
-        var elementGroup = $(this).parent().parent().parent();
-        elementGroup.remove();
-        resetOtherDriver();
-    });
-    
-
-    //resetRegularDriver
-    $('#regularDriver').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'no') {
-            $('#regularDriversId').show();
-        }
-        else if (select_value == 'yes') {
-            $('#regularDriversId').hide();
-        }
-    });
-
-    $('#regularDriversId').on('click', '.Add', function () {
-        var elementGroup = $(this).parent().parent().parent();
-        elementGroup.clone().insertAfter(elementGroup).show().find('input:text').val('');
-        resetRegularDriver();
-    });
-
-    $('#regularDriversId').on('click', '.Delete', function () {
-        var elementGroup = $(this).parent().parent().parent();
-        elementGroup.remove();
-        resetRegularDriver();
-    });
-
-
     //vehicle to be insured
     $('#isOwnerOfVehicle').change(function () {
         var select_value = $(this).val();
@@ -188,97 +142,6 @@ $(document).ready(function (e) {
         SetPageHeaderFooter(getPropertyMenu());
         $.mobile.changePage($("#personal-main-page"), "none");
     });
-
-    //anti-theft device
-    $('#vehicleAntiTheftDevice').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#divVehicleAntiTheftDeviceProvider').show();
-        }
-        else if (select_value == 'no') {
-            $('#divVehicleAntiTheftDeviceProvider').hide();
-        }
-    });
-
-    //vehicleRegularCustodyDetails
-    $('#vehicleRegularCustody').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#divvehicleRegularCustodyDetails').show();
-        }
-        else if (select_value == 'no') {
-            $('#divvehicleRegularCustodyDetails').hide();
-        }
-    });
-
-    //vehicleGaragedAtProposersHome
-    $('#vehicleGaragedAtProposersHome').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#divvehicleGaragedAtProposersHomeDetails').hide();
-        }
-        else if (select_value == 'no') {
-            $('#divvehicleGaragedAtProposersHomeDetails').show();
-        }
-    });
-
-    //vehicleKeptIn
-    $('input[type=radio][name=vehicleKeptIn]').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'vehicleKeptInOther') {
-            $('.vehicleKeptInOtherClass').show();
-        }
-        else {
-            $('.vehicleKeptInOtherClass').hide();
-        }
-    });
-
-    //proposerInsured
-    $('#proposerInsured').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#divproposerInsuranceDetails').show();
-        }
-        else if (select_value == 'no') {
-            $('#divproposerInsuranceDetails').hide();
-        }
-    });
-
-
-    //proposerEntitledToNOClaimDiscount
-    $('#proposerEntitledToNOClaimDiscount').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#proposerEntitledToNOClaimDiscountProof').show();
-        }
-        else if (select_value == 'no') {
-            $('#proposerEntitledToNOClaimDiscountProof').hide();
-        }
-    });
-
-    //applicantOtherInsurer
-    $('#applicantOtherInsurer').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#divapplicantOtherInsurerType').show();
-        }
-        else if (select_value == 'no') {
-            $('#divapplicantOtherInsurerType').hide();
-        }
-    });
-
-    //applicantOtherInsurer
-    $('#applicantPreviouslyInsured').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#divApplicantPreviouslyInsured').show();
-        }
-        else if (select_value == 'no') {
-            $('#divApplicantPreviouslyInsured').hide();
-        }
-    });
-
-
     //validate function
     loadCountriesOptions();
 
@@ -302,79 +165,143 @@ function loadCountriesOptions() {
     });
 }
 
-//
-function resetOtherDriver() {
-
-    var objectList = [
-   { "class": "name", "name": "otherDriversName" },
-   { "class": "occupation", "name": "otherDriversOccupation" },
-   { "class": "DateOfBirth", "name": "otherDriversDateOfBirth" },
-   { "class": "DriversDL", "name": "otherDriversDL" },
-   { "class": "DriversDLOriginalDateOfIssue", "name": "otherDriversDLOriginalDateOfIssue" },
-    { "class": "DriversRelationshipToProposer", "name": "otherDriversRelationshipToProposer" }
-    ];
-    var elementClass = $('.otherDriversCls');
-
-    resetObjects(objectList, elementClass, "Add", "Delete", "Driver");
-}
-
-//regular drivers
-function resetRegularDriver() {
-
-    var objectList = [
-   { "class": "name", "name": "regularDriversName" },
-   { "class": "occupation", "name": "regularDriversOccupation" },
-   { "class": "DateOfBirth", "name": "regularDriversDateOfBirth" },
-   { "class": "DriversDL", "name": "regularDriversDL" },
-   { "class": "DriversDLOriginalDateOfIssue", "name": "regularDriversDLOriginalDateOfIssue" },
-    { "class": "DriversRelationshipToProposer", "name": "regularDriversRelationshipToProposer" }
-    ];
-    var elementClass = $('.regularDriversCls');
-
-    resetObjects(objectList, elementClass, "Add", "Delete", "Driver");
-}
-
 
 function resetApplicantRelativeInPublicOffice() {
 
-    var objectList = [
-   { "class": "office", "name": "applicantRelativeTypePublicOffice" },
-   { "class": "address", "name": "applicantRelativeTypePublicAddress" },
-   { "class": "relation", "name": "applicantRelativeTypePublicRelation" },
-   { "class": "name", "name": "applicantRelativeInPublicOfficeName" }
-    ];
-    var elementClass = $('.publicofficerelations');
+    var  Office = "applicantRelativeTypePublicOffice";
+    var Address = "applicantRelativeTypePublicAddress";
+    var Relation = "applicantRelativeTypePublicRelation";
+    var OfficeName = "applicantRelativeInPublicOfficeName";
 
-    resetObjects(objectList, elementClass, "applicantRelativeInPublicOfficeAdd", "applicantRelativeInPublicOfficeDelete", "Relative");
+    var objectList = [
+   {"class":"office" var  Office = "applicantRelativeTypePublicOffice";
+    var Address = "applicantRelativeTypePublicAddress";
+    var Relation = "applicantRelativeTypePublicRelation";
+    var OfficeName = "applicantRelativeInPublicOfficeName";
+    ]
+
+    resetObjects(objectList, elementClass, addBtnName, delBtnName, elementTitle);
+
+
+    var elementClass = $('.publicofficerelations');
+    var firstElement = elementClass.first();
+    var lastElement = elementClass.last();
+    var i = 0;
+
+    elementClass.each(function (index, e) {
+        var element = $(this);
+        //change ids and names
+        element.find(".office input").attr('id', Office + i).attr('name', Office + i);
+        element.find(".office label").attr('for', Office + i);
+        element.find(".address input").attr('id', Address + i).attr('name', Address + i);
+        element.find(".address label").attr('for', Address + i);
+        element.find(".name input").attr('id', OfficeName + i).attr('name', OfficeName + i);
+        element.find(".name label").attr('for', OfficeName + i);
+        element.find(".relation input").attr('id', Relation + i).attr('name', Relation + i);
+        element.find(".relation label").attr('for', Relation + i);
+
+        //set controls
+        if (element.is(firstElement) && element.is(lastElement)) {
+            firstElement.find(".applicantRelativeInPublicOfficeDelete").hide();
+            lastElement.find(".applicantRelativeInPublicOfficeAdd").show();
+        }
+        else if (element.is(firstElement)) {
+            element.find(".applicantRelativeInPublicOfficeDelete").hide();
+            element.find(".applicantRelativeInPublicOfficeAdd").hide();
+        } else if (element.is(lastElement)) {
+            element.find(".applicantRelativeInPublicOfficeDelete").show();
+            element.find(".applicantRelativeInPublicOfficeAdd").show();
+        }
+        else {
+            element.find(".applicantRelativeInPublicOfficeDelete").hide();
+            element.find(".applicantRelativeInPublicOfficeAdd").hide();
+        }
+        //change title
+        element.find('h4').text('Relative ' + ++i);
+    });
 }
 
 function resetVehiclesToBeInsured() {
-    var objectList = [
-    { "class": "registration", "name": "vehicleRegistrationNo" },
-    { "class": "make", "name": "vehicleMake" },
-    { "class": "model", "name": "vehicleModel" },
-    { "class": "engine", "name": "vehicleEngineNo" },
-    { "class": "chassis", "name": "vehicleChassisNo" },
-    { "class": "year", "name": "vehicleYearOfMake" },
-    { "class": "rating", "name": "vehicleCcRating" },
-    { "class": "seating", "name": "vehicleSeating" },
-    { "class": "body", "name": "vehicleTypeOfBody" },
-    { "class": "insured", "name": "vehicleSumInsured" },
-    { "class": "trailer", "name": "vehicleTrailerUsed" }
-    ];
+    var registration = "vehicleRegistrationNo";
+    var make = "vehicleMake";
+    var model = "vehicleModel";
+    var engine = "vehicleEngineNo";
+    var chassis = "vehicleChassisNo";
+
+    var year = "vehicleYearOfMake";
+    var rating = "vehicleCcRating";
+
+    var seating = "vehicleSeating";
+    var body = "vehicleTypeOfBody";
+
+    var insured = "vehicleSumInsured";
+    var trailer = "vehicleTrailerUsed";
+
+
+
     var elementClass = $('.vehicleToBeInsured');
-    resetObjects(objectList, elementClass, "Add", "Delete", "Vehicle");
+    var firstElement = elementClass.first();
+    var lastElement = elementClass.last();
+    var i = 0;
+    elementClass.each(function (index, e) {
+        var element = $(this);
+        //change ids and names
+        element.find(".year input").attr('id', year + i).attr('name', year + i);
+        element.find(".year label").attr('for', year + i);
+
+        element.find(".rating input").attr('id', rating + i).attr('name', rating + i);
+        element.find(".rating label").attr('for', rating + i);
+
+        element.find(".seating input").attr('id', seating + i).attr('name', seating + i);
+        element.find(".seating label").attr('for', seating + i);
+
+        element.find(".body input").attr('id', body + i).attr('name', body + i);
+        element.find(".body label").attr('for', body + i);
+
+        element.find(".insured input").attr('id', insured + i).attr('name', insured + i);
+        element.find(".insured label").attr('for', insured + i);
+
+        element.find(".trailer input").attr('id', trailer + i).attr('name', trailer + i);
+        element.find(".trailer label").attr('for', trailer + i);
+
+        element.find(".registration input").attr('id', registration + i).attr('name', registration + i);
+        element.find(".registration label").attr('for', registration + i);
+
+        element.find(".make input").attr('id', make + i).attr('name', make + i);
+        element.find(".make label").attr('for', make + i);
+
+        element.find(".model input").attr('id', model + i).attr('name', model + i);
+        element.find(".model label").attr('for', model + i);
+
+        element.find(".engine input").attr('id', engine + i).attr('name', engine + i);
+        element.find(".engine label").attr('for', engine + i);
+
+        element.find(".chassis input").attr('id', chassis + i).attr('name', chassis + i);
+        element.find(".chassis label").attr('for', chassis + i);
+
+        //set controls
+        if (element.is(firstElement) && element.is(lastElement)) {
+            firstElement.find(".Delete").hide();
+            lastElement.find(".Add").show();
+        }
+        else if (element.is(firstElement)) {
+            element.find(".Delete").hide();
+            element.find(".Add").hide();
+        } else if (element.is(lastElement)) {
+            element.find(".Delete").show();
+            element.find(".Add").show();
+        }
+        else {
+            element.find(".Delete").hide();
+            element.find(".Add").hide();
+        }
+        //change title
+        element.find('h4').text('Vehicle ' + ++i);
+    });
 }
 
 function SignatureItem() {
     return { "name": "Signature", "value": "page-signature" };
-}
-
-function SetupSignaturePage() {
-    var signaturePage = $('#page-signature');
-    signaturePage.find("[data-role=header]").find("h1").text("Signature");
-    signaturePage.find("[data-role=footer]").find("h4").text("IronRock App");
-    signaturePage.find("[data-role=main]").show();
 }
 
 function getPersonalMenu() {
@@ -716,7 +643,7 @@ var _countries =
 
 
 
-function resetObjects(objectList, elementClass, addBtnName, delBtnName, elementTitle) {
+function resetObjects(objectList, elementClass, addBtnName, delBtnName,elementTitle) {
     var firstElement = elementClass.first();
     var lastElement = elementClass.last();
     var i = 0;
@@ -724,15 +651,15 @@ function resetObjects(objectList, elementClass, addBtnName, delBtnName, elementT
     elementClass.each(function (index, e) {
         var element = $(this);
         //change ids and names
-        $.each(objectList, function (i, item) {
+        objectList.each(function (i, item) {
             element.find('.' + item.class + ' input').attr('id', item.name + i).attr('name', item.name + i);
             element.find('.' + item.class + ' label').attr('for', item.name + i);
-        })
+        })       
 
         //set controls
         if (element.is(firstElement) && element.is(lastElement)) {
-            firstElement.find('.' + delBtnName).hide();
-            lastElement.find('.' + addBtnName).show();
+            firstElement.find('.'+delBtnName).hide();
+            lastElement.find('.'+addBtnName).show();
         }
         else if (element.is(firstElement)) {
             element.find('.' + delBtnName).hide();
@@ -746,6 +673,6 @@ function resetObjects(objectList, elementClass, addBtnName, delBtnName, elementT
             element.find('.' + addBtnName).hide();
         }
         //change title
-        element.find('h4').text(elementTitle + ' ' + ++i);
+        element.find('h4').text(elementTitle+' ' + ++i);
     });
 }

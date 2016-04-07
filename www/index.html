@@ -22,22 +22,27 @@
 </head>
 <body>
 
-
-    <div data-role="page" id="main-page">
-
+    <div data-role="page" id="page-signature">
         <div data-role="header" class="header" data-position="fixed">
-            <h1 id="app-title">IronRock Insurance App</h1>
+            <h1 id="app-title"></h1>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
 
-        <div role="main" class="ui-content">
-            <!--<div style="width: 100%; height: 100%; position: relative; background-color: #fbfbfb; border: 1px solid #b8b8b8;">
-                <img src="images/IronRockLogo.png" alt="image" style="position: absolute; top: 50%; left: 50%; margin-left: -16px; margin-top: -18px" />
-            </div>-->
-            <div class="">
-                <a id="menu-vehicle" href="#" class="ui-btn">Motor Vehicle Insurance</a>
-                <a id="menu-property" href="#" class="ui-btn">Property Insurance</a>
+        <div data-role="main" class="ui-content">
+            <p>Sign below and press the submit button.</p>
+            <div id="canvasContainer" width="100%">
+                <canvas id="signature" height="200px" />
             </div>
-
+            <div id="lowerControls">
+                <div id="feedback"></div>
+                <div id="buttonsContainer">
+                    <div data-role="controlgroup">
+                        <a href="#personal-main-page" data-role="button" data-inline="true" data-mini="true" data-icon="delete">Return</a>
+                        <a id="clear-canvas" href="#" data-role="button" data-inline="true" data-icon="back" data-mini="true">Clear</a>
+                        <a id="submit-btn" href="#" data-role="button" data-inline="true" data-icon="check" data-mini="true">Submit</a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <footer data-role="footer" data-position="fixed">
@@ -45,14 +50,31 @@
         </footer>
     </div>
 
+    <div data-role="page" id="main-page">
+
+        <!--<div data-role="header" class="header" data-position="fixed">
+            <h1 id="app-title">IronRock Insurance App</h1>
+        </div>-->
+        <div data-role="main" class="ui-content">
+            <img src="images/IronRockLogo.png" alt="image" style="width: 100%;" />
+            <div class="">
+                <a id="menu-vehicle" href="#" class="ui-btn">Motor Vehicle Insurance</a>
+                <a id="menu-property" href="#" class="ui-btn">Property Insurance</a>
+            </div>
+        </div>
+        <!--<footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>-->
+    </div>
+
     <div data-role="page" id="personal-main-page">
 
         <div data-role="header" class="header" data-position="fixed">
             <h1 id="app-title">Personal Details</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Main</a>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Main</a>
         </div>
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
             <form>
                 <input type="hidden" id="signatureBytes" name="signatureBytes" />
                 <label for="applicantSurname">Surname:</label>
@@ -79,6 +101,22 @@
                 <label for="applicantAlias">Other Names/Aliases:</label>
                 <input type="text" id="applicantAlias" name="applicantAlias" placeholder="Enter other name/alias">
 
+                <label for="applicantDateOfBirth">Date Of Birth:</label>
+                <input type="date" id="applicantDateOfBirth" name="applicantDateOfBirth" placeholder="Enter Date of Birth">
+
+
+                <label for="applicantPlaceOfBirth">Place Of Birth:</label>
+                <input type="text" id="applicantPlaceOfBirth" name="applicantPlaceOfBirth" placeholder="Enter Place of Birth">
+
+                <label for="applicantNationality">Country of Nationality:</label>
+                <select name="applicantNationality" id="applicantNationality" class="countries" data-mini="true">
+                    <option value="Jamaica">Jamaica</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                    <option value="Barbados">Barbados</option>
+                    <option value="USA">USA</option>
+                </select>
+
                 <label for="applicantIDType" class="select">ID Type:</label>
                 <select id="IDType">
                     <option>National ID</option>
@@ -103,14 +141,11 @@
 
         <div data-role="header" class="header" data-position="fixed">
             <h1 id="app-title">Personal Details</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Main</a>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Main</a>
         </div>
 
-
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
             <form>
-
-
                 <label for="SourceOfFunds">Source of Funds:</label>
                 <input type="text" id="SourceOfFunds" placeholder="Enter Source of Funds">
 
@@ -132,34 +167,6 @@
 
                 <label for="applicantWorkNumber">Work Number:</label>
                 <input type="number" id="applicantWorkNumber" name="applicantWorkNumber" placeholder="Enter Work Number">
-
-
-                <label for="applicantDateOfBirth">Date Of Birth:</label>
-                <input type="date" id="applicantDateOfBirth" name="applicantDateOfBirth" placeholder="Enter Date of Birth">
-
-
-                <label for="applicantPlaceOfBirth">Place Of Birth:</label>
-                <input type="text" id="applicantPlaceOfBirth" name="applicantPlaceOfBirth" placeholder="Enter Place of Birth">
-
-
-                <label for="applicantNationality">Nationality:</label>
-                <input type="text" id="applicantNationality" name="applicantNationality" placeholder="Enter Nationality">
-
-
-                <label for="applicantDLNumber">D/L Number:</label>
-                <input type="number" id="applicantDLNumber" name="applicantDLNumber" placeholder="Enter D/L Number">
-
-
-                <label for="applicantClass">D/L Class:</label>
-                <input type="text" id="applicantDLClass" name="applicantDLClass" placeholder="Enter Class">
-
-
-                <label for="applicantOriginalDate">D/L Original Date:</label>
-                <input type="date" id="applicantOriginalDate" name="applicantOriginalDate" placeholder="Enter Original Date">
-
-
-                <label for="applicantExpiryDate">D/L Expiry Date:</label>
-                <input type="date" id="applicantExpiryDate" placeholder="Enter Expiry Date">
             </form>
 
         </div>
@@ -173,10 +180,10 @@
 
         <div data-role="header" class="header" data-position="fixed">
             <h1 id="app-title">Home Address</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
             <form>
                 <label for="applicantHomeStreetName">Street Number and Name:</label>
                 <input type="text" id="applicantHomeStreetName" name="applicantHomeStreetName" placeholder="Enter Street Number and Name">
@@ -205,13 +212,7 @@
                 </select>
 
                 <label for="applicantHomeCountry">Select Country:</label>
-                <select name="applicantHomeCountry" id="applicantHomeCountry" data-mini="true">
-                    <option value="Jamaica">Jamaica</option>
-                    <option value="Canada">Canada</option>
-                    <option value="Trinidad and Tobago">Trinidad and Tobago</option>
-                    <option value="Barbados">Barbados</option>
-                    <option value="USA">USA</option>
-                </select>
+                <select name="applicantHomeCountry" id="applicantHomeCountry" class="countries" data-mini="true"></select>
 
             </form>
 
@@ -227,10 +228,10 @@
 
         <div data-role="header" class="header">
             <h1 id="app-title">Mailing Address</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
             <form>
 
                 <label for="applicantMailStreetName">Street Number and Name:</label>
@@ -260,7 +261,7 @@
                 </select>
 
                 <label for="applicantMailCountry">Select Country:</label>
-                <select name="applicantMailCountry" id="applicantMailCountry" data-mini="true">
+                <select name="applicantMailCountry" id="applicantMailCountry" class="countries" data-mini="true">
                     <option value="Jamaica">Jamaica</option>
                     <option value="Canada">Canada</option>
                     <option value="Trinidad and Tobago">Trinidad and Tobago</option>
@@ -280,10 +281,10 @@
 
         <div data-role="header" class="header">
             <h1 id="app-title">Employer Details</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
             <form>
 
                 <label for="employerNameInFull">Name in Full:</label>
@@ -314,7 +315,7 @@
                 </select>
 
                 <label for="employerNationality">Nationality:</label>
-                <select name="employerNationality" id="employerNationality" data-mini="true">
+                <select name="employerNationality" id="employerNationality" class="countries" data-mini="true">
                     <option value="Jamaica">Jamaica</option>
                     <option value="Canada">Canada</option>
                     <option value="Trinidad and Tobago">Trinidad and Tobago</option>
@@ -333,10 +334,10 @@
 
         <div data-role="header" class="header">
             <h1 id="app-title">Personal details continued</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
             <form>
                 <label for="applicantRelativeInPublicOffice">Have you or any relative or close associate been entrusted with prominent pubic functions(e.g. Member of Parliament, Senator or Mayor, Senior Government Official, Judiciary, Security forces)?</label>
                 <select name="applicantRelativeInPublicOffice" id="applicantRelativeInPublicOffice" data-role="slider" data-mini="true">
@@ -349,34 +350,34 @@
                         <h4>Relative 1</h4>
                         <hr />
                         <fieldset class="ui-grid-a office">
-                            <div class="ui-block-a" style="width:50%">
+                            <div class="ui-block-a">
                                 <label for="applicantRelativeTypePublicOffice0">Office</label>
                             </div>
-                            <div class="ui-block-b" style="width:50%">
+                            <div class="ui-block-b">
                                 <input type="text" name="applicantRelativeTypePublicOffice0" id="applicantRelativeTypePublicOffice0" value="">
                             </div>
                         </fieldset>
                         <fieldset class="ui-grid-a name">
-                            <div class="ui-block-a" style="width:50%">
+                            <div class="ui-block-a">
                                 <label for="applicantRelativeInPublicOfficeName0">Name</label>
                             </div>
-                            <div class="ui-block-b" style="width:50%">
+                            <div class="ui-block-b">
                                 <input type="text" name="applicantRelativeInPublicOfficeName0" id="applicantRelativeInPublicOfficeName0" value="">
                             </div>
                         </fieldset>
                         <fieldset class="ui-grid-a address">
-                            <div class="ui-block-a" style="width:50%">
+                            <div class="ui-block-a">
                                 <label for="applicantRelativeInPublicOfficeAddress0">Address</label>
                             </div>
-                            <div class="ui-block-b" style="width:50%">
+                            <div class="ui-block-b">
                                 <input type="text" name="applicantRelativeInPublicOfficeAddress0" id="applicantRelativeInPublicOfficeAddress0" value="">
                             </div>
                         </fieldset>
                         <fieldset class="ui-grid-a relation">
-                            <div class="ui-block-a" style="width:50%">
+                            <div class="ui-block-a">
                                 <label for="applicantRelativeInPublicOfficeRelation0">Relation</label>
                             </div>
-                            <div class="ui-block-b" style="width:50%">
+                            <div class="ui-block-b">
                                 <select name="applicantRelativeInPublicOfficeRelation0" id="applicantRelativeInPublicOfficeRelation0">
                                     <option value="spouse">Spouse</option>
                                     <option value="child">Child</option>
@@ -386,7 +387,7 @@
                             </div>
                         </fieldset>
                         <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-                            <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left applicantRelativeInPublicOfficeAdd">Add More</a>
+                            <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left applicantRelativeInPublicOfficeAdd">Add Relative</a>
                             <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right applicantRelativeInPublicOfficeDelete" style="display:none">Delete</a>
                         </div>
                     </div>
@@ -404,10 +405,10 @@
 
         <div data-role="header" class="header">
             <h1 id="app-title">Particulars Of Vehicle</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
             <form id="vehicleToBeInsuredCtrl">
                 <p>PARTICULAR OF VEHICLE(S) TO BE INSURED</p>
 
@@ -514,7 +515,7 @@
                         </div>
                     </fieldset>
                     <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-                        <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left Add">Add More</a>
+                        <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left Add">Add Vehicle</a>
                         <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right Delete" style="display:none">Delete</a>
                     </div>
                 </div>
@@ -542,16 +543,16 @@
 
         <div data-role="header" class="header">
             <h1 id="app-title">Mortgagee</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
             <form>
-
-                <p>NOTE: You are required to ensure that the Sum Insured is revised annually to reflect the current market value. Claims will be settled based on the market value at the time of the loss. For total losses you will be paid based on the market value or Policy Sum Insured whichever is lesser.</p>
-                <p>
-                    <b>Mortgagee</b>
-                </p>
+                <div data-role="collapsible">
+                    <h1>Note</h1>
+                    <p>You are required to ensure that the Sum Insured is revised annually to reflect the current market value. Claims will be settled based on the market value at the time of the loss. For total losses you will be paid based on the market value or Policy Sum Insured whichever is lesser.</p>
+                </div>
+                <h4>Mortgagee</h4>
                 <label for="mortgageeNameInFull">Name in Full:</label>
                 <input type="text" name="mortgageeNameInFull" id="mortgageeNameInFull" value="">
                 <label for="mortgageeStreetName">Street Number and Name:</label>
@@ -576,27 +577,23 @@
                     <option value="St. Thomas">St. Thomas</option>
                 </select>
 
-
-                <p>Insurance coveragies available:</p>
-
-                <label for="insuranceCoverage">Select cover required:</label>
+                <label for="insuranceCoverage">Insurance coverage:</label>
                 <select name="insuranceCoverage" id="insuranceCoverage" data-mini="true">
-                    <option value="Comprehensive-Liability for Third Party Bodily Injury and Property Damage and loss of or damage to the Insured's Motor Vehicle">Comprehensive-Liability for Third Party Bodily Injury and Property Damage and loss of or damage to the Insured's Motor Vehicle</option>
-                    <option value="Third Party Fire and Theft- Liability for Third Party Bodily Injury and Property Damage and Loss of or damage to the Insured's Motor Vehicle by Fire or Theft">Third Party Fire and Theft- Liability for Third Party Bodily Injury and Property Damage and Loss of or damage to the Insured's Motor Vehicle by Fire or Theft</option>
-                    <option value="Third Party- Liability for Third Party Bodily Injury and Property Damage">Third Party- Liability for Third Party Bodily Injury and Property Damage</option>
+                    <option value="Comprehensive-Liability" title="Third Party Bodily Injury and Property Damage and loss of or damage to the Insured's Motor Vehicle">Comprehensive-Liability</option>
+                    <option value="Third Party Fire and Theft" title="Liability for Third Party Bodily Injury and Property Damage and Loss of or damage to the Insured's Motor Vehicle by Fire or Theft">Third Party Fire and Theft</option>
+                    <option value="Third Party" title="Liability for Third Party Bodily Injury and Property Damage">Third Party</option>
                 </select>
 
-                <label for="vehicleUsedAs">Please indicate if the vehicle is to be used as:</label>
+                <label for="vehicleUsedAs">Vehicle Used As:</label>
                 <select name="vehicleUsedAs" id="vehicleUsedAs" data-mini="true">
-                    <option value="Carriage of own goods only(Private Commercial)">Carriage of own goods only(Private Commercial)</option>
-                    <option value="Carriage ofpassengers not for hire or reward">Carriage ofpassengers not for hire or reward</option>
+                    <option value="Carriage of own goods only">Carriage of own goods only</option>
+                    <option value="Carriage of passengers not for hire or reward">Carriage of passengers not for hire or reward</option>
                     <option value="Carriage of Passengers for hire or reward">Carriage of Passengers for hire or reward</option>
                     <option value="Social domestic and pleasure purposes only">Social domestic and pleasure purposes only</option>
-                    <option value="General Cartage(Public Commercial)">General Cartage(Public Commercial)</option>
-                    <option value="Social domestic and pleasure purposes and business use">Social domestic and pleasure purposes and business use</option>
+                    <option value="General Cartage">General Cartage</option>
+                    <option value="Social domestic and pleasure purposes and business use">Social domestic/pleasure purposes/business use</option>
                     <option value="Commercial travelling">Commercial travelling</option>
                 </select>
-
             </form>
 
         </div>
@@ -609,131 +606,110 @@
 
         <div data-role="header" class="header">
             <h1 id="app-title">Vehicle Particulars continued</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
             <form>
 
-                <fieldset data-role="controlgroup">
+                <label>Is the vehicle fitted with an anti-theft device?:</label>
+                <select name="vehicleAntiTheftDevice" id="vehicleAntiTheftDevice" data-role="slider" data-mini="true">
+                    <option value="no" selected="">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+                <div id="divVehicleAntiTheftDeviceProvider" style="display:none">
+                    <label for="vehicleAntiTheftDeviceNameOfProvider">Name of Provider:</label>
+                    <input type="text" name="vehicleAntiTheftDeviceNameOfProvider" id="vehicleAntiTheftDeviceNameOfProvider" value="">
+                </div>
+                <hr />
+                <label>Will you have regular custody of the vehicle?:</label>
+                <select name="vehicleRegularCustody" id="vehicleRegularCustody" data-role="slider" data-mini="true">
+                    <option value="no" selected>No</option>
+                    <option value="yes">Yes</option>
+                </select>
+                <div id="divvehicleRegularCustodyDetails" style="display:none">
+                    <label for="vehicleRegularCustodyDetails">Details:</label>
+                    <textarea name="vehicleRegularCustodyDetails" id="vehicleRegularCustodyDetails"></textarea>
+                </div>
+                <hr />
 
-                    <legend>Is the vehicle fitted with an anti-theft device?:</legend>
+                <label for="vehicleGaragedAtProposersHome">Is the vehicle garaged at the Proposer's home address?</label>
+                <select name="vehicleGaragedAtProposersHome" id="vehicleGaragedAtProposersHome" data-role="slider" data-mini="true">
+                    <option value="no">No</option>
+                    <option value="yes" selected>Yes</option>
+                </select>
 
-                    <input type="radio" name="vehicleAntiTheftDevice" id="vehicleAntiTheftDeviceYes" value="on" checked="checked">
-                    <label for="vehicleAntiTheftDeviceYes">Yes</label>
-
-                    <input type="radio" name="vehicleAntiTheftDevice" id="vehicleAntiTheftDeviceNo" value="off">
-                    <label for="vehicleAntiTheftDeviceNo">No</label>
-                </fieldset>
-                <label for="vehicleAntiTheftDeviceNameOfProvider">If yes, state the name, type of device and name of provider:</label>
-                <input type="text" name="vehicleAntiTheftDeviceNameOfProvider" id="vehicleAntiTheftDeviceNameOfProvider" value="">
-
-                <fieldset data-role="controlgroup">
-
-                    <legend>Will you have regular custody of the vehicle?:</legend>
-
-                    <input type="radio" name="vehicleRegularCustody" id="vehicleRegularCustodyYes" value="on" checked="checked">
-                    <label for="vehicleRegularCustodyYes">Yes</label>
-
-                    <input type="radio" name="vehicleRegularCustody" id="vehicleRegularCustodyNo" value="off">
-                    <label for="vehicleRegularCustodyNo">No</label>
-                </fieldset>
-
-                <label for="vehicleRegularCustodyDetails">If yes, please provide details:</label>
-                <input type="text" name="vehicleRegularCustodyDetails" id="vehicleRegularCustodyDetails" value="">
-
-                <fieldset data-role="controlgroup">
-
-                    <legend>Is the vehicle garaged at the Properser's home address?:</legend>
-
-                    <input type="radio" name="vehicleGaragedAtProposersHome" id="vehicleGaragedAtProposersHomeYes" value="on" checked="checked">
-                    <label for="vehicleGaragedAtProposersHomeYes">Yes</label>
-
-                    <input type="radio" name="vehicleGaragedAtProposersHome" id="vehicleGaragedAtProposersHomeNo" value="off">
-                    <label for="vehicleGaragedAtProposersHomeNo">No</label>
-                </fieldset>
-
-                <label for="vehicleGaragedAtProposersHomeWhere">If yes, please state where:</label>
-                <input type="text" name="vehicleGaragedAtProposersHomeWhere" id="vehicleGaragedAtProposersHomeWhere" value="">
+                <div id="divvehicleGaragedAtProposersHomeDetails" style="display:none">
+                    <label for="vehicleGaragedAtProposersHomeDetails">Details:</label>
+                    <textarea name="vehicleGaragedAtProposersHomeDetails" id="vehicleGaragedAtProposersHomeDetails"></textarea>
+                </div>
+                <hr />
 
                 <fieldset data-role="controlgroup">
-
                     <legend>Is the vehicle kept in?:</legend>
-
-                    <input type="radio" name="vehicleKeptIn" id="vehicleKeptInGarage" value="on" checked="checked">
+                    <input type="radio" name="vehicleKeptIn" id="vehicleKeptInGarage" value="vehicleKeptInGarage" checked="checked">
                     <label for="vehicleKeptInGarage">A locked garage</label>
-
-                    <input type="radio" name="vehicleKeptIn" id="vehicleKeptInArea" value="off">
+                    <input type="radio" name="vehicleKeptIn" id="vehicleKeptInArea" value="vehicleKeptInArea">
                     <label for="vehicleKeptInArea">A locked area</label>
+                    <input type="radio" name="vehicleKeptIn" id="vehicleKeptInOther" value="vehicleKeptInOther">
+                    <label for="vehicleKeptInOther">Other</label>
                 </fieldset>
-                <label for="vehicleKeptInOther">Other:</label>
-                <input type="text" name="vehicleKeptInOther" id="vehicleKeptInOther" value="">
+                <label class="vehicleKeptInOtherClass" for="vehicleKeptInOtherDetails" style="display:none">Details:</label>
+                <textarea class="vehicleKeptInOtherClass" type="text" name="vehicleKeptInOtherDetails" id="vehicleKeptInOtherDetails" style="display:none"></textarea>
+                <hr />
 
+                <label for="proposerInsured">Is the Proposer now insured or was previously insured in respect of any vehicles(s)?</label>
+                <select name="proposerInsured" id="proposerInsured" data-role="slider" data-mini="true">
+                    <option value="no" selected>No</option>
+                    <option value="yes">Yes</option>
+                </select>
+                <div id="divproposerInsuranceDetails" style="display:none">
+                    <label for="proposerInsuranceDetails">Details:</label>
+                    <textarea name="proposerInsuranceDetails" id="proposerInsuranceDetails"></textarea>
+                </div>
+                <hr />
+
+                <label for="proposerEntitledToNOClaimDiscount">Is the proposer entitled to No CLaim Discount from previous insurerer(s) in respect of any vehicle(s) described in the proposal:</label>
+                <select name="proposerEntitledToNOClaimDiscount" id="proposerEntitledToNOClaimDiscount" data-role="slider" data-mini="true">
+                    <option value="no" selected>No</option>
+                    <option value="yes">Yes</option>
+                </select>
+                <p id="proposerEntitledToNOClaimDiscountProof" style="display:none;color:red">Please submit proof of No Claim Discount Letter or Renewal Notice</p>
+                <hr />
+
+                <label for="applicantOtherInsurer">Do you have any other insurance(s) with IronRock Insurance Company Ltd.?</label>
+                <select name="applicantOtherInsurer" id="applicantOtherInsurer" data-role="slider" data-mini="true">
+                    <option value="no" selected>No</option>
+                    <option value="yes">Yes</option>
+                </select>
+
+                <div id="divapplicantOtherInsurerType" style="display:none">
+                    <label for="applicantOtherInsurerType">Type:</label>
+                    <textarea name="applicantOtherInsurerType" id="applicantOtherInsurerType"></textarea>
+                </div>
+
+                <hr />
+
+
+                <label for="applicantPreviouslyInsured">Has any Insurer(s) in respect of the Proposer or any other person who will regularly drive ever:</label>
+                <ul>
+                    <li>Declined your proposal?</li>
+                    <li>Required and increased premium or imposed special conditions</li>
+                    <li>Cancelled or refused to renew an existing insurance?</li>
+                </ul>
+                <select name="applicantPreviouslyInsured" id="applicantPreviouslyInsured" data-role="slider" data-mini="true">
+                    <option value="no" selected>No</option>
+                    <option value="yes">Yes</option>
+                </select>
+                <div id="divApplicantPreviouslyInsured" style="display:none">
+                    <label for="ApplicantPreviouslyInsuredDetails">Details:</label>
+                    <textarea name="ApplicantPreviouslyInsuredDetails" id="ApplicantPreviouslyInsuredDetails"></textarea>
+                </div>
+                <hr />
                 <fieldset data-role="controlgroup">
-
-                    <legend>Is the Proposer now insured or was previously insured in respect of any vehicles(s)?:</legend>
-
-                    <input type="radio" name="proposerInsured" id="proposerInsuredYes" value="on" checked="checked">
-                    <label for="proposerInsuredYes">Yes</label>
-
-                    <input type="radio" name="proposerInsured" id="proposerInsuredNo" value="off">
-                    <label for="proposerInsuredNo">No</label>
-                </fieldset>
-
-
-                <label for="proposerInsuranceCompanyNameAddress">If yes, state the name and address of the Insurance Company:</label>
-                <input type="text" name="proposerInsuranceCompanyNameAddress" id="proposerInsuranceCompanyNameAddress" value="">
-
-                <fieldset data-role="controlgroup">
-
-                    <legend>Is the proposer entitled to No CLaim Discount from previous insurerer(s) in respect of any vehicle(s) described in the proposal:</legend>
-
-                    <input type="radio" name="proposerEntitledToNOClaimDiscount" id="proposerEntitledToNOClaimDiscountYes" value="on" checked="checked">
-                    <label for="proposerEntitledToNOClaimDiscountYes">Yes</label>
-
-                    <input type="radio" name="proposerEntitledToNOClaimDiscount" id="proposerEntitledToNOClaimDiscountNo" value="off">
-                    <label for="proposerEntitledToNOClaimDiscountNo">No</label>
-                </fieldset>
-
-                <p>If yes, please attach proof of No Claim Discount Letter or Renewal Notice</p>
-
-                <fieldset data-role="controlgroup">
-
-                    <legend>Do you have any other insurer(s) with IronRock Insurance Company Ltd.?:</legend>
-
-                    <input type="radio" name="applicantOtherInsurer" id="applicantOtherInsurerYes" value="on" checked="checked">
-                    <label for="applicantOtherInsurerYes">Yes</label>
-
-                    <input type="radio" name="applicantOtherInsurer" id="applicantOtherInsurerNo" value="off">
-                    <label for="applicantOtherInsurerNo">No</label>
-                </fieldset>
-
-                <label for="applicantOtherInsurerType">If yes, please state type(s):</label>
-                <input type="text" name="applicantOtherInsurerType" id="applicantOtherInsurerType" value="">
-
-                <fieldset data-role="controlgroup">
-
-                    <legend>Has any Insurer(s) in respect of the Proposer or any other person who will regularly drive ever:</legend>
-
-                    <input type="radio" name="applicantInsurer" id="applicantInsurerDeclinedProposal" value="on" checked="checked">
-                    <label for="applicantInsurerDeclinedProposal">Declined your proposal?</label>
-
-                    <input type="radio" name="applicantInsurer" id="applicantInsurerIncreasedPremium" value="off">
-                    <label for="applicantInsurerIncreasedPremium">Required and increased premium or imposed special conditions</label>
-                    <input type="radio" name="applicantInsurer" id="applicantInsurerCancelledRefused" value="off">
-                    <label for="applicantInsurerCancelledRefused">Cancelled or refused to renew an existing insurance?</label>
-                </fieldset>
-
-                <label for="applicantInsurerIfYes">If yes, please give details:</label>
-                <input type="text" name="applicantInsurerIfYes" id="applicantInsurerIfYes" value="">
-
-                <fieldset data-role="controlgroup">
-
                     <legend>Type of Authorized Driver Clause:</legend>
-
                     <input type="radio" name="typeOfAuthorizedDriver" id="typeOfAuthorizedDriverOpen" value="on" checked="checked">
                     <label for="typeOfAuthorizedDriverOpen">Open Driving</label>
-
                     <input type="radio" name="typeOfAuthorizedDriver" id="typeOfAuthorizedDriverRestricted" value="off">
                     <label for="typeOfAuthorizedDriverRestricted">Restricted Driving(Restricted Discount Available)</label>
                 </fieldset>
@@ -750,54 +726,93 @@
 
         <div data-role="header" class="header">
             <h1 id="app-title">Other Drivers</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
             <form>
                 <p>Will anyone driving your motor vehicle:</p>
-                <fieldset data-role="controlgroup">
+                <div data-role="collapsible">
+                    <h1>Be under the age of:</h1>
+                    <ul>
+                        <li>21 Years Old- Private Cars</li>
+                        <li>23 Years Old- Private Commercial</li>
+                        <li>25 Years Old- General Cartage</li>
+                    </ul>
+                </div>
+                <div data-role="collapsible">
+                    <h1>Have Driving Experience less than:</h1>
+                    <ul>
+                        <li>24 Months Private Licence</li>
+                        <li>36 Months- General Licence- Private Commercial</li>
+                        <li>5 Years- Genral Licence- Public Commercial</li>
+                    </ul>
+                </div>
 
-                    <legend>Be under the age of:</legend>
+                <select name="otherDriver" id="otherDriver" data-role="slider" data-mini="true">
+                    <option value="no" selected="">No</option>
+                    <option value="yes">Yes</option>
+                </select>
 
-                    <input type="checkbox" name="otherDriver21years" id="otherDriver21years" checked="">
-                    <label for="otherDriver21years">21 Years Old- Private Cars</label>
+                <div id="otherDriversId" style="display:none">
+                    <div class="otherDriversCls">
+                        <h4>Driver 1</h4>
+                        <hr />
+                        <fieldset class="ui-grid-a name">
+                            <div class="ui-block-a">
+                                <label for="otherDriversName">Name:</label>
+                            </div>
+                            <div class="ui-block-b">
+                                <input type="text" name="otherDriversName" id="otherDriversName" value="">
+                            </div>
+                        </fieldset>
+                        <fieldset class="ui-grid-a occupation">
+                            <div class="ui-block-a">
+                                <label for="otherDriversOccupation">Occupation:</label>
+                            </div>
+                            <div class="ui-block-b">
+                                <input type="text" name="otherDriversOccupation" id="otherDriversOccupation" value="">
+                            </div>
+                        </fieldset>
+                        <fieldset class="ui-grid-a DateOfBirth">
+                            <div class="ui-block-a">
+                                <label for="otherDriversDateOfBirth">Date of Birth:</label>
+                            </div>
+                            <div class="ui-block-b">
+                                <input type="date" name="otherDriversDateOfBirth" id="otherDriversDateOfBirth" value="">
+                            </div>
+                        </fieldset>
+                        <fieldset class="ui-grid-a DriversDL">
+                            <div class="ui-block-a">
+                                <label for="otherDriversDL">Driver's Licence:</label>
+                            </div>
+                            <div class="ui-block-b">
+                                <input type="text" name="otherDriversDL" id="otherDriversDL" value="">
+                            </div>
+                        </fieldset>
+                        <fieldset class="ui-grid-a DriversDLOriginalDateOfIssue">
+                            <div class="ui-block-a">
+                                <label for="otherDriversDLOriginalDateOfIssue">Original Date of Issue:</label>
+                            </div>
+                            <div class="ui-block-b">
+                                <input type="date" name="otherDriversDLOriginalDateOfIssue" id="otherDriversDLOriginalDateOfIssue" value="">
+                            </div>
+                        </fieldset>
+                        <fieldset class="ui-grid-a DriversRelationshipToProposer">
+                            <div class="ui-block-a">
+                                <label for="otherDriversRelationshipToProposer">Relationship to Proposer:</label>
+                            </div>
+                            <div class="ui-block-b">
+                                <input type="text" name="otherDriversRelationshipToProposer" id="otherDriversRelationshipToProposer" value="">
+                            </div>
+                        </fieldset>
+                        <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left Add">Add Driver</a>
+                            <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right Delete" style="display:none">Remove Driver</a>
+                        </div>
+                    </div>
+                </div>
 
-                    <input type="checkbox" name="otherDriver23years" id="otherDriver23years">
-                    <label for="otherDriver23years">23 Years Old- Private Commercial</label>
-
-                    <input type="checkbox" name="otherDriver25years" id="otherDriver25years">
-                    <label for="otherDriver25years">25 Years Old- General Cartage</label>
-                </fieldset>
-
-                <fieldset data-role="controlgroup">
-
-                    <legend>Have Driving Experience less than:</legend>
-
-                    <input type="checkbox" name="otherDriversExperience24months" id="otherDriversExperience24months" checked="">
-                    <label for="otherDriversExperience24months">24 Months Private Licence</label>
-
-                    <input type="checkbox" name="otherDriversExperience36months" id="otherDriversExperience36months">
-                    <label for="otherDriversExperience36months">36 Months- General Licence- Private Commercial</label>
-
-                    <input type="checkbox" name="otherDriversExperience5years" id="otherDriversExperience5years">
-                    <label for="otherDriversExperience5years">5 Years- Genral Licence- Public Commercial</label>
-                </fieldset>
-
-                <p>If yes, please give particulars of drivers below:</p>
-
-                <label for="otherDriversName">Name:</label>
-                <input type="text" name="otherDriversName" id="otherDriversName" value="">
-                <label for="otherDriversOccupation">Occupation:</label>
-                <input type="text" name="otherDriversOccupation" id="otherDriversOccupation" value="">
-                <label for="otherDriversDateOfBirth">Date of Birth:</label>
-                <input type="date" name="otherDriversDateOfBirth" id="otherDriversDateOfBirth" value="">
-                <label for="otherDriversDL">Driver's Licence:</label>
-                <input type="text" name="otherDriversDL" id="otherDriversDL" value="">
-                <label for="otherDriversDLOriginalDateOfIssue">Original Date of Issue:</label>
-                <input type="date" name="otherDriversDLOriginalDateOfIssue" id="otherDriversDLOriginalDateOfIssue" value="">
-                <label for="otherDriversRelationshipToProposer">Relationship to Proposer:</label>
-                <input type="text" name="otherDriversRelationshipToProposer" id="otherDriversRelationshipToProposer" value="">
 
             </form>
 
@@ -811,36 +826,100 @@
 
         <div data-role="header" class="header">
             <h1 id="app-title">Driver details</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
             <form>
-                <fieldset data-role="controlgroup">
 
-                    <legend>Will you be the regular driver of the vehicle:</legend>
+                <div data-role="collapsible">
+                    <h1>Applicant Driver License</h1>
 
-                    <input type="radio" name="regularDriverOfVehicle" id="regularDriverOfVehicleYes" value="on" checked="checked">
-                    <label for="regularDriverOfVehicleYes">Yes</label>
 
-                    <input type="radio" name="regularDriverOfVehicle" id="regularDriverOfVehicleNo" value="off">
-                    <label for="regularDriverOfVehicleNo">No</label>
-                </fieldset>
 
-                <p>Please provide details of the drivers likely to drive the motor vehicle:</p>
+                    <label for="applicantDLNumber">D/L Number:</label>
+                    <input type="number" id="applicantDLNumber" name="applicantDLNumber" placeholder="Enter D/L Number">
 
-                <label for="regularDriverName">Name:</label>
-                <input type="text" name="regularDriverName" id="regularDriverName" value="">
-                <label for="regularDriverOccupation">Occupation:</label>
-                <input type="text" name="regularDriverOccupation" id="regularDriverOccupation" value="">
-                <label for="regularDriverDateOfBirth">Date of Birth:</label>
-                <input type="date" name="regularDriverDateOfBirth" id="regularDriverDateOfBirth" value="">
-                <label for="regularDriverDL">Driver's Licence:</label>
-                <input type="text" name="regularDriverDL" id="regularDriverDL" value="">
-                <label for="regularDriverOriginalDateOfIssue">Original Date of Issue:</label>
-                <input type="date" name="regularDriverOriginalDateOfIssue" id="regularDriverOriginalDateOfIssue" value="">
-                <label for="regularDriverRelationshipToProposer">Relationship to Proposer:</label>
-                <input type="text" name="regularDriverRelationshipToProposer" id="regularDriverRelationshipToProposer" value="">
+
+                    <label for="applicantClass">D/L Class:</label>
+                    <input type="text" id="applicantDLClass" name="applicantDLClass" placeholder="Enter Class">
+
+
+                    <label for="applicantOriginalDate">D/L Original Date:</label>
+                    <input type="date" id="applicantOriginalDate" name="applicantOriginalDate" placeholder="Enter Original Date">
+
+
+                    <label for="applicantExpiryDate">D/L Expiry Date:</label>
+                    <input type="date" id="applicantExpiryDate" placeholder="Enter Expiry Date">
+                </div>
+                <hr />
+                <label for="regularDriverOfVehicle">Will you be the regular driver of the vehicle:</label>
+
+                <select name="regularDriver" id="regularDriver" data-role="slider" data-mini="true">
+                    <option value="no">No</option>
+                    <option value="yes" selected>Yes</option>
+                </select>
+
+                <div id="regularDriversId" style="display:none">
+                    <div class="regularDriversCls">
+                        <h4>Driver 1</h4>
+                        <hr />
+                        <fieldset class="ui-grid-a name">
+                            <div class="ui-block-a">
+                                <label for="regularDriversName">Name:</label>
+                            </div>
+                            <div class="ui-block-b">
+                                <input type="text" name="regularDriversName" id="regularDriversName" value="">
+                            </div>
+                        </fieldset>
+                        <fieldset class="ui-grid-a occupation">
+                            <div class="ui-block-a">
+                                <label for="regularDriversOccupation">Occupation:</label>
+                            </div>
+                            <div class="ui-block-b">
+                                <input type="text" name="regularDriversOccupation" id="regularDriversOccupation" value="">
+                            </div>
+                        </fieldset>
+                        <fieldset class="ui-grid-a DateOfBirth">
+                            <div class="ui-block-a">
+                                <label for="regularDriversDateOfBirth">Date of Birth:</label>
+                            </div>
+                            <div class="ui-block-b">
+                                <input type="date" name="regularDriversDateOfBirth" id="regularDriversDateOfBirth" value="">
+                            </div>
+                        </fieldset>
+                        <fieldset class="ui-grid-a DriversDL">
+                            <div class="ui-block-a">
+                                <label for="regularDriversDL">Driver's Licence:</label>
+                            </div>
+                            <div class="ui-block-b">
+                                <input type="text" name="regularDriversDL" id="regularDriversDL" value="">
+                            </div>
+                        </fieldset>
+                        <fieldset class="ui-grid-a DriversDLOriginalDateOfIssue">
+                            <div class="ui-block-a">
+                                <label for="regularDriversDLOriginalDateOfIssue">Original Date of Issue:</label>
+                            </div>
+                            <div class="ui-block-b">
+                                <input type="date" name="regularDriversDLOriginalDateOfIssue" id="regularDriversDLOriginalDateOfIssue" value="">
+                            </div>
+                        </fieldset>
+                        <fieldset class="ui-grid-a DriversRelationshipToProposer">
+                            <div class="ui-block-a">
+                                <label for="regularDriversRelationshipToProposer">Relationship to Proposer:</label>
+                            </div>
+                            <div class="ui-block-b">
+                                <input type="text" name="regularDriversRelationshipToProposer" id="regularDriversRelationshipToProposer" value="">
+                            </div>
+                        </fieldset>
+                        <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left Add">Add Driver</a>
+                            <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right Delete" style="display:none">Remove Driver</a>
+                        </div>
+                    </div>
+                </div>
+
+
 
             </form>
 
@@ -853,19 +932,20 @@
     <div data-role="page" id="vehicles-owned-page">
 
         <div data-role="header" class="header">
-            <h1 id="app-title">Number of Vehicles owned</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+            <h1 id="app-title">Vehicles owned</h1>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
             <form>
 
                 <p>State the number of motor vehicles[including motorcycle(s)] owned by you within the past 3 years</p>
-
-                <label for="numberOfVehiclesOwnedYear">Year:</label>
-                <input type="text" name="numberOfVehiclesOwnedYear" id="numberOfVehiclesOwnedYear" value="">
-                <label for="numberOfVehiclesOwnedYear">Number of vehicles owned:</label>
-                <input type="number" name="numberOfVehiclesOwnedYear" id="numberOfVehiclesOwnedYear" value="">
+                <label for="numberOfVehiclesOwned2015">2015: Number of vehicles owned:</label>
+                <input type="number" name="numberOfVehiclesOwned2015" id="numberOfVehiclesOwned2015" value="">
+                <label for="numberOfVehiclesOwned2015">2014: Number of vehicles owned:</label>
+                <input type="number" name="numberOfVehiclesOwned2014" id="numberOfVehiclesOwned2014" value="">
+                <label for="numberOfVehiclesOwned2015">2013: Number of vehicles owned:</label>
+                <input type="number" name="numberOfVehiclesOwned2013" id="numberOfVehiclesOwned2013" value="">
 
             </form>
 
@@ -879,18 +959,21 @@
 
         <div data-role="header" class="header">
             <h1 id="app-title">Accidents</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
             <form>
 
-                <p>Have you or any regular drivers had any accidents or losses during the past three years(whether insured or not) in respect of all vehicles:</p>
+                <div data-role="collapsible">
+                    <h1>Notes!</h1>
+                    <p>Have you or any regular drivers had any accidents or losses during the past three years(whether insured or not) in respect of all vehicles:</p>
 
-                <ol>
-                    <li>Owned by you, whether or not you were the driver at the material time?</li>
-                    <li>Not owned by you, but driven by you or in your custdy at the material time?</li>
-                </ol>
+                    <ol>
+                        <li>Owned by you, whether or not you were the driver at the material time?</li>
+                        <li>Not owned by you, but driven by you or in your custody at the material time?</li>
+                    </ol>
+                </div>
 
                 <label for="accidentDate">Date of Accident:</label>
                 <input type="date" name="accidentDate" id="accidentDate" value="">
@@ -898,8 +981,8 @@
                 <input type="text" name="accidentCost" id="accidentCost" value="">
                 <label for="accidentDriver">Driver:</label>
                 <input type="text" name="accidentDriver" id="accidentDriver" value="">
-                <label for="accidentDetails">Brief details or Accidents, Incident or losses:</label>
-                <input type="text" name="accidentDetails" id="accidentDetails" value="">
+                <label for="accidentDetails">Brief details of Accident/Incident/Losses:</label>
+                <textarea name="accidentDetails" id="accidentDetails"></textarea>
 
             </form>
 
@@ -913,10 +996,10 @@
 
         <div data-role="header" class="header">
             <h1 id="app-title">Medical History</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
             <form>
 
                 <fieldset data-role="controlgroup">
@@ -984,10 +1067,10 @@
 
         <div data-role="header" class="header">
             <h1 id="app-title">Particulars of Home</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
             <form>
                 <label for="homeRiskAddress">Risk Address:</label>
                 <input type="text" name="homeRiskAddress" id="homeRiskAddress" value="">
@@ -1038,9 +1121,6 @@
                 <label for="garageRoof">External Walls:</label>
                 <input type="text" name="garageRoof" id="garageRoof" value="">
 
-                <div data-role="controlgroup">
-                    <a href="#vehicle-medical-history-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#home-particulars-continued-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
-                </div>
             </form>
 
         </div>
@@ -1054,10 +1134,10 @@
 
         <div data-role="header" class="header">
             <h1 id="app-title">Particulars of Home continued</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
             <form>
 
 
@@ -1113,9 +1193,6 @@
                 <label for="homeHasWatersideStructureDetails">If yes, please describe:</label>
                 <input type="text" name="homeHasWatersideStructureDetails" id="homeHasWatersideStructureDetails" value="">
 
-                <div data-role="controlgroup">
-                    <a href="#home-particulars-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#home-property-details-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
-                </div>
             </form>
 
         </div>
@@ -1129,10 +1206,10 @@
 
         <div data-role="header" class="header">
             <h1 id="app-title">Details Of Property</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
             <form>
 
                 <h4>Details of Property to be insured</h4>
@@ -1149,24 +1226,24 @@
                         <h4>Item 1</h4>
                         <hr />
                         <fieldset class="ui-grid-a article-name">
-                            <div class="ui-block-a" style="width:50%">
+                            <div class="ui-block-a">
                                 <label for="homeInsurancePropertyItem">Description</label>
                             </div>
-                            <div class="ui-block-b" style="width:50%">
+                            <div class="ui-block-b">
                                 <input type="text" name="homeInsurancePropertyItem" id="homeInsurancePropertyItem" value="">
                             </div>
                         </fieldset>
                         <fieldset class="ui-grid-a article-value">
-                            <div class="ui-block-a" style="width:50%">
+                            <div class="ui-block-a">
                                 <label for="homeInsurancePropertyItemValue">Value</label>
                             </div>
-                            <div class="ui-block-b" style="width:50%">
+                            <div class="ui-block-b">
                                 <input type="text" name="homeInsurancePropertyItemValue" id="homeInsurancePropertyItemValue" value="">
                             </div>
                         </fieldset>
 
                         <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-                            <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left Add">Add More</a>
+                            <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left Add">Add Item</a>
                             <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right Delete" style="display:none">Delete</a>
                         </div>
                     </div>
@@ -1218,10 +1295,6 @@
                 <label for="totalSumInsured">The Total Sum Insured under the Contents Section of the Policy </label>
                 <input type="text" name="totalSumInsured" id="totalSumInsured" value="">
 
-
-                <div data-role="controlgroup">
-                    <a href="#home-particulars-continued-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#home-all-risk-insurance-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
-                </div>
             </form>
 
         </div>
@@ -1235,40 +1308,40 @@
 
         <div data-role="header" class="header">
             <h1 id="app-title">All Risk Insurance</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
+            <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
         </div>
 
-        <div role="main" class="ui-content">
+        <div data-role="main" class="ui-content">
             <form>
                 <h5>ALL RISKS INSURANCE IN RESPECT OF PERSONAL POSSESSIONS</h5>
                 <div data-role="collapsible">
                     <h4>IMPORTANT NOTE</h4>
                     <p>Valuation Reports or Receipts in respect of all Articles to be insured should be attached to this Form.</p>
-                </div>                
+                </div>
                 <p>Full Description of Article(s) to be insured</p>
                 <div id="articleInsured">
                     <div class="articles">
                         <h4>Article 1</h4>
                         <hr />
                         <fieldset class="ui-grid-a article-name">
-                            <div class="ui-block-a" style="width:50%">
+                            <div class="ui-block-a">
                                 <label for="homeInsuranceArticle">Description</label>
                             </div>
-                            <div class="ui-block-b" style="width:50%">
+                            <div class="ui-block-b">
                                 <input type="text" name="homeInsuranceArticle" id="homeInsuranceArticle" value="">
                             </div>
                         </fieldset>
                         <fieldset class="ui-grid-a article-value">
-                            <div class="ui-block-a" style="width:50%">
+                            <div class="ui-block-a">
                                 <label for="homeInsuranceArticleValue">Value</label>
                             </div>
-                            <div class="ui-block-b" style="width:50%">
+                            <div class="ui-block-b">
                                 <input type="text" name="homeInsuranceArticleValue" id="homeInsuranceArticleValue" value="">
                             </div>
                         </fieldset>
 
                         <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-                            <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left Add">Add More</a>
+                            <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left Add">Add Article</a>
                             <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right Delete" style="display:none">Delete</a>
                         </div>
                     </div>
@@ -1333,9 +1406,6 @@
                 <input type="text" name="lossFromPerilsDetails" id="lossFromPerilsDetails" placeholder="Text input" value="" data-mini="true">
 
 
-                <div data-role="controlgroup">
-                    <a href="#home-property-details-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l">Previous</a><a href="#page-signature" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Next</a>
-                </div>
             </form>
 
         </div>
@@ -1346,34 +1416,12 @@
     </div>
 
 
-    <div data-role="page" id="page-signature">
-        <div data-role="header" class="header" data-position="fixed">
-            <h1 id="app-title">Signature</h1>
-            <a href="/" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Home</a>
-        </div>
 
-        <div role="main" class="ui-content">
-            <p>Sign below and press the submit button.</p>
-            <div id="canvasContainer" width="100%">
-                <canvas id="signature" height="200px" />
-            </div>
-            <div id="lowerControls">
-                <div id="feedback"></div>
-                <div id="buttonsContainer">
-                    <div data-role="controlgroup">
-                        <a href="#personal-main-page" data-role="button" data-inline="true" data-mini="true" data-icon="delete">Return</a>
-                        <a id="clear-canvas" href="#" data-role="button" data-inline="true" data-icon="back" data-mini="true">Clear</a>
-                        <a id="submit-btn" href="#" data-role="button" data-inline="true" data-icon="check" data-mini="true">Submit</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <footer data-role="footer" data-position="fixed">
-            <h4>Iron Rock Insurance-Mobile App</h4>
-        </footer>
-    </div>
-
+    <script type="text/javascript">
+        $(document).on("mobileinit", function () {
+            $.mobile.autoInitializePage = false;
+        });
+    </script>
 
     <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
     <script src="scripts/jquery.validate.min.js"></script>
