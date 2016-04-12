@@ -10,12 +10,18 @@
 //    $(':mobile-pagecontainer').pagecontainer('change', '#main-page');  
 //});
 
+//$(document).on("mobileinit", function () {
+//    $.mobile.autoInitializePage = false;
+//});
+
 document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 
 function onDeviceReady() {
     // Handle the Cordova pause and resume events
     document.addEventListener('pause', onPause.bind(this), false);
     document.addEventListener('resume', onResume.bind(this), false);
+
+    sigCapture = new SignatureCapture("signature");
 
 };
 
@@ -27,12 +33,10 @@ function onResume() {
     // TODO: This application has been reactivated. Restore application state here.
 };
 
-
-
 var sigCapture = null;
 $(document).ready(function (e) {
     window.location.hash = 'main-page';
-    // #initialise jQM
+    //// #initialise jQM
     $.mobile.initializePage();
 
     $('form').validate({
@@ -68,8 +72,7 @@ $(document).ready(function (e) {
             return false;
         }
     });
-
-    sigCapture = new SignatureCapture("signature");
+        
     $('#submit-btn').click(function () {
         var sig = sigCapture.toString();
         $('#signatureBytes').val(sig);
@@ -80,6 +83,210 @@ $(document).ready(function (e) {
     $('#clear-canvas').click(function () {
         var sig = sigCapture.clear();
     });
+
+
+    //medical history
+    $('.medicalCondition').change(function () {
+        var isChecked = false;
+        $('.medicalCondition').each(function (index, element) {
+            var checked_value = $(element).is(':checked');
+            if (checked_value) {
+                isChecked = true;
+                return true;
+            }
+        })
+        if (isChecked) {
+            $('#medicalConditionDetails').show();
+        }
+        else {
+            $('#medicalConditionDetails').hide();
+        }
+    });
+
+
+
+
+    //vehicle-all-accidents
+    setAllAccidentsYears();
+    function setAllAccidentsYears() {
+        var currentYear = new Date().getFullYear();
+        for (i = 0; i < 3; i++) {            
+            var option = $('<option/>');
+            option.attr('Value', currentYear);
+            option.text(currentYear);
+            option.appendTo($('#accidentYear'));
+            currentYear = currentYear - i;
+        }
+    }
+
+    $('#vehicle-all-accidents').on('click', '.Add', function () {
+        var elementGroup = $(this).parent().parent().parent();
+        elementGroup.clone().insertAfter(elementGroup).show().find('input').val('');
+        resetAllAccident();
+    });
+
+    $('#vehicle-all-accidents').on('click', '.Delete', function () {
+        var elementGroup = $(this).parent().parent().parent();
+        elementGroup.remove();
+        resetAllAccident();
+    });
+
+    function resetAllAccident() {
+        var objectList = [
+       { "class": "year", "name": "accidentYear" },
+       { "class": "cost", "name": "accidentCost" },
+       { "class": "month", "name": "accidentMonth" },
+       { "class": "driver", "name": "accidentDriver" },
+       { "class": "brief", "name": "accidentBrief" }
+        ];
+        var elementClass = $('.vehicle-accident-block');
+        resetObjects(objectList, elementClass, "Add", "Delete", "Accident");
+    }
+
+
+
+    //garageOutBuildingClass
+    $('#garageOutBuildingExists').change(function () {
+        var select_value = $(this).val();
+        if (select_value == 'yes') {
+            $('.garageOutBuildingClass').show();
+        }
+        else if (select_value == 'no') {
+            $('.garageOutBuildingClass').hide();
+        }
+    });
+
+    //set Last Three Years of Ownership()
+    setLastThreeYearsOwnership();
+
+    //resetHomeAllRiskArticles
+    $('#HomeAllRiskInsured').on('click', '.Add', function () {
+        var elementGroup = $(this).parent().parent().parent();
+        elementGroup.clone().insertAfter(elementGroup).show().find('input').val('');
+        resetHomeAllRiskArticles();
+        SetHomeAllRiskInsuredValue();
+    });
+
+    $('#HomeAllRiskInsured').on('click', '.Delete', function () {
+        var elementGroup = $(this).parent().parent().parent();
+        elementGroup.remove();
+        resetHomeAllRiskArticles();
+        SetHomeAllRiskInsuredValue();
+    });
+
+    function SetHomeAllRiskInsuredValue() {
+        var valList = [];
+        $('#HomeAllRiskInsured .article-value').find('input').each(function (index, element) {
+            valList.push($(element).val());
+        });
+        $('#HomeAllRiskTotalAmount').val(GetTotal(valList));
+    }
+
+    $('#HomeAllRiskInsured').on('keyup', '.article-value input', function () {
+        SetHomeAllRiskInsuredValue();
+    });
+    
+
+
+
+    //HomeInsurance
+    $('#homeInsuranceProperty').on('click', '.Add', function () {
+        var elementGroup = $(this).parent().parent().parent();
+        elementGroup.clone().insertAfter(elementGroup).show().find('input').val('');
+        resetHomeInsuranceProperty();
+        SetHomeInsuranceValue();
+    });
+
+    $('#homeInsuranceProperty').on('click', '.Delete', function () {
+        var elementGroup = $(this).parent().parent().parent();
+        elementGroup.remove();
+        resetHomeInsuranceProperty();
+        SetHomeInsuranceValue();
+    });
+
+    function SetHomeInsuranceValue() {
+        var valList = [];
+        $('#homeInsuranceProperty .article-value').find('input').each(function (index, element) {
+            valList.push($(element).val());
+        });
+        $('#homeInsurancePropertySum').val(GetTotal(valList));
+    }
+
+    $('#homeInsuranceProperty').on('keyup', '.article-value input', function () {
+        SetHomeInsuranceValue();
+    });
+
+
+    $('#HomeInsuranceContent .article-value').on('keyup', 'input', function () {
+        var valList = [];
+        $('#HomeInsuranceContent .article-value').find('input').each(function (index, element) {
+            valList.push($(element).val());
+        });
+        $('#HomeInsuranceContentTotalAmount').val(GetTotal(valList));
+    });
+
+    ////totalValueExceedOneThirdTotalSum
+    //$('#totalValueExceedOneThirdTotalSum').change(function () {
+    //    var select_value = $(this).val();
+    //    if (select_value == 'yes') {
+    //        $('#totalValueExceedOneThirdTotalSumIfYesAmount').removeAttr('disabled'); //.show();
+    //    }
+    //    else if (select_value == 'no') {
+    //        $('#totalValueExceedOneThirdTotalSumIfYesAmount').attr('disabled', 'disabled');
+    //    }
+    //});
+
+
+
+    //homeHasWatersideStructure
+    $('#homeHasWatersideStructure').change(function () {
+        var select_value = $(this).val();
+        if (select_value == 'yes') {
+            $('#divhomeHasWatersideStructure').show();
+        }
+        else if (select_value == 'no') {
+            $('#divhomeHasWatersideStructure').hide();
+        }
+    });
+
+
+
+    //homeHaveInterestFromIndividual
+    $('#homeHaveInterestFromIndividual').change(function () {
+        var select_value = $(this).val();
+        if (select_value == 'yes') {
+            $('#divhomeHaveInterestFromIndividual').show();
+        }
+        else if (select_value == 'no') {
+            $('#divhomeHaveInterestFromIndividual').hide();
+        }
+    });
+
+
+    //homeOccupiedByApplicantFamily
+    $('#homeUsedForIncomeActivity').change(function () {
+        var select_value = $(this).val();
+        if (select_value == 'yes') {
+            $('#divhomeUsedForIncomeActivity').show();
+        }
+        else if (select_value == 'no') {
+            $('#divhomeUsedForIncomeActivity').hide();
+        }
+    });
+
+    //homeOccupiedByApplicantFamily
+    $('#homeOccupiedByApplicantFamily').change(function () {
+        var select_value = $(this).val();
+        if (select_value == 'no') {
+            $('#divhomeOccupiedByApplicantFamily').show();
+        }
+        else if (select_value == 'yes') {
+            $('#divhomeOccupiedByApplicantFamily').hide();
+        }
+    });
+
+
+
 
     //applicantRelativeInPublicOffice
     $('#applicantRelativeInPublicOffice').change(function () {
@@ -105,29 +312,36 @@ $(document).ready(function (e) {
     });
 
 
-    //resetOtherDriver()
-    $('#otherDriver').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#otherDriversId').show();
+    //resetInexperiencedDriver()
+    $('.inexperiencedDriver').change(function () {
+        var isChecked = false;
+        $('.inexperiencedDriver').each(function (index, element) {
+            var checked_value = $(element).is(':checked');
+            if (checked_value) {
+                isChecked = true;
+                return true;
+            }
+        })
+        if (isChecked) {
+            $('#inexperiencedDriversId').show();
         }
-        else if (select_value == 'no') {
-            $('#otherDriversId').hide();
+        else {
+            $('#inexperiencedDriversId').hide();
         }
     });
 
-    $('#otherDriversId').on('click', '.Add', function () {
+    $('#inexperiencedDriversId').on('click', '.Add', function () {
         var elementGroup = $(this).parent().parent().parent();
         elementGroup.clone().insertAfter(elementGroup).show().find('input:text').val('');
-        resetOtherDriver();
+        resetInexperiencedDriver();
     });
 
-    $('#otherDriversId').on('click', '.Delete', function () {
+    $('#inexperiencedDriversId').on('click', '.Delete', function () {
         var elementGroup = $(this).parent().parent().parent();
         elementGroup.remove();
-        resetOtherDriver();
+        resetInexperiencedDriver();
     });
-    
+
 
     //resetRegularDriver
     $('#regularDriver').change(function () {
@@ -156,11 +370,11 @@ $(document).ready(function (e) {
     //vehicle to be insured
     $('#isOwnerOfVehicle').change(function () {
         var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#vehicleNameAddressOfOwner').show();
+        if (select_value == 'no') {
+            $('.vehicleNameAddressOfOwner').show();
         }
-        else if (select_value == 'no') {
-            $('#vehicleNameAddressOfOwner').hide();
+        else if (select_value == 'yes') {
+            $('.vehicleNameAddressOfOwner').hide();
         }
     });
 
@@ -193,21 +407,21 @@ $(document).ready(function (e) {
     $('#vehicleAntiTheftDevice').change(function () {
         var select_value = $(this).val();
         if (select_value == 'yes') {
-            $('#divVehicleAntiTheftDeviceProvider').show();
+            $('.VehicleAntiTheftDeviceProviderClass').show();
         }
         else if (select_value == 'no') {
-            $('#divVehicleAntiTheftDeviceProvider').hide();
+            $('.VehicleAntiTheftDeviceProviderClass').hide();
         }
     });
 
     //vehicleRegularCustodyDetails
     $('#vehicleRegularCustody').change(function () {
         var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#divvehicleRegularCustodyDetails').show();
+        if (select_value == 'no') {
+            $('.vehicleRegularCustodyDetailsClass').show();
         }
-        else if (select_value == 'no') {
-            $('#divvehicleRegularCustodyDetails').hide();
+        else if (select_value == 'yes') {
+            $('.vehicleRegularCustodyDetailsClass').hide();
         }
     });
 
@@ -215,10 +429,10 @@ $(document).ready(function (e) {
     $('#vehicleGaragedAtProposersHome').change(function () {
         var select_value = $(this).val();
         if (select_value == 'yes') {
-            $('#divvehicleGaragedAtProposersHomeDetails').hide();
+            $('.vehicleGaragedAtProposersHomeDetailsClass').hide();
         }
         else if (select_value == 'no') {
-            $('#divvehicleGaragedAtProposersHomeDetails').show();
+            $('.vehicleGaragedAtProposersHomeDetailsClass').show();
         }
     });
 
@@ -237,10 +451,10 @@ $(document).ready(function (e) {
     $('#proposerInsured').change(function () {
         var select_value = $(this).val();
         if (select_value == 'yes') {
-            $('#divproposerInsuranceDetails').show();
+            $('.proposerInsuranceDetailsClass').show();
         }
         else if (select_value == 'no') {
-            $('#divproposerInsuranceDetails').hide();
+            $('.proposerInsuranceDetailsClass').hide();
         }
     });
 
@@ -260,10 +474,10 @@ $(document).ready(function (e) {
     $('#applicantOtherInsurer').change(function () {
         var select_value = $(this).val();
         if (select_value == 'yes') {
-            $('#divapplicantOtherInsurerType').show();
+            $('.applicantOtherInsurerTypeClass').show();
         }
         else if (select_value == 'no') {
-            $('#divapplicantOtherInsurerType').hide();
+            $('.applicantOtherInsurerTypeClass').hide();
         }
     });
 
@@ -271,10 +485,10 @@ $(document).ready(function (e) {
     $('#applicantPreviouslyInsured').change(function () {
         var select_value = $(this).val();
         if (select_value == 'yes') {
-            $('#divApplicantPreviouslyInsured').show();
+            $('.ApplicantPreviouslyInsuredClass').show();
         }
         else if (select_value == 'no') {
-            $('#divApplicantPreviouslyInsured').hide();
+            $('.ApplicantPreviouslyInsuredClass').hide();
         }
     });
 
@@ -287,7 +501,7 @@ $(document).ready(function (e) {
 
 
 
-//functions
+//country functions
 function loadCountriesOptions() {
     $('.countries').each(function (index, item) {
         var selectObj = $(this);
@@ -302,18 +516,96 @@ function loadCountriesOptions() {
     });
 }
 
+$('#mailingAddressSame').change(function () {
+    var select_value = $(this).val();
+    if (select_value == 'yes') {
+        $('#mailingAddress').hide();
+    }
+    else if (select_value == 'no') {
+        $('#mailingAddress').show();
+    }
+});
+
+
+
+$('#applicantHomeCountry').change(function () {
+    var select_value = $(this).val();
+    if (select_value == "JM") {
+        $('#homeAddress .jamaica').show();
+        $('#homeAddress .international').hide();
+    } else {
+        $('#homeAddress .jamaica').hide();
+        $('#homeAddress .international').show();
+    }
+});
+
+
+$('#applicantMailCountry').change(function () {
+    var select_value = $(this).val();
+    if (select_value == "JM") {
+        $('#mailingAddress').find('.jamaica').show();
+        $('#mailingAddress').find('.international').hide();
+    } else {
+        $('#mailingAddress').find('.jamaica').hide();
+        $('#mailingAddress').find('.international').show();
+    }
+});
+
+
+$('#employerNationality').change(function () {
+    var select_value = $(this).val();
+    if (select_value == "JM") {
+        $('#employer').find('.jamaica').show();
+        $('#employer').find('.international').hide();
+    } else {
+        $('#employer').find('.jamaica').hide();
+        $('#employer').find('.international').show();
+    }
+});
+
+
+
+
+//miscellaneous functions
+function GetTotal(InputArray) {
+    var sum = 0;
+    $.each(InputArray, function (index, val) {
+        sum = sum + Number(val ? val : 0);
+    })
+    return '$' + sum.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+}
+
+function resetHomeAllRiskArticles() {
+    var objectList = [
+   { "class": "article-name", "name": "HomeAllRiskArticleDescription" },
+   { "class": "article-value", "name": "HomeAllRiskArticleValue" }
+    ];
+    var elementClass = $('.HomeAllRiskArticles');
+    resetObjects(objectList, elementClass, "Add", "Delete", "Article");
+}
+
+function resetHomeInsuranceProperty() {
+    var objectList = [
+   { "class": "article-name", "name": "homeInsurancePropertyItem" },
+   { "class": "article-value", "name": "homeInsurancePropertyItemValue" }
+    ];
+    var elementClass = $('.homeInsurancePropertyItems');
+    resetObjects(objectList, elementClass, "Add", "Delete", "Specified Item");
+}
+
+
 //
-function resetOtherDriver() {
+function resetInexperiencedDriver() {
 
     var objectList = [
-   { "class": "name", "name": "otherDriversName" },
-   { "class": "occupation", "name": "otherDriversOccupation" },
-   { "class": "DateOfBirth", "name": "otherDriversDateOfBirth" },
-   { "class": "DriversDL", "name": "otherDriversDL" },
-   { "class": "DriversDLOriginalDateOfIssue", "name": "otherDriversDLOriginalDateOfIssue" },
-    { "class": "DriversRelationshipToProposer", "name": "otherDriversRelationshipToProposer" }
+   { "class": "name", "name": "inexperiencedDriversName" },
+   { "class": "occupation", "name": "inexperiencedDriversOccupation" },
+   { "class": "DateOfBirth", "name": "inexperiencedDriversDateOfBirth" },
+   { "class": "DriversDL", "name": "inexperiencedDriversDL" },
+   { "class": "DriversDLOriginalDateOfIssue", "name": "inexperiencedDriversDLOriginalDateOfIssue" },
+    { "class": "DriversRelationshipToProposer", "name": "inexperiencedDriversRelationshipToProposer" }
     ];
-    var elementClass = $('.otherDriversCls');
+    var elementClass = $('.inexperiencedDriversCls');
 
     resetObjects(objectList, elementClass, "Add", "Delete", "Driver");
 }
@@ -382,21 +674,21 @@ function getPersonalMenu() {
        //{ "name": "Start Page", "value": "main-page" },
         { "name": "Personal Details", "value": "personal-main-page" },
         { "name": "Contact Details", "value": "personal-contact-page" },
-        { "name": "Home Address", "value": "personal-home-address-page" },
-        { "name": "Mailing Address", "value": "personal-mailing-address-page" },
-        { "name": "Employer Details", "value": "personal-employer-details-page" },
-        { "name": "Public Office Association", "value": "personal-relative-public-office-page" }
+        //{ "name": "Home Address", "value": "personal-home-address-page" },
+        //{ "name": "Mailing Address", "value": "personal-mailing-address-page" },
+        { "name": "Employer Details", "value": "personal-employer-details-page" }//,
+        //{ "name": "Public Office Association", "value": "personal-relative-public-office-page" }
     ];
 }
 
 function getVehicleMenu() {
     var vehicleMenuList = [
         { "name": "Vehicle Particulars", "value": "vehicle-particulars-page" },
-        { "name": "Vehicle Mortgagee Details", "value": "vehicle-mortgagee-details-page" },
-        { "name": "Vehicle Particular Con't", "value": "vehicle-particular-continued" },
-        { "name": "Other Drivers", "value": "vehicle-other-drivers-page" },
-        { "name": "Driver Details", "value": "vehicle-driver-details-page" },
-        { "name": "Vehicles Owned", "value": "vehicles-owned-page" },
+        //{ "name": "Vehicle Particular Con't", "value": "vehicle-particular-continued" },
+        //{ "name": "Vehicle Mortgagee Details", "value": "vehicle-mortgagee-details-page" },        
+        { "name": "Drivers Details", "value": "vehicle-driver-details-page" },
+        //{ "name": "Other Drivers", "value": "vehicle-other-drivers-page" },        
+        //{ "name": "Vehicles Owned", "value": "vehicles-owned-page" },
         { "name": "Accidents", "value": "vehicle-accidents-page" },
         { "name": "Medical History", "value": "vehicle-medical-history-page" }
     ];
@@ -452,10 +744,10 @@ function setmenu(menu_list, menu_header) {
         var currentPage = $('#' + item.value);
         var current_page_dom = currentPage.get(0);
         if (currentPage.find('[data-role=panel]').length == 0 && last_page_dom != current_page_dom) {
-            var panel = '<div data-role="panel" data-mini="true" class="menu" id="panel' + p + '" data-dismissible="true" data-swipe-close="true" data-position="right">';
+            var panel = '<div data-role="panel" data-display="overlay" data-mini="true" class="menu" id="panel' + p + '" data-dismissible="true" data-swipe-close="true" data-position="left">';
             panel = panel + '<h2>' + menu_header + '</h2><ol data-role="listview" data-inset="true" data-mini="true">' + panelItems + '</ol></div>';
             currentPage.prepend(panel);
-            var panelBtn = '<a href="#panel' + p + '" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-bars ui-btn-icon-notext" rel="search">Menu</a>'
+            var panelBtn = '<a href="#panel' + p + '" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-bars ui-btn-icon-notext" rel="search">Menu</a>'
             currentPage.find('[data-role=header]').append(panelBtn);
         }
         p++;
@@ -724,7 +1016,7 @@ function resetObjects(objectList, elementClass, addBtnName, delBtnName, elementT
     elementClass.each(function (index, e) {
         var element = $(this);
         //change ids and names
-        $.each(objectList, function (i, item) {
+        $.each(objectList, function (jIndex, item) {
             element.find('.' + item.class + ' input').attr('id', item.name + i).attr('name', item.name + i);
             element.find('.' + item.class + ' label').attr('for', item.name + i);
         })
@@ -748,4 +1040,27 @@ function resetObjects(objectList, elementClass, addBtnName, delBtnName, elementT
         //change title
         element.find('h4').text(elementTitle + ' ' + ++i);
     });
+}
+
+
+//set years
+function setLastThreeYearsOwnership() {
+    var currentYear = new Date().getFullYear();
+    for (i = 1; i < 4; i++) {
+        var previousYear = currentYear - i;
+        var YearName = 'numberOfVehiclesOwned'+previousYear;
+        var YearHtml = $('<div/>');
+        YearHtml.addClass('ui-field-contain');
+        var YearLabel = $('<label/>');
+        YearLabel.attr('for', YearName);
+        YearLabel.text(previousYear+':Number of vehicles owned:')
+        YearLabel.appendTo(YearHtml);
+        var yearText = $('<input/>');
+        yearText.attr('type', 'number');
+        yearText.attr('name', YearName);
+        yearText.attr('id', YearName);
+        yearText.appendTo(YearHtml);
+        YearHtml.appendTo($('#numberOfVehiclesOwned'));
+    }
+
 }
