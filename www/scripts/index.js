@@ -85,6 +85,13 @@ $(document).ready(function (e) {
     });
 
 
+    $('[data-role=header]').on('click','.home', function (event, ui) {
+        $.mobile.changePage('#main-page');
+        //global_vars = default_global_vars;
+    });
+
+
+
     //medical history
     $('.medicalCondition').change(function () {
         var isChecked = false;
