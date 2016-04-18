@@ -109,7 +109,7 @@
 
                 </div><div class="ui-field-contain">
                     <label for="applicantMothersMaidenName">Mother's Maiden Name:</label>
-                    <input type="text" id="applicantMothersMaidenName" name="applicantMothersMaidenName" placeholder="Enter your maiden name">
+                    <input type="text" id="applicantMothersMaidenName" name="applicantMothersMaidenName" placeholder="Enter your Mother's Maiden Name">
 
                 </div><div class="ui-field-contain">
                     <label for="applicantAlias">Other Names/Aliases:</label>
@@ -457,7 +457,7 @@
                         <hr />
                         <div class="ui-field-contain office">
 
-                            <label for="applicantRelativeTypePublicOffice0">Office</label>
+                            <label for="applicantRelativeTypePublicOffice0">Type of Public Office</label>
 
                             <input type="text" name="applicantRelativeTypePublicOffice0" id="applicantRelativeTypePublicOffice0" value="">
 
@@ -553,7 +553,7 @@
 
         <div data-role="main" class="ui-content">
             <form class="ProposalForm" id="vehicleToBeInsuredCtrl">
-                <p>PARTICULAR OF VEHICLE(S) TO BE INSURED</p>
+                <p>PARTICULARS OF VEHICLE(S) TO BE INSURED</p>
                 <a href="#taxOfficeVehicleDialog" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-right ui-btn-inline ui-mini">Add Vehicle</a>
 
                 <div id="vehiclesToBeInsured">
@@ -587,11 +587,12 @@
                             <option value="yes" selected>Yes</option>
                         </select>
                     </div>
-                    <div class="ui-block-c vehicleNameAddressOfOwner" style="width:10%;display:none">
-                        <label for=nameAddressOfOwner>Owner Details:</label>
-                    </div>
-                    <div class="ui-block-d vehicleNameAddressOfOwner" style="width:40%;display:none">
-                        <textarea name="nameAddressOfOwner" id="nameAddressOfOwner" placeholder="Owner's Name/Address"></textarea>
+
+                    <div class="ui-block-c vehicleNameAddressOfOwner" style="width:50%;display:none">
+                        <div class="ui-field-contain">
+                            <label for=nameAddressOfOwner>Owner Details:</label>
+                            <textarea name="nameAddressOfOwner" id="nameAddressOfOwner" placeholder="Owner's Name/Address"></textarea>
+                        </div>
                     </div>
                 </div>
 
@@ -637,8 +638,14 @@
                         </select>
                     </div>
                     <div class="ui-block-c VehicleAntiTheftDeviceProviderClass" style="width:50%;display:none">
-                        <label for="vehicleAntiTheftDeviceNameOfProvider">Provider:</label>
-                        <textarea name="vehicleAntiTheftDeviceNameOfProvider" id="vehicleAntiTheftDeviceNameOfProvider" placeholder="Name of Provider"></textarea>
+                        <div class="ui-field-contain">
+                            <label for="vehicleAntiTheftDeviceName">Name of device:</label>
+                            <textarea name="vehicleAntiTheftDeviceName" id="vehicleAntiTheftDeviceName"></textarea>
+                            <label for="vehicleAntiTheftDeviceType">Type:</label>
+                            <textarea name="vehicleAntiTheftDeviceType" id="vehicleAntiTheftDeviceType"></textarea>
+                            <label for="vehicleAntiTheftDeviceNameOfProvider">Name of provider:</label>
+                            <textarea name="vehicleAntiTheftDeviceNameOfProvider" id="vehicleAntiTheftDeviceNameOfProvider"></textarea>
+                        </div>
                     </div>
                 </div>
 
@@ -654,8 +661,10 @@
                         </select>
                     </div>
                     <div class="ui-block-c vehicleRegularCustodyDetailsClass" style="width:50%;display:none">
-                        <label for="vehicleRegularCustodyDetails">Details:</label>
-                        <textarea name="vehicleRegularCustodyDetails" id="vehicleRegularCustodyDetails"></textarea>
+                        <div class="ui-field-contain">
+                            <label for="vehicleRegularCustodyDetails">Details:</label>
+                            <textarea name="vehicleRegularCustodyDetails" id="vehicleRegularCustodyDetails"></textarea>
+                        </div>
                     </div>
                 </div>
 
@@ -671,8 +680,10 @@
                         </select>
                     </div>
                     <div class="ui-block-c vehicleGaragedAtProposersHomeDetailsClass" style="width:50%;display:none">
-                        <label for="vehicleGaragedAtProposersHomeDetails">Details:</label>
-                        <textarea name="vehicleGaragedAtProposersHomeDetails" id="vehicleGaragedAtProposersHomeDetails"></textarea>
+                        <div class="ui-field-contain">
+                            <label for="vehicleGaragedAtProposersHomeDetails">Details:</label>
+                            <textarea name="vehicleGaragedAtProposersHomeDetails" id="vehicleGaragedAtProposersHomeDetails"></textarea>
+                        </div>
                     </div>
                 </div>
 
@@ -692,8 +703,10 @@
                         <label for="vehicleKeptInOtherDetails" style="display:none">Details:</label>
                     </div>-->
                     <div class="ui-block-c vehicleKeptInOtherClass" style="width:50%;display:none">
-                        <label for="vehicleKeptInOtherDetails" style="display:none">Details:</label>
-                        <textarea name="vehicleKeptInOtherDetails" id="vehicleKeptInOtherDetails" placeholder="Details" style="display:none"></textarea>
+                        <div class="ui-field-contain">
+                            <label for="vehicleKeptInOtherDetails" style="display:none">Details:</label>
+                            <textarea name="vehicleKeptInOtherDetails" id="vehicleKeptInOtherDetails" placeholder="Details" style="display:none"></textarea>
+                        </div>
                     </div>
                 </div>
 
@@ -710,14 +723,16 @@
                         </select>
                     </div>
                     <div class="ui-block-c proposerInsuranceDetailsClass" style="width:50%;display:none">
-                        <label for="proposerInsuranceDetails">Details:</label>
-                        <textarea name="proposerInsuranceDetails" id="proposerInsuranceDetails" placeholder="Details"></textarea>
+                        <div class="ui-field-contain">
+                            <label for="proposerInsuranceDetails">Details:</label>
+                            <textarea name="proposerInsuranceDetails" id="proposerInsuranceDetails" placeholder="Details"></textarea>
+                        </div>
                     </div>
                 </div>
 
                 <div class="ui-grid-c">
                     <div class="ui-block-a" style="width:40%">
-                        <label for="proposerEntitledToNOClaimDiscount">Is the proposer entitled to No CLaim Discount from previous insurerer(s) in respect of any vehicle(s) described in the proposal:</label>
+                        <label for="proposerEntitledToNOClaimDiscount">Is the proposer entitled to No Claim Discount from previous insurer(s) in respect of any vehicle(s) described in the proposal?</label>
                     </div>
                     <div class="ui-block-b" style="width:10%">
                         <select name="proposerEntitledToNOClaimDiscount" id="proposerEntitledToNOClaimDiscount" data-role="slider" data-mini="true">
@@ -742,8 +757,10 @@
                         </select>
                     </div>
                     <div class="ui-block-c applicantOtherInsurerTypeClass" style="width:50%;display:none">
-                        <label for="applicantOtherInsurerType">Type:</label>
-                        <textarea name="applicantOtherInsurerType" id="applicantOtherInsurerType"></textarea>
+                        <div class="ui-field-contain">
+                            <label for="applicantOtherInsurerType">Type:</label>
+                            <textarea name="applicantOtherInsurerType" id="applicantOtherInsurerType"></textarea>
+                        </div>
                     </div>
                 </div>
 
@@ -769,8 +786,10 @@
                         </select>
                     </div>
                     <div class="ui-block-c ApplicantPreviouslyInsuredClass" style="width:50%;display:none">
-                        <label for="ApplicantPreviouslyInsuredDetails">Details:</label>
-                        <textarea name="ApplicantPreviouslyInsuredDetails" id="ApplicantPreviouslyInsuredDetails"></textarea>
+                        <div class="ui-field-contain">
+                            <label for="ApplicantPreviouslyInsuredDetails">Details:</label>
+                            <textarea name="ApplicantPreviouslyInsuredDetails" id="ApplicantPreviouslyInsuredDetails"></textarea>
+                        </div>
                     </div>
                 </div>
 
@@ -812,40 +831,51 @@
                 </div>
 
                 <h4>Lien Holder</h4>
-                <div class="ui-grid-a">
-                    <div class="ui-block-a">
-                        <div class="ui-field-contain">
-                            <label for="lienHolderNameInFull">&nbsp;&nbsp;Name:</label>
-                            <input type="text" name="lienHolderNameInFull" id="lienHolderNameInFull" value="">
+
+                <div class="ui-field-contain">
+                    <label for="lienHolder">Is there a Lien Holder?</label>
+                    <select name="lienHolder" id="lienHolder" data-role="slider" data-mini="true">
+                        <option value="no" selected="">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+
+                <div class="lienHolderClass" style="display:none">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <div class="ui-field-contain">
+                                <label for="lienHolderNameInFull">&nbsp;&nbsp;Name:</label>
+                                <input type="text" name="lienHolderNameInFull" id="lienHolderNameInFull" value="">
+                            </div>
+                            <div class="ui-field-contain">
+                                <label for="lienHolderTown">&nbsp;&nbsp;Town:</label>
+                                <input type="text" name="lienHolderTown" id="lienHolderTown" value="">
+                            </div>
                         </div>
-                        <div class="ui-field-contain">
-                            <label for="lienHolderTown">&nbsp;&nbsp;Town:</label>
-                            <input type="text" name="lienHolderTown" id="lienHolderTown" value="">
-                        </div>
-                    </div>
-                    <div class="ui-block-b">
-                        <div class="ui-field-contain">
-                            <label for="lienHolderStreetName">&nbsp;&nbsp;Address:</label>
-                            <input type="text" name="lienHolderStreetName" id="lienHolderStreetName" value="">
-                        </div>
-                        <div class="ui-field-contain">
-                            <label for="lienHolderParish">&nbsp;&nbsp;Parish:</label>
-                            <select name="lienHolderParish" id="lienHolderParish" data-mini="true">
-                                <option value="Kingston">Kingston</option>
-                                <option value="St. Andrew">St. Andrew</option>
-                                <option value="St. Catherine">St. Catherine</option>
-                                <option value="Clarendon">Clarendon</option>
-                                <option value="Manchester">Manchester</option>
-                                <option value="St. Elizabeth">St. Elizabeth</option>
-                                <option value="Westmoreland">Westmoreland</option>
-                                <option value="Hanover">Hanover</option>
-                                <option value="St. James">St. James</option>
-                                <option value="Trelawny">Trelawny</option>
-                                <option value="St. Ann">St. Ann</option>
-                                <option value="St. Mary">St. Mary</option>
-                                <option value="Portland">Portland</option>
-                                <option value="St. Thomas">St. Thomas</option>
-                            </select>
+                        <div class="ui-block-b">
+                            <div class="ui-field-contain">
+                                <label for="lienHolderStreetName">&nbsp;&nbsp;Address:</label>
+                                <input type="text" name="lienHolderStreetName" id="lienHolderStreetName" value="">
+                            </div>
+                            <div class="ui-field-contain">
+                                <label for="lienHolderParish">&nbsp;&nbsp;Parish:</label>
+                                <select name="lienHolderParish" id="lienHolderParish" data-mini="true">
+                                    <option value="Kingston">Kingston</option>
+                                    <option value="St. Andrew">St. Andrew</option>
+                                    <option value="St. Catherine">St. Catherine</option>
+                                    <option value="Clarendon">Clarendon</option>
+                                    <option value="Manchester">Manchester</option>
+                                    <option value="St. Elizabeth">St. Elizabeth</option>
+                                    <option value="Westmoreland">Westmoreland</option>
+                                    <option value="Hanover">Hanover</option>
+                                    <option value="St. James">St. James</option>
+                                    <option value="Trelawny">Trelawny</option>
+                                    <option value="St. Ann">St. Ann</option>
+                                    <option value="St. Mary">St. Mary</option>
+                                    <option value="Portland">Portland</option>
+                                    <option value="St. Thomas">St. Thomas</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -855,22 +885,22 @@
                 <div class="ui-field-contain">
                     <label for="insuranceCoverage">Insurance coverage:</label>
                     <select name="insuranceCoverage" id="insuranceCoverage" data-mini="true">
-                        <option value="Comprehensive-Liability" title="Third Party Bodily Injury and Property Damage and loss of or damage to the Insured's Motor Vehicle">Comprehensive-Liability</option>
-                        <option value="Third Party Fire and Theft" title="Liability for Third Party Bodily Injury and Property Damage and Loss of or damage to the Insured's Motor Vehicle by Fire or Theft">Third Party Fire and Theft</option>
-                        <option value="Third Party" title="Liability for Third Party Bodily Injury and Property Damage">Third Party</option>
+                        <option value="Comprehensive" title="Liability for Third Party Bodily Injury and Property Damage and loss of or damage to the Insured’s Motor Vehicle">Comprehensive</option>
+                        <option value="Third Party Fire and Theft" title="Liability for Third Party Bodily Injury and Property Damage and Loss of or damage to the Insured’s Motor Vehicle by Fire or Theft">Third Party Fire and Theft</option>
+                        <option value="Third Party" title="Liability for Third Party Bodily Injury and Property Damage">Third Party Liability</option>
                     </select>
                 </div>
 
                 <div class="ui-field-contain">
                     <label for="vehicleUsedAs">Vehicle Used As:</label>
                     <select name="vehicleUsedAs" id="vehicleUsedAs" data-mini="true">
-                        <option value="Carriage of own goods only">Carriage of own goods only</option>
-                        <option value="Carriage of passengers not for hire or reward">Carriage of passengers not for hire or reward</option>
-                        <option value="Carriage of Passengers for hire or reward">Carriage of Passengers for hire or reward</option>
-                        <option value="Social domestic and pleasure purposes only">Social domestic and pleasure purposes only</option>
-                        <option value="General Cartage">General Cartage</option>
-                        <option value="Social domestic and pleasure purposes and business use">Social domestic/pleasure purposes/business use</option>
-                        <option value="Commercial travelling">Commercial travelling</option>
+                        <option value="CarriageOwnGoods">Carriage of own goods only (Private Commercial)</option>
+                        <option value="CarriagePassengersNotHire">Carriage of passengers not for hire or reward</option>
+                        <option value="CarriagePassengersHire">Carriage of Passengers for hire or reward</option>
+                        <option value="SocialDomesticPleasure">Social domestic and pleasure purposes only</option>
+                        <option value="GeneralCartage">General Cartage</option>
+                        <option value="SocialDomesticPleasureBusiness">Social domestic & pleasure purposes and Proposer’s business use</option>
+                        <option value="CommercialTravelling">Commercial travelling</option>
                     </select>
                 </div>
             </form>
@@ -1152,61 +1182,69 @@
         <div data-role="main" class="ui-content">
             <form class="ProposalForm">
 
-                <div data-role="collapsible">
-                    <h1>Notes!</h1>
+
+                
+                
                     <p>Have you or any regular drivers had any accidents or losses during the past three years(whether insured or not) in respect of all vehicles:</p>
 
                     <ol>
                         <li>Owned by you, whether or not you were the driver at the material time?</li>
                         <li>Not owned by you, but driven by you or in your custody at the material time?</li>
                     </ol>
-                </div>
+                
+                <label for="involvedInAccident"></label>
+                    <select name="involvedInAccident" id="involvedInAccident" data-role="slider" data-mini="true">
+                        <option value="no" selected>No</option>
+                        <option value="yes">Yes</option>
+                    </select>
 
-                <div id="vehicle-all-accidents">
-                    <div class="vehicle-accident-block">
-                        <h4>Accident 1</h4>
-                        <div class="ui-grid-a">
-                            <div class="ui-block-a">
-                                <div class="ui-field-contain year">
-                                    <label for="accidentYear">Year of Accident:</label>
-                                    <select name="accidentYear" id="accidentYear"></select>
+                <div class="involvedInAccidentClass" style="display:none">
+                    <div id="vehicle-all-accidents">
+                        <div class="vehicle-accident-block">
+                            <h4>Accident 1</h4>
+                            <div class="ui-grid-a">
+                                <div class="ui-block-a">
+                                    <div class="ui-field-contain year">
+                                        <label for="accidentYear">Year of Accident:</label>
+                                        <select name="accidentYear" id="accidentYear"></select>
+                                    </div>
+                                    <div class="ui-field-contain cost" title="Cost(Paid/Estimated)">
+                                        <label for="accidentCost">Cost:</label>
+                                        <input type="text" name="accidentCost" id="accidentCost" placeholder="Cost (Paid/Estimated)" value="">
+                                    </div>
                                 </div>
-                                <div class="ui-field-contain cost" title="Cost(Paid/Estimated)">
-                                    <label for="accidentCost">Cost:</label>
-                                    <input type="text" name="accidentCost" id="accidentCost" placeholder="Cost (Paid/Estimated)" value="">
+                                <div class="ui-block-b">
+                                    <div class="ui-field-contain month">
+                                        <label for="accidentMonth">&nbsp;&nbsp;Month:</label>
+                                        <select name="accidentMonth" id="accidentMonth" data-mini="true">
+                                            <option value="01">Jan</option>
+                                            <option value="02">Feb</option>
+                                            <option value="03">Mar</option>
+                                            <option value="04">Apr</option>
+                                            <option value="05">May</option>
+                                            <option value="06">Jun</option>
+                                            <option value="07">Jul</option>
+                                            <option value="08">Aug</option>
+                                            <option value="09">Sep</option>
+                                            <option value="10">Oct</option>
+                                            <option value="11">Nov</option>
+                                            <option value="12">Dec</option>
+                                        </select>
+                                    </div>
+                                    <div class="ui-field-contain driver">
+                                        <label for="accidentDriver">&nbsp;&nbsp;Driver:</label>
+                                        <input type="text" name="accidentDriver" id="accidentDriver" value="">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="ui-block-b">
-                                <div class="ui-field-contain month">
-                                    <label for="accidentMonth">&nbsp;&nbsp;Month:</label>
-                                    <select name="accidentMonth" id="accidentMonth" data-mini="true">
-                                        <option value="01">Jan</option>
-                                        <option value="02">Feb</option>
-                                        <option value="03">Mar</option>
-                                        <option value="04">Apr</option>
-                                        <option value="05">May</option>
-                                        <option value="06">Jun</option>
-                                        <option value="07">Jul</option>
-                                        <option value="08">Aug</option>
-                                        <option value="09">Sep</option>
-                                        <option value="10">Oct</option>
-                                        <option value="11">Nov</option>
-                                        <option value="12">Dec</option>
-                                    </select>
-                                </div>
-                                <div class="ui-field-contain driver">
-                                    <label for="accidentDriver">&nbsp;&nbsp;Driver:</label>
-                                    <input type="text" name="accidentDriver" id="accidentDriver" value="">
-                                </div>
+                            <div class="ui-field-contain brief">
+                                <label for="accidentBrief" style="width:9%">Brief Details:</label>
+                                <textarea name="accidentBrief" id="accidentBrief" placeholder="Brief Details of Accident/Incident/Losses"></textarea>
                             </div>
-                        </div>
-                        <div class="ui-field-contain brief">
-                            <label for="accidentBrief">Brief:</label>
-                            <textarea name="accidentBrief" id="accidentBrief" placeholder="Brief Details of Accident/Incident/Losses"></textarea>
-                        </div>
-                        <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-                            <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left Add">Add Accident</a>
-                            <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right Delete" style="display:none">Delete Accident</a>
+                            <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left Add">Add Accident</a>
+                                <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right Delete" style="display:none">Delete Accident</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1215,7 +1253,7 @@
 
 
 
-            </form>
+</form>
 
         </div>
         <footer data-role="footer" data-position="fixed">
@@ -1237,7 +1275,7 @@
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
                         <fieldset data-role="controlgroup">
-                            <legend>Medical Conditions</legend>
+                            <legend>Medical Conditions:</legend>
                             <input class="medicalCondition" type="checkbox" name="driverSufferFromDefectiveHearingOrVision" id="driverSufferFromDefectiveHearingOrVision">
                             <label for="driverSufferFromDefectiveHearingOrVision">Defective vision or hearing?</label>
 
@@ -1257,20 +1295,36 @@
                     </div>
                 </div>
 
-                <p>Have you or any person who to your knowledge will drive:</p>
+
+
                 <div class="ui-grid-a">
-                    <div class="ui-block-a">
-                        <label>
-                            <input type="checkbox" name="driverTrafficTicket" id="driverTrafficTicket">Received any traffic ticket(s) and or have been convicted of any offence in connection with the driving of any motor vehicle within the last three (3) years?
-                        </label>
+                    <div class="ui-block-a" style="width:40%">
+
+                        <label for="driverTrafficTicket">Have you or any person who to your knowledge will drive received any traffic ticket(s) and or have been convicted of any offence in connection with the driving of any motor vehicle within the last three (3) years?</label>
+
                     </div>
-                    <div class="ui-block-b">
+                    <div class="ui-block-b" style="width:10%">
+                        <select name="driverTrafficTicket" id="driverTrafficTicket" data-role="slider" data-mini="true">
+                            <option value="no" selected>No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+
+
+
+                    <div class="ui-block-c" style="width:50%">
                         <div id="driverTrafficTicketDetailGroup">
-                            <label for="driverTrafficTicketDetails">Details:</label>
-                            <textarea name="driverTrafficTicketDetails" id="driverTrafficTicketDetails"></textarea>
+                            <div class="ui-field-contain">
+                                <label for="driverTrafficTicketDate">Date:</label>
+                                <input type="date" name="driverTrafficTicketDate" id="driverTrafficTicketDate">
+                                <label for="driverTrafficTicketDetails">Nature of Event:</label>
+                                <textarea name="driverTrafficTicketDetails" id="driverTrafficTicketDetails"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+
 
 
                 <div class="ui-grid-c">
@@ -1284,57 +1338,99 @@
                         </select>
                     </div>
                     <div class="ui-block-c vehicleModifiedDetailsClass" style="width:50%;display:none">
-                        <label for="vehicleModifiedDetails">Details:</label>
-                        <textarea name="vehicleModifiedDetails" id="vehicleModifiedDetails"></textarea>
+                        <div class="ui-field-contain">
+                            <label for="vehicleModifiedDetails">Details:</label>
+                            <textarea name="vehicleModifiedDetails" id="vehicleModifiedDetails"></textarea>
+                        </div>
                     </div>
                 </div>
 
-                <p>Have you or any person who to your knowledge will drive:??????</p>
+                <div class="ui-grid-c">
+                    <div class="ui-block-a" style="width:40%">
+                        <label for="increasedLimits">Do you require increased limits (in excess of the Standard Limits)?</label>
+                    </div>
+                    <div class="ui-block-b" style="width:10%">
+                        <select name="increasedLimits" id="increasedLimits" data-role="slider" data-mini="true">
+                            <option value="no" selected>No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
 
-                <div class="ui-grid-a">
-                    <div class="ui-block-a">
-                        <label for="amountGlassBreakage">Breakage of Glass(Window or Windscreen):</label>
-                    </div>
-                    <div class="ui-block-b">
-                        <input type="number" name="amountGlassBreakage" id="amountGlassBreakage" value="">
-                    </div>
                 </div>
-                <div class="ui-grid-a">
-                    <div class="ui-block-a">
-                        <label for="amountWreckerFee">Protection and Removal(Wrecker Fee):</label>
-                    </div><div class="ui-block-b">
-                        <input type="number" name="amountWreckerFee" id="amountWreckerFee" value="">
-                    </div>
-                </div>
-                <div class="ui-grid-a">
-                    <div class="ui-block-a">
-                        <label for="amountDeathBenefit">Personal Accident Death Benefit(Driver and Passengers):</label>
-                    </div><div class="ui-block-b">
-                        <input type="number" name="amountDeathBenefit" id="amountDeathBenefit" value="">
-                    </div>
-                </div>
-                <div class="ui-grid-a">
-                    <div class="ui-block-a">
-                        <label for="amountMedicalExpenses">Medical Expenses(Including Passengers):</label>
-                    </div><div class="ui-block-b">
-                        <input type="number" name="amountMedicalExpenses" id="amountMedicalExpenses" value="">
-                    </div>
-                </div>
-                <div class="ui-grid-a">
-                    <div class="ui-block-a">
-                        <label for="amountManslaughterDefenseCosts">Manslaughter Defense Costs:</label>
-                    </div><div class="ui-block-b">
-                        <input type="number" name="amountManslaughterDefenseCosts" id="amountManslaughterDefenseCosts" value="">
-                    </div>
-                </div>
-                <div class="ui-grid-a">
-                    <div class="ui-block-a">
-                        <label for="amountThirdPartyLimits">Third Party Limits(Bodily Injury and Property Damage):</label>
-                    </div>
-                    <div class="ui-block-b">
-                        <input type="number" name="amountThirdPartyLimits" id="amountThirdPartyLimits" value="">
-                    </div>
-                </div>
+
+
+
+                <fieldset class="ui-field-contain">
+                    <label for="wreckerFee">Protection and Removal (Wrecker Fee):</label>
+                    <select name="wreckerFee" id="wreckerFee">
+                        <optgroup label="Standard Limits">
+                            <option value="35000">$35,000</option>
+                            <option value="50000">$50,000</option>
+                        </optgroup>
+                        <optgroup label="Increased Limits">
+                            <option value="75000">$75,000</option>
+                            <option value="100000">$100,000</option>
+                        </optgroup>
+                    </select>
+                </fieldset>
+
+                <fieldset class="ui-field-contain">
+                    <label for="medicalExpenses">Medical Expenses (Including Passengers):</label>
+                    <select name="medicalExpenses" id="medicalExpenses">
+                        <optgroup label="Standard Limits">
+                            <option value="30000">$30,000</option>
+                            <option value="45000">$45,000</option>
+                        </optgroup>
+                        <optgroup label="Increased Limits">
+                            <option value="55000">$55,000</option>
+                            <option value="75000">$75,000</option>
+                        </optgroup>
+                    </select>
+                </fieldset>
+
+                <fieldset class="ui-field-contain">
+                    <label for="manslaughterDefenceCosts">Manslaughter Defense Costs:</label>
+                    <select name="manslaughterDefenceCosts" id="manslaughterDefenceCosts">
+                        <optgroup label="Standard Limits">
+                            <option value="250000">$250,000</option>
+                            <option value="300000">$300,000</option>
+                        </optgroup>
+                        <optgroup label="Increased Limits">
+                            <option value="400000">$400,000</option>
+                            <option value="500000">$500,000</option>
+                        </optgroup>
+                    </select>
+                </fieldset>
+
+                <fieldset class="ui-field-contain">
+                    <label for="thirdPartyLimits">Third Party Limits (Bodily Injury and Property Damage) Sums Insured < $2M</label>
+                    <select name="thirdPartyLimits" id="thirdPartyLimits">
+                        <optgroup label="Standard Limits">
+                            <option value="$3M/$5M/$5M">$3M/$5M/$5M</option>
+                            <option value="$5M/$7.5M/$5M">$5M/$7.5M/$5M</option>
+                        </optgroup>
+                        <optgroup label="Increased Limits">
+                            <option value="$5M/$10M/$5M">$5M/$10M/$5M</option>
+                            <option value="$10M/$10M/$10M">$10M/$10M/$10M</option>
+                        </optgroup>
+                    </select>
+                </fieldset>
+
+                <fieldset class="ui-field-contain">
+                    <label for="sumsInsured">Sums Insured ≥ $2M</label>
+                    <select name="sumsInsured" id="sumsInsured">
+                        <optgroup label="Standard Limits">
+                            <option value="$5M/$10M/$5M">$5M/$10M/$5M</option>
+                        </optgroup>
+                        <optgroup label="Increased Limits">
+                            <option value="$10M/$10M/$10M">$10M/$10M/$10M</option>
+                        </optgroup>
+                    </select>
+                </fieldset>
+
+
+
+
             </form>
 
         </div>
@@ -1421,76 +1517,105 @@
 
         <div data-role="main" class="ui-content">
             <form class="ProposalForm">
+                <div class="ui-grid-b">
+                    <div class="ui-block-a" style="width:40%">
+                        <label for="homeInGoodState">Are the buildings in a good state of repair and will they be so maintained?</label>
+                    </div>
+                    <div class="ui-block-b" style="width:10%">
+                        <select name="homeInGoodState" id="homeInGoodState" data-role="slider" data-mini="true">
+                            <option value="no">No</option>
+                            <option value="yes" selected>Yes</option>
+                        </select>
+                    </div>
+                    <div id="divhomeInGoodStateDetails" class="ui-block-c" style="width:50%;display:none">
+                        <div class="ui-field-contain">
+                            <label for="homeInGoodStateDetails">Details:</label>
+                            <textarea name="homeInGoodStateDetails" id="homeInGoodStateDetails"></textarea>
+                        </div>
+                    </div>
 
-                <div class="ui-field-contain">
-                    <label for="homeInGoodState" style="width:50%">Are the buildings in a good state of repair and will they be so maintained?</label>
-                    <select name="homeInGoodState" id="homeInGoodState" data-role="slider" data-mini="true">
-                        <option value="no">No</option>
-                        <option value="yes">Yes</option>
-                    </select>
                 </div>
                 <hr />
 
-
-                <div class="ui-field-contain">
-                    <label for="homeOccupiedByApplicantFamily" style="width:50%">Is the Dwelling occupied solely by you, your family and domestic employees?</label>
-                    <select name="homeOccupiedByApplicantFamily" id="homeOccupiedByApplicantFamily" data-role="slider" data-mini="true">
-                        <option value="no">No</option>
-                        <option value="yes" selected>Yes</option>
-                    </select>
-                </div>
-                <div id="divhomeOccupiedByApplicantFamily" class="ui-field-contain" style="display:none">
-                    <label for="homeOccupiedByApplicantFamilyIfNo">Details:</label>
-                    <textarea name="homeOccupiedByApplicantFamilyIfNo" id="homeOccupiedByApplicantFamilyIfNo"></textarea>
-                </div>
-                <hr />
-
-
-
-
-                <div class="ui-field-contain">
-                    <label for="homeUsedForIncomeActivity" style="width:50%">Is the Dwelling or Outbuilding used for any income-earning activity?</label>
-                    <select name="homeUsedForIncomeActivity" id="homeUsedForIncomeActivity" data-role="slider" data-mini="true">
-                        <option value="no" selected>No</option>
-                        <option value="yes">Yes</option>
-                    </select>
-                </div>
-                <div id="divhomeUsedForIncomeActivity" class="ui-field-contain" style="display:none">
-                    <label for="homeUsedForIncomeActivityDetails">Details:</label>
-                    <textarea name="homeUsedForIncomeActivityDetails" id="homeUsedForIncomeActivityDetails"></textarea>
-                </div>
-                <hr />
-
-
-
-                <div class="ui-field-contain">
-                    <label for="homeHaveInterestFromIndividual" style="width:50%">Does any institution or individual have a financial interest in the property?</label>
-                    <select name="homeHaveInterestFromIndividual" id="homeHaveInterestFromIndividual" data-role="slider" data-mini="true">
-                        <option value="no" selected>No</option>
-                        <option value="yes">Yes</option>
-                    </select>
-                </div>
-
-                <div id="divhomeHaveInterestFromIndividual" class="ui-field-contain" style="display:none">
-                    <label for="homeHaveInterestFromIndividualDetails">Details:</label>
-                    <textarea name="homeHaveInterestFromIndividualDetails" id="homeHaveInterestFromIndividualDetails"></textarea>
+                <div class="ui-grid-b">
+                    <div class="ui-block-a" style="width:40%">
+                        <label for="homeOccupiedByApplicantFamily">Is the Dwelling occupied solely by you, your family and domestic employees?</label>
+                    </div>
+                    <div class="ui-block-b" style="width:10%">
+                        <select name="homeOccupiedByApplicantFamily" id="homeOccupiedByApplicantFamily" data-role="slider" data-mini="true">
+                            <option value="no">No</option>
+                            <option value="yes" selected>Yes</option>
+                        </select>
+                    </div>
+                    <div class="ui-block-c" style="width:50%">
+                        <div id="divhomeOccupiedByApplicantFamily" class="ui-field-contain" style="display:none">
+                            <label for="homeOccupiedByApplicantFamilyIfNo">Details:</label>
+                            <textarea name="homeOccupiedByApplicantFamilyIfNo" id="homeOccupiedByApplicantFamilyIfNo"></textarea>
+                        </div>
+                    </div>
                 </div>
                 <hr />
 
 
 
-                <div class="ui-field-contain">
-                    <label for="homeHasWatersideStructure" style="width:50%">Are there any Waterside Structures?</label>
-                    <select name="homeHasWatersideStructure" id="homeHasWatersideStructure" data-role="slider" data-mini="true">
-                        <option value="no">No</option>
-                        <option value="yes">Yes</option>
-                    </select>
-                </div>
-                <div id="divhomeHasWatersideStructure" class="ui-field-contain" style="display:none">
-                    <label for="homeHasWatersideStructureDetails">Details:</label>
-                    <textarea name="homeHasWatersideStructureDetails" id="homeHasWatersideStructureDetails"></textarea>
-                </div>
+                <div class="ui-grid-b">
+                    <div class="ui-block-a" style="width:40%">
+                        <label for="homeUsedForIncomeActivity">Is the Dwelling or Outbuilding used for any income-earning activity?</label>
+                    </div>
+                    <div class="ui-block-b" style="width:10%">
+                        <select name="homeUsedForIncomeActivity" id="homeUsedForIncomeActivity" data-role="slider" data-mini="true">
+                            <option value="no" selected>No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+                    <div class="ui-block-c" style="width:50%">
+                        <div id="divhomeUsedForIncomeActivity" class="ui-field-contain" style="display:none">
+                            <label for="homeUsedForIncomeActivityDetails">Details:</label>
+                            <textarea name="homeUsedForIncomeActivityDetails" id="homeUsedForIncomeActivityDetails"></textarea>
+                        </div>
+                    </div>
 
+                </div>
+                <hr />
+
+
+                <div class="ui-grid-b">
+                    <div class="ui-block-a" style="width:40%">
+                        <label for="homeHaveInterestFromIndividual">Does any institution or individual have a financial interest in the property?</label>
+                    </div>
+                    <div class="ui-block-b" style="width:10%">
+                        <select name="homeHaveInterestFromIndividual" id="homeHaveInterestFromIndividual" data-role="slider" data-mini="true">
+                            <option value="no" selected>No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+                    <div class="ui-block-c" style="width:50%">
+                        <div id="divhomeHaveInterestFromIndividual" class="ui-field-contain" style="display:none">
+                            <label for="homeHaveInterestFromIndividualDetails">Details:</label>
+                            <textarea name="homeHaveInterestFromIndividualDetails" id="homeHaveInterestFromIndividualDetails"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+
+
+                <div class="ui-grid-b">
+                    <div class="ui-block-a" style="width:40%">
+                        <label for="homeHasWatersideStructure">Are there any Waterside Structures?</label>
+                    </div>
+                    <div class="ui-block-b" style="width:10%">
+                        <select name="homeHasWatersideStructure" id="homeHasWatersideStructure" data-role="slider" data-mini="true">
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+                    <div class="ui-block-c" style="width:50%">
+                        <div id="divhomeHasWatersideStructure" class="ui-field-contain" style="display:none">
+                            <label for="homeHasWatersideStructureDetails">Details:</label>
+                            <textarea name="homeHasWatersideStructureDetails" id="homeHasWatersideStructureDetails"></textarea>
+                        </div>
+                    </div>
+                </div>
 
             </form>
 
@@ -1511,11 +1636,10 @@
         <div data-role="main" class="ui-content">
             <form class="ProposalForm">
 
-                <h2>Currency</h2>
                 <div class="ui-field-contain">
                     <label for="currency">Currency:</label>
                     <select name="currency" id="currency">
-                        <option value="JMD">Jamaica Dollar</option>
+                        <option value="JMD">Jamaican Dollar</option>
                         <option value="USD">United States Dollar</option>
                     </select>
                 </div>
@@ -1542,7 +1666,7 @@
                         </p>
                     </div>
                     <div class="homeInsurancePropertyItems">
-                        <h4>Specified Item 1</h4>
+                        <h4>Building 1</h4>
                         <div class="ui-field-contain article-name">
                             <label for="homeInsurancePropertyItem0">Description:<a href="#homeInsurancePropertyDetails" data-rel="popup" data-transition="pop" class="my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-info ui-btn-icon-notext" title="Learn more">?</a></label>
                             <input type="text" name="homeInsurancePropertyItem0" id="homeInsurancePropertyItem0" value="">
@@ -1553,7 +1677,7 @@
                         </div>
 
                         <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-                            <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left Add">Add Item</a>
+                            <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left Add">Add Building</a>
                             <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right Delete" style="display:none">Delete</a>
                         </div>
                     </div>
@@ -1665,7 +1789,7 @@
 
                 <div data-role="collapsible">
                     <h4>IMPORTANT NOTE</h4>
-                    <p>Valuation Reports or Receipts in respect of all Articles to be insured should be attached to this Form.</p>
+                    <p>Valuation Reports or Receipts in respect of all Articles to be insured should be submitted to this Form.</p>
                 </div>
 
                 <div id="HomeAllRiskInsured">
@@ -1716,11 +1840,10 @@
 
 
 
-                <div class="ui-grid-c">
+                <div class="ui-grid-b">
                     <div class="ui-block-a" style="width: 40%">
                         <label for="currentPolicyWithCompanyOrInsurer">
-                            Do you currently have in force any
-                            policy whether with us or with any other Company or Insurer covering any of the Property to be insured?
+                            Do you currently have in force any policy whether with us or with any other Company or Insurer covering any of the Property to be insured?
                         </label>
                     </div>
                     <div class="ui-block-b" style="width: 10%">
@@ -1729,37 +1852,37 @@
                             <option value="yes">Yes</option>
                         </select>
                     </div>
-                    <div class="ui-block-c" style="width: 10%">
-                        <label for="currentPolicyWithCompanyOrInsurerDetails">Details:</label>
-                    </div>
-                    <div class="ui-block-d" style="width: 40%">
-                        <input type="text" name="currentPolicyWithCompanyOrInsurerDetails" id="currentPolicyWithCompanyOrInsurerDetails" placeholder="Text input" value="" data-mini="true">
+                    <div id="divcurrentPolicyWithCompanyOrInsurerDetails" class="ui-block-c" style="width: 50%;display:none">
+                        <div class="ui-field-contain">
+                            <label for="currentPolicyWithCompanyOrInsurerDetails">Details:</label>
+                            <input type="text" name="currentPolicyWithCompanyOrInsurerDetails" id="currentPolicyWithCompanyOrInsurerDetails" placeholder="Details" value="" data-mini="true">
+                        </div>
                     </div>
                 </div>
 
                 <h4>Has any Company or Insurer, in respect of any of the Perils to which this Proposal applies, ever:</h4>
 
-                <div class="ui-grid-c">
+                <div class="ui-grid-b">
                     <div class="ui-block-a" style="width: 40%">
                         <label for="HomeInsuranceDeclined">
                             Declined to insure you?
                         </label>
                     </div>
-                    <div class="ui-block-b" style="width: 10%">
+                    <div  class="ui-block-b" style="width: 10%">
                         <select name="HomeInsuranceDeclined" id="HomeInsuranceDeclined" data-role="slider" data-mini="true">
                             <option value="no" selected="">No</option>
                             <option value="yes">Yes</option>
                         </select>
                     </div>
-                    <div class="ui-block-c" style="width: 10%">
-                        <label for="HomeInsuranceDeclinedDetails">Details:</label>
-                    </div>
-                    <div class="ui-block-d" style="width: 40%">
-                        <input type="text" name="HomeInsuranceDeclinedDetails" id="HomeInsuranceDeclinedDetails" placeholder="Details" value="" data-mini="true">
+                    <div id="divHomeInsuranceDeclined" class="ui-block-c" style="width:50%;display:none">
+                        <div class="ui-field-contain">
+                            <label for="HomeInsuranceDeclinedDetails">Details:</label>
+                            <input type="text" name="HomeInsuranceDeclinedDetails" id="HomeInsuranceDeclinedDetails" placeholder="Details" value="" data-mini="true">
+                        </div>
                     </div>
                 </div>
 
-                <div class="ui-grid-c">
+                <div class="ui-grid-b">
                     <div class="ui-block-a" style="width: 40%">
                         <label for="HomeInsuranceRequiredSpecialTerm">
                             Required special terms to insure you?
@@ -1771,15 +1894,16 @@
                             <option value="yes">Yes</option>
                         </select>
                     </div>
-                    <div class="ui-block-c" style="width: 10%">
-                        <label for="HomeInsuranceRequiredSpecialTermDetails">Details:</label>
-                    </div>
-                    <div class="ui-block-d" style="width: 40%">
-                        <input type="text" name="HomeInsuranceRequiredSpecialTermDetails" id="HomeInsuranceRequiredSpecialTermDetails" placeholder="Details" value="" data-mini="true">
+                    <div id="divHomeInsuranceRequiredSpecialTermDetails" class="ui-block-c" style="width:50%;display:none">
+                        <div class="ui-field-contain">
+                            <label for="HomeInsuranceRequiredSpecialTermDetails">Details:</label>
+                            <input type="text" name="HomeInsuranceRequiredSpecialTermDetails" id="HomeInsuranceRequiredSpecialTermDetails" placeholder="Details" value="" data-mini="true">
+                        </div>
                     </div>
                 </div>
 
-                <div class="ui-grid-c">
+
+                <div class="ui-grid-b">
                     <div class="ui-block-a" style="width: 40%">
                         <label for="HomeInsuranceCancelled">
                             Cancelled or refused to renew your policy?
@@ -1791,65 +1915,77 @@
                             <option value="yes">Yes</option>
                         </select>
                     </div>
-                    <div class="ui-block-c" style="width: 10%">
-                        <label for="HomeInsuranceCancelledDetails">Details:</label>
+                    <div id="divHomeInsuranceCancelledDetails" class="ui-block-c" style="width:50%;display:none">
+                        <div class="ui-field-contain">
+                            <label for="HomeInsuranceCancelledDetails">Details:</label>
+                            <input type="text" name="HomeInsuranceCancelledDetails" id="HomeInsuranceCancelledDetails" placeholder="Details" value="" data-mini="true">
+                        </div>
                     </div>
-                    <div class="ui-block-d" style="width: 40%">
-                        <input type="text" name="HomeInsuranceCancelledDetails" id="HomeInsuranceCancelledDetails" placeholder="Details" value="" data-mini="true">
-                    </div>
-                </div>
+                   </div>
 
-                <div class="ui-grid-c">
-                    <div class="ui-block-a" style="width: 40%">
-                        <label for="HomeInsuranceIncreasedPremium">
-                            Increased your premium on renewal?
-                        </label>
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a" style="width: 40%">
+                            <label for="HomeInsuranceIncreasedPremium">
+                                Increased your premium on renewal?
+                            </label>
+                        </div>
+                        <div class="ui-block-b" style="width: 10%">
+                            <select name="HomeInsuranceIncreasedPremium" id="HomeInsuranceIncreasedPremium" data-role="slider" data-mini="true">
+                                <option value="no" selected="">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                        <div id="divHomeInsuranceIncreasedPremiumDetails" class="ui-block-c" style="width:50%;display:none">
+                            <div class="ui-field-contain">
+                                <label for="HomeInsuranceIncreasedPremiumDetails">Details:</label>
+                                <input type="text" name="HomeInsuranceIncreasedPremiumDetails" id="HomeInsuranceIncreasedPremiumDetails" placeholder="Details" value="" data-mini="true">
+                            </div>
+                        </div>
                     </div>
-                    <div class="ui-block-b" style="width: 10%">
-                        <select name="HomeInsuranceIncreasedPremium" id="HomeInsuranceIncreasedPremium" data-role="slider" data-mini="true">
-                            <option value="no" selected="">No</option>
-                            <option value="yes">Yes</option>
-                        </select>
-                    </div>
-                    <div class="ui-block-c" style="width: 10%">
-                        <label for="HomeInsuranceIncreasedPremiumDetails">Details:</label>
-                    </div>
-                    <div class="ui-block-d" style="width: 40%">
-                        <input type="text" name="HomeInsuranceIncreasedPremiumDetails" id="HomeInsuranceIncreasedPremiumDetails" placeholder="Details" value="" data-mini="true">
-                    </div>
-                </div>
 
 
-                <div class="ui-grid-c">
-                    <div class="ui-block-a" style="width: 40%">
-                        <label for="HomeInsurancePerilsSuffer">
-                            Have the Building and/or Contents of the Home to which this Proposal relates ever suffered damage by Hurricane, Earthquake or Flood?
-                        </label>
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a" style="width: 40%">
+                            <label for="HomeInsurancePerilsSuffer">
+                                Have the Building and/or Contents of the Home to which this Proposal relates ever suffered damage by Hurricane, Earthquake or Flood?
+                            </label>
+                        </div>
+                        <div class="ui-block-b" style="width: 10%">
+                            <select name="HomeInsurancePerilsSuffer" id="HomeInsurancePerilsSuffer" data-mini="true">
+                                <option value="no" selected="">No</option>
+                                <option value="no">Don't Know</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                        <div id="divHomeInsurancePerilsSufferDetails" class="ui-block-c" style="width:50%;display:none">
+                            <div class="ui-field-contain">
+                                <label for="HomeInsurancePerilsSufferDetails">Details:</label>
+                                <textarea name="HomeInsurancePerilsSufferDetails" id="HomeInsurancePerilsSufferDetails"></textarea>
+                            </div>
+                        </div>
                     </div>
-                    <div class="ui-block-b" style="width: 60%">
-                        <select name="HomeInsurancePerilsSuffer" id="HomeInsurancePerilsSuffer" data-mini="true">
-                            <option value="no" selected="">No</option>
-                            <option value="no">Don't Know</option>
-                            <option value="yes">Yes</option>
-                        </select>
+                    
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a" style="width: 40%">
+                            <label for="HomeInsuranceSufferLoss">
+                                Have you ever sustained loss from any Perils to which this Proposal would apply?
+                            </label>
+                        </div>
+                        <div class="ui-block-b" style="width: 10%">
+                            <select name="HomeInsuranceSufferLoss" id="HomeInsuranceSufferLoss" data-mini="true">
+                                <option value="no" selected="">No</option>
+                                <option value="no">Don't Know</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                        <div id="divHomeInsuranceSufferLossDetails" class="ui-block-c" style="width:50%;display:none">
+                            <div class="ui-field-contain">
+                                <label for="HomeInsuranceSufferLossDetails">Details:</label>
+                                <textarea name="HomeInsuranceSufferLossDetails" id="HomeInsuranceSufferLossDetails"></textarea>
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <div class="ui-grid-c">
-                    <div class="ui-block-a" style="width: 40%">
-                        <label for="HomeInsuranceSufferLoss">
-                            Have you ever sustained loss from any Perils to which this Proposal would apply??
-                        </label>
-                    </div>
-                    <div class="ui-block-b" style="width: 60%">
-                        <select name="HomeInsuranceSufferLoss" id="HomeInsuranceSufferLoss" data-mini="true">
-                            <option value="no" selected="">No</option>
-                            <option value="no">Don't Know</option>
-                            <option value="yes">Yes</option>
-                        </select>
-                    </div>
-                </div>
-
+                    
 
             </form>
 
@@ -1859,8 +1995,8 @@
             <h4>Insurance App</h4>
         </footer>
     </div>
-       
-    
+
+
 
     <script src="scripts/jquery.validate.min.js"></script>
     <script src="cordova.js"></script>

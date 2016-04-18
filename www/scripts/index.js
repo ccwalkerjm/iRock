@@ -117,12 +117,13 @@ $(document).ready(function (e) {
     setAllAccidentsYears();
     function setAllAccidentsYears() {
         var currentYear = new Date().getFullYear();
-        for (i = 0; i < 3; i++) {            
+        for (i = 1; i < 4; i++) {
+            currentYear = currentYear - i;
             var option = $('<option/>');
             option.attr('Value', currentYear);
             option.text(currentYear);
             option.appendTo($('#accidentYear'));
-            currentYear = currentYear - i;
+            
         }
     }
 
@@ -243,6 +244,17 @@ $(document).ready(function (e) {
     //    }
     //});
 
+    
+    //homeInGoodState
+    $('#homeInGoodState').change(function () {
+        var select_value = $(this).val();
+        if (select_value == 'no') {
+            $('#divhomeInGoodStateDetails').show();
+        }
+        else if (select_value == 'yes') {
+            $('#divhomeInGoodStateDetails').hide();
+        }
+    });
 
 
     //homeHasWatersideStructure
@@ -270,6 +282,8 @@ $(document).ready(function (e) {
     });
 
 
+
+
     //homeOccupiedByApplicantFamily
     $('#homeUsedForIncomeActivity').change(function () {
         var select_value = $(this).val();
@@ -292,9 +306,7 @@ $(document).ready(function (e) {
         }
     });
 
-
-
-
+   
     //applicantRelativeInPublicOffice
     $('#applicantRelativeInPublicOffice').change(function () {
         var select_value = $(this).val();
@@ -305,6 +317,96 @@ $(document).ready(function (e) {
             $('#publicofficerelation').hide();
         }
     });
+
+    //homeInGoodState
+    $('#homeInGoodState').change(function () {
+        var select_value = $(this).val();
+        if (select_value == 'no') {
+            $('#divhomeInGoodStateDetails').show();
+        }
+        else if (select_value == 'yes') {
+            $('#divhomeInGoodStateDetails').hide();
+        }
+    });
+
+    //currentPolicyWithCompanyOrInsurer
+    $('#currentPolicyWithCompanyOrInsurer').change(function () {
+        var select_value = $(this).val();
+        if (select_value == 'yes') {
+            $('#divcurrentPolicyWithCompanyOrInsurerDetails').show();
+        }
+        else if (select_value == 'no') {
+            $('#divcurrentPolicyWithCompanyOrInsurerDetails').hide();
+        }
+    });
+
+    //HomeInsuranceDeclined
+    $('#HomeInsuranceDeclined').change(function () {
+        var select_value = $(this).val();
+        if (select_value == 'yes') {
+            $('#divHomeInsuranceDeclined').show();
+        }
+        else if (select_value == 'no') {
+            $('#divHomeInsuranceDeclined').hide();
+        }
+    });
+
+    //HomeInsuranceRequiredSpecialTerm
+    $('#HomeInsuranceRequiredSpecialTerm').change(function () {
+        var select_value = $(this).val();
+        if (select_value == 'yes') {
+            $('#divHomeInsuranceRequiredSpecialTermDetails').show();
+        }
+        else if (select_value == 'no') {
+            $('#divHomeInsuranceRequiredSpecialTermDetails').hide();
+        }
+    });
+
+    //HomeInsuranceCancelled
+    $('#HomeInsuranceCancelled').change(function () {
+        var select_value = $(this).val();
+        if (select_value == 'yes') {
+            $('#divHomeInsuranceCancelledDetails').show();
+        }
+        else if (select_value == 'no') {
+            $('#divHomeInsuranceCancelledDetails').hide();
+        }
+    });
+
+    //HomeInsuranceIncreasedPremium
+    $('#HomeInsuranceIncreasedPremium').change(function () {
+        var select_value = $(this).val();
+        if (select_value == 'yes') {
+            $('#divHomeInsuranceIncreasedPremiumDetails').show();
+        }
+        else if (select_value == 'no') {
+            $('#divHomeInsuranceIncreasedPremiumDetails').hide();
+        }
+    });
+
+    //HomeInsurancePerilsSuffer
+    $('#HomeInsurancePerilsSuffer').change(function () {
+        var select_value = $(this).val();
+        if (select_value == 'yes') {
+            $('#divHomeInsurancePerilsSufferDetails').show();
+        }
+        else if (select_value == 'no') {
+            $('#divHomeInsurancePerilsSufferDetails').hide();
+        }
+    });
+
+    //HomeInsuranceSufferLoss
+    $('#HomeInsuranceSufferLoss').change(function () {
+        var select_value = $(this).val();
+        if (select_value == 'yes') {
+            $('#divHomeInsuranceSufferLossDetails').show();
+        }
+        else if (select_value == 'no') {
+            $('#divHomeInsuranceSufferLossDetails').hide();
+        }
+    });
+
+
 
     $('#publicofficerelation').on('click', '.applicantRelativeInPublicOfficeAdd', function () {
         var elementGroup = $(this).parent().parent().parent();
@@ -372,6 +474,30 @@ $(document).ready(function (e) {
         elementGroup.remove();
         resetRegularDriver();
     });
+
+    //lienHolder
+    $('#lienHolder').change(function () {
+        var select_value = $(this).val();
+        if (select_value == 'yes') {
+            $('.lienHolderClass').show();
+        }
+        else if (select_value == 'no') {
+            $('.lienHolderClass').hide();
+        }
+    });
+
+    //accidents
+    $('#involvedInAccident').change(function () {
+        var select_value = $(this).val();
+        if (select_value == 'yes') {
+            $('.involvedInAccidentClass').show();
+        }
+        else if (select_value == 'no') {
+            $('.involvedInAccidentClass').hide();
+        }
+    });
+
+
 
 
     //vehicle to be insured
@@ -597,7 +723,7 @@ function resetHomeInsuranceProperty() {
    { "class": "article-value", "name": "homeInsurancePropertyItemValue" }
     ];
     var elementClass = $('.homeInsurancePropertyItems');
-    resetObjects(objectList, elementClass, "Add", "Delete", "Specified Item");
+    resetObjects(objectList, elementClass, "Add", "Delete", "Building");
 }
 
 
