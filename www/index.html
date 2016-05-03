@@ -7,7 +7,13 @@
         Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
         For details, see http://go.microsoft.com/fwlink/?LinkID=617521
     -->
-    <meta http-equiv="Content-Security-Policy" content="default-src	'self' api.courserv.com; 'self' data: gap: api.courserv.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src *; 
+    style-src * 'unsafe-inline'; 
+    script-src * 'unsafe-inline'; 
+    media-src *; img-src * data:; 
+" />
+    <!--    <meta http-equiv="Content-Security-Policy" content="default-src	'self' api.courserv.com; 'self' data: gap: api.courserv.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
 
     <!-- IronRockApplication references -->
 
@@ -184,7 +190,7 @@
                     <select id="applicantIDType" name="applicantIDType">
                         <option value="national">National ID</option>
                         <option value="passport">Passport</option>
-                        <option value="driver" selected>Driver's Licence</option>
+                        <option value="TRN" selected>Driver's Licence</option>
                     </select>
                     <label for="applicantIDNumber">ID Number:</label>
                     <input type="number" id="applicantIDNumber" name="applicantIDnumber" placeholder="Enter ID Number">
