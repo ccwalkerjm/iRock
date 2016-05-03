@@ -7,13 +7,13 @@
         Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
         For details, see http://go.microsoft.com/fwlink/?LinkID=617521
     -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: http://10.0.1.5/ 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+    <meta http-equiv="Content-Security-Policy" content="default-src	'self' api.courserv.com; 'self' data: gap: api.courserv.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
 
     <!-- IronRockApplication references -->
 
     <title>Iron Rock Insurance-Application</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
     <link rel="stylesheet" href="css/jquery.mobile.inline-png-1.4.5.css" />
@@ -135,88 +135,61 @@
                 <div class="ui-field-contain">
                     <label for="applicantTRN">TRN:</label>
                     <input type="number" id="applicantTRN" name="applicantTRN" placeholder="Enter TRN">
+
+                    <a href="#" class="ui-btn" id="getTRNDetails" data-role="button" data-inline="true">Check TRN</a>
+                    <a href="#" class="ui-btn" id="clearTRNDetails" data-role="button" data-inline="true" style="display:none">Clear TRN</a>
                 </div>
-                <a href="#" class="ui-btn" id="getTRNDetails">Check TRN</a>
-                <a href="#" class="ui-btn" id="clearTRNDetails" style="display:none">Clear TRN</a>
 
-                <div id="applicantTRNDetails">
+                <div class="ui-field-contain" id="applicantTRNDetails">
+                    <label for="applicantSurname">Surname:</label>
+                    <input type="text" id="applicantSurname" name="applicantSurname" placeholder="Enter Surname" readonly>
 
-                    <div class="ui-field-contain">
-                        <label for="applicantSurname">Surname:</label>
-                        <input type="text" id="applicantSurname" name="applicantSurname" placeholder="Enter Surname" readonly>
+                    <label for="applicantFirstName">FirstName:</label>
+                    <input type="text" id="applicantFirstName" name="FirstName" placeholder="Enter FirstName" readonly>
 
-                    </div>
-                    <div class="ui-field-contain">
-                        <label for="applicantFirstName">FirstName:</label>
-                        <input type="text" id="applicantFirstName" name="FirstName" placeholder="Enter FirstName" readonly>
+                    <label for="applicantMiddleName">MiddleName:</label>
+                    <input type="text" id="applicantMiddleName" name="applicantMiddleName" placeholder="Enter MiddleName" readonly>
 
-                    </div>
-                    <div class="ui-field-contain">
-                        <label for="applicantMiddleName">MiddleName:</label>
-                        <input type="text" id="applicantMiddleName" name="applicantMiddleName" placeholder="Enter MiddleName" readonly>
+                    <label for="applicantTitle">Title:</label>
+                    <input type="text" id="applicantTitle" name="applicantTitle" placeholder="Enter Title" readonly>
 
-                    </div>
-                </div>
-                <div class="ui-field-contain">
-                    <label for="applicantTitle" class="select">Title:</label>
-                    <select id="Title">
-                        <option>Mr</option>
-                        <option>Mrs</option>
-                        <option>Miss</option>
-                        <option>Dr</option>
-                        <option>Prof</option>
-                    </select>
-
-                </div>
-                <div class="ui-field-contain">
-                    <label for="applicantMothersMaidenName">Mother's Maiden Name:</label>
-                    <input type="text" id="applicantMothersMaidenName" name="applicantMothersMaidenName" placeholder="Enter your Mother's Maiden Name">
-
-                </div>
-                <div class="ui-field-contain">
-                    <label for="applicantAlias">Other Names/Aliases:</label>
-                    <input type="text" id="applicantAlias" name="applicantAlias" placeholder="Enter other name/alias">
-
-                </div>
-                <div class="ui-field-contain">
                     <label for="applicantDateOfBirth">Date Of Birth:</label>
-                    <input type="date" id="applicantDateOfBirth" name="applicantDateOfBirth" placeholder="Enter Date of Birth">
-
-
+                    <input type="date" id="applicantDateOfBirth" name="applicantDateOfBirth" placeholder="Enter Date of Birth" readonly>
                 </div>
+
+
                 <div class="ui-field-contain">
                     <label for="applicantPlaceOfBirth">Place Of Birth:</label>
                     <input type="text" id="applicantPlaceOfBirth" name="applicantPlaceOfBirth" placeholder="Enter Place of Birth">
 
-                </div>
-                <div class="ui-field-contain">
-                    <label for="applicantNationality">Country of Nationality:</label>
-                    <select name="applicantNationality" id="applicantNationality" class="countries">
-                        <option value="Jamaica">Jamaica</option>
-                        <option value="Canada">Canada</option>
-                        <option value="Trinidad and Tobago">Trinidad and Tobago</option>
-                        <option value="Barbados">Barbados</option>
-                        <option value="USA">USA</option>
-                    </select>
+                    <label for="applicantMothersMaidenName">Mother's Maiden Name:</label>
+                    <input type="text" id="applicantMothersMaidenName" name="applicantMothersMaidenName" placeholder="Enter your Mother's Maiden Name">
 
+                    <label for="applicantAlias">Other Names/Aliases:</label>
+                    <input type="text" id="applicantAlias" name="applicantAlias" placeholder="Enter other name/alias">
                 </div>
+
+                <div class="ui-field-contain">
+                    <label for="currency">Currency:</label>
+                    <select name="currency" id="currency">
+                        <option value="JA">Jamaican Dollar</option>
+                        <option value="USD">United States Dollar</option>
+                    </select>
+                    <label for="applicantNationality">Country of Nationality:</label>
+                    <select name="applicantNationality" id="applicantNationality" class="countries"></select>
+                </div>
+
                 <div class="ui-field-contain">
                     <label for="applicantIDType" class="select">ID Type:</label>
-                    <select id="IDType">
-                        <option>National ID</option>
-                        <option>Passport</option>
-                        <option>Driver's License</option>
+                    <select id="applicantIDType" name="applicantIDType">
+                        <option value="national">National ID</option>
+                        <option value="passport">Passport</option>
+                        <option value="driver" selected>Driver's Licence</option>
                     </select>
-
-                </div>
-                <div class="ui-field-contain">
                     <label for="applicantIDNumber">ID Number:</label>
                     <input type="number" id="applicantIDNumber" name="applicantIDnumber" placeholder="Enter ID Number">
-
-                </div>
-                <div class="ui-field-contain">
                     <label for="applicationIDExpirationDate">Expiration Date:</label>
-                    <input type="date" id="applicationIDExpirationDate" name="applicationIDExpirationDate" placeholder="Enter Expiration Date">
+                    <input type="date" id="applicationIDExpirationDate" name="applicationIDExpirationDate" placeholder="Enter Expiration Date" value="">
                 </div>
             </form>
         </div>
@@ -266,8 +239,6 @@
                     <div class="ui-field-contain">
                         <label for="applicantHomeStreetName">Street Number and Name:</label>
                         <input type="text" id="applicantHomeStreetName" name="applicantHomeStreetName" placeholder="Enter Street Number and Name">
-
-
                     </div>
 
                     <div class="ui-field-contain">
@@ -534,6 +505,7 @@
                 </div>
 
                 <a href="#vehicle-particulars-page" class="ui-btn ui-btn-inline ui-icon-back ui-btn-icon-right">Return</a>
+                <a href="#" id="dummyTaxiVehicle" class="ui-btn ui-btn-inline" data-inline="true">Dummy Vehicle Insert</a>
                 <a href="#" id="queryTaxiVehicle" class="ui-btn ui-btn-inline ui-icon-plus ui-btn-icon-right" data-textonly="false" data-textvisible="true" data-msgtext="Retrieving Data..." data-inline="true">Query</a>
 
             </form>
@@ -556,19 +528,18 @@
                 <div id="vehiclesToBeInsured">
                     <div class="ui-grid-d" data-id="0">
                         <div class="ui-block-a">
-                            <h4>Registration</h4>
+                            <h4>Plate No</h4>
                         </div>
                         <div class="ui-block-b">
                             <h4>Make/Model</h4>
                         </div>
                         <div class="ui-block-c">
-                            <h4>Year</h4>
+                            <h4>Year/Body/Colour</h4>
                         </div>
                         <div class="ui-block-d">
-                            <h4>CC Rating</h4>
+                            <h4>Chassis/Engine</h4>
                         </div>
                         <div class="ui-block-e">
-                            <h4>Sum Insured</h4>
                         </div>
                     </div>
                 </div>
@@ -906,37 +877,7 @@
         <div data-role="main" class="ui-content">
             <form class="ProposalForm">
 
-                <div data-role="collapsible">
-                    <h1>Applicant Driver License</h1>
-
-
-
-                    <div class="ui-field-contain">
-                        <label for="applicantDLNumber">D/L Number:</label>
-                        <input type="number" id="applicantDLNumber" name="applicantDLNumber" placeholder="Enter D/L Number">
-
-
-                    </div>
-                    <div class="ui-field-contain">
-                        <label for="applicantClass">D/L Class:</label>
-                        <input type="text" id="applicantDLClass" name="applicantDLClass" placeholder="Enter Class">
-
-
-                    </div>
-                    <div class="ui-field-contain">
-                        <label for="applicantOriginalDate">D/L Original Date:</label>
-                        <input type="date" id="applicantOriginalDate" name="applicantOriginalDate" placeholder="Enter Original Date">
-
-
-                    </div>
-                    <div class="ui-field-contain">
-                        <label for="applicantExpiryDate">D/L Expiry Date:</label>
-                        <input type="date" id="applicantExpiryDate" placeholder="Enter Expiry Date">
-                    </div>
-                </div>
-
-
-                <div class="ui-grid-a">
+                <!--<div class="ui-grid-a">
                     <div class="ui-block-a">
                         <label for="regularDriverOfVehicle">Will you be the regular driver of the vehicle:</label>
                     </div>
@@ -946,6 +887,21 @@
                             <option value="yes" selected>Yes</option>
                         </select>
                     </div>
+                </div>-->
+                <h4>Regular Drivers</h4>
+                <div class="ui-grid-a" id="regularDriversBtns">
+                    <div class="ui-block-a">
+                        <div class="ui-field-contain">
+                            <label for="regularDriverQueryID">Driver Licence:</label>
+                            <input type="text" id="regularDriverQueryID" placeholder="Enter Driver Licence No">
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="margin-top:15px">
+                            <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-right Add">Add Driver</a>
+                            <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right Reset">Reset</a>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="regularDriversId" style="display:none">
@@ -954,7 +910,7 @@
                         <hr />
                         <div class="ui-field-contain name">
                             <label for="regularDriversName0">Name:</label>
-                            <input type="text" name="regularDriversName0" id="regularDriversName0" value="">
+                            <input type="text" name="regularDriversName0" id="regularDriversName0" value="" readonly>
                         </div>
                         <div class="ui-field-contain occupation">
                             <label for="regularDriversOccupation0">Occupation:</label>
@@ -962,23 +918,19 @@
                         </div>
                         <div class="ui-field-contain DateOfBirth">
                             <label for="regularDriversDateOfBirth0">Date of Birth:</label>
-                            <input type="date" name="regularDriversDateOfBirth0" id="regularDriversDateOfBirth0" value="">
+                            <input type="date" name="regularDriversDateOfBirth0" id="regularDriversDateOfBirth0" value="" readonly>
                         </div>
                         <div class="ui-field-contain DriversDL">
                             <label for="regularDriversDL0">Driver's Licence:</label>
-                            <input type="text" name="regularDriversDL0" id="regularDriversDL0" value="">
+                            <input type="text" name="regularDriversDL0" id="regularDriversDL0" value="" readonly>
                         </div>
                         <div class="ui-field-contain DriversDLOriginalDateOfIssue">
                             <label for="regularDriversDLOriginalDateOfIssue0">Original Date of Issue:</label>
-                            <input type="date" name="regularDriversDLOriginalDateOfIssue0" id="regularDriversDLOriginalDateOfIssue0" value="">
+                            <input type="date" name="regularDriversDLOriginalDateOfIssue0" id="regularDriversDLOriginalDateOfIssue0" value="" readonly>
                         </div>
                         <div class="ui-field-contain DriversRelationshipToProposer">
                             <label for="regularDriversRelationshipToProposer0">Relationship to Proposer:</label>
                             <input type="text" name="regularDriversRelationshipToProposer0" id="regularDriversRelationshipToProposer0" value="">
-                        </div>
-                        <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-                            <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left Add">Add Driver</a>
-                            <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right Delete" style="display:none">Remove Driver</a>
                         </div>
                     </div>
                 </div>
@@ -1010,14 +962,27 @@
                         </fieldset>
                     </div>
                 </div>
-
+                <div class="ui-grid-a" id="inexperiencedDriversBtns" style="display:none">
+                    <div class="ui-block-a">
+                        <div class="ui-field-contain">
+                            <label for="inexperiencedDriverQueryID">Driver Licence:</label>
+                            <input type="text" id="inexperiencedDriverQueryID" placeholder="Enter Driver Licence No">
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="margin-top:15px">
+                            <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-right Add">Add Driver</a>
+                            <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right Reset">Reset</a>
+                        </div>
+                    </div>
+                </div>
                 <div id="inexperiencedDriversId" style="display:none">
                     <div class="inexperiencedDriversCls">
                         <h4>Driver 1</h4>
                         <hr />
                         <div class="ui-field-contain name">
                             <label for="inexperiencedDriversName0">Name:</label>
-                            <input type="text" name="inexperiencedDriversName0" id="inexperiencedDriversName0" value="">
+                            <input type="text" name="inexperiencedDriversName0" id="inexperiencedDriversName0" value="" readonly>
                         </div>
                         <div class="ui-field-contain occupation">
                             <label for="inexperiencedDriversOccupation0">Occupation:</label>
@@ -1025,23 +990,19 @@
                         </div>
                         <div class="ui-field-contain DateOfBirth">
                             <label for="inexperiencedDriversDateOfBirth0">Date of Birth:</label>
-                            <input type="date" name="inexperiencedDriversDateOfBirth0" id="inexperiencedDriversDateOfBirth0" value="">
+                            <input type="date" name="inexperiencedDriversDateOfBirth0" id="inexperiencedDriversDateOfBirth0" value="" readonly>
                         </div>
                         <div class="ui-field-contain DriversDL">
                             <label for="inexperiencedDriversDL0">Driver's Licence:</label>
-                            <input type="text" name="inexperiencedDriversDL0" id="inexperiencedDriversDL0" value="">
+                            <input type="text" name="inexperiencedDriversDL0" id="inexperiencedDriversDL0" value="" readonly>
                         </div>
                         <div class="ui-field-contain DriversDLOriginalDateOfIssue">
                             <label for="inexperiencedDriversDLOriginalDateOfIssue0">Original Date of Issue:</label>
-                            <input type="date" name="inexperiencedDriversDLOriginalDateOfIssue0" id="inexperiencedDriversDLOriginalDateOfIssue0" value="">
+                            <input type="date" name="inexperiencedDriversDLOriginalDateOfIssue0" id="inexperiencedDriversDLOriginalDateOfIssue0" value="" readonly>
                         </div>
                         <div class="ui-field-contain DriversRelationshipToProposer">
                             <label for="inexperiencedDriversRelationshipToProposer0">Relationship to Proposer:</label>
-                            <input type="text" name="inexperiencedDriversRelationshipToProposer0" id="inexperiencedDriversRelationshipToProposer0" value="">
-                        </div>
-                        <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-                            <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left Add">Add Driver</a>
-                            <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right Delete" style="display:none">Remove Driver</a>
+                            <input type="text" name="inexperiencedDriversRelationshipToProposer0" id="inexperiencedDriversRelationshipToProposer0" value="" readonly>
                         </div>
                     </div>
                 </div>
@@ -1248,11 +1209,11 @@
                 <fieldset class="ui-field-contain">
                     <label for="wreckerFee">Protection and Removal (Wrecker Fee):</label>
                     <select name="wreckerFee" id="wreckerFee">
-                        <optgroup label="Standard Limits">
-                            <option value="35000">$35,000</option>
-                            <option value="50000">$50,000</option>
+                        <optgroup label="Standard Limit">
+                            <option value="StandardLimit">$35,000 </option>
                         </optgroup>
                         <optgroup label="Increased Limits">
+                            <option value="50000">$50,000</option>
                             <option value="75000">$75,000</option>
                             <option value="100000">$100,000</option>
                         </optgroup>
@@ -1262,11 +1223,11 @@
                 <fieldset class="ui-field-contain">
                     <label for="medicalExpenses">Medical Expenses (Including Passengers):</label>
                     <select name="medicalExpenses" id="medicalExpenses">
-                        <optgroup label="Standard Limits">
+                        <optgroup label="Standard Limit">
                             <option value="30000">$30,000</option>
-                            <option value="45000">$45,000</option>
                         </optgroup>
                         <optgroup label="Increased Limits">
+                            <option value="45000">$45,000</option>
                             <option value="55000">$55,000</option>
                             <option value="75000">$75,000</option>
                         </optgroup>
@@ -1276,11 +1237,11 @@
                 <fieldset class="ui-field-contain">
                     <label for="manslaughterDefenceCosts">Manslaughter Defense Costs:</label>
                     <select name="manslaughterDefenceCosts" id="manslaughterDefenceCosts">
-                        <optgroup label="Standard Limits">
+                        <optgroup label="Standard Limit">
                             <option value="250000">$250,000</option>
-                            <option value="300000">$300,000</option>
                         </optgroup>
                         <optgroup label="Increased Limits">
+                            <option value="300000">$300,000</option>
                             <option value="400000">$400,000</option>
                             <option value="500000">$500,000</option>
                         </optgroup>
@@ -1292,11 +1253,11 @@
                         Third Party Limits (Bodily Injury and Property Damage) Sums Insured
                         < $2M </label>
                             <select name="thirdPartyLimits" id="thirdPartyLimits">
-                                <optgroup label="Standard Limits">
+                                <optgroup label="Standard Limit">
                                     <option value="$3M/$5M/$5M">$3M/$5M/$5M</option>
-                                    <option value="$5M/$7.5M/$5M">$5M/$7.5M/$5M</option>
                                 </optgroup>
                                 <optgroup label="Increased Limits">
+                                    <option value="$5M/$7.5M/$5M">$5M/$7.5M/$5M</option>
                                     <option value="$5M/$10M/$5M">$5M/$10M/$5M</option>
                                     <option value="$10M/$10M/$10M">$10M/$10M/$10M</option>
                                 </optgroup>
@@ -1522,14 +1483,6 @@
 
         <div data-role="main" class="ui-content">
             <form class="ProposalForm">
-
-                <div class="ui-field-contain">
-                    <label for="currency">Currency:</label>
-                    <select name="currency" id="currency">
-                        <option value="JMD">Jamaican Dollar</option>
-                        <option value="USD">United States Dollar</option>
-                    </select>
-                </div>
 
                 <h2>Buildings and other structures</h2>
                 <div data-role="collapsible">
@@ -1880,9 +1833,11 @@
     <script src="scripts/jquery.validate.min.js"></script>
     <script src="cordova.js"></script>
     <script src="scripts/platformOverrides.js"></script>
+    <script src="scripts/aws-sdk.min.js"></script>
     <!--Custom js-->
-    <script src="scripts/index.js"></script>
+
     <script src="scripts/webservice.js"></script>
+    <script src="scripts/index.js"></script>
     <script src="scripts/signatureCapture.js"></script>
 
 </body>

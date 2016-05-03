@@ -1,5 +1,5 @@
 $(document).ready(function (e) {
-    var baseUrl = "http://10.0.1.5/api/"; //localhost:58633/api/";
+    var baseUrl = "https://api.courserv.com/ironrock"; //localhost:58633/api/";
     ////TRN///////
     $('#personal-main-page').on('click', '#getTRNDetails', function () {
         var $this = $(this),
@@ -15,7 +15,9 @@ $(document).ready(function (e) {
             textonly: textonly,
             html: html
         });
-        var serverUrl = baseUrl + "TRN/" + $('#applicantTRN').val();
+
+        var id = $('#applicantTRN').val();
+        var serverUrl = baseUrl + "/trn/?id=" + id;
         $.ajax({
             type: 'GET',
             contentType: 'application/json',
@@ -24,7 +26,15 @@ $(document).ready(function (e) {
             success: function (r) {
                 //success handling
                 $.mobile.loading("hide");
-                populateApplicant(r);
+                var json = JSON.parse(r);
+                if (json.error_message) {
+                    alert("Invalid ID!!");
+                } else if (json.Message) {
+                    alert("Invalid ID!!");
+                } else {
+                    json.id = id;
+                    populateApplicant(json);
+                }
             },
             error: function (data) {
                 //error handling
@@ -36,29 +46,52 @@ $(document).ready(function (e) {
 
     $('#personal-main-page').on('click', '#clearTRNDetails', function () {
         SetTRnDetails(false);
-        $('#applicantTRN').val('');
-        $('#applicantSurname').val('');
-        $('#applicantFirstName').val('');
-        $('#applicantMiddleName').val('');
+        $('#applicantTRNDetails input').val('');
     });
 
     function populateApplicant(r) {
+        //id
+        $('#applicantIDNumber').val(r.id);
+        $('#applicationIDExpirationDate').val('01/01/2020');
+        //address
         $('#applicantSurname').val(r.lastName);
         $('#applicantFirstName').val(r.firstName);
         $('#applicantMiddleName').val(r.middleName);
+        $('#applicantDateOfBirth').val(r.birthDate.substring(0, 10));
+        $('#applicantTitle').val(r.genderType == 'M' ? 'Mr.' : 'Ms.');
+        //$('#applicantHomeCountry').val(r.CountryCode.toLowerCase()=='jamaica'?'JM':).trigger("change");
+        //        $('#applicantHomeCountry option[value=' + r.CountryCode + ']').prop('selected', 'selected');
+        //        $('#applicantHomeParish option[value=' + r.ParishCode + ']').prop('selected', 'selected');
+        $('#applicantHomeStreetName').val(r.StreetNo + ' ' + r.StreetName);
         SetTRnDetails(true);
     }
 
     function SetTRnDetails(state) {
-        $("#applicantTRN").attr("readonly", state);
-        if (state) {
-            $('#getTRNDetails').hide();
-            $('#clearTRNDetails').show();
-        } else {
-            $('#getTRNDetails').show();
-            $('#clearTRNDetails').hide();
+            $("#applicantTRN").attr("readonly", state);
+            if (state) {
+                $('#getTRNDetails').hide();
+                $('#clearTRNDetails').show();
+            } else {
+                $('#getTRNDetails').show();
+                $('#clearTRNDetails').hide();
+            }
         }
-    }
+        ////////////////////////////////////////
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
 
 
     ////////Reset Quotation Page////////////////
@@ -126,31 +159,79 @@ $(document).ready(function (e) {
         });
 
 
-        var formData = JSON.stringify($('form').serializeObject());
-        var serverUrl = baseUrl + "Quotation/";
+        //var formData = JSON.stringify($('form').serializeObject());
+        //var params = {
+        //    FunctionName: 'ironrockquote', //ironrock-quote',
+        //    //ClientContext: 'STRING_VALUE',
+        //    InvocationType: 'DryRun', //Event | RequestResponse | DryRun',
+        //    LogType: 'Tail',
+        //    Payload: formData.toString(), // new Buffer('...') || 'STRING_VALUE',
+        //    //Qualifier: 'STRING_VALUE'
+        //};
+        ////public aws credentials
+        //AWS.config.update({
+        //    accessKeyId: 'AKIAI6GJQG42AVX3WK2Q',
+        //    secretAccessKey: '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'
+        //});
+        //AWS.config.region = 'us-east-1';
+        ////cloud services verifications
+        ////var lambda;
+        //var lambda = new AWS.Lambda();
+        //lambda.invoke(params, function (err, data) {
+        //    if (err) {
+        //        console.log(err, err.stack); // an error occurred
+        //        alert(err.message);
+        //    }
+        //    else {
+        //        console.log(data);           // successful response
+        //        $.mobile.loading("hide");
+        //        $('#get-quotation').hide();
+        //        $('#confirmQuotation').show();
+        //        if (data.success == true) {
+        //            loadQuotation(r);
+        //        } else {
+        //            alert(data.error_message);
+        //        }
+        //    }
+        //});
+
+        //var formData = $('form').serialize();
+        var formData = JSON.parse(JSON.stringify($('form').serializeObject()));
+        //remove all empty nodes
+        $.each(formData, function (key, value) {
+            if (value === "" || value === null) {
+                delete formData[key];
+            }
+        });
+        //formData = "signatureBytes=&insuranceType=motor&applicantTRN=&applicantSurname=&FirstName=&applicantMiddleName="; // $("form").serialize();
+        var serverUrl = baseUrl + "/ironrockquote/";
+        var data = JSON.stringify(formData);
+        console.log(formData);
+        console.log(data);
         $.ajax({
-            type: 'POST',
+            type: 'post',
             contentType: 'application/json',
             url: serverUrl,
-            dataType: "json",
-            data: formData,
-            success: function (r) {
+            dataType: 'json',
+            data: data,
+            success: function (results) {
                 //success handling
                 $.mobile.loading("hide");
-                $('#get-quotation').hide();
-                $('#confirmQuotation').show();
-                if (r.success == true) {
-                    loadQuotation(r);
+                var r = JSON.parse(results);
+                if (r.error_message || r.Message) {
+                    console.log(r);
+                    alert(r.error_message ? r.error_message : '' + r.Message ? r.Message : '');
                 } else {
-                    alert(r.error_message);
+                    loadQuotation(r);
+                    $('#get-quotation').hide();
+                    $('#confirmQuotation').show();
                 }
-
-
             },
-            error: function (data) {
+            error: function (err) {
                 //error handling
+                console.log(err);
                 $.mobile.loading("hide");
-                alert("error: " + data.statusText);
+                alert("error: " + err.statusText);
             }
         });
 
@@ -203,6 +284,25 @@ $(document).ready(function (e) {
         }
     });
 
+
+    //dummy
+    $('#taxOfficeVehicleDialog').on("click", "#dummyTaxiVehicle", function () {
+        var r = {};
+
+        r.plateNo = "6775HK";
+        r.chassisNo = "ksdfsa9873982432kjsdf";
+        r.make = "Toyota";
+        r.model = "Corolla";
+        r.year = "2002";
+        r.vehicleBodyType = "Sedan";
+        r.vehicleType = "Sedan";
+        r.engineNo = "jdfsjdfsjf99034329";
+        r.colour = "White";
+        r.vehicleStatus = "";
+        insertVehicle(r);
+    });
+
+
     $('#taxOfficeVehicleDialog').on("click", "#queryTaxiVehicle", function () {
         var $this = $(this),
             theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
@@ -218,12 +318,12 @@ $(document).ready(function (e) {
             html: html
         });
 
-        var serverUrl = baseUrl + "/FslVehicle/";
+        var serverUrl = baseUrl + "/Vehicle/";
 
         if ($('#isNewVehicle').val() == "yes") {
-            serverUrl = serverUrl + '?plateNo=' + $('#QueryVehicleRegistrationNo').val(); // = null, string chassisNo
+            serverUrl = serverUrl + '?plateno=' + $('#QueryVehicleRegistrationNo').val(); // = null, string chassisNo
         } else {
-            serverUrl = serverUrl + '?chassisNo=' + $('#QueryVehicleChassisNo').val(); // = null, string chassisNo
+            serverUrl = serverUrl + '?chassisno=' + $('#QueryVehicleChassisNo').val(); // = null, string chassisNo
         }
 
         /*if (!VehicleRegistrationNo) {
@@ -239,7 +339,15 @@ $(document).ready(function (e) {
             dataType: "json",
             success: function (r) {
                 $.mobile.loading("hide");
-                insertVehicle(r);
+                var json = JSON.parse(r);
+                if (json.error_message) {
+                    alert("Invalid Chassis/Plate No!!");
+                } else if (json.Message) {
+                    alert("Invalid Chassis/Plate No!!");
+                } else {
+                    insertVehicle(json);
+                }
+
             },
             error: function (data) {
                 //error handling
@@ -254,8 +362,11 @@ $(document).ready(function (e) {
     });
 
 
+
     //insert vehicle
     function insertVehicle(r) {
+
+
 
         var cnt = $('#vehiclesToBeInsured .vehicle').length;
         var CaptionBaseVehicleRegistrationNo = 'vehicleRegistrationNo';
@@ -264,7 +375,10 @@ $(document).ready(function (e) {
         var CaptionBaseVehicleModel = 'vehicleModel';
         var CaptionBaseVehicleYear = 'vehicleYear';
         var CaptionBaseVehicleEngineNo = 'vehicleEngineType';
-        var CaptionBaseVehicleCCRating = 'vehicleCCRating';
+        var CaptionBaseVehicleBody = 'vehicleBody';
+        var CaptionBaseVehicleType = 'vehicleType';
+        var CaptionBaseVehicleColour = 'vehicleColour';
+        var CaptionBaseVehicleStatus = 'vehicleStatus';
         var CaptionBaseVehicleValue = 'vehicleValue';
 
 
@@ -275,8 +389,12 @@ $(document).ready(function (e) {
             '<input type="hidden" id="' + CaptionBaseVehicleMake + cnt + '" name="' + CaptionBaseVehicleMake + cnt + '" value="' + r.make + '" />' +
             '<input type="hidden" id="' + CaptionBaseVehicleModel + cnt + '" name="' + CaptionBaseVehicleModel + cnt + '" value="' + r.model + '" />' +
             '<input type="hidden" id="' + CaptionBaseVehicleYear + cnt + '" name="' + CaptionBaseVehicleYear + cnt + '" value="' + r.year + '" />' +
-            '<input type="hidden" id="' + CaptionBaseVehicleCCRating + cnt + '" name="' + CaptionBaseVehicleCCRating + cnt + '" value="' + r.CCRating + '" />' +
-            '<input type="hidden" id="' + CaptionBaseVehicleEngineNo + cnt + '" name="' + CaptionBaseVehicleEngineNo + cnt + '" value="' + r.engineNo + '" />'
+            '<input type="hidden" id="' + CaptionBaseVehicleBody + cnt + '" name="' + CaptionBaseVehicleBody + cnt + '" value="' + r.vehicleBodyType + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleType + cnt + '" name="' + CaptionBaseVehicleType + cnt + '" value="' + r.vehicleType + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleEngineNo + cnt + '" name="' + CaptionBaseVehicleEngineNo + cnt + '" value="' + r.engineNo + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleColour + cnt + '" name="' + CaptionBaseVehicleColour + cnt + '" value="' + r.colour + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleStatus + cnt + '" name="' + CaptionBaseVehicleStatus + cnt + '" value="' + r.vehicleStatus + '" />';
+
 
         var gridRow = $('<div/>');
         gridRow.addClass('ui-grid-d vehicle').attr('data-id', r.chassisNo);
@@ -290,17 +408,15 @@ $(document).ready(function (e) {
         makeModelCell.html(r.make + ' ' + r.model);
         makeModelCell.appendTo(gridRow);
         //
-        var yearCell = $('<div/>');
-        yearCell.addClass('ui-block-c');
-        yearCell.html(r.year);
-        yearCell.appendTo(gridRow);
-        //
-
-        //CCRating
-        var CCRatingCell = $('<div/>');
-        CCRatingCell.addClass('ui-block-d');
-        CCRatingCell.html(r.CCRating);
-        CCRatingCell.appendTo(gridRow);
+        var detailsCell = $('<div/>');
+        detailsCell.addClass('ui-block-c');
+        detailsCell.html(r.year + ' ' + r.vehicleBodyType + ' ' + r.colour);
+        detailsCell.appendTo(gridRow);
+        //            
+        var chassisCell = $('<div/>');
+        chassisCell.addClass('ui-block-d');
+        chassisCell.html(r.chassisNo + '/' + r.engineNo);
+        chassisCell.appendTo(gridRow);
         //
         var sumInsuredCell = $('<div/>');
         sumInsuredCell.addClass('ui-block-e');
@@ -345,6 +461,8 @@ $(document).ready(function (e) {
         });
         return returnVal;
     }
+
+    //driver Licence 
 
 
 

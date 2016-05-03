@@ -34,6 +34,7 @@ function onResume() {
 };
 
 var sigCapture = null;
+var baseUrl = "https://api.courserv.com/ironrock"; //localhost:58633/api/";
 $(document).ready(function (e) {
     window.location.hash = 'main-page';
     //// #initialise jQM
@@ -72,21 +73,7 @@ $(document).ready(function (e) {
         return false;
     }
 });*/
-    $.fn.serializeObject = function () {
-        var o = {};
-        var a = this.serializeArray();
-        $.each(a, function () {
-            if (o[this.name] !== undefined) {
-                if (!o[this.name].push) {
-                    o[this.name] = [o[this.name]];
-                }
-                o[this.name].push(this.value || '');
-            } else {
-                o[this.name] = this.value || '';
-            }
-        });
-        return o;
-    };
+    
 
 
     //$('#submit-btn').click(function () {
@@ -138,56 +125,26 @@ $(document).ready(function (e) {
         //$('label[for=a], input#a').hide();
         //show relevant inputs
         switch (select_value) {
-        case "CarriageOwnGoods": //private commercial               
-        case "CarriagePassengersNotHire": //private commercial
-        case "CarriagePassengersHire": //private commercial
-        case "CommercialTravelling": //private commercial
-            $('label[for=23YearsOldPrivateCommercial], input#23YearsOldPrivateCommercial').show();
-            $('label[for=36MonthsGeneralLicencePrivateCommercial], input#36MonthsGeneralLicencePrivateCommercial').show();
-            break;
-        case "GeneralCartage": //General Cartage  
-            $('label[for=25YearsOldGeneralCartage], input#25YearsOldGeneralCartage').show();
-            $('label[for=5YearsGeneralLicencePublicCommercial], input#5YearsGeneralLicencePublicCommercial').show();
-            break;
-        case "SocialDomesticPleasure": //private car
-        case "SocialDomesticPleasureBusiness": //private car
-            $('label[for=21YearsOldPrivateCars], input#21YearsOldPrivateCars').show();
-            $('label[for=24MonthsPrivateLicence], input#24MonthsPrivateLicence').show();
-            break;
+            case "CarriageOwnGoods": //private commercial               
+            case "CarriagePassengersNotHire": //private commercial
+            case "CarriagePassengersHire": //private commercial
+            case "CommercialTravelling": //private commercial
+                $('label[for=23YearsOldPrivateCommercial], input#23YearsOldPrivateCommercial').show();
+                $('label[for=36MonthsGeneralLicencePrivateCommercial], input#36MonthsGeneralLicencePrivateCommercial').show();
+                break;
+            case "GeneralCartage": //General Cartage  
+                $('label[for=25YearsOldGeneralCartage], input#25YearsOldGeneralCartage').show();
+                $('label[for=5YearsGeneralLicencePublicCommercial], input#5YearsGeneralLicencePublicCommercial').show();
+                break;
+            case "SocialDomesticPleasure": //private car
+            case "SocialDomesticPleasureBusiness": //private car
+                $('label[for=21YearsOldPrivateCars], input#21YearsOldPrivateCars').show();
+                $('label[for=24MonthsPrivateLicence], input#24MonthsPrivateLicence').show();
+                break;
         }
     }
 
-
-    //Inexperienced Driver
-    $('#InexperiencedDriverBlock input').change(function () {
-        var isChecked = false;
-        $('.inexperiencedDriver').each(function (index, element) {
-            var checked_value = $(element).is(':checked');
-            if (checked_value) {
-                isChecked = true;
-                return true;
-            }
-        })
-        if (isChecked) {
-            $('#inexperiencedDriversId').show();
-        } else {
-            $('#inexperiencedDriversId').hide();
-        }
-    });
-
-    $('#inexperiencedDriversId').on('click', '.Add', function () {
-        var elementGroup = $(this).parent().parent().parent();
-        elementGroup.clone().insertAfter(elementGroup).show().find('input:text').val('');
-        resetInexperiencedDriver();
-    });
-
-    $('#inexperiencedDriversId').on('click', '.Delete', function () {
-        var elementGroup = $(this).parent().parent().parent();
-        elementGroup.remove();
-        resetInexperiencedDriver();
-    });
-
-
+    
 
 
     //medical history
@@ -521,26 +478,155 @@ $(document).ready(function (e) {
 
 
     //resetRegularDriver
-    $('#regularDriver').change(function () {
+    /*$('#regularDriver').change(function () {
         var select_value = $(this).val();
         if (select_value == 'no') {
             $('#regularDriversId').show();
         } else if (select_value == 'yes') {
             $('#regularDriversId').hide();
         }
+    });*/
+
+    function add_driver($this, id, callback) {
+        var $this = $(this),
+            theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
+            msgText = $this.jqmData("msgtext") || $.mobile.loader.prototype.options.text,
+            textVisible = $this.jqmData("textvisible") || $.mobile.loader.prototype.options.textVisible,
+            textonly = !!$this.jqmData("textonly");
+        html = $this.jqmData("html") || "";
+        $.mobile.loading("show", {
+            text: msgText,
+            textVisible: textVisible,
+            theme: theme,
+            textonly: textonly,
+            html: html
+        });
+        
+        var serverUrl = baseUrl + "/trn/?id=" + id;
+        $.ajax({
+            type: 'GET',
+            contentType: 'application/json',
+            url: serverUrl,
+            dataType: "json",
+            success: function (r) {
+                //success handling
+                $.mobile.loading("hide");
+                var json = JSON.parse(r);
+                if (json.error_message ) {
+                    alert("Invalid ID!!");
+                } else if (json.Message) {
+                    alert("Invalid ID!!");
+                }
+                else {                    
+                    callback(json);
+                }                
+            },
+            error: function (data) {
+                //error handling
+                $.mobile.loading("hide");
+                alert("error: " + data.statusText);
+            }
+        });
+    }
+
+    //regular driver
+    $('#regularDriversBtns').on('click', '.Add', function () {
+        var $this = $('#regularDriversBtns .Add');
+        var id = $('#regularDriverQueryID').val();
+        add_driver($this, id, function (r) {
+            $('#regularDriverQueryID').val('');
+            var elementGroup = $('.regularDriversCls:last');
+            if ($('#regularDriversId').is(':visible')) {
+                elementGroup.clone().insertAfter(elementGroup).show().find('input:text').val('');
+                resetRegularDriver();
+            } else {
+                $('#regularDriversId').show()
+            }
+            $('.regularDriversCls:last .name input').val(r.firstName + ' ' + r.lastName);
+            $('.regularDriversCls:last .occupation input').val('');
+            $('.regularDriversCls:last .DateOfBirth input').val(r.birthDate.substring(0, 10));
+            $('.regularDriversCls:last .DriversDL input').val(id);
+            $('.regularDriversCls:last .DriversDLOriginalDateOfIssue input').val('');
+            
+        });
     });
 
-    $('#regularDriversId').on('click', '.Add', function () {
-        var elementGroup = $(this).parent().parent().parent();
-        elementGroup.clone().insertAfter(elementGroup).show().find('input:text').val('');
+    $('#regularDriversBtns').on('click', '.Reset', function () {
+        $('.regularDriversCls').not('.regularDriversCls:first').remove();
+        $('.regularDriversCls').find('input:text').val('');
+        $('#regularDriversId').hide()
         resetRegularDriver();
     });
 
-    $('#regularDriversId').on('click', '.Delete', function () {
-        var elementGroup = $(this).parent().parent().parent();
-        elementGroup.remove();
-        resetRegularDriver();
+
+
+    //inexperienced driver
+    $('#inexperiencedDriversBtns').on('click', '.Add', function () {
+        var $this = $('#inexperiencedDriversBtns .Add');
+        var id = $('#inexperiencedDriverQueryID').val();
+        add_driver($this, id, function (r) {
+            $('#inexperiencedDriverQueryID').val('');
+            var elementGroup = $('.inexperiencedDriversCls:last');
+            if ($('#inexperiencedDriversId').is(':visible')) {
+                elementGroup.clone().insertAfter(elementGroup).show().find('input:text').val('');
+                resetInexperiencedDriver();
+            } else {
+                $('#inexperiencedDriversId').show()
+            }
+            $('.inexperiencedDriversCls:last .name input').val(r.firstName + ' ' + r.lastName);
+            $('.inexperiencedDriversCls:last .occupation input').val('');
+            $('.inexperiencedDriversCls:last .DateOfBirth input').val(r.birthDate.substring(0, 10));
+            $('.inexperiencedDriversCls:last .DriversDL input').val(id);
+            $('.inexperiencedDriversCls:last .DriversDLOriginalDateOfIssue input').val('');
+
+        });
     });
+
+    $('#inexperiencedDriversBtns').on('click', '.Reset', function () {
+        $('.inexperiencedDriversCls').not('.inexperiencedDriversCls:first').remove();
+        $('.inexperiencedDriversCls').find('input:text').val('');
+        $('#inexperiencedDriversId').hide()
+        resetInexperiencedDriver();
+    });
+
+    //Inexperienced Driver
+    $('#InexperiencedDriverBlock input').change(function () {
+        var isChecked = false;
+        $('.inexperiencedDriver').each(function (index, element) {
+            var checked_value = $(element).is(':checked');
+            if (checked_value) {
+                isChecked = true;
+                return true;
+            }
+        })
+        if (isChecked) {
+            $('#inexperiencedDriversBtns').show();
+        } else {
+            $("#inexperiencedDriversBtns .Reset").trigger("click");
+            //$('#inexperiencedDriversId').hide();
+        }
+    });
+
+   
+    ///
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //lienHolder
     $('#lienHolder').change(function () {
@@ -2036,7 +2122,7 @@ var _countries = [
         "name": 'Zimbabwe',
         "code": 'ZW'
     }
-    ];
+];
 
 function loadCountriesOptions() {
     $('.countries').each(function (index, item) {
