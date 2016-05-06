@@ -47,7 +47,9 @@ $('#page-signature').on('pageshow', function (e, data) {
 
 //go tp home page
 $('[data-role=header]').on('click', '.home', function (event, ui) {
-    location.reload();
+    document.location = "index.html"
+    //navigator.app.loadUrl("file:///android_asset/www/index.html", { wait: 2000, loadingDialog: "Wait,Loading App", loadUrlTimeoutValue: 60000 });
+    //location.reload();
     //$.mobile.changePage('#main-page');
     //global_vars = default_global_vars;
 });
