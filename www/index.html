@@ -1784,12 +1784,12 @@
         <div data-role="main" class="ui-content">
 
             <div class="">
-                <a id="get-quotation" href="#" class="ui-btn">Submit</a>
+                <!--<a id="get-quotation" href="#" class="ui-btn">Submit</a>-->
                 <a href="#personal-main-page" data-role="button">Modify</a>
-                <a id="confirmQuotation" href="#page-signature" data-role="button" style="display:none">Confirm</a>
+                <a id="confirmQuotation" href="#page-signature" data-role="button">Confirm</a>
             </div>
-            <input type="hidden" id="quotation-number" />
-            <div id="quotation"></div>
+            <!--<input type="hidden" id="quotation-number" />
+            <div id="quotation"></div>-->
 
         </div>
 
@@ -1807,24 +1807,32 @@
         </div>
 
         <div data-role="main" class="ui-content">
-            <h4>Disclaimer:</h4>
-            <p>
-                The liability of the Company does not commence until the acceptance of the proposal has been formally acknowledged by the Company and a premium or deposit has been paid, except as provided by an Official Cover Note issued by the Company.
-            </p>
-            <p>Sign below and press the submit button.</p>
 
-            <div id="signature" style="width:600px; height:150px;"></div>
+            <div id="signatureContainer">
+                <h4>Disclaimer:</h4>
+                <p>
+                    The liability of the Company does not commence until the acceptance of the proposal has been formally acknowledged by the Company and a premium or deposit has been paid, except as provided by an Official Cover Note issued by the Company.
+                </p>
+                <p>Sign below and press the submit button.</p>
 
-            <div id="lowerControls">
-                <div id="feedback"></div>
-                <div id="buttonsContainer">
-                    <div data-role="controlgroup">
-                        <a href="#personal-main-page" data-role="button" data-inline="true" data-mini="true" data-icon="delete">Return</a>
-                        <a id="clear-canvas" href="#" data-role="button" data-inline="true" data-icon="back" data-mini="true">Clear</a>
-                        <a id="submit-btn" href="#" data-role="button" data-inline="true" data-icon="check" data-mini="true">Submit</a>
+
+                <div id="signature" style="width:600px; height:150px;"></div>
+
+                <div id="lowerControls">
+                    <div id="feedback"></div>
+                    <div id="buttonsContainer">
+                        <div data-role="controlgroup">
+                            <a href="#personal-main-page" data-role="button" data-inline="true" data-mini="true" data-icon="delete">Return</a>
+                            <a id="clear-canvas" href="#" data-role="button" data-inline="true" data-icon="back" data-mini="true">Clear</a>
+                            <a id="submit-btn" href="#" data-role="button" data-inline="true" data-icon="check" data-mini="true">Submit</a>
+                        </div>
                     </div>
                 </div>
             </div>
+            <input type="hidden" id="quotation-number" />
+            <div id="quotation"></div>
+
+
         </div>
 
         <footer data-role="footer" data-position="fixed">
@@ -1841,9 +1849,9 @@
         <div data-role="main" class="ui-content">
 
             <div class="">
-                <p>A Policy has been Created. Kindly note the Policy Details Below</p>
+                <p>A Quote has been Created. Note the limits below</p>
             </div>
-            <div id="policy"></div>
+
         </div>
 
         <footer data-role="footer" data-position="fixed">

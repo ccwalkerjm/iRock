@@ -820,7 +820,7 @@ function getVehicleMenu() {
         }
     ];
     var newList = getPersonalMenu().concat(vehicleMenuList);
-    newList.push(QuotationPageItem()); //SignaturePageItem());
+    newList.push(SignaturePageItem());
     return newList;
 }
 
@@ -845,7 +845,7 @@ function getPropertyMenu() {
         }
     ];
     var newList = getPersonalMenu().concat(propertyMenuList);
-    newList.push(QuotationPageItem()); //SignaturePageItem());
+    newList.push(SignaturePageItem());
     return newList;
 }
 

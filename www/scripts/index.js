@@ -372,9 +372,16 @@ $(document).ready(function (e) {
         $('#signatureImageType').val(sig[0]);
         $('#signatureBytes').val(sig[1]);
         //serilize form and convert to json
-        var formData = $('form').serialize();
+        //var formData = $('form').serialize();
         var formData = JSON.stringify($('form').serializeObject());
-        var serverUrl = baseUrl + "/Policy/"; // + $('#quotation-number').val();
+        //$.each(formData, function (key, value) {
+        //    if (value === "" || value === null) {
+        //        delete formData[key];
+        //    }
+        //});
+        //var formData = JSON.stringify(formData);
+        console.log(formData);        
+        var serverUrl = baseUrl + "/ironrockquote/"; //; // + $('#quotation-number').val();
         $.ajax({
             type: 'POST',
             contentType: 'application/json',
@@ -384,7 +391,16 @@ $(document).ready(function (e) {
             success: function (data) {
                 //success handling
                 $.mobile.loading("hide");
-                alert(data);
+                var r = JSON.parse(data);
+                if (!r.success) {
+                    console.log(r);
+                    alert(r.error_message ? r.error_message : '' + r.Message ? r.Message : '');
+                } else {
+                    loadQuotation(r);
+                    //$('#quotation-number').val(r.quotation_number);
+                    //$('#get-quotation').hide();
+                    //$('#confirmQuotation').show();
+                }
             },
             error: function (err) {
                 //error handling
@@ -472,6 +488,7 @@ $(document).ready(function (e) {
 
 
     function loadQuotation(r) {
+        $('#signatureContainer').hide();
         $('#quotation-number').val(r.quotation_number);
         var container = $('#quotation');
         container.append('<h4>Note the Policy Limits</h4>');
