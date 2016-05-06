@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -8,13 +8,12 @@
         For details, see http://go.microsoft.com/fwlink/?LinkID=617521
     -->
     <meta http-equiv="Content-Security-Policy" content="
-    default-src *; 
-    style-src * 'unsafe-inline'; 
-    script-src * 'unsafe-inline'; 
-    media-src *; img-src * data:; 
-" />
+          default-src *;
+          style-src * 'unsafe-inline' ;
+          script-src * 'unsafe-inline' ;
+          media-src *; img-src * data:;
+          " />
     <!--    <meta http-equiv="Content-Security-Policy" content="default-src	'self' api.courserv.com; 'self' data: gap: api.courserv.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
-
     <!-- IronRockApplication references -->
 
     <title>Iron Rock Insurance-Application</title>
@@ -37,84 +36,6 @@
 </head>
 
 <body>
-    <div data-role="page" id="page-signature">
-        <div data-role="header" class="header" data-position="fixed">
-            <h1 id="app-title"></h1>
-            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
-        </div>
-
-        <div data-role="main" class="ui-content">
-            <h4>Disclaimer:</h4>
-            <p>
-                The liability of the Company does not commence until the acceptance of the proposal has been formally acknowledged by the Company and a premium or deposit has been paid, except as provided by an Official Cover Note issued by the Company.
-            </p>
-            <p>Sign below and press the submit button.</p>
-            <div id="canvasContainer" width="100%">
-                <canvas id="signature" height="200px" />
-            </div>
-            <div id="lowerControls">
-                <div id="feedback"></div>
-                <div id="buttonsContainer">
-                    <div data-role="controlgroup">
-                        <a href="#personal-main-page" data-role="button" data-inline="true" data-mini="true" data-icon="delete">Return</a>
-                        <a id="clear-canvas" href="#" data-role="button" data-inline="true" data-icon="back" data-mini="true">Clear</a>
-                        <a id="submit-btn" href="#" data-role="button" data-inline="true" data-icon="check" data-mini="true">Submit</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <footer data-role="footer" data-position="fixed">
-            <h4>Iron Rock Insurance-Mobile App</h4>
-        </footer>
-    </div>
-
-    <div data-role="page" id="page-final">
-        <div data-role="header" class="header" data-position="fixed">
-            <h1 id="app-title">Thank You</h1>
-            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
-        </div>
-
-        <div data-role="main" class="ui-content">
-
-            <div class="">
-                <p>A Policy has been Created. Kindly note the Policy Details Below</p>
-            </div>
-            <div id="policy"></div>
-        </div>
-
-        <footer data-role="footer" data-position="fixed">
-            <h4>Iron Rock Insurance-Mobile App</h4>
-        </footer>
-    </div>
-
-
-    <div data-role="page" id="page-quotation">
-        <div data-role="header" class="header" data-position="fixed">
-            <h1 id="app-title">Validation</h1>
-            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
-        </div>
-
-        <div data-role="main" class="ui-content">
-
-            <div class="">
-                <a id="get-quotation" href="#" class="ui-btn">Validate</a>
-                <a href="#personal-main-page" data-role="button">Review</a>
-                <a id="confirmQuotation" href="#page-signature" data-role="button" style="display:none">Confirm</a>
-            </div>
-            <input type="hidden" id="quotation-number" />
-            <div id="quotation"></div>
-
-        </div>
-
-        <footer data-role="footer" data-position="fixed">
-            <h4>Iron Rock Insurance-Mobile App</h4>
-        </footer>
-    </div>
-
-
-
-
 
     <div data-role="page" id="main-page">
         <div data-role="main" class="ui-content">
@@ -136,6 +57,7 @@
         <div data-role="main" class="ui-content">
             <form class="ProposalForm">
                 <input type="hidden" id="signatureBytes" name="signatureBytes" />
+                <input type="hidden" id="signatureImageType" name="signatureImageType" />
                 <input type="hidden" id="insuranceType" name="insuranceType" />
 
                 <div class="ui-field-contain">
@@ -214,7 +136,6 @@
 
         <div data-role="main" class="ui-content">
             <form class="ProposalForm">
-
                 <div class="ui-field-contain">
                     <label for="SourceOfFunds">Source of Funds:</label>
                     <input type="text" id="SourceOfFunds" placeholder="Enter Source of Funds">
@@ -248,8 +169,8 @@
                     </div>
 
                     <div class="ui-field-contain">
-                        <label for="applicantHomeTown">City/Town:</label>
-                        <input type="text" id="applicantHomeTown" name="applicantHomeTown" placeholder="Enter Town">
+                        <label for="applicantHomeTown">City/Town/Postal Zone:</label>
+                        <input type="text" id="applicantHomeTown" name="applicantHomeTown" placeholder="Enter City, Town or Postal Zone">
                     </div>
 
                     <div class="ui-field-contain jamaica">
@@ -311,8 +232,8 @@
                     </div>
 
                     <div class="ui-field-contain">
-                        <label for="applicantMailTown">City/Town:</label>
-                        <input type="text" id="applicantMailTown" name="applicantMailTown" placeholder="Enter Town">
+                        <label for="applicantMailTown">City/Town/Postal Zone:</label>
+                        <input type="text" id="applicantMailTown" name="applicantMailTown" placeholder="Enter City, Town or Postal Zone">
                     </div>
 
                     <div class="ui-field-contain jamaica">
@@ -372,18 +293,20 @@
 
                 <div id="employer">
                     <div class="ui-field-contain">
-                        <label for="employerNameInFull">Name in Full:</label>
-                        <input type="text" name="employerNameInFull" id="employerNameInFull" placeholder="Enter Name In Full">
-
+                        <label for="applicantOccupation">Occupation:</label>
+                        <input type="text" name="applicantOccupation" id="applicantOccupation" placeholder="Enter Name In Full">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="employerName">Company Name:</label>
+                        <input type="text" name="employerName" id="employerName" placeholder="Enter Name In Full">
                     </div>
                     <div class="ui-field-contain">
                         <label for="employerStreetName">Street Number and Name:</label>
                         <input type="text" name="employerStreetName" id="employerStreetName" placeholder="Enter Street Number and Name">
-
                     </div>
                     <div class="ui-field-contain">
-                        <label for="employerTown">City/Town:</label>
-                        <input type="text" name="employerTown" id="employerTown" placeholder="Enter Town">
+                        <label for="employerTown">City/Town/Postal Zone:</label>
+                        <input type="text" name="employerTown" id="employerTown" placeholder="Enter City, Town or Postal Zone">
                     </div>
 
                     <div class="ui-field-contain jamaica">
@@ -528,7 +451,8 @@
 
         <div data-role="main" class="ui-content">
             <form class="ProposalForm" id="vehicleToBeInsuredCtrl">
-                <p>PARTICULARS OF VEHICLE(S) TO BE INSURED</p>
+                <h4>PARTICULARS OF VEHICLE(S) TO BE INSURED</h4>
+                <p>You are required to ensure that the Sum Insured is revised annually to reflect the current market value. Claims will be settled based on the market value at the time of the loss. For total losses you will be paid based on the market value or Policy Sum Insured whichever is lesser.</p>
                 <a href="#taxOfficeVehicleDialog" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-right ui-btn-inline ui-mini">Add Vehicle</a>
                 <a href="#" id="taxOfficeVehicleRefresh" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right ui-btn-inline ui-mini" style="display:none">Refresh</a>
                 <div id="vehiclesToBeInsured">
@@ -584,13 +508,7 @@
 
 
                 <div id="lien-holder">
-                    <div data-role="collapsible" data-mini="true">
-                        <h1>Note</h1>
-                        <p>You are required to ensure that the Sum Insured is revised annually to reflect the current market value. Claims will be settled based on the market value at the time of the loss. For total losses you will be paid based on the market value or Policy Sum Insured whichever is lesser.</p>
-                    </div>
-
                     <h4>Lien Holder</h4>
-
                     <div class="ui-field-contain">
                         <label for="lienHolder">Is there a Lien Holder?</label>
                         <select name="lienHolder" id="lienHolder" data-role="slider" data-mini="true">
@@ -660,15 +578,14 @@
         <div data-role="main" class="ui-content">
             <form class="ProposalForm">
                 <div class="ui-field-contain">
+                    <label for="startDate">Start Date:</label>
+                    <input name="startDate" type="date" id="startDate" placeholder="Start Date" />
                     <label for="insuranceCoverage">Insurance coverage:</label>
                     <select name="insuranceCoverage" id="insuranceCoverage" data-mini="true">
                         <option value="Comprehensive" title="Liability for Third Party Bodily Injury and Property Damage and loss of or damage to the Insured’s Motor Vehicle">Comprehensive</option>
-                        <option value="Third Party Fire and Theft" title="Liability for Third Party Bodily Injury and Property Damage and Loss of or damage to the Insured’s Motor Vehicle by Fire or Theft">Third Party Fire and Theft</option>
-                        <option value="Third Party" title="Liability for Third Party Bodily Injury and Property Damage">Third Party Liability</option>
+                        <option value="ThirdPartyFireTheft" title="Liability for Third Party Bodily Injury and Property Damage and Loss of or damage to the Insured’s Motor Vehicle by Fire or Theft">Third Party Fire and Theft</option>
+                        <option value="ThirdParty" title="Liability for Third Party Bodily Injury and Property Damage">Third Party Liability</option>
                     </select>
-                </div>
-
-                <div class="ui-field-contain">
                     <label for="vehicleUsedAs">Vehicle Used As:</label>
                     <select name="vehicleUsedAs" id="vehicleUsedAs" data-mini="true">
                         <option value="CarriageOwnGoods">Carriage of own goods only (Private Commercial)</option>
@@ -680,7 +597,6 @@
                         <option value="CommercialTravelling">Commercial travelling</option>
                     </select>
                 </div>
-
 
 
 
@@ -857,8 +773,8 @@
                     </div>
                     <div class="ui-block-b" style="width:60%">
                         <select name="typeOfAuthorizedDriver" id="typeOfAuthorizedDriver" data-mini="true">
-                            <option value="Open Driving">Open Driving</option>
-                            <option value="Restricted Driving(Restricted Discount Available)">Restricted Driving(Restricted Discount Available)</option>
+                            <option value="OpenDriving">Open Driving</option>
+                            <option value="RestrictedDriving">Restricted Driving(Restricted Discount Available)</option>
                         </select>
                     </div>
                 </div>
@@ -1033,10 +949,6 @@
 
         <div data-role="main" class="ui-content">
             <form class="ProposalForm">
-
-
-
-
                 <p>Have you or any regular drivers had any accidents or losses during the past three years(whether insured or not) in respect of all vehicles:</p>
 
                 <ol>
@@ -1257,17 +1169,18 @@
                 <fieldset class="ui-field-contain">
                     <label for="thirdPartyLimits">
                         Third Party Limits (Bodily Injury and Property Damage) Sums Insured
-                        < $2M </label>
-                            <select name="thirdPartyLimits" id="thirdPartyLimits">
-                                <optgroup label="Standard Limit">
-                                    <option value="$3M/$5M/$5M">$3M/$5M/$5M</option>
-                                </optgroup>
-                                <optgroup label="Increased Limits">
-                                    <option value="$5M/$7.5M/$5M">$5M/$7.5M/$5M</option>
-                                    <option value="$5M/$10M/$5M">$5M/$10M/$5M</option>
-                                    <option value="$10M/$10M/$10M">$10M/$10M/$10M</option>
-                                </optgroup>
-                            </select>
+                        < $2M
+                    </label>
+                    <select name="thirdPartyLimits" id="thirdPartyLimits">
+                        <optgroup label="Standard Limit">
+                            <option value="$3M/$5M/$5M">$3M/$5M/$5M</option>
+                        </optgroup>
+                        <optgroup label="Increased Limits">
+                            <option value="$5M/$7.5M/$5M">$5M/$7.5M/$5M</option>
+                            <option value="$5M/$10M/$5M">$5M/$10M/$5M</option>
+                            <option value="$10M/$10M/$10M">$10M/$10M/$10M</option>
+                        </optgroup>
+                    </select>
                 </fieldset>
 
                 <fieldset class="ui-field-contain">
@@ -1835,16 +1748,94 @@
     </div>
 
 
+    <div data-role="page" id="page-quotation">
+        <div data-role="header" class="header" data-position="fixed">
+            <h1 id="app-title">Validation</h1>
+            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
+        </div>
 
+        <div data-role="main" class="ui-content">
+
+            <div class="">
+                <a id="get-quotation" href="#" class="ui-btn">Validate</a>
+                <a href="#personal-main-page" data-role="button">Review</a>
+                <a id="confirmQuotation" href="#page-signature" data-role="button" style="display:none">Confirm</a>
+            </div>
+            <input type="hidden" id="quotation-number" />
+            <div id="quotation"></div>
+
+        </div>
+
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+
+
+    <div data-role="page" id="page-signature">
+        <div data-role="header" class="header" data-position="fixed">
+            <h1 id="app-title"></h1>
+            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
+        </div>
+
+        <div data-role="main" class="ui-content">
+            <h4>Disclaimer:</h4>
+            <p>
+                The liability of the Company does not commence until the acceptance of the proposal has been formally acknowledged by the Company and a premium or deposit has been paid, except as provided by an Official Cover Note issued by the Company.
+            </p>
+            <p>Sign below and press the submit button.</p>
+                        
+            <div id="signature" style="width:600px; height:150px;"></div>
+
+            <div id="lowerControls">
+                <div id="feedback"></div>
+                <div id="buttonsContainer">
+                    <div data-role="controlgroup">
+                        <a href="#personal-main-page" data-role="button" data-inline="true" data-mini="true" data-icon="delete">Return</a>
+                        <a id="clear-canvas" href="#" data-role="button" data-inline="true" data-icon="back" data-mini="true">Clear</a>
+                        <a id="submit-btn" href="#" data-role="button" data-inline="true" data-icon="check" data-mini="true">Submit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+    <div data-role="page" id="page-final">
+        <div data-role="header" class="header" data-position="fixed">
+            <h1 id="app-title">Thank You</h1>
+            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
+        </div>
+
+        <div data-role="main" class="ui-content">
+
+            <div class="">
+                <p>A Policy has been Created. Kindly note the Policy Details Below</p>
+            </div>
+            <div id="policy"></div>
+        </div>
+
+        <footer data-role="footer" data-position="fixed">
+            <h4>Iron Rock Insurance-Mobile App</h4>
+        </footer>
+    </div>
+
+
+    <script src="scripts/accounting.min.js"></script>
     <script src="scripts/jquery.validate.min.js"></script>
     <script src="cordova.js"></script>
     <script src="scripts/platformOverrides.js"></script>
     <script src="scripts/aws-sdk.min.js"></script>
+    <script src="scripts/jSignature/jSignature.min.js"></script>
     <!--Custom js-->
-
+    <script src="scripts/miscellaneous.js"></script>
     <script src="scripts/webservice.js"></script>
     <script src="scripts/index.js"></script>
-    <script src="scripts/signatureCapture.js"></script>
+    
 
 </body>
 

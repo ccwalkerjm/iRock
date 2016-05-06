@@ -5,25 +5,15 @@
 ////////////outside functions
 
 
-////stop default initialization
-//$(document).one("pagebeforeshow", "#page-signature", function () {
-//    $(':mobile-pagecontainer').pagecontainer('change', '#main-page');  
-//});
+
 
 //$(document).on("mobileinit", function () {
 //    $.mobile.autoInitializePage = false;
 //});
 
+var baseUrl = "https://api.courserv.com/ironrock"; //localhost:58633/api/";
+
 document.addEventListener('deviceready', onDeviceReady.bind(this), false);
-
-function onDeviceReady() {
-    // Handle the Cordova pause and resume events
-    document.addEventListener('pause', onPause.bind(this), false);
-    document.addEventListener('resume', onResume.bind(this), false);
-
-    sigCapture = new SignatureCapture("signature");
-
-};
 
 function onPause() {
     // TODO: This application has been suspended. Save application state here.
@@ -33,447 +23,79 @@ function onResume() {
     // TODO: This application has been reactivated. Restore application state here.
 };
 
-var sigCapture = null;
-var baseUrl = "https://api.courserv.com/ironrock"; //localhost:58633/api/";
+
+function onDeviceReady() {
+    // Handle the Cordova pause and resume events
+    document.addEventListener('pause', onPause.bind(this), false);
+    document.addEventListener('resume', onResume.bind(this), false);
+
+
+
+    //window.location.hash = 'main-page';
+    ////// #initialise jQM
+    //$.mobile.initializePage();
+
+}
+
+//initialize signature app
+$('#page-signature').on('pageshow', function (e, data) {
+    if ($('#signature').find('.jSignature').length == 0) {
+        $('#signature').jSignature({ 'UndoButton': false, color: "#000000", lineWidth: 1 });
+    }
+});
+
+
+//go tp home page
+$('[data-role=header]').on('click', '.home', function (event, ui) {
+    $.mobile.changePage('#main-page');
+    //global_vars = default_global_vars;
+});
+
+
+////////Reset Quotation Page////////////////
+$(document).on("pagebeforeshow", "#page-quotation", function () { // When entering pagetwo
+    $('#quotation').html('');
+    $('#get-quotation').show();
+    $('#confirmQuotation').hide();
+
+});
+
+
+
 $(document).ready(function (e) {
-    window.location.hash = 'main-page';
-    //// #initialise jQM
-    $.mobile.initializePage();
-
-    /*$('form').validate({
-    rules: {
-        applicantSurname: {
-            required: true
-        },
-        applicantFirstName: {
-            required: true
-        },
-        applicantIDNumber: {
-            required: true
-        }
-    },
-    messages: {
-        applicantSurname: {
-            required: "Please enter your surname."
-        },
-        applicantFirstName: {
-            required: "Please enter your first name."
-        },
-        applicantIDNumber: {
-            required: "Please enter your ID Number."
-        }
-    },
-    errorPlacement: function (error, element) {
-        error.appendTo(element.parent().prev());
-    },
-    submitHandler: function (form) {
-        $(':mobile-pagecontainer').pagecontainer('change', '#success', {
-            reload: false
-        });
-        return false;
-    }
-});*/
-    
-
-
-    //$('#submit-btn').click(function () {
-    //    //var sig = sigCapture.toString();
-    //    //$('#signatureBytes').val(sig);
-    //    //var formData = $('form').serialize();
-    //    var formData = JSON.stringify($('form').serializeObject());
-    //    var serverUrl = "http://localhost:58633/api/Policy/";
-    //    $.ajax({
-    //        type: 'POST',
-    //        contentType: 'application/json',
-    //        url: serverUrl,
-    //        dataType: "json",
-    //        data: formData,
-    //        success: function (data) {
-    //            //success handling
-    //            alert(data);
-    //        },
-    //        error: function (data) {
-    //            //error handling
-    //            alert("error: " + data.statusText);
-    //        }
-    //    });
-    //});
-
-    $('#clear-canvas').click(function () {
-        var sig = sigCapture.clear();
-    });
-
-
-    $('[data-role=header]').on('click', '.home', function (event, ui) {
-        $.mobile.changePage('#main-page');
-        //global_vars = default_global_vars;
-    });
-
-    //
-    //vehicle Used As
-    $('#vehicleUsedAs').change(function () {
-        var select_value = $(this).val();
-        setVehicleUsedAs(select_value);
-    });
-
-    setVehicleUsedAs("SocialDomesticPleasure");
-
-    function setVehicleUsedAs(select_value) {
-        //hide and uncheck all inexperinecd driver elements
-        $('#InexperiencedDriverBlock input').prop('checked', false); // Unchecks it
-        $('#InexperiencedDriverBlock label, #InexperiencedDriverBlock input').hide();
-        //$('label[for=a], input#a').hide();
-        //show relevant inputs
-        switch (select_value) {
-            case "CarriageOwnGoods": //private commercial               
-            case "CarriagePassengersNotHire": //private commercial
-            case "CarriagePassengersHire": //private commercial
-            case "CommercialTravelling": //private commercial
-                $('label[for=23YearsOldPrivateCommercial], input#23YearsOldPrivateCommercial').show();
-                $('label[for=36MonthsGeneralLicencePrivateCommercial], input#36MonthsGeneralLicencePrivateCommercial').show();
-                break;
-            case "GeneralCartage": //General Cartage  
-                $('label[for=25YearsOldGeneralCartage], input#25YearsOldGeneralCartage').show();
-                $('label[for=5YearsGeneralLicencePublicCommercial], input#5YearsGeneralLicencePublicCommercial').show();
-                break;
-            case "SocialDomesticPleasure": //private car
-            case "SocialDomesticPleasureBusiness": //private car
-                $('label[for=21YearsOldPrivateCars], input#21YearsOldPrivateCars').show();
-                $('label[for=24MonthsPrivateLicence], input#24MonthsPrivateLicence').show();
-                break;
-        }
-    }
-
-    
-
-
-    //medical history
-    $('.medicalCondition').change(function () {
-        var isChecked = false;
-        $('.medicalCondition').each(function (index, element) {
-            var checked_value = $(element).is(':checked');
-            if (checked_value) {
-                isChecked = true;
-                return true;
+    $('form').validate({
+        rules: {
+            applicantSurname: {
+                required: true
+            },
+            applicantFirstName: {
+                required: true
+            },
+            applicantIDNumber: {
+                required: true
             }
-        })
-        if (isChecked) {
-            $('#medicalConditionDetails').show();
-        } else {
-            $('#medicalConditionDetails').hide();
-        }
-    });
-
-
-
-
-    //vehicle-all-accidents
-    setAllAccidentsYears();
-
-    function setAllAccidentsYears() {
-        var currentYear = new Date().getFullYear();
-        for (i = 1; i < 4; i++) {
-            currentYear = currentYear - i;
-            var option = $('<option/>');
-            option.attr('Value', currentYear);
-            option.text(currentYear);
-            option.appendTo($('#accidentYear'));
-
-        }
-    }
-
-    $('#vehicle-all-accidents').on('click', '.Add', function () {
-        var elementGroup = $(this).parent().parent().parent();
-        elementGroup.clone().insertAfter(elementGroup).show().find('input').val('');
-        resetAllAccident();
-    });
-
-    $('#vehicle-all-accidents').on('click', '.Delete', function () {
-        var elementGroup = $(this).parent().parent().parent();
-        elementGroup.remove();
-        resetAllAccident();
-    });
-
-    function resetAllAccident() {
-        var objectList = [
-            {
-                "class": "year",
-                "name": "accidentYear"
+        },
+        messages: {
+            applicantSurname: {
+                required: "Please enter your surname."
             },
-            {
-                "class": "cost",
-                "name": "accidentCost"
+            applicantFirstName: {
+                required: "Please enter your first name."
             },
-            {
-                "class": "month",
-                "name": "accidentMonth"
-            },
-            {
-                "class": "driver",
-                "name": "accidentDriver"
-            },
-            {
-                "class": "brief",
-                "name": "accidentBrief"
+            applicantIDNumber: {
+                required: "Please enter your ID Number."
             }
-        ];
-        var elementClass = $('.vehicle-accident-block');
-        resetObjects(objectList, elementClass, "Add", "Delete", "Accident");
-    }
-
-
-
-    //garageOutBuildingClass
-    $('#garageOutBuildingExists').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('.garageOutBuildingClass').show();
-        } else if (select_value == 'no') {
-            $('.garageOutBuildingClass').hide();
+        },
+        errorPlacement: function (error, element) {
+            error.appendTo(element.parent().prev());
+        },
+        submitHandler: function (form) {
+            $(':mobile-pagecontainer').pagecontainer('change', '#success', {
+                reload: false
+            });
+            return false;
         }
     });
-
-
-
-    //resetHomeAllRiskArticles
-    $('#HomeAllRiskInsured').on('click', '.Add', function () {
-        var elementGroup = $(this).parent().parent().parent();
-        elementGroup.clone().insertAfter(elementGroup).show().find('input').val('');
-        resetHomeAllRiskArticles();
-        SetHomeAllRiskInsuredValue();
-    });
-
-    $('#HomeAllRiskInsured').on('click', '.Delete', function () {
-        var elementGroup = $(this).parent().parent().parent();
-        elementGroup.remove();
-        resetHomeAllRiskArticles();
-        SetHomeAllRiskInsuredValue();
-    });
-
-    function SetHomeAllRiskInsuredValue() {
-        var valList = [];
-        $('#HomeAllRiskInsured .article-value').find('input').each(function (index, element) {
-            valList.push($(element).val());
-        });
-        $('#HomeAllRiskTotalAmount').val(GetTotal(valList));
-    }
-
-    $('#HomeAllRiskInsured').on('keyup', '.article-value input', function () {
-        SetHomeAllRiskInsuredValue();
-    });
-
-
-
-
-    //HomeInsurance
-    $('#homeInsuranceProperty').on('click', '.Add', function () {
-        var elementGroup = $(this).parent().parent().parent();
-        elementGroup.clone().insertAfter(elementGroup).show().find('input').val('');
-        resetHomeInsuranceProperty();
-        SetHomeInsuranceValue();
-    });
-
-    $('#homeInsuranceProperty').on('click', '.Delete', function () {
-        var elementGroup = $(this).parent().parent().parent();
-        elementGroup.remove();
-        resetHomeInsuranceProperty();
-        SetHomeInsuranceValue();
-    });
-
-    function SetHomeInsuranceValue() {
-        var valList = [];
-        $('#homeInsuranceProperty .article-value').find('input').each(function (index, element) {
-            valList.push($(element).val());
-        });
-        $('#homeInsurancePropertySum').val(GetTotal(valList));
-    }
-
-    $('#homeInsuranceProperty').on('keyup', '.article-value input', function () {
-        SetHomeInsuranceValue();
-    });
-
-
-    $('#HomeInsuranceContent .article-value').on('keyup', 'input', function () {
-        var valList = [];
-        $('#HomeInsuranceContent .article-value').find('input').each(function (index, element) {
-            valList.push($(element).val());
-        });
-        $('#HomeInsuranceContentTotalAmount').val(GetTotal(valList));
-    });
-
-    ////totalValueExceedOneThirdTotalSum
-    //$('#totalValueExceedOneThirdTotalSum').change(function () {
-    //    var select_value = $(this).val();
-    //    if (select_value == 'yes') {
-    //        $('#totalValueExceedOneThirdTotalSumIfYesAmount').removeAttr('disabled'); //.show();
-    //    }
-    //    else if (select_value == 'no') {
-    //        $('#totalValueExceedOneThirdTotalSumIfYesAmount').attr('disabled', 'disabled');
-    //    }
-    //});
-
-
-    //homeInGoodState
-    $('#homeInGoodState').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'no') {
-            $('#divhomeInGoodStateDetails').show();
-        } else if (select_value == 'yes') {
-            $('#divhomeInGoodStateDetails').hide();
-        }
-    });
-
-
-    //homeHasWatersideStructure
-    $('#homeHasWatersideStructure').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#divhomeHasWatersideStructure').show();
-        } else if (select_value == 'no') {
-            $('#divhomeHasWatersideStructure').hide();
-        }
-    });
-
-
-
-    //homeHaveInterestFromIndividual
-    $('#homeHaveInterestFromIndividual').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#divhomeHaveInterestFromIndividual').show();
-        } else if (select_value == 'no') {
-            $('#divhomeHaveInterestFromIndividual').hide();
-        }
-    });
-
-
-
-
-    //homeOccupiedByApplicantFamily
-    $('#homeUsedForIncomeActivity').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#divhomeUsedForIncomeActivity').show();
-        } else if (select_value == 'no') {
-            $('#divhomeUsedForIncomeActivity').hide();
-        }
-    });
-
-    //homeOccupiedByApplicantFamily
-    $('#homeOccupiedByApplicantFamily').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'no') {
-            $('#divhomeOccupiedByApplicantFamily').show();
-        } else if (select_value == 'yes') {
-            $('#divhomeOccupiedByApplicantFamily').hide();
-        }
-    });
-
-
-    //applicantRelativeInPublicOffice
-    $('#applicantRelativeInPublicOffice').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#publicofficerelation').show();
-        } else if (select_value == 'no') {
-            $('#publicofficerelation').hide();
-        }
-    });
-
-    //homeInGoodState
-    $('#homeInGoodState').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'no') {
-            $('#divhomeInGoodStateDetails').show();
-        } else if (select_value == 'yes') {
-            $('#divhomeInGoodStateDetails').hide();
-        }
-    });
-
-    //currentPolicyWithCompanyOrInsurer
-    $('#currentPolicyWithCompanyOrInsurer').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#divcurrentPolicyWithCompanyOrInsurerDetails').show();
-        } else if (select_value == 'no') {
-            $('#divcurrentPolicyWithCompanyOrInsurerDetails').hide();
-        }
-    });
-
-    //HomeInsuranceDeclined
-    $('#HomeInsuranceDeclined').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#divHomeInsuranceDeclined').show();
-        } else if (select_value == 'no') {
-            $('#divHomeInsuranceDeclined').hide();
-        }
-    });
-
-    //HomeInsuranceRequiredSpecialTerm
-    $('#HomeInsuranceRequiredSpecialTerm').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#divHomeInsuranceRequiredSpecialTermDetails').show();
-        } else if (select_value == 'no') {
-            $('#divHomeInsuranceRequiredSpecialTermDetails').hide();
-        }
-    });
-
-    //HomeInsuranceCancelled
-    $('#HomeInsuranceCancelled').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#divHomeInsuranceCancelledDetails').show();
-        } else if (select_value == 'no') {
-            $('#divHomeInsuranceCancelledDetails').hide();
-        }
-    });
-
-    //HomeInsuranceIncreasedPremium
-    $('#HomeInsuranceIncreasedPremium').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#divHomeInsuranceIncreasedPremiumDetails').show();
-        } else if (select_value == 'no') {
-            $('#divHomeInsuranceIncreasedPremiumDetails').hide();
-        }
-    });
-
-    //HomeInsurancePerilsSuffer
-    $('#HomeInsurancePerilsSuffer').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#divHomeInsurancePerilsSufferDetails').show();
-        } else if (select_value == 'no') {
-            $('#divHomeInsurancePerilsSufferDetails').hide();
-        }
-    });
-
-    //HomeInsuranceSufferLoss
-    $('#HomeInsuranceSufferLoss').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#divHomeInsuranceSufferLossDetails').show();
-        } else if (select_value == 'no') {
-            $('#divHomeInsuranceSufferLossDetails').hide();
-        }
-    });
-
-
-
-    $('#publicofficerelation').on('click', '.Add', function () {
-        var elementGroup = $(this).parent().parent().parent();
-        elementGroup.clone().insertAfter(elementGroup).show().find('input:text').val('');
-        resetApplicantRelativeInPublicOffice();
-    });
-
-    $('#publicofficerelation').on('click', '.Delete', function () {
-        var elementGroup = $(this).parent().parent().parent();
-        elementGroup.remove();
-        resetApplicantRelativeInPublicOffice();
-    });
-
 
 
 
@@ -501,7 +123,7 @@ $(document).ready(function (e) {
             textonly: textonly,
             html: html
         });
-        
+
         var serverUrl = baseUrl + "/trn/?id=" + id;
         $.ajax({
             type: 'GET',
@@ -512,14 +134,13 @@ $(document).ready(function (e) {
                 //success handling
                 $.mobile.loading("hide");
                 var json = JSON.parse(r);
-                if (json.error_message ) {
+                if (json.error_message) {
                     alert("Invalid ID!!");
                 } else if (json.Message) {
                     alert("Invalid ID!!");
-                }
-                else {                    
+                } else {
                     callback(json);
-                }                
+                }
             },
             error: function (data) {
                 //error handling
@@ -528,6 +149,19 @@ $(document).ready(function (e) {
             }
         });
     }
+
+
+    ////create first driver from applicant details
+    $(document).one("pagebeforeshow", "#vehicle-driver-details-page", function () {
+        if (!$('#regularDriversId').is(":visible") && $('#applicantIDType').val() == 'TRN') {
+            $('#regularDriversId').show();
+            $('.regularDriversCls:last .name input').val($('#applicantFirstName').val() + ' ' + $('#applicantSurname').val());
+            $('.regularDriversCls:last .occupation input').val($('#applicantOccupation').val());
+            $('.regularDriversCls:last .DateOfBirth input').val($('#applicantDateOfBirth').val());
+            $('.regularDriversCls:last .DriversDL input').val($('#applicantIDNumber').val());
+            $('.regularDriversCls:last .DriversDLOriginalDateOfIssue input').val('2000-06-22');
+        }
+    });
 
     //regular driver
     $('#regularDriversBtns').on('click', '.Add', function () {
@@ -540,14 +174,14 @@ $(document).ready(function (e) {
                 elementGroup.clone().insertAfter(elementGroup).show().find('input:text').val('');
                 resetRegularDriver();
             } else {
-                $('#regularDriversId').show()
+                $('#regularDriversId').show();
             }
             $('.regularDriversCls:last .name input').val(r.firstName + ' ' + r.lastName);
             $('.regularDriversCls:last .occupation input').val('');
             $('.regularDriversCls:last .DateOfBirth input').val(r.birthDate.substring(0, 10));
             $('.regularDriversCls:last .DriversDL input').val(id);
-            $('.regularDriversCls:last .DriversDLOriginalDateOfIssue input').val('');
-            
+            $('.regularDriversCls:last .DriversDLOriginalDateOfIssue input').val('2000-06-22');
+
         });
     });
 
@@ -607,1587 +241,451 @@ $(document).ready(function (e) {
         }
     });
 
-   
-    ///
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //lienHolder
-    $('#lienHolder').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('.lienHolderClass').show();
-        } else if (select_value == 'no') {
-            $('.lienHolderClass').hide();
-        }
-    });
-
-    //accidents
-    $('#involvedInAccident').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('.involvedInAccidentClass').show();
-        } else if (select_value == 'no') {
-            $('.involvedInAccidentClass').hide();
-        }
-    });
-
-
-
-
-    //vehicle to be insured
-    $('#isOwnerOfVehicle').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'no') {
-            $('.vehicleNameAddressOfOwner').show();
-        } else if (select_value == 'yes') {
-            $('.vehicleNameAddressOfOwner').hide();
-        }
-    });
-
-    $('#vehicleToBeInsuredCtrl').on('click', '.Add', function () {
-        var elementGroup = $(this).parent().parent().parent();
-        elementGroup.clone().insertAfter(elementGroup).show().find('input:text').val('');
-        resetVehiclesToBeInsured();
-    });
-
-    $('#vehicleToBeInsuredCtrl').on('click', '.Delete', function () {
-        var elementGroup = $(this).parent().parent().parent();
-        elementGroup.remove();
-        resetVehiclesToBeInsured();
-    });
-
-
-    $('#menu-vehicle').click(function () {
-        $('#insuranceType').val('motor');
-        setmenu(getVehicleMenu(), "Vehicle Insurance");
-        SetPageHeaderFooter(getVehicleMenu());
-        $.mobile.changePage($("#personal-main-page"), "none");
-    });
-
-    $('#menu-property').click(function () {
-        $('#insuranceType').val('property');
-        setmenu(getPropertyMenu(), "Property Insurance");
-        SetPageHeaderFooter(getPropertyMenu());
-        $.mobile.changePage($("#personal-main-page"), "none");
-    });
-
-    //anti-theft device
-    $('#vehicleAntiTheftDevice').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('.VehicleAntiTheftDeviceProviderClass').show();
-        } else if (select_value == 'no') {
-            $('.VehicleAntiTheftDeviceProviderClass').hide();
-        }
-    });
-
-    //vehicleRegularCustodyDetails
-    $('#vehicleRegularCustody').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'no') {
-            $('.vehicleRegularCustodyDetailsClass').show();
-        } else if (select_value == 'yes') {
-            $('.vehicleRegularCustodyDetailsClass').hide();
-        }
-    });
-
-    //vehicleGaragedAtProposersHome
-    $('#vehicleGaragedAtProposersHome').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('.vehicleGaragedAtProposersHomeDetailsClass').hide();
-        } else if (select_value == 'no') {
-            $('.vehicleGaragedAtProposersHomeDetailsClass').show();
-        }
-    });
-
-    //vehicleKeptIn
-    $('input[type=radio][name=vehicleKeptIn]').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'vehicleKeptInOther') {
-            $('.vehicleKeptInOtherClass').show();
-        } else {
-            $('.vehicleKeptInOtherClass').hide();
-        }
-    });
-
-    //proposerInsured
-    $('#proposerInsured').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('.proposerInsuranceDetailsClass').show();
-        } else if (select_value == 'no') {
-            $('.proposerInsuranceDetailsClass').hide();
-        }
-    });
-
-
-    //proposerEntitledToNOClaimDiscount
-    $('#proposerEntitledToNOClaimDiscount').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#proposerEntitledToNOClaimDiscountProof').show();
-        } else if (select_value == 'no') {
-            $('#proposerEntitledToNOClaimDiscountProof').hide();
-        }
-    });
-
-    //applicantOtherInsurer
-    $('#applicantOtherInsurer').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('.applicantOtherInsurerTypeClass').show();
-        } else if (select_value == 'no') {
-            $('.applicantOtherInsurerTypeClass').hide();
-        }
-    });
-
-    //applicantOtherInsurer
-    $('#applicantPreviouslyInsured').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('.ApplicantPreviouslyInsuredClass').show();
-        } else if (select_value == 'no') {
-            $('.ApplicantPreviouslyInsuredClass').hide();
-        }
-    });
-
-
-    //validate function
-    loadCountriesOptions();
-
-    $('#mailingAddressSame').change(function () {
-        var select_value = $(this).val();
-        if (select_value == 'yes') {
-            $('#mailingAddress').hide();
-        } else if (select_value == 'no') {
-            $('#mailingAddress').show();
-        }
-    });
-
-
-    $('#applicantHomeCountry').change(function () {
-        var select_value = $(this).val();
-        if (select_value == "JM") {
-            $('#homeAddress .jamaica').show();
-            $('#homeAddress .international').hide();
-        } else {
-            $('#homeAddress .jamaica').hide();
-            $('#homeAddress .international').show();
-        }
-    });
-
-
-    $('#applicantMailCountry').change(function () {
-        var select_value = $(this).val();
-        if (select_value == "JM") {
-            $('#mailingAddress').find('.jamaica').show();
-            $('#mailingAddress').find('.international').hide();
-        } else {
-            $('#mailingAddress').find('.jamaica').hide();
-            $('#mailingAddress').find('.international').show();
-        }
-    });
-
-
-    $('#employerNationality').change(function () {
-        var select_value = $(this).val();
-        if (select_value == "JM") {
-            $('#employer').find('.jamaica').show();
-            $('#employer').find('.international').hide();
-        } else {
-            $('#employer').find('.jamaica').hide();
-            $('#employer').find('.international').show();
-        }
-    });
-
-    //set Last Three Years of Ownership()
-    setLastThreeYearsOwnership();
-
-});
-
-
-//miscellaneous functions
-function GetTotal(InputArray) {
-    var sum = 0;
-    $.each(InputArray, function (index, val) {
-        sum = sum + Number(val ? val : 0);
-    })
-    return '$' + sum.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-}
-
-function resetHomeAllRiskArticles() {
-    var objectList = [
-        {
-            "class": "article-name",
-            "name": "HomeAllRiskArticleDescription"
-        },
-        {
-            "class": "article-value",
-            "name": "HomeAllRiskArticleValue"
-        }
-    ];
-    var elementClass = $('.HomeAllRiskArticles');
-    resetObjects(objectList, elementClass, "Add", "Delete", "Article");
-}
-
-function resetHomeInsuranceProperty() {
-    var objectList = [
-        {
-            "class": "article-name",
-            "name": "homeInsurancePropertyItem"
-        },
-        {
-            "class": "article-value",
-            "name": "homeInsurancePropertyItemValue"
-        }
-    ];
-    var elementClass = $('.homeInsurancePropertyItems');
-    resetObjects(objectList, elementClass, "Add", "Delete", "Building");
-}
-
-
-//
-function resetInexperiencedDriver() {
-
-    var objectList = [
-        {
-            "class": "name",
-            "name": "inexperiencedDriversName"
-        },
-        {
-            "class": "occupation",
-            "name": "inexperiencedDriversOccupation"
-        },
-        {
-            "class": "DateOfBirth",
-            "name": "inexperiencedDriversDateOfBirth"
-        },
-        {
-            "class": "DriversDL",
-            "name": "inexperiencedDriversDL"
-        },
-        {
-            "class": "DriversDLOriginalDateOfIssue",
-            "name": "inexperiencedDriversDLOriginalDateOfIssue"
-        },
-        {
-            "class": "DriversRelationshipToProposer",
-            "name": "inexperiencedDriversRelationshipToProposer"
-        }
-    ];
-    var elementClass = $('.inexperiencedDriversCls');
-
-    resetObjects(objectList, elementClass, "Add", "Delete", "Driver");
-}
-
-//regular drivers
-function resetRegularDriver() {
-
-    var objectList = [
-        {
-            "class": "name",
-            "name": "regularDriversName"
-        },
-        {
-            "class": "occupation",
-            "name": "regularDriversOccupation"
-        },
-        {
-            "class": "DateOfBirth",
-            "name": "regularDriversDateOfBirth"
-        },
-        {
-            "class": "DriversDL",
-            "name": "regularDriversDL"
-        },
-        {
-            "class": "DriversDLOriginalDateOfIssue",
-            "name": "regularDriversDLOriginalDateOfIssue"
-        },
-        {
-            "class": "DriversRelationshipToProposer",
-            "name": "regularDriversRelationshipToProposer"
-        }
-    ];
-    var elementClass = $('.regularDriversCls');
-
-    resetObjects(objectList, elementClass, "Add", "Delete", "Driver");
-}
-
-
-function resetApplicantRelativeInPublicOffice() {
-
-    var objectList = [
-        {
-            "class": "office",
-            "name": "applicantRelativeTypePublicOffice"
-        },
-        {
-            "class": "address",
-            "name": "applicantRelativeTypePublicAddress"
-        },
-        {
-            "class": "relation",
-            "name": "applicantRelativeTypePublicRelation"
-        },
-        {
-            "class": "name",
-            "name": "applicantRelativeInPublicOfficeName"
-        }
-    ];
-    var elementClass = $('.publicofficerelations');
-
-    resetObjects(objectList, elementClass, "Add", "Delete", "Relative");
-}
-
-function resetVehiclesToBeInsured() {
-    var objectList = [
-        {
-            "class": "registration",
-            "name": "vehicleRegistrationNo"
-        },
-        {
-            "class": "make",
-            "name": "vehicleMake"
-        },
-        {
-            "class": "model",
-            "name": "vehicleModel"
-        },
-        {
-            "class": "engine",
-            "name": "vehicleEngineNo"
-        },
-        {
-            "class": "chassis",
-            "name": "vehicleChassisNo"
-        },
-        {
-            "class": "year",
-            "name": "vehicleYearOfMake"
-        },
-        {
-            "class": "rating",
-            "name": "vehicleCcRating"
-        },
-        {
-            "class": "seating",
-            "name": "vehicleSeating"
-        },
-        {
-            "class": "body",
-            "name": "vehicleTypeOfBody"
-        },
-        {
-            "class": "insured",
-            "name": "vehicleSumInsured"
-        },
-        {
-            "class": "trailer",
-            "name": "vehicleTrailerUsed"
-        }
-    ];
-    var elementClass = $('.vehicleToBeInsured');
-    resetObjects(objectList, elementClass, "Add", "Delete", "Vehicle");
-}
-
-function SignaturePageItem() {
-    return {
-        "name": "Signature",
-        "value": "page-signature"
-    };
-}
-
-
-function QuotationPageItem() {
-    return {
-        "name": "Validation",
-        "value": "page-quotation"
-    };
-}
-
-
-//function SetupSignaturePage() {
-//    var signaturePage = $('#page-signature');
-//    signaturePage.find("[data-role=header]").find("h1").text("Signature");
-//    signaturePage.find("[data-role=footer]").find("h4").text("IronRock App");
-//    signaturePage.find("[data-role=main]").show();
-//}
-
-function getPersonalMenu() {
-    return [
-        {
-            "name": "Personal Details",
-            "value": "personal-main-page"
-        },
-        {
-            "name": "Contact Details",
-            "value": "personal-contact-page"
-        },
-        {
-            "name": "Employer Details",
-            "value": "personal-employer-details-page"
-        }
-    ];
-}
-
-function getVehicleMenu() {
-    var vehicleMenuList = [
-        {
-            "name": "Vehicle Particulars",
-            "value": "vehicle-particulars-page"
-        },
-        {
-            "name": "Insurance Coverage",
-            "value": "vehicle-insurance-coverage-page"
-        },
-        {
-            "name": "Drivers Details",
-            "value": "vehicle-driver-details-page"
-        },
-        {
-            "name": "Accidents",
-            "value": "vehicle-accidents-page"
-        },
-        {
-            "name": "Medical History",
-            "value": "vehicle-medical-history-page"
-        }
-    ];
-    var newList = getPersonalMenu().concat(vehicleMenuList);
-    newList.push(QuotationPageItem()); //SignaturePageItem());
-    return newList;
-}
-
-
-function getPropertyMenu() {
-    var propertyMenuList = [
-        {
-            "name": "Home Particulars",
-            "value": "home-particulars-page"
-        },
-        {
-            "name": "Home Particulars Con't",
-            "value": "home-particulars-continued-page"
-        },
-        {
-            "name": "Home Property Details",
-            "value": "home-property-details-page"
-        },
-        {
-            "name": "All Risk Insurance",
-            "value": "home-all-risk-insurance-page"
-        }
-    ];
-    var newList = getPersonalMenu().concat(propertyMenuList);
-    newList.push(QuotationPageItem()); //SignaturePageItem());
-    return newList;
-}
-
-
-function SetPageHeaderFooter(menu_list) {
-    // <a href="#main-page" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-arrow-l ui-btn-icon-notext" rel="prev">Home</a>
-    //<a href="#personal-contact-page" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-arrow-r ui-btn-icon-notext" rel="next">Next</a>       
-    for (var i = 0; i < menu_list.length; i++) {
-        var currentPage = $('#' + menu_list[i].value);
-        currentPage.find("[data-role=header]").find("h1").text(menu_list[i].name);
-        var prevI = i - 1;
-        var nextI = i + 1;
-        if (i > 0) {
-            //insert previous link               
-            var prevLink = '<a href="#' + menu_list[prevI].value + '" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-arrow-l ui-btn-icon-notext" rel="prev">Home</a>';
-            currentPage.find('[data-role=footer]').append(prevLink);
-        }
-        if (i < menu_list.length - 1) {
-            //insert next link
-            var nextLink = '<a href="#' + menu_list[nextI].value + '" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-arrow-r ui-btn-icon-notext" rel="next">Next</a>';
-            currentPage.find('[data-role=footer]').append(nextLink);
-        }
-    }
-}
-
-
-function setmenu(menu_list, menu_header) {
-    var panelItems = "";
-    $.each(menu_list, function (key, item) {
-        panelItems = panelItems + '<li><a href="#' + item.value + '">' + item.name + '</a></li>';
-    });
-    var p = 1;
-    var last_page_dom = $("#" + menu_list[menu_list.length - 1].value).get(0);
-    $.each(menu_list, function (key, item) {
-        var currentPage = $('#' + item.value);
-        var current_page_dom = currentPage.get(0);
-        if (currentPage.find('[data-role=panel]').length == 0 && last_page_dom != current_page_dom) {
-            var panel = '<div data-role="panel" data-display="overlay" data-mini="true" class="menu" id="panel' + p + '" data-dismissible="true" data-swipe-close="true" data-position="left">';
-            panel = panel + '<h2>' + menu_header + '</h2><ol data-role="listview" data-inset="true" data-mini="true">' + panelItems + '</ol></div>';
-            currentPage.prepend(panel);
-            var panelBtn = '<a href="#panel' + p + '" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-bars ui-btn-icon-notext" rel="search">Menu</a>'
-            currentPage.find('[data-role=header]').append(panelBtn);
-        }
-        p++;
-    });
-}
-
-
-//country functions
-var _countries = [
-
-    {
-        "name": 'Afghanistan',
-        "code": 'AF'
-    },
-    {
-        "name": 'Åland Islands',
-        "code": 'AX'
-    },
-    {
-        "name": 'Albania',
-        "code": 'AL'
-    },
-    {
-        "name": 'Algeria',
-        "code": 'DZ'
-    },
-    {
-        "name": 'American Samoa',
-        "code": 'AS'
-    },
-    {
-        "name": 'AndorrA',
-        "code": 'AD'
-    },
-    {
-        "name": 'Angola',
-        "code": 'AO'
-    },
-    {
-        "name": 'Anguilla',
-        "code": 'AI'
-    },
-    {
-        "name": 'Antarctica',
-        "code": 'AQ'
-    },
-    {
-        "name": 'Antigua and Barbuda',
-        "code": 'AG'
-    },
-    {
-        "name": 'Argentina',
-        "code": 'AR'
-    },
-    {
-        "name": 'Armenia',
-        "code": 'AM'
-    },
-    {
-        "name": 'Aruba',
-        "code": 'AW'
-    },
-    {
-        "name": 'Australia',
-        "code": 'AU'
-    },
-    {
-        "name": 'Austria',
-        "code": 'AT'
-    },
-    {
-        "name": 'Azerbaijan',
-        "code": 'AZ'
-    },
-    {
-        "name": 'Bahamas',
-        "code": 'BS'
-    },
-    {
-        "name": 'Bahrain',
-        "code": 'BH'
-    },
-    {
-        "name": 'Bangladesh',
-        "code": 'BD'
-    },
-    {
-        "name": 'Barbados',
-        "code": 'BB'
-    },
-    {
-        "name": 'Belarus',
-        "code": 'BY'
-    },
-    {
-        "name": 'Belgium',
-        "code": 'BE'
-    },
-    {
-        "name": 'Belize',
-        "code": 'BZ'
-    },
-    {
-        "name": 'Benin',
-        "code": 'BJ'
-    },
-    {
-        "name": 'Bermuda',
-        "code": 'BM'
-    },
-    {
-        "name": 'Bhutan',
-        "code": 'BT'
-    },
-    {
-        "name": 'Bolivia',
-        "code": 'BO'
-    },
-    {
-        "name": 'Bosnia and Herzegovina',
-        "code": 'BA'
-    },
-    {
-        "name": 'Botswana',
-        "code": 'BW'
-    },
-    {
-        "name": 'Bouvet Island',
-        "code": 'BV'
-    },
-    {
-        "name": 'Brazil',
-        "code": 'BR'
-    },
-    {
-        "name": 'British Indian Ocean Territory',
-        "code": 'IO'
-    },
-    {
-        "name": 'Brunei Darussalam',
-        "code": 'BN'
-    },
-    {
-        "name": 'Bulgaria',
-        "code": 'BG'
-    },
-    {
-        "name": 'Burkina Faso',
-        "code": 'BF'
-    },
-    {
-        "name": 'Burundi',
-        "code": 'BI'
-    },
-    {
-        "name": 'Cambodia',
-        "code": 'KH'
-    },
-    {
-        "name": 'Cameroon',
-        "code": 'CM'
-    },
-    {
-        "name": 'Canada',
-        "code": 'CA'
-    },
-    {
-        "name": 'Cape Verde',
-        "code": 'CV'
-    },
-    {
-        "name": 'Cayman Islands',
-        "code": 'KY'
-    },
-    {
-        "name": 'Central African Republic',
-        "code": 'CF'
-    },
-    {
-        "name": 'Chad',
-        "code": 'TD'
-    },
-    {
-        "name": 'Chile',
-        "code": 'CL'
-    },
-    {
-        "name": 'China',
-        "code": 'CN'
-    },
-    {
-        "name": 'Christmas Island',
-        "code": 'CX'
-    },
-    {
-        "name": 'Cocos (Keeling) Islands',
-        "code": 'CC'
-    },
-    {
-        "name": 'Colombia',
-        "code": 'CO'
-    },
-    {
-        "name": 'Comoros',
-        "code": 'KM'
-    },
-    {
-        "name": 'Congo',
-        "code": 'CG'
-    },
-    {
-        "name": 'Congo, The Democratic Republic of the',
-        "code": 'CD'
-    },
-    {
-        "name": 'Cook Islands',
-        "code": 'CK'
-    },
-    {
-        "name": 'Costa Rica',
-        "code": 'CR'
-    },
-    {
-        "name": 'Cote D\'Ivoire',
-        "code": 'CI'
-    },
-    {
-        "name": 'Croatia',
-        "code": 'HR'
-    },
-    {
-        "name": 'Cuba',
-        "code": 'CU'
-    },
-    {
-        "name": 'Cyprus',
-        "code": 'CY'
-    },
-    {
-        "name": 'Czech Republic',
-        "code": 'CZ'
-    },
-    {
-        "name": 'Denmark',
-        "code": 'DK'
-    },
-    {
-        "name": 'Djibouti',
-        "code": 'DJ'
-    },
-    {
-        "name": 'Dominica',
-        "code": 'DM'
-    },
-    {
-        "name": 'Dominican Republic',
-        "code": 'DO'
-    },
-    {
-        "name": 'Ecuador',
-        "code": 'EC'
-    },
-    {
-        "name": 'Egypt',
-        "code": 'EG'
-    },
-    {
-        "name": 'El Salvador',
-        "code": 'SV'
-    },
-    {
-        "name": 'Equatorial Guinea',
-        "code": 'GQ'
-    },
-    {
-        "name": 'Eritrea',
-        "code": 'ER'
-    },
-    {
-        "name": 'Estonia',
-        "code": 'EE'
-    },
-    {
-        "name": 'Ethiopia',
-        "code": 'ET'
-    },
-    {
-        "name": 'Falkland Islands (Malvinas)',
-        "code": 'FK'
-    },
-    {
-        "name": 'Faroe Islands',
-        "code": 'FO'
-    },
-    {
-        "name": 'Fiji',
-        "code": 'FJ'
-    },
-    {
-        "name": 'Finland',
-        "code": 'FI'
-    },
-    {
-        "name": 'France',
-        "code": 'FR'
-    },
-    {
-        "name": 'French Guiana',
-        "code": 'GF'
-    },
-    {
-        "name": 'French Polynesia',
-        "code": 'PF'
-    },
-    {
-        "name": 'French Southern Territories',
-        "code": 'TF'
-    },
-    {
-        "name": 'Gabon',
-        "code": 'GA'
-    },
-    {
-        "name": 'Gambia',
-        "code": 'GM'
-    },
-    {
-        "name": 'Georgia',
-        "code": 'GE'
-    },
-    {
-        "name": 'Germany',
-        "code": 'DE'
-    },
-    {
-        "name": 'Ghana',
-        "code": 'GH'
-    },
-    {
-        "name": 'Gibraltar',
-        "code": 'GI'
-    },
-    {
-        "name": 'Greece',
-        "code": 'GR'
-    },
-    {
-        "name": 'Greenland',
-        "code": 'GL'
-    },
-    {
-        "name": 'Grenada',
-        "code": 'GD'
-    },
-    {
-        "name": 'Guadeloupe',
-        "code": 'GP'
-    },
-    {
-        "name": 'Guam',
-        "code": 'GU'
-    },
-    {
-        "name": 'Guatemala',
-        "code": 'GT'
-    },
-    {
-        "name": 'Guernsey',
-        "code": 'GG'
-    },
-    {
-        "name": 'Guinea',
-        "code": 'GN'
-    },
-    {
-        "name": 'Guinea-Bissau',
-        "code": 'GW'
-    },
-    {
-        "name": 'Guyana',
-        "code": 'GY'
-    },
-    {
-        "name": 'Haiti',
-        "code": 'HT'
-    },
-    {
-        "name": 'Heard Island and Mcdonald Islands',
-        "code": 'HM'
-    },
-    {
-        "name": 'Holy See (Vatican City State)',
-        "code": 'VA'
-    },
-    {
-        "name": 'Honduras',
-        "code": 'HN'
-    },
-    {
-        "name": 'Hong Kong',
-        "code": 'HK'
-    },
-    {
-        "name": 'Hungary',
-        "code": 'HU'
-    },
-    {
-        "name": 'Iceland',
-        "code": 'IS'
-    },
-    {
-        "name": 'India',
-        "code": 'IN'
-    },
-    {
-        "name": 'Indonesia',
-        "code": 'ID'
-    },
-    {
-        "name": 'Iran, Islamic Republic Of',
-        "code": 'IR'
-    },
-    {
-        "name": 'Iraq',
-        "code": 'IQ'
-    },
-    {
-        "name": 'Ireland',
-        "code": 'IE'
-    },
-    {
-        "name": 'Isle of Man',
-        "code": 'IM'
-    },
-    {
-        "name": 'Israel',
-        "code": 'IL'
-    },
-    {
-        "name": 'Italy',
-        "code": 'IT'
-    },
-    {
-        "name": 'Jamaica',
-        "code": 'JM'
-    },
-    {
-        "name": 'Japan',
-        "code": 'JP'
-    },
-    {
-        "name": 'Jersey',
-        "code": 'JE'
-    },
-    {
-        "name": 'Jordan',
-        "code": 'JO'
-    },
-    {
-        "name": 'Kazakhstan',
-        "code": 'KZ'
-    },
-    {
-        "name": 'Kenya',
-        "code": 'KE'
-    },
-    {
-        "name": 'Kiribati',
-        "code": 'KI'
-    },
-    {
-        "name": 'Korea, Democratic People\'S Republic of',
-        "code": 'KP'
-    },
-    {
-        "name": 'Korea, Republic of',
-        "code": 'KR'
-    },
-    {
-        "name": 'Kuwait',
-        "code": 'KW'
-    },
-    {
-        "name": 'Kyrgyzstan',
-        "code": 'KG'
-    },
-    {
-        "name": 'Lao People\'S Democratic Republic',
-        "code": 'LA'
-    },
-    {
-        "name": 'Latvia',
-        "code": 'LV'
-    },
-    {
-        "name": 'Lebanon',
-        "code": 'LB'
-    },
-    {
-        "name": 'Lesotho',
-        "code": 'LS'
-    },
-    {
-        "name": 'Liberia',
-        "code": 'LR'
-    },
-    {
-        "name": 'Libyan Arab Jamahiriya',
-        "code": 'LY'
-    },
-    {
-        "name": 'Liechtenstein',
-        "code": 'LI'
-    },
-    {
-        "name": 'Lithuania',
-        "code": 'LT'
-    },
-    {
-        "name": 'Luxembourg',
-        "code": 'LU'
-    },
-    {
-        "name": 'Macao',
-        "code": 'MO'
-    },
-    {
-        "name": 'Macedonia, The Former Yugoslav Republic of',
-        "code": 'MK'
-    },
-    {
-        "name": 'Madagascar',
-        "code": 'MG'
-    },
-    {
-        "name": 'Malawi',
-        "code": 'MW'
-    },
-    {
-        "name": 'Malaysia',
-        "code": 'MY'
-    },
-    {
-        "name": 'Maldives',
-        "code": 'MV'
-    },
-    {
-        "name": 'Mali',
-        "code": 'ML'
-    },
-    {
-        "name": 'Malta',
-        "code": 'MT'
-    },
-    {
-        "name": 'Marshall Islands',
-        "code": 'MH'
-    },
-    {
-        "name": 'Martinique',
-        "code": 'MQ'
-    },
-    {
-        "name": 'Mauritania',
-        "code": 'MR'
-    },
-    {
-        "name": 'Mauritius',
-        "code": 'MU'
-    },
-    {
-        "name": 'Mayotte',
-        "code": 'YT'
-    },
-    {
-        "name": 'Mexico',
-        "code": 'MX'
-    },
-    {
-        "name": 'Micronesia, Federated States of',
-        "code": 'FM'
-    },
-    {
-        "name": 'Moldova, Republic of',
-        "code": 'MD'
-    },
-    {
-        "name": 'Monaco',
-        "code": 'MC'
-    },
-    {
-        "name": 'Mongolia',
-        "code": 'MN'
-    },
-    {
-        "name": 'Montserrat',
-        "code": 'MS'
-    },
-    {
-        "name": 'Morocco',
-        "code": 'MA'
-    },
-    {
-        "name": 'Mozambique',
-        "code": 'MZ'
-    },
-    {
-        "name": 'Myanmar',
-        "code": 'MM'
-    },
-    {
-        "name": 'Namibia',
-        "code": 'NA'
-    },
-    {
-        "name": 'Nauru',
-        "code": 'NR'
-    },
-    {
-        "name": 'Nepal',
-        "code": 'NP'
-    },
-    {
-        "name": 'Netherlands',
-        "code": 'NL'
-    },
-    {
-        "name": 'Netherlands Antilles',
-        "code": 'AN'
-    },
-    {
-        "name": 'New Caledonia',
-        "code": 'NC'
-    },
-    {
-        "name": 'New Zealand',
-        "code": 'NZ'
-    },
-    {
-        "name": 'Nicaragua',
-        "code": 'NI'
-    },
-    {
-        "name": 'Niger',
-        "code": 'NE'
-    },
-    {
-        "name": 'Nigeria',
-        "code": 'NG'
-    },
-    {
-        "name": 'Niue',
-        "code": 'NU'
-    },
-    {
-        "name": 'Norfolk Island',
-        "code": 'NF'
-    },
-    {
-        "name": 'Northern Mariana Islands',
-        "code": 'MP'
-    },
-    {
-        "name": 'Norway',
-        "code": 'NO'
-    },
-    {
-        "name": 'Oman',
-        "code": 'OM'
-    },
-    {
-        "name": 'Pakistan',
-        "code": 'PK'
-    },
-    {
-        "name": 'Palau',
-        "code": 'PW'
-    },
-    {
-        "name": 'Palestinian Territory, Occupied',
-        "code": 'PS'
-    },
-    {
-        "name": 'Panama',
-        "code": 'PA'
-    },
-    {
-        "name": 'Papua New Guinea',
-        "code": 'PG'
-    },
-    {
-        "name": 'Paraguay',
-        "code": 'PY'
-    },
-    {
-        "name": 'Peru',
-        "code": 'PE'
-    },
-    {
-        "name": 'Philippines',
-        "code": 'PH'
-    },
-    {
-        "name": 'Pitcairn',
-        "code": 'PN'
-    },
-    {
-        "name": 'Poland',
-        "code": 'PL'
-    },
-    {
-        "name": 'Portugal',
-        "code": 'PT'
-    },
-    {
-        "name": 'Puerto Rico',
-        "code": 'PR'
-    },
-    {
-        "name": 'Qatar',
-        "code": 'QA'
-    },
-    {
-        "name": 'Reunion',
-        "code": 'RE'
-    },
-    {
-        "name": 'Romania',
-        "code": 'RO'
-    },
-    {
-        "name": 'Russian Federation',
-        "code": 'RU'
-    },
-    {
-        "name": 'RWANDA',
-        "code": 'RW'
-    },
-    {
-        "name": 'Saint Helena',
-        "code": 'SH'
-    },
-    {
-        "name": 'Saint Kitts and Nevis',
-        "code": 'KN'
-    },
-    {
-        "name": 'Saint Lucia',
-        "code": 'LC'
-    },
-    {
-        "name": 'Saint Pierre and Miquelon',
-        "code": 'PM'
-    },
-    {
-        "name": 'Saint Vincent and the Grenadines',
-        "code": 'VC'
-    },
-    {
-        "name": 'Samoa',
-        "code": 'WS'
-    },
-    {
-        "name": 'San Marino',
-        "code": 'SM'
-    },
-    {
-        "name": 'Sao Tome and Principe',
-        "code": 'ST'
-    },
-    {
-        "name": 'Saudi Arabia',
-        "code": 'SA'
-    },
-    {
-        "name": 'Senegal',
-        "code": 'SN'
-    },
-    {
-        "name": 'Serbia and Montenegro',
-        "code": 'CS'
-    },
-    {
-        "name": 'Seychelles',
-        "code": 'SC'
-    },
-    {
-        "name": 'Sierra Leone',
-        "code": 'SL'
-    },
-    {
-        "name": 'Singapore',
-        "code": 'SG'
-    },
-    {
-        "name": 'Slovakia',
-        "code": 'SK'
-    },
-    {
-        "name": 'Slovenia',
-        "code": 'SI'
-    },
-    {
-        "name": 'Solomon Islands',
-        "code": 'SB'
-    },
-    {
-        "name": 'Somalia',
-        "code": 'SO'
-    },
-    {
-        "name": 'South Africa',
-        "code": 'ZA'
-    },
-    {
-        "name": 'South Georgia and the South Sandwich Islands',
-        "code": 'GS'
-    },
-    {
-        "name": 'Spain',
-        "code": 'ES'
-    },
-    {
-        "name": 'Sri Lanka',
-        "code": 'LK'
-    },
-    {
-        "name": 'Sudan',
-        "code": 'SD'
-    },
-    {
-        "name": 'Suriname',
-        "code": 'SR'
-    },
-    {
-        "name": 'Svalbard and Jan Mayen',
-        "code": 'SJ'
-    },
-    {
-        "name": 'Swaziland',
-        "code": 'SZ'
-    },
-    {
-        "name": 'Sweden',
-        "code": 'SE'
-    },
-    {
-        "name": 'Switzerland',
-        "code": 'CH'
-    },
-    {
-        "name": 'Syrian Arab Republic',
-        "code": 'SY'
-    },
-    {
-        "name": 'Taiwan, Province of China',
-        "code": 'TW'
-    },
-    {
-        "name": 'Tajikistan',
-        "code": 'TJ'
-    },
-    {
-        "name": 'Tanzania, United Republic of',
-        "code": 'TZ'
-    },
-    {
-        "name": 'Thailand',
-        "code": 'TH'
-    },
-    {
-        "name": 'Timor-Leste',
-        "code": 'TL'
-    },
-    {
-        "name": 'Togo',
-        "code": 'TG'
-    },
-    {
-        "name": 'Tokelau',
-        "code": 'TK'
-    },
-    {
-        "name": 'Tonga',
-        "code": 'TO'
-    },
-    {
-        "name": 'Trinidad and Tobago',
-        "code": 'TT'
-    },
-    {
-        "name": 'Tunisia',
-        "code": 'TN'
-    },
-    {
-        "name": 'Turkey',
-        "code": 'TR'
-    },
-    {
-        "name": 'Turkmenistan',
-        "code": 'TM'
-    },
-    {
-        "name": 'Turks and Caicos Islands',
-        "code": 'TC'
-    },
-    {
-        "name": 'Tuvalu',
-        "code": 'TV'
-    },
-    {
-        "name": 'Uganda',
-        "code": 'UG'
-    },
-    {
-        "name": 'Ukraine',
-        "code": 'UA'
-    },
-    {
-        "name": 'United Arab Emirates',
-        "code": 'AE'
-    },
-    {
-        "name": 'United Kingdom',
-        "code": 'GB'
-    },
-    {
-        "name": 'United States',
-        "code": 'US'
-    },
-    {
-        "name": 'United States Minor Outlying Islands',
-        "code": 'UM'
-    },
-    {
-        "name": 'Uruguay',
-        "code": 'UY'
-    },
-    {
-        "name": 'Uzbekistan',
-        "code": 'UZ'
-    },
-    {
-        "name": 'Vanuatu',
-        "code": 'VU'
-    },
-    {
-        "name": 'Venezuela',
-        "code": 'VE'
-    },
-    {
-        "name": 'Viet Nam',
-        "code": 'VN'
-    },
-    {
-        "name": 'Virgin Islands, British',
-        "code": 'VG'
-    },
-    {
-        "name": 'Virgin Islands, U.S.',
-        "code": 'VI'
-    },
-    {
-        "name": 'Wallis and Futuna',
-        "code": 'WF'
-    },
-    {
-        "name": 'Western Sahara',
-        "code": 'EH'
-    },
-    {
-        "name": 'Yemen',
-        "code": 'YE'
-    },
-    {
-        "name": 'Zambia',
-        "code": 'ZM'
-    },
-    {
-        "name": 'Zimbabwe',
-        "code": 'ZW'
-    }
-];
-
-function loadCountriesOptions() {
-    $('.countries').each(function (index, item) {
-        var selectObj = $(this);
-        selectObj.html('');
-        $.each(_countries, function (i, json) {
-            if (json.code == 'JM') {
-                selectObj.append('<option value="' + json.code + '" selected="selected">' + json.name + '</option>');
-            } else {
-                selectObj.append('<option value="' + json.code + '">' + json.name + '</option>');
+    ////TRN///////
+    $('#personal-main-page').on('click', '#getTRNDetails', function () {
+        var $this = $(this),
+            theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
+            msgText = $this.jqmData("msgtext") || $.mobile.loader.prototype.options.text,
+            textVisible = $this.jqmData("textvisible") || $.mobile.loader.prototype.options.textVisible,
+            textonly = !!$this.jqmData("textonly");
+        html = $this.jqmData("html") || "";
+        $.mobile.loading("show", {
+            text: msgText,
+            textVisible: textVisible,
+            theme: theme,
+            textonly: textonly,
+            html: html
+        });
+
+        var id = $('#applicantTRN').val();
+        var serverUrl = baseUrl + "/trn/?id=" + id;
+        $.ajax({
+            type: 'GET',
+            contentType: 'application/json',
+            url: serverUrl,
+            dataType: "json",
+            success: function (r) {
+                //success handling
+                $.mobile.loading("hide");
+                var json = JSON.parse(r);
+                if (json.error_message) {
+                    alert("Invalid ID!!");
+                } else if (json.Message) {
+                    alert("Invalid ID!!");
+                } else {
+                    json.id = id;
+                    populateApplicant(json);
+                }
+            },
+            error: function (data) {
+                //error handling
+                $.mobile.loading("hide");
+                alert("error: " + data.statusText);
             }
         });
     });
-}
 
-function resetObjects(objectList, elementClass, addBtnName, delBtnName, elementTitle) {
-    var firstElement = elementClass.first();
-    var lastElement = elementClass.last();
-    var i = 0;
-
-    elementClass.each(function (index, e) {
-        var element = $(this);
-        //change ids and names
-        $.each(objectList, function (jIndex, item) {
-            element.find('.' + item.class + ' input').attr('id', item.name + i).attr('name', item.name + i);
-            element.find('.' + item.class + ' label').attr('for', item.name + i);
-        })
-
-        //set controls
-        if (element.is(firstElement) && element.is(lastElement)) {
-            firstElement.find('.' + delBtnName).hide();
-            lastElement.find('.' + addBtnName).show();
-        } else if (element.is(firstElement)) {
-            element.find('.' + delBtnName).hide();
-            element.find('.' + addBtnName).hide();
-        } else if (element.is(lastElement)) {
-            element.find('.' + delBtnName).show();
-            element.find('.' + addBtnName).show();
-        } else {
-            element.find('.' + delBtnName).hide();
-            element.find('.' + addBtnName).hide();
-        }
-        //change title
-        element.find('h4').text(elementTitle + ' ' + ++i);
+    $('#personal-main-page').on('click', '#clearTRNDetails', function () {
+        SetTRnDetails(false);
+        $('#applicantTRNDetails input').val('');
     });
-}
 
-
-function setLastThreeYearsOwnership() {
-    var currentYear = new Date().getFullYear();
-    for (i = 1; i < 4; i++) {
-        var previousYear = currentYear - i;
-        var YearName = 'numberOfVehiclesOwned' + previousYear;
-        var YearHtml = $('<div/>');
-        YearHtml.addClass('ui-field-contain');
-        var YearLabel = $('<label/>');
-        YearLabel.attr('for', YearName);
-        YearLabel.text(previousYear + ':Number of vehicles owned:')
-        YearLabel.appendTo(YearHtml);
-        var yearText = $('<input/>');
-        yearText.attr('type', 'number');
-        yearText.attr('name', YearName);
-        yearText.attr('id', YearName);
-        yearText.appendTo(YearHtml);
-        YearHtml.appendTo($('#numberOfVehiclesOwned'));
+    function populateApplicant(r) {
+        //id
+        $('#applicantIDNumber').val(r.id);
+        $('#applicationIDExpirationDate').val('2010-01-01');
+        //address
+        $('#applicantSurname').val(r.lastName);
+        $('#applicantFirstName').val(r.firstName);
+        $('#applicantMiddleName').val(r.middleName);
+        $('#applicantDateOfBirth').val(r.birthDate.substring(0, 10));
+        $('#applicantTitle').val(r.genderType == 'M' ? 'Mr.' : 'Ms.');
+        //$('#applicantHomeCountry').val(r.CountryCode.toLowerCase()=='jamaica'?'JM':).trigger("change");
+        //        $('#applicantHomeCountry option[value=' + r.CountryCode + ']').prop('selected', 'selected');
+        //        $('#applicantHomeParish option[value=' + r.ParishCode + ']').prop('selected', 'selected');
+        $('#applicantHomeStreetName').val(r.StreetNo + ' ' + r.StreetName);
+        SetTRnDetails(true);
     }
 
-}
+    function SetTRnDetails(state) {
+        $("#applicantTRN").attr("readonly", state);
+        if (state) {
+            $('#getTRNDetails').hide();
+            $('#clearTRNDetails').show();
+        } else {
+            $('#getTRNDetails').show();
+            $('#clearTRNDetails').hide();
+        }
+    }
+    ////////////////////////////////////////
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+
+    //clear signature
+    $('#page-signature').on('click', '#clear-canvas', function () {
+        $('#signature').jSignature('clear');
+    });
+    /////Final//////////////////////
+
+
+    $('#page-signature').on('click', '#submit-btn', function () {
+        var $this = $(this),
+            theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
+            msgText = $this.jqmData("msgtext") || $.mobile.loader.prototype.options.text,
+            textVisible = $this.jqmData("textvisible") || $.mobile.loader.prototype.options.textVisible,
+            textonly = !!$this.jqmData("textonly");
+        html = $this.jqmData("html") || "";
+        $.mobile.loading("show", {
+            text: msgText,
+            textVisible: textVisible,
+            theme: theme,
+            textonly: textonly,
+            html: html
+        });
+        //get signature data
+        var sig = $('#signature').jSignature("getData", "base30");
+        $('#signatureImageType').val(sig[0]);
+        $('#signatureBytes').val(sig[1]);
+        //serilize form and convert to json
+        var formData = $('form').serialize();
+        var formData = JSON.stringify($('form').serializeObject());
+        var serverUrl = baseUrl + "/Policy/"; // + $('#quotation-number').val();
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            url: serverUrl,
+            dataType: "json",
+            data: formData,
+            success: function (data) {
+                //success handling
+                $.mobile.loading("hide");
+                alert(data);
+            },
+            error: function (err) {
+                //error handling
+                $.mobile.loading("hide");
+                alert("error: " + err.statusText);
+            }
+        });
+
+    });
+
+
+
+    ////////Validate and Get Quotation ////////////////
+    $('#page-quotation').on('click', '#get-quotation', function () {
+        var $this = $(this),
+            theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
+            msgText = $this.jqmData("msgtext") || $.mobile.loader.prototype.options.text,
+            textVisible = $this.jqmData("textvisible") || $.mobile.loader.prototype.options.textVisible,
+            textonly = !!$this.jqmData("textonly");
+        html = $this.jqmData("html") || "";
+        $.mobile.loading("show", {
+            text: msgText,
+            textVisible: textVisible,
+            theme: theme,
+            textonly: textonly,
+            html: html
+        });
+
+        //var formData = $('form').serialize();
+        var formData = JSON.parse(JSON.stringify($('form').serializeObject()));
+        //remove all empty nodes
+        $.each(formData, function (key, value) {
+            if (value === "" || value === null) {
+                delete formData[key];
+            }
+        });
+        //formData = "signatureBytes=&insuranceType=motor&applicantTRN=&applicantSurname=&FirstName=&applicantMiddleName="; // $("form").serialize();
+        var serverUrl = baseUrl + "/ironrockquote/";
+        var data = JSON.stringify(formData);
+        console.log(formData);
+        console.log(data);
+        $.ajax({
+            type: 'post',
+            contentType: 'application/json',
+            url: serverUrl,
+            dataType: 'json',
+            data: data,
+            success: function (results) {
+                //success handling
+                $.mobile.loading("hide");
+                var r = JSON.parse(results);
+                if (!r.success) {
+                    console.log(r);
+                    alert(r.error_message ? r.error_message : '' + r.Message ? r.Message : '');
+                } else {
+                    loadQuotation(r);
+                    $('#quotation-number').val(r.quotation_number);
+                    $('#get-quotation').hide();
+                    $('#confirmQuotation').show();
+                }
+            },
+            error: function (err) {
+                //error handling
+                console.log(err);
+                $.mobile.loading("hide");
+                alert("error: " + err.statusText);
+            }
+        });
+
+    });
+
+    /* premium_calculation = new PremiumCalculation
+                     {
+                         net_premium = 10000,
+                         stamp_duty = 1000,
+                         tax = 500,
+                         total_premium = 11500
+                     },
+                     quotation_number = 5345435,
+                     success = true,*/
+    /*  code": "ME_AOE",
+              "heading": "Medical Expenses ",
+              "limit": 30000,
+              "description": "I*/
+
+
+    function loadQuotation(r) {
+        $('#quotation-number').val(r.quotation_number);
+        var container = $('#quotation');
+        container.append('<h4>Note the Policy Limits</h4>');
+        var table = $('<table/>'); //data-role="table" class="ui-responsive"
+        table.attr('data-role', "table");
+        table.addClass('ui-responsive');
+        table.append('<tr><th>Quotation No:</th><td>' + r.quotation_number + '</td></tr>');
+        //table.append('<tr><th style="text-align: right;">Net Premium:</th><td style="text-align: right;">' + r.premium_calculation.net_premium + '</td></tr>');
+        //table.append('<tr><th style="text-align: right;">Stamp Duty:</th><td style="text-align: right;">' + r.premium_calculation.stamp_duty + '</td></tr>');
+        //table.append('<tr><th style="text-align: right;">Tax:</th><td style="text-align: right;">' + r.premium_calculation.tax + '</td></tr>');
+        //table.append('<tr><th style="text-align: right;">Total Premium:</th><td style="text-align: right;">' + r.premium_calculation.total_premium + '</td></tr>');
+        table.appendTo(container);
+        if (r.limits.length > 0) {
+            var limitHeader = $('<h4/>').text('Limits');
+            limitHeader.appendTo(container);
+            var limittable = $('<table/>').attr('data-role', "table").addClass('ui-responsive').html('<tr><th>Code</th><th>Heading</th><th  style="text-align:right">Limit</th><th>Description</th></tr>');
+
+            $.each(r.limits, function (i, item) {
+                limittable.append('<tr><td>' + item.code + '</td><td>' + item.heading + '</td><td style="text-align:right">' + accounting.formatMoney(item.limit) + '</td><td>' + item.description + '</td></tr>');
+            });
+            limittable.appendTo(container);
+        }
+    }
+
+
+
+
+    //////////////////////////////////Insert vehicle
+    $('#taxOfficeVehicleRefresh').click(function () {
+        $('#vehiclesToBeInsured .vehicle').remove();
+        $('#taxOfficeVehicleRefresh').hide();
+    });
+
+    //check whether new
+    $('#isNewVehicle').change(function () {
+        var select_value = $(this).val();
+        if (select_value == 'yes') {
+            $('#taxOfficeVehicleDialog .chassis').hide();
+            $('#taxOfficeVehicleDialog .registration').show();
+        } else {
+            $('#taxOfficeVehicleDialog .chassis').show();
+            $('#taxOfficeVehicleDialog .registration').hide();
+        }
+    });
+
+
+    //dummy
+    $('#taxOfficeVehicleDialog').on("click", "#dummyTaxiVehicle", function () {
+        var r = {};
+
+        r.plateNo = "6775HK";
+        r.chassisNo = "ksdfsa9873982432kjsdf";
+        r.make = "Toyota";
+        r.model = "Corolla";
+        r.year = "2002";
+        r.vehicleBodyType = "Sedan";
+        r.vehicleType = "Sedan";
+        r.engineNo = "jdfsjdfsjf99034329";
+        r.colour = "White";
+        r.vehicleStatus = "";
+        insertVehicle(r);
+    });
+
+
+    $('#taxOfficeVehicleDialog').on("click", "#queryTaxiVehicle", function () {
+        var $this = $(this),
+            theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
+            msgText = $this.jqmData("msgtext") || $.mobile.loader.prototype.options.text,
+            textVisible = $this.jqmData("textvisible") || $.mobile.loader.prototype.options.textVisible,
+            textonly = !!$this.jqmData("textonly");
+        html = $this.jqmData("html") || "";
+        $.mobile.loading("show", {
+            text: msgText,
+            textVisible: textVisible,
+            theme: theme,
+            textonly: textonly,
+            html: html
+        });
+
+        var serverUrl = baseUrl + "/Vehicle/";
+
+        if ($('#isNewVehicle').val() == "yes") {
+            serverUrl = serverUrl + '?plateno=' + $('#QueryVehicleRegistrationNo').val(); // = null, string chassisNo
+        } else {
+            serverUrl = serverUrl + '?chassisno=' + $('#QueryVehicleChassisNo').val(); // = null, string chassisNo
+        }
+
+        /*if (!VehicleRegistrationNo) {
+            alert("Not valid!");
+        } else if (IsDuplicate(VehicleRegistrationNo)) {
+            alert('Duplicate!');
+        }*/
+
+
+        $.ajax({
+            type: 'GET',
+            url: serverUrl,
+            dataType: "json",
+            success: function (r) {
+                $.mobile.loading("hide");
+                var json = JSON.parse(r);
+                if (json.error_message) {
+                    alert("Invalid Chassis/Plate No!!");
+                } else if (json.Message) {
+                    alert("Invalid Chassis/Plate No!!");
+                } else {
+                    insertVehicle(json);
+                }
+
+            },
+            error: function (data) {
+                //error handling
+                $.mobile.loading("hide");
+                alert("error: " + data.statusText);
+            }
+        });
+
+
+    }).on("click", "#queryTaxiVehicleStop", function () {
+        $.mobile.loading("hide");
+    });
+
+
+
+    //insert vehicle
+    function insertVehicle(r) {
+
+
+
+        var cnt = $('#vehiclesToBeInsured .vehicle').length;
+        var CaptionBaseVehicleRegistrationNo = 'vehicleRegistrationNo';
+        var CaptionBaseVehicleChassisNo = 'vehicleChassisNo';
+        var CaptionBaseVehicleMake = 'vehicleMake';
+        var CaptionBaseVehicleModel = 'vehicleModel';
+        var CaptionBaseVehicleYear = 'vehicleYear';
+        var CaptionBaseVehicleEngineNo = 'vehicleEngineType';
+        var CaptionBaseVehicleBody = 'vehicleBody';
+        var CaptionBaseVehicleType = 'vehicleType';
+        var CaptionBaseVehicleColour = 'vehicleColour';
+        var CaptionBaseVehicleStatus = 'vehicleStatus';
+        var CaptionBaseVehicleValue = 'vehicleValue';
+
+
+
+        var htmlValues = '<span>' + r.plateNo + '</span>' +
+            '<input type="hidden" id="' + CaptionBaseVehicleRegistrationNo + cnt + '" name="' + CaptionBaseVehicleRegistrationNo + cnt + '" value="' + r.plateNo + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleChassisNo + cnt + '" name="' + CaptionBaseVehicleChassisNo + cnt + '" value="' + r.chassisNo + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleMake + cnt + '" name="' + CaptionBaseVehicleMake + cnt + '" value="' + r.make + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleModel + cnt + '" name="' + CaptionBaseVehicleModel + cnt + '" value="' + r.model + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleYear + cnt + '" name="' + CaptionBaseVehicleYear + cnt + '" value="' + r.year + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleBody + cnt + '" name="' + CaptionBaseVehicleBody + cnt + '" value="' + r.vehicleBodyType + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleType + cnt + '" name="' + CaptionBaseVehicleType + cnt + '" value="' + r.vehicleType + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleEngineNo + cnt + '" name="' + CaptionBaseVehicleEngineNo + cnt + '" value="' + r.engineNo + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleColour + cnt + '" name="' + CaptionBaseVehicleColour + cnt + '" value="' + r.colour + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleStatus + cnt + '" name="' + CaptionBaseVehicleStatus + cnt + '" value="' + r.vehicleStatus + '" />';
+
+
+        var gridRow = $('<div/>');
+        gridRow.addClass('ui-grid-d vehicle').attr('data-id', r.chassisNo);
+        var registrationCell = $('<div/>');
+        registrationCell.addClass('ui-block-a');
+        registrationCell.html(htmlValues);
+        registrationCell.appendTo(gridRow);
+        //
+        var makeModelCell = $('<div/>');
+        makeModelCell.addClass('ui-block-b');
+        makeModelCell.html(r.make + ' ' + r.model);
+        makeModelCell.appendTo(gridRow);
+        //
+        var detailsCell = $('<div/>');
+        detailsCell.addClass('ui-block-c');
+        detailsCell.html(r.year + ' ' + r.vehicleBodyType + ' ' + r.colour);
+        detailsCell.appendTo(gridRow);
+        //            
+        var chassisCell = $('<div/>');
+        chassisCell.addClass('ui-block-d');
+        chassisCell.html(r.chassisNo + '/' + r.engineNo);
+        chassisCell.appendTo(gridRow);
+        //
+        var sumInsuredCell = $('<div/>');
+        sumInsuredCell.addClass('ui-block-e');
+        sumInsuredCell.html('<input  data-mini="true" data-clear-btn="true" type="number" id="' + CaptionBaseVehicleValue + cnt + '" name="' + CaptionBaseVehicleValue + cnt + '" value="" />');
+        sumInsuredCell.appendTo(gridRow);
+        //
+        if (IsDuplicate(r.chassisNo)) {
+            alert('Duplicate!');
+        } else {
+            gridRow.appendTo($('#vehiclesToBeInsured'));
+            $('#taxOfficeVehicleRefresh').show();
+            $(':mobile-pagecontainer').pagecontainer('change', '#vehicle-particulars-page');
+        }
+    }
+
+
+
+
+
+    //check duplicate
+    function IsDuplicate(val) {
+        var returnVal = false;
+        $('#vehiclesToBeInsured .ui-grid-d').each(function (index, element) {
+            var rowVal = $(this).attr('data-id');
+            if (rowVal == val) {
+                returnVal = true;
+                return false;
+            }
+        });
+        return returnVal;
+    }
+
+    //return count
+    function GetCount() {
+        var i = 0;
+        $('#vehiclesToBeInsured .ui-grid-d').each(function (index, element) {
+            var rowVal = $(this).attr('data-id');
+            if (rowVal == val) {
+                returnVal = true;
+                return false;
+            }
+        });
+        return returnVal;
+    }
+
+    //driver Licence 
+
+
+
+});
