@@ -24,3 +24,23 @@
     background: none;
     border: 0;
 }
+
+
+
+
+/*/*Inline form*/
+.form-inline .ui-grid-a a{
+    float: left;
+}
+
+.form-inline .ui-block-b{
+    margin: 12px 0px;
+}
+
+.form-inline .ui-grid-a> .form-inline.ui-block-a{
+    width: 60%;
+}
+
+.form-inline .ui-grid-a>.form-inline .ui-block-b{
+    width: 40%;
+}*/

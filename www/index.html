@@ -60,13 +60,25 @@
                 <input type="hidden" id="signatureImageType" name="signatureImageType" />
                 <input type="hidden" id="insuranceType" name="insuranceType" />
 
-                <div class="ui-field-contain">
-                    <label for="applicantTRN">TRN:</label>
-                    <input type="number" id="applicantTRN" name="applicantTRN" placeholder="Enter TRN">
 
-                    <a href="#" class="ui-btn" id="getTRNDetails" data-role="button" data-inline="true">Check TRN</a>
-                    <a href="#" class="ui-btn" id="clearTRNDetails" data-role="button" data-inline="true" style="display:none">Clear TRN</a>
+                <div class="form-inline">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <div data-role="fieldcontain">
+                                <label for="applicantTRN">TRN</label>
+                                <!--<input type="text" name="text-basic" id="text-basic" value="" data-inline="true" />-->
+                                <input type="number" id="applicantTRN" name="applicantTRN" placeholder="Enter TRN" value="" data-inline="true" />
+                            </div>
+                        </div>
+                        <div class="ui-block-b">
+                            <a href="#" id="getTRNDetails" class="ui-btn ui-icon-search ui-btn-icon-notext ui-corner-all" data-inline="true">Check</a>
+                            <a href="#" id="clearTRNDetails" class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" data-inline="true" style="display:none">Clear</a>
+                        </div>
+                    </div>
                 </div>
+
+
+                <hr />
 
                 <div class="ui-field-contain" id="applicantTRNDetails">
                     <label for="applicantSurname">Surname:</label>
@@ -433,6 +445,14 @@
                     </div>
                 </div>
 
+                <div class="ui-grid-a sum-insured">
+                    <div class="ui-block-a">
+                        <label for="QueryVehicleSumInsured">Sum Being Insured:</label>
+                    </div>
+                    <div class="ui-block-b">
+                        <input type="number" name="QueryVehicleSumInsured" id="QueryVehicleSumInsured" value="">
+                    </div>
+                </div>
                 <a href="#vehicle-particulars-page" class="ui-btn ui-btn-inline ui-icon-back ui-btn-icon-right">Return</a>
                 <a href="#" id="dummyTaxiVehicle" class="ui-btn ui-btn-inline" data-inline="true">Dummy Vehicle Insert</a>
                 <a href="#" id="queryTaxiVehicle" class="ui-btn ui-btn-inline ui-icon-plus ui-btn-icon-right" data-textonly="false" data-textvisible="true" data-msgtext="Retrieving Data..." data-inline="true">Query</a>
@@ -470,6 +490,7 @@
                             <h4>Chassis/Engine</h4>
                         </div>
                         <div class="ui-block-e">
+                            <h4>Sum Insured</h4>
                         </div>
                     </div>
                 </div>
@@ -846,6 +867,10 @@
                             <label for="regularDriversDL0">Driver's Licence:</label>
                             <input type="text" name="regularDriversDL0" id="regularDriversDL0" value="" readonly>
                         </div>
+                        <div class="ui-field-contain DriversDLExpirationDate">
+                            <label for="regularDriversDLExpirationDate0">Expiration Date:</label>
+                            <input type="date" name="regularDriversDLExpirationDate0" id="regularDriversDLExpirationDate0" value="" readonly>
+                        </div>
                         <div class="ui-field-contain DriversDLOriginalDateOfIssue">
                             <label for="regularDriversDLOriginalDateOfIssue0">Original Date of Issue:</label>
                             <input type="date" name="regularDriversDLOriginalDateOfIssue0" id="regularDriversDLOriginalDateOfIssue0" value="" readonly>
@@ -884,7 +909,7 @@
                         </fieldset>
                     </div>
                 </div>
-                <div class="ui-grid-a" id="inexperiencedDriversBtns" style="display:none">
+                <!--<div class="ui-grid-a" id="inexperiencedDriversBtns" style="display:none">
                     <div class="ui-block-a">
                         <div class="ui-field-contain">
                             <label for="inexperiencedDriverQueryID">Driver Licence:</label>
@@ -930,7 +955,7 @@
                 </div>
 
                 <h4>State the number of motor vehicles[including motorcycle(s)] owned by you</h4>
-                <div id="numberOfVehiclesOwned"></div>
+                <div id="numberOfVehiclesOwned"></div>-->
 
             </form>
 
@@ -1186,7 +1211,7 @@
                 <fieldset class="ui-field-contain">
                     <label for="sumsInsured">Sums Insured ≥ $2M</label>
                     <select name="sumsInsured" id="sumsInsured">
-                        <optgroup label="Standard Limits">
+                        <optgroup label="Standard Limit">
                             <option value="$5M/$10M/$5M">$5M/$10M/$5M</option>
                         </optgroup>
                         <optgroup label="Increased Limits">
@@ -1757,8 +1782,8 @@
         <div data-role="main" class="ui-content">
 
             <div class="">
-                <a id="get-quotation" href="#" class="ui-btn">Validate</a>
-                <a href="#personal-main-page" data-role="button">Review</a>
+                <a id="get-quotation" href="#" class="ui-btn">Submit</a>
+                <a href="#personal-main-page" data-role="button">Modify</a>
                 <a id="confirmQuotation" href="#page-signature" data-role="button" style="display:none">Confirm</a>
             </div>
             <input type="hidden" id="quotation-number" />
@@ -1785,7 +1810,7 @@
                 The liability of the Company does not commence until the acceptance of the proposal has been formally acknowledged by the Company and a premium or deposit has been paid, except as provided by an Official Cover Note issued by the Company.
             </p>
             <p>Sign below and press the submit button.</p>
-                        
+
             <div id="signature" style="width:600px; height:150px;"></div>
 
             <div id="lowerControls">
@@ -1835,7 +1860,7 @@
     <script src="scripts/miscellaneous.js"></script>
     <script src="scripts/webservice.js"></script>
     <script src="scripts/index.js"></script>
-    
+
 
 </body>
 

@@ -47,7 +47,8 @@ $('#page-signature').on('pageshow', function (e, data) {
 
 //go tp home page
 $('[data-role=header]').on('click', '.home', function (event, ui) {
-    $.mobile.changePage('#main-page');
+    location.reload();
+    //$.mobile.changePage('#main-page');
     //global_vars = default_global_vars;
 });
 
@@ -159,6 +160,7 @@ $(document).ready(function (e) {
             $('.regularDriversCls:last .occupation input').val($('#applicantOccupation').val());
             $('.regularDriversCls:last .DateOfBirth input').val($('#applicantDateOfBirth').val());
             $('.regularDriversCls:last .DriversDL input').val($('#applicantIDNumber').val());
+            $('.regularDriversCls:last .DriversDLExpirationDate input').val($('#applicationIDExpirationDate').val());
             $('.regularDriversCls:last .DriversDLOriginalDateOfIssue input').val('2000-06-22');
         }
     });
@@ -180,6 +182,8 @@ $(document).ready(function (e) {
             $('.regularDriversCls:last .occupation input').val('');
             $('.regularDriversCls:last .DateOfBirth input').val(r.birthDate.substring(0, 10));
             $('.regularDriversCls:last .DriversDL input').val(id);
+            
+            $('.regularDriversCls:last .DriversDLExpirationDate input').val('2020-06-22');
             $('.regularDriversCls:last .DriversDLOriginalDateOfIssue input').val('2000-06-22');
 
         });
@@ -194,52 +198,52 @@ $(document).ready(function (e) {
 
 
 
-    //inexperienced driver
-    $('#inexperiencedDriversBtns').on('click', '.Add', function () {
-        var $this = $('#inexperiencedDriversBtns .Add');
-        var id = $('#inexperiencedDriverQueryID').val();
-        add_driver($this, id, function (r) {
-            $('#inexperiencedDriverQueryID').val('');
-            var elementGroup = $('.inexperiencedDriversCls:last');
-            if ($('#inexperiencedDriversId').is(':visible')) {
-                elementGroup.clone().insertAfter(elementGroup).show().find('input:text').val('');
-                resetInexperiencedDriver();
-            } else {
-                $('#inexperiencedDriversId').show()
-            }
-            $('.inexperiencedDriversCls:last .name input').val(r.firstName + ' ' + r.lastName);
-            $('.inexperiencedDriversCls:last .occupation input').val('');
-            $('.inexperiencedDriversCls:last .DateOfBirth input').val(r.birthDate.substring(0, 10));
-            $('.inexperiencedDriversCls:last .DriversDL input').val(id);
-            $('.inexperiencedDriversCls:last .DriversDLOriginalDateOfIssue input').val('');
+    ////inexperienced driver
+    //$('#inexperiencedDriversBtns').on('click', '.Add', function () {
+    //    var $this = $('#inexperiencedDriversBtns .Add');
+    //    var id = $('#inexperiencedDriverQueryID').val();
+    //    add_driver($this, id, function (r) {
+    //        $('#inexperiencedDriverQueryID').val('');
+    //        var elementGroup = $('.inexperiencedDriversCls:last');
+    //        if ($('#inexperiencedDriversId').is(':visible')) {
+    //            elementGroup.clone().insertAfter(elementGroup).show().find('input:text').val('');
+    //            resetInexperiencedDriver();
+    //        } else {
+    //            $('#inexperiencedDriversId').show()
+    //        }
+    //        $('.inexperiencedDriversCls:last .name input').val(r.firstName + ' ' + r.lastName);
+    //        $('.inexperiencedDriversCls:last .occupation input').val('');
+    //        $('.inexperiencedDriversCls:last .DateOfBirth input').val(r.birthDate.substring(0, 10));
+    //        $('.inexperiencedDriversCls:last .DriversDL input').val(id);
+    //        $('.inexperiencedDriversCls:last .DriversDLOriginalDateOfIssue input').val('');
 
-        });
-    });
+    //    });
+    //});
 
-    $('#inexperiencedDriversBtns').on('click', '.Reset', function () {
-        $('.inexperiencedDriversCls').not('.inexperiencedDriversCls:first').remove();
-        $('.inexperiencedDriversCls').find('input:text').val('');
-        $('#inexperiencedDriversId').hide()
-        resetInexperiencedDriver();
-    });
+    //$('#inexperiencedDriversBtns').on('click', '.Reset', function () {
+    //    $('.inexperiencedDriversCls').not('.inexperiencedDriversCls:first').remove();
+    //    $('.inexperiencedDriversCls').find('input:text').val('');
+    //    $('#inexperiencedDriversId').hide()
+    //    resetInexperiencedDriver();
+    //});
 
-    //Inexperienced Driver
-    $('#InexperiencedDriverBlock input').change(function () {
-        var isChecked = false;
-        $('.inexperiencedDriver').each(function (index, element) {
-            var checked_value = $(element).is(':checked');
-            if (checked_value) {
-                isChecked = true;
-                return true;
-            }
-        })
-        if (isChecked) {
-            $('#inexperiencedDriversBtns').show();
-        } else {
-            $("#inexperiencedDriversBtns .Reset").trigger("click");
-            //$('#inexperiencedDriversId').hide();
-        }
-    });
+    ////Inexperienced Driver
+    //$('#InexperiencedDriverBlock input').change(function () {
+    //    var isChecked = false;
+    //    $('.inexperiencedDriver').each(function (index, element) {
+    //        var checked_value = $(element).is(':checked');
+    //        if (checked_value) {
+    //            isChecked = true;
+    //            return true;
+    //        }
+    //    })
+    //    if (isChecked) {
+    //        $('#inexperiencedDriversBtns').show();
+    //    } else {
+    //        $("#inexperiencedDriversBtns .Reset").trigger("click");
+    //        //$('#inexperiencedDriversId').hide();
+    //    }
+    //});
 
 
     ////TRN///////
@@ -289,6 +293,10 @@ $(document).ready(function (e) {
     $('#personal-main-page').on('click', '#clearTRNDetails', function () {
         SetTRnDetails(false);
         $('#applicantTRNDetails input').val('');
+        $('#applicantTRN').val('');
+        $('#applicantIDNumber').val('');
+        $('#applicationIDExpirationDate').val('');
+        $('#applicantHomeStreetName').val('');
     });
 
     function populateApplicant(r) {
@@ -521,6 +529,7 @@ $(document).ready(function (e) {
         r.engineNo = "jdfsjdfsjf99034329";
         r.colour = "White";
         r.vehicleStatus = "";
+        r.sumInsured = $('#QueryVehicleSumInsured').val();
         insertVehicle(r);
     });
 
@@ -554,6 +563,12 @@ $(document).ready(function (e) {
             alert('Duplicate!');
         }*/
 
+        if ($('#QueryVehicleSumInsured').val() < 1000) {
+            alert('Invalid Sum Insured!');
+            $.mobile.loading("hide");
+            return;
+        }
+
 
         $.ajax({
             type: 'GET',
@@ -567,6 +582,7 @@ $(document).ready(function (e) {
                 } else if (json.Message) {
                     alert("Invalid Chassis/Plate No!!");
                 } else {
+                    json.sumInsured = $('#QueryVehicleSumInsured').val();
                     insertVehicle(json);
                 }
 
@@ -603,7 +619,7 @@ $(document).ready(function (e) {
         var CaptionBaseVehicleStatus = 'vehicleStatus';
         var CaptionBaseVehicleValue = 'vehicleValue';
 
-
+       
 
         var htmlValues = '<span>' + r.plateNo + '</span>' +
             '<input type="hidden" id="' + CaptionBaseVehicleRegistrationNo + cnt + '" name="' + CaptionBaseVehicleRegistrationNo + cnt + '" value="' + r.plateNo + '" />' +
@@ -615,6 +631,7 @@ $(document).ready(function (e) {
             '<input type="hidden" id="' + CaptionBaseVehicleType + cnt + '" name="' + CaptionBaseVehicleType + cnt + '" value="' + r.vehicleType + '" />' +
             '<input type="hidden" id="' + CaptionBaseVehicleEngineNo + cnt + '" name="' + CaptionBaseVehicleEngineNo + cnt + '" value="' + r.engineNo + '" />' +
             '<input type="hidden" id="' + CaptionBaseVehicleColour + cnt + '" name="' + CaptionBaseVehicleColour + cnt + '" value="' + r.colour + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleValue + cnt + '" name="' + CaptionBaseVehicleValue + cnt + '" value="' + r.sumInsured + '" />' +
             '<input type="hidden" id="' + CaptionBaseVehicleStatus + cnt + '" name="' + CaptionBaseVehicleStatus + cnt + '" value="' + r.vehicleStatus + '" />';
 
 
@@ -642,7 +659,7 @@ $(document).ready(function (e) {
         //
         var sumInsuredCell = $('<div/>');
         sumInsuredCell.addClass('ui-block-e');
-        sumInsuredCell.html('<input  data-mini="true" data-clear-btn="true" type="number" id="' + CaptionBaseVehicleValue + cnt + '" name="' + CaptionBaseVehicleValue + cnt + '" value="" />');
+        sumInsuredCell.html('<input type="text" "style="margin-left:auto; margin-right:0;" value="' + accounting.formatMoney(r.sumInsured) + '" disabled/>');
         sumInsuredCell.appendTo(gridRow);
         //
         if (IsDuplicate(r.chassisNo)) {

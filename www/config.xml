@@ -110,5 +110,5 @@
   <preference name="android-targetSdkVersion" value="1" />
   <preference name="ShowTitle" value="True" />
   <preference name="Orientation" value="portrait" />
-  <preference name="Fullscreen" value="True" />
+  <preference name="Fullscreen" value="false" />
 </widget>
