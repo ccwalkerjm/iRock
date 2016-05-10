@@ -50,8 +50,6 @@
     <div data-role="page" id="personal-main-page">
 
         <div data-role="header" class="header" data-position="fixed">
-            <h1 id="app-title">Personal Details</h1>
-            <a href="/" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Main</a>
         </div>
 
         <div data-role="main" class="ui-content">
@@ -110,16 +108,8 @@
                 </div>
 
                 <div class="ui-field-contain">
-                    <label for="currency">Currency:</label>
-                    <select name="currency" id="currency">
-                        <option value="JA">Jamaican Dollar</option>
-                        <option value="USD">United States Dollar</option>
-                    </select>
                     <label for="applicantNationality">Country of Nationality:</label>
                     <select name="applicantNationality" id="applicantNationality" class="countries"></select>
-                </div>
-
-                <div class="ui-field-contain">
                     <label for="applicantIDType" class="select">ID Type:</label>
                     <select id="applicantIDType" name="applicantIDType">
                         <option value="national">National ID</option>
@@ -131,23 +121,18 @@
                     <label for="applicationIDExpirationDate">Expiration Date:</label>
                     <input type="date" id="applicationIDExpirationDate" name="applicationIDExpirationDate" placeholder="Enter Expiration Date" value="">
                 </div>
-                <div class="ui-field-contain">
-                    <label for="startDate">Start Date:</label>
-                    <input name="startDate" type="date" id="startDate" placeholder="Start Date" />
-                </div>
+
             </form>
         </div>
 
         <footer data-role="footer" data-position="fixed">
-            <h4>Insurance App</h4>
+            
         </footer>
     </div>
 
     <div data-role="page" id="personal-contact-page">
 
         <div data-role="header" class="header" data-position="fixed">
-            <h1 id="app-title">Personal Details</h1>
-            <a href="/" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext" rel="external">Main</a>
         </div>
 
         <div data-role="main" class="ui-content">
@@ -293,15 +278,13 @@
 
         </div>
         <footer data-role="footer" data-position="fixed">
-            <h4>Insurance App</h4>
+            
         </footer>
     </div>
 
     <div data-role="page" id="personal-employer-details-page">
 
         <div data-role="header" class="header">
-            <h1 id="app-title">Employer Details</h1>
-            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
         </div>
 
         <div data-role="main" class="ui-content">
@@ -413,7 +396,7 @@
 
         </div>
         <footer data-role="footer" data-position="fixed">
-            <h4>Insurance App</h4>
+            
         </footer>
     </div>
 
@@ -469,8 +452,6 @@
     <div data-role="page" id="vehicle-particulars-page">
 
         <div data-role="header" class="header">
-            <h1 id="app-title">Particulars Of Vehicle</h1>
-            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
         </div>
 
         <div data-role="main" class="ui-content">
@@ -500,7 +481,18 @@
                 </div>
 
                 <hr />
+                <div class="ui-grid-a">
+                    <input type="hidden" name="currency" id="currency" value="JA" />
+                    <div class="ui-block-a" style="width:40%">
+                        <label for="startDate">Insurance Start Date:</label>
+                    </div>
+                    <div class="ui-block-b" style="width:60%">
+                        <input name="startDate" type="date" id="startDate" placeholder="Start Date" />
+                    </div>
+                </div>
+
                 <div class="ui-grid-c">
+
                     <div class="ui-block-a" style="width:40%">
                         <label for="isOwnerOfVehicle">Are you the owner of the vehicle?</label>
                     </div>
@@ -589,15 +581,13 @@
 
         </div>
         <footer data-role="footer" data-position="fixed">
-            <h4>Insurance App</h4>
+            
         </footer>
     </div>
 
     <div data-role="page" id="vehicle-insurance-coverage-page">
 
         <div data-role="header" class="header">
-            <h1 id="app-title"></h1>
-            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
         </div>
 
         <div data-role="main" class="ui-content">
@@ -807,7 +797,7 @@
         </div>
 
         <footer data-role="footer" data-position="fixed">
-            <h4>Insurance App</h4>
+            
         </footer>
     </div>
 
@@ -815,8 +805,6 @@
     <div data-role="page" id="vehicle-driver-details-page">
 
         <div data-role="header" class="header">
-            <h1 id="app-title">Driver details</h1>
-            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
         </div>
 
         <div data-role="main" class="ui-content">
@@ -963,15 +951,13 @@
 
         </div>
         <footer data-role="footer" data-position="fixed">
-            <h4>Insurance App</h4>
+            
         </footer>
     </div>
 
     <div data-role="page" id="vehicle-accidents-page">
 
         <div data-role="header" class="header">
-            <h1 id="app-title">Accidents</h1>
-            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
         </div>
 
         <div data-role="main" class="ui-content">
@@ -1048,15 +1034,13 @@
 
         </div>
         <footer data-role="footer" data-position="fixed">
-            <h4>Insurance App</h4>
+            
         </footer>
     </div>
 
     <div data-role="page" id="vehicle-medical-history-page">
 
         <div data-role="header" class="header">
-            <h1 id="app-title">Medical History</h1>
-            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
         </div>
 
         <div data-role="main" class="ui-content">
@@ -1230,15 +1214,13 @@
         </div>
 
         <footer data-role="footer" data-position="fixed">
-            <h4>Insurance App</h4>
+            
         </footer>
     </div>
 
     <div data-role="page" id="home-particulars-page">
 
         <div data-role="header" class="header">
-            <h1 id="app-title">Particulars of Home</h1>
-            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
         </div>
 
         <div data-role="main" class="ui-content">
@@ -1298,15 +1280,13 @@
         </div>
 
         <footer data-role="footer" data-position="fixed">
-            <h4>Insurance App</h4>
+            
         </footer>
     </div>
 
     <div data-role="page" id="home-particulars-continued-page">
 
         <div data-role="header" class="header">
-            <h1 id="app-title">Particulars of Home continued</h1>
-            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
         </div>
 
         <div data-role="main" class="ui-content">
@@ -1416,15 +1396,13 @@
         </div>
 
         <footer data-role="footer" data-position="fixed">
-            <h4>Insurance App</h4>
+            
         </footer>
     </div>
 
     <div data-role="page" id="home-property-details-page">
 
         <div data-role="header" class="header">
-            <h1 id="app-title">Details Of Property</h1>
-            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
         </div>
 
         <div data-role="main" class="ui-content">
@@ -1437,6 +1415,16 @@
                         The SUMS TO BE INSURED must represent the FULL NEW REPLACEMENT COST of the Property and should include adequate provision for demolition and debris removal costs in the event of major damage as well as professional fees that would be incurred in reinstatement. As the Company will pay up to 10% of the Sum insured in respect of Rent lost or reasonable costs of alternative accomodation if damage by an Insured Peril renders the home uninhabitable, provision for this should also be included in your Sums Insured.
                     </p>
 
+                </div>
+
+                <div class="ui-field-contain">
+                    <label for="startDate">Insurance Start Date:</label>
+                    <input name="startDate" type="date" id="startDate" placeholder="Start Date" />
+                    <label for="currency">Currency:</label>
+                    <select name="currency" id="currency" data-mini="true">
+                        <option value="JA">Jamaican Dollar</option>
+                        <option value="USD">United States Dollar</option>
+                    </select>
                 </div>
 
 
@@ -1551,15 +1539,12 @@
         </div>
 
         <footer data-role="footer" data-position="fixed">
-            <h4>Insurance App</h4>
+            
         </footer>
     </div>
 
     <div data-role="page" id="home-all-risk-insurance-page">
-
-        <div data-role="header" class="header">
-            <h1 id="app-title">All Risk Insurance</h1>
-            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
+        <div data-role="header" class="header">            
         </div>
 
         <div data-role="main" class="ui-content">
@@ -1770,40 +1755,13 @@
         </div>
 
         <footer data-role="footer" data-position="fixed">
-            <h4>Insurance App</h4>
+            
         </footer>
     </div>
-
-
-    <div data-role="page" id="page-quotation">
-        <div data-role="header" class="header" data-position="fixed">
-            <h1 id="app-title">Validation</h1>
-            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
-        </div>
-
-        <div data-role="main" class="ui-content">
-
-            <div class="">
-                <!--<a id="get-quotation" href="#" class="ui-btn">Submit</a>-->
-                <a href="#personal-main-page" data-role="button">Modify</a>
-                <a id="confirmQuotation" href="#page-signature" data-role="button">Confirm</a>
-            </div>
-            <!--<input type="hidden" id="quotation-number" />
-            <div id="quotation"></div>-->
-
-        </div>
-
-        <footer data-role="footer" data-position="fixed">
-            <h4>Iron Rock Insurance-Mobile App</h4>
-        </footer>
-    </div>
-
 
 
     <div data-role="page" id="page-signature">
         <div data-role="header" class="header" data-position="fixed">
-            <h1 id="app-title"></h1>
-            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
         </div>
 
         <div data-role="main" class="ui-content">
@@ -1818,7 +1776,15 @@
 
                 <div id="signature" style="width:600px; height:150px;"></div>
 
-                <div id="lowerControls">
+                <form class="ProposalForm">
+                    <div data-role="controlgroup">
+                        <a href="#personal-main-page" data-role="button" data-inline="true" data-mini="true" data-icon="delete">Return</a>
+                        <a id="clear-canvas" href="#" data-role="button" data-inline="true" data-icon="back" data-mini="true">Clear</a>
+                        <a id="submit-btn" href="#" data-role="button" data-inline="true" data-icon="check" data-mini="true">Submit</a>
+                    </div>
+                </form>
+                
+                <!--<div id="lowerControls">
                     <div id="feedback"></div>
                     <div id="buttonsContainer">
                         <div data-role="controlgroup">
@@ -1827,7 +1793,8 @@
                             <a id="submit-btn" href="#" data-role="button" data-inline="true" data-icon="check" data-mini="true">Submit</a>
                         </div>
                     </div>
-                </div>
+                </div>-->
+
             </div>
             <input type="hidden" id="quotation-number" />
             <div id="quotation"></div>
@@ -1835,31 +1802,11 @@
 
         </div>
 
-        <footer data-role="footer" data-position="fixed">
-            <h4>Iron Rock Insurance-Mobile App</h4>
+        <footer data-role="footer" data-position="fixed">            
         </footer>
     </div>
 
-    <div data-role="page" id="page-final">
-        <div data-role="header" class="header" data-position="fixed">
-            <h1 id="app-title">Thank You</h1>
-            <a href="#" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-home ui-btn-icon-notext home" rel="external">Home</a>
-        </div>
-
-        <div data-role="main" class="ui-content">
-
-            <div class="">
-                <p>A Quote has been Created. Note the limits below</p>
-            </div>
-
-        </div>
-
-        <footer data-role="footer" data-position="fixed">
-            <h4>Iron Rock Insurance-Mobile App</h4>
-        </footer>
-    </div>
-
-
+   
     <script src="scripts/accounting.min.js"></script>
     <script src="scripts/jquery.validate.min.js"></script>
     <script src="cordova.js"></script>
@@ -1868,7 +1815,6 @@
     <script src="scripts/jSignature/jSignature.min.js"></script>
     <!--Custom js-->
     <script src="scripts/miscellaneous.js"></script>
-    <script src="scripts/webservice.js"></script>
     <script src="scripts/index.js"></script>
 
 

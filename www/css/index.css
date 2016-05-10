@@ -28,7 +28,7 @@
 
 
 
-/*/*Inline form*/
+/*Inline form*/
 .form-inline .ui-grid-a a{
     float: left;
 }
@@ -43,4 +43,12 @@
 
 .form-inline .ui-grid-a>.form-inline .ui-block-b{
     width: 40%;
-}*/
+}
+
+/* mark readonly inputs */
+input[readonly]
+{    
+    cursor:auto;
+    background-color: #ededed;
+    color: #888;
+}

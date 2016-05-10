@@ -13,7 +13,11 @@
 
 var baseUrl = "https://api.courserv.com/ironrock"; //localhost:58633/api/";
 
-document.addEventListener('deviceready', onDeviceReady.bind(this), false);
+
+$(document).ready(function (e) {
+
+    document.addEventListener('deviceready', onDeviceReady.bind(this), false);
+})
 
 function onPause() {
     // TODO: This application has been suspended. Save application state here.
@@ -29,12 +33,13 @@ function onDeviceReady() {
     document.addEventListener('pause', onPause.bind(this), false);
     document.addEventListener('resume', onResume.bind(this), false);
 
-
+    
+    doMiscellaneous();
+    doPrimaryFunctions();
 
     //window.location.hash = 'main-page';
     ////// #initialise jQM
     //$.mobile.initializePage();
-
 }
 
 //initialize signature app
@@ -47,12 +52,13 @@ $('#page-signature').on('pageshow', function (e, data) {
 
 //go tp home page
 $('[data-role=header]').on('click', '.home', function (event, ui) {
+    navigator.app.loadUrl("file:///android_asset/www/index.html", { wait: 2000, loadingDialog: "Wait,Loading App", loadUrlTimeoutValue: 60000 });
+});
+
+
+//exit app
+$('[data-role=header]').on('click', '.exitApp', function (event, ui) {
     navigator.app.exitApp();
-    //document.location = "index.html"
-    //navigator.app.loadUrl("file:///android_asset/www/index.html", { wait: 2000, loadingDialog: "Wait,Loading App", loadUrlTimeoutValue: 60000 });
-    //location.reload();
-    //$.mobile.changePage('#main-page');
-    //global_vars = default_global_vars;
 });
 
 
@@ -66,7 +72,8 @@ $(document).on("pagebeforeshow", "#page-quotation", function () { // When enteri
 
 
 
-$(document).ready(function (e) {
+//$(document).ready(function (e) {
+function doPrimaryFunctions() {
     $('form').validate({
         rules: {
             applicantSurname: {
@@ -185,7 +192,7 @@ $(document).ready(function (e) {
             $('.regularDriversCls:last .occupation input').val('');
             $('.regularDriversCls:last .DateOfBirth input').val(r.birthDate.substring(0, 10));
             $('.regularDriversCls:last .DriversDL input').val(id);
-            
+
             $('.regularDriversCls:last .DriversDLExpirationDate input').val('2020-06-22');
             $('.regularDriversCls:last .DriversDLOriginalDateOfIssue input').val('2000-06-22');
 
@@ -354,6 +361,10 @@ $(document).ready(function (e) {
 
 
     $('#page-signature').on('click', '#submit-btn', function () {
+        var isvalid = $('form').valid();
+        if (!isvalid) {
+            alert('There are invalid entries. Please examine each section carefully!')
+        }
         var $this = $(this),
             theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
             msgText = $this.jqmData("msgtext") || $.mobile.loader.prototype.options.text,
@@ -380,7 +391,7 @@ $(document).ready(function (e) {
         //    }
         //});
         //var formData = JSON.stringify(formData);
-        console.log(formData);        
+        console.log(formData);
         var serverUrl = baseUrl + "/ironrockquote/"; //; // + $('#quotation-number').val();
         $.ajax({
             type: 'POST',
@@ -397,9 +408,7 @@ $(document).ready(function (e) {
                     alert(r.error_message ? r.error_message : '' + r.Message ? r.Message : '');
                 } else {
                     loadQuotation(r);
-                    //$('#quotation-number').val(r.quotation_number);
-                    //$('#get-quotation').hide();
-                    //$('#confirmQuotation').show();
+                    $('#page-signature').find('[data-role=footer] a').hide();
                 }
             },
             error: function (err) {
@@ -437,7 +446,7 @@ $(document).ready(function (e) {
                 delete formData[key];
             }
         });
-        //formData = "signatureBytes=&insuranceType=motor&applicantTRN=&applicantSurname=&FirstName=&applicantMiddleName="; // $("form").serialize();
+        
         var serverUrl = baseUrl + "/ironrockquote/";
         var data = JSON.stringify(formData);
         console.log(formData);
@@ -472,21 +481,7 @@ $(document).ready(function (e) {
 
     });
 
-    /* premium_calculation = new PremiumCalculation
-                     {
-                         net_premium = 10000,
-                         stamp_duty = 1000,
-                         tax = 500,
-                         total_premium = 11500
-                     },
-                     quotation_number = 5345435,
-                     success = true,*/
-    /*  code": "ME_AOE",
-              "heading": "Medical Expenses ",
-              "limit": 30000,
-              "description": "I*/
-
-
+    
     function loadQuotation(r) {
         $('#signatureContainer').hide();
         $('#quotation-number').val(r.quotation_number);
@@ -496,10 +491,10 @@ $(document).ready(function (e) {
         table.attr('data-role', "table");
         table.addClass('ui-responsive');
         table.append('<tr><th>Quotation No:</th><td>' + r.quotation_number + '</td></tr>');
-        //table.append('<tr><th style="text-align: right;">Net Premium:</th><td style="text-align: right;">' + r.premium_calculation.net_premium + '</td></tr>');
-        //table.append('<tr><th style="text-align: right;">Stamp Duty:</th><td style="text-align: right;">' + r.premium_calculation.stamp_duty + '</td></tr>');
-        //table.append('<tr><th style="text-align: right;">Tax:</th><td style="text-align: right;">' + r.premium_calculation.tax + '</td></tr>');
-        //table.append('<tr><th style="text-align: right;">Total Premium:</th><td style="text-align: right;">' + r.premium_calculation.total_premium + '</td></tr>');
+        table.append('<tr><th style="text-align: right;">Net Premium:</th><td style="text-align: right;">' + accounting.formatMoney(r.premium_calculation.net_premium) + '</td></tr>');
+        table.append('<tr><th style="text-align: right;">Stamp Duty:</th><td style="text-align: right;">' + accounting.formatMoney(r.premium_calculation.stamp_duty) + '</td></tr>');
+        table.append('<tr><th style="text-align: right;">Tax:</th><td style="text-align: right;">' + accounting.formatMoney(r.premium_calculation.tax) + '</td></tr>');
+        table.append('<tr><th style="text-align: right;">Total Premium:</th><td style="text-align: right;">' + accounting.formatMoney(r.premium_calculation.total_premium) + '</td></tr>');
         table.appendTo(container);
         if (r.limits.length > 0) {
             var limitHeader = $('<h4/>').text('Limits');
@@ -624,8 +619,6 @@ $(document).ready(function (e) {
     //insert vehicle
     function insertVehicle(r) {
 
-
-
         var cnt = $('#vehiclesToBeInsured .vehicle').length;
         var CaptionBaseVehicleRegistrationNo = 'vehicleRegistrationNo';
         var CaptionBaseVehicleChassisNo = 'vehicleChassisNo';
@@ -639,7 +632,7 @@ $(document).ready(function (e) {
         var CaptionBaseVehicleStatus = 'vehicleStatus';
         var CaptionBaseVehicleValue = 'vehicleValue';
 
-       
+
 
         var htmlValues = '<span>' + r.plateNo + '</span>' +
             '<input type="hidden" id="' + CaptionBaseVehicleRegistrationNo + cnt + '" name="' + CaptionBaseVehicleRegistrationNo + cnt + '" value="' + r.plateNo + '" />' +
@@ -691,9 +684,7 @@ $(document).ready(function (e) {
         }
     }
 
-
-
-
+    
 
     //check duplicate
     function IsDuplicate(val) {
@@ -725,4 +716,6 @@ $(document).ready(function (e) {
 
 
 
-});
+}
+
+//);

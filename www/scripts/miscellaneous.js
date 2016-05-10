@@ -1,6 +1,26 @@
 //function onDeviceReady() {
 
-$(document).ready(function (e) {
+//$(document).ready(function (e) {
+
+function doMiscellaneous() {
+
+    //set menu
+
+    $('#menu-vehicle').click(function () {
+        $('#insuranceType').val('motor');
+        setmenu(getVehicleMenu(), "Vehicle Insurance");
+       // SetPageHeaderFooter(getVehicleMenu());
+        $.mobile.changePage($("#personal-main-page"), "none");
+    });
+
+    $('#menu-property').click(function () {
+        $('#insuranceType').val('property');
+        setmenu(getPropertyMenu(), "Property Insurance");
+      //  SetPageHeaderFooter(getPropertyMenu());
+        $.mobile.changePage($("#personal-main-page"), "none");
+    });
+
+
     //$(document).on("mobileinit", function () {
     //
     //vehicle Used As
@@ -18,22 +38,22 @@ $(document).ready(function (e) {
         //$('label[for=a], input#a').hide();
         //show relevant inputs
         switch (select_value) {
-        case "CarriageOwnGoods": //private commercial               
-        case "CarriagePassengersNotHire": //private commercial
-        case "CarriagePassengersHire": //private commercial
-        case "CommercialTravelling": //private commercial
-            $('label[for=23YearsOldPrivateCommercial], input#23YearsOldPrivateCommercial').show();
-            $('label[for=36MonthsGeneralLicencePrivateCommercial], input#36MonthsGeneralLicencePrivateCommercial').show();
-            break;
-        case "GeneralCartage": //General Cartage  
-            $('label[for=25YearsOldGeneralCartage], input#25YearsOldGeneralCartage').show();
-            $('label[for=5YearsGeneralLicencePublicCommercial], input#5YearsGeneralLicencePublicCommercial').show();
-            break;
-        case "SocialDomesticPleasure": //private car
-        case "SocialDomesticPleasureBusiness": //private car
-            $('label[for=21YearsOldPrivateCars], input#21YearsOldPrivateCars').show();
-            $('label[for=24MonthsPrivateLicence], input#24MonthsPrivateLicence').show();
-            break;
+            case "CarriageOwnGoods": //private commercial               
+            case "CarriagePassengersNotHire": //private commercial
+            case "CarriagePassengersHire": //private commercial
+            case "CommercialTravelling": //private commercial
+                $('label[for=23YearsOldPrivateCommercial], input#23YearsOldPrivateCommercial').show();
+                $('label[for=36MonthsGeneralLicencePrivateCommercial], input#36MonthsGeneralLicencePrivateCommercial').show();
+                break;
+            case "GeneralCartage": //General Cartage  
+                $('label[for=25YearsOldGeneralCartage], input#25YearsOldGeneralCartage').show();
+                $('label[for=5YearsGeneralLicencePublicCommercial], input#5YearsGeneralLicencePublicCommercial').show();
+                break;
+            case "SocialDomesticPleasure": //private car
+            case "SocialDomesticPleasureBusiness": //private car
+                $('label[for=21YearsOldPrivateCars], input#21YearsOldPrivateCars').show();
+                $('label[for=24MonthsPrivateLicence], input#24MonthsPrivateLicence').show();
+                break;
         }
     }
 
@@ -152,9 +172,7 @@ $(document).ready(function (e) {
     $('#HomeAllRiskInsured').on('keyup', '.article-value input', function () {
         SetHomeAllRiskInsuredValue();
     });
-
-
-
+    
 
     //HomeInsurance
     $('#homeInsuranceProperty').on('click', '.Add', function () {
@@ -413,21 +431,6 @@ $(document).ready(function (e) {
         resetVehiclesToBeInsured();
     });
 
-
-    $('#menu-vehicle').click(function () {
-        $('#insuranceType').val('motor');
-        setmenu(getVehicleMenu(), "Vehicle Insurance");
-        SetPageHeaderFooter(getVehicleMenu());
-        $.mobile.changePage($("#personal-main-page"), "none");
-    });
-
-    $('#menu-property').click(function () {
-        $('#insuranceType').val('property');
-        setmenu(getPropertyMenu(), "Property Insurance");
-        SetPageHeaderFooter(getPropertyMenu());
-        $.mobile.changePage($("#personal-main-page"), "none");
-    });
-
     //anti-theft device
     $('#vehicleAntiTheftDevice').change(function () {
         var select_value = $(this).val();
@@ -561,7 +564,7 @@ $(document).ready(function (e) {
     //set Last Three Years of Ownership()
     setLastThreeYearsOwnership();
 
-});
+}  //);
 
 
 
@@ -796,7 +799,29 @@ function getPersonalMenu() {
     ];
 }
 
+
+//disable property elements
+function disablePropertyItems() {
+    $("#home-particulars-page :input").prop("disabled", true);
+    $("#home-particulars-continued-page :input").prop("disabled", true);
+    $("#home-property-details-page :input").prop("disabled", true);
+    $("#home-all-risk-insurance-page :input").prop("disabled", true);
+}
+
+
+//disable property elements
+function disableMotorVehicleItems() {
+    $("#vehicle-particulars-page :input").prop("disabled", true);
+    $("#vehicle-insurance-coverage-page :input").prop("disabled", true);
+    $("#vehicle-driver-details-page :input").prop("disabled", true);
+    $("#vehicle-accidents-page :input").prop("disabled", true);
+    $("#vehicle-medical-history-page :input").prop("disabled", true);
+    $("#taxOfficeVehicleDialog :input").prop("disabled", true);
+}
+
+
 function getVehicleMenu() {
+    disablePropertyItems();
     var vehicleMenuList = [
         {
             "name": "Vehicle Particulars",
@@ -826,6 +851,7 @@ function getVehicleMenu() {
 
 
 function getPropertyMenu() {
+    disableMotorVehicleItems();
     var propertyMenuList = [
         {
             "name": "Home Particulars",
@@ -855,41 +881,122 @@ function SetPageHeaderFooter(menu_list) {
     //<a href="#personal-contact-page" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-arrow-r ui-btn-icon-notext" rel="next">Next</a>       
     for (var i = 0; i < menu_list.length; i++) {
         var currentPage = $('#' + menu_list[i].value);
-        currentPage.find("[data-role=header]").find("h1").text(menu_list[i].name);
+        var currentHeader = currentPage.find("[data-role=header]");
+        var currentFooter = currentPage.find('[data-role=footer]');
+
+        //set title
+        currentHeader.find("h1").text(menu_list[i].name);
+        var logo = $('<img/>').attr('border', '0');
+        logo.attr('alt', '');
+        logo.attr('style', 'float:left;display:inline');
+        logo.attr('src', 'images/IronRockLogo30x30.png');
+        logo.appendTo(currentHeader);
+
+        //<img border="0" src="http://i490.photobucket.com/albums/rr270/pelicancup/FaceBook30x30.jpg" alt="Logo, Facebook" style="float:left;display:inline"/>
+        
         var prevI = i - 1;
         var nextI = i + 1;
         if (i > 0) {
             //insert previous link               
             var prevLink = '<a href="#' + menu_list[prevI].value + '" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-arrow-l ui-btn-icon-notext" rel="prev">Home</a>';
-            currentPage.find('[data-role=footer]').append(prevLink);
+            currentFooter.append(prevLink);
         }
         if (i < menu_list.length - 1) {
             //insert next link
             var nextLink = '<a href="#' + menu_list[nextI].value + '" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-arrow-r ui-btn-icon-notext" rel="next">Next</a>';
-            currentPage.find('[data-role=footer]').append(nextLink);
+            currentFooter.append(nextLink);
         }
     }
 }
 
 
-function setmenu(menu_list, menu_header) {
+function GetMenuPanelItems(menu_list) {
     var panelItems = "";
     $.each(menu_list, function (key, item) {
         panelItems = panelItems + '<li><a href="#' + item.value + '">' + item.name + '</a></li>';
     });
-    var p = 1;
+    return panelItems;
+}
+
+
+function setmenu(menu_list, menu_header) {
+    var menuLinks = GetMenuPanelItems(menu_list);
+    //$.each(menu_list, function (key, item) {
+    //    panelItems = panelItems + '<li><a href="#' + item.value + '">' + item.name + '</a></li>';
+    //});
+    
     var last_page_dom = $("#" + menu_list[menu_list.length - 1].value).get(0);
-    $.each(menu_list, function (key, item) {
+    
+    var p = 1;
+    $.each(menu_list, function (key, item) {  
         var currentPage = $('#' + item.value);
+        var currentHeader = currentPage.find('[data-role=header]');
+        var currentFooter = currentPage.find('[data-role=footer]');
+        
+        //set title
+        var title = $('<h1/>').text(item.name);
+        title.appendTo(currentHeader);
+        //set logo and logo link
+        var logoLink = $('<a/>');
+        logoLink.attr('data-role', 'button');
+       // logoLink.attr('data-theme', 'none');
+        logoLink.attr('data-corners', 'false');
+        logoLink.attr('data-inline', 'true');
+        logoLink.attr('data-shadow', 'false');
+        logoLink.attr('style','border:none;background-color: transparent;'); //'float:left;display:inline;width:30px;height:30px');
+        logoLink.attr('href', '#');
+        logoLink.addClass('home');       
+        var logo = $('<img/>').attr('border', '0');
+        logo.attr('alt', '');
+        logo.attr('style', 'height:30px');// ;border:none;background-color: transparent;'); //'float:left;display:inline;width:30px;height:30px');
+        logo.attr('src', 'images/IronRockLogoSmall.png');
+        logoLink.append(logo);
+        logoLink.appendTo(currentHeader);
+
+        var currDate = new Date();
+        var copyright = $('<h4/>').html('Copyright &nbsp; &copy;'+currDate.getFullYear()+', IronRock Insurance Company Limited');
+        copyright.appendTo(currentFooter);
+
+        //set prev and next links
+        var prevI = p-2;
+        var nextI = p;
+        if (p > 1) {
+            //insert previous link               
+            var prevLink = '<a href="#' + menu_list[prevI].value + '" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-arrow-l ui-btn-icon-notext" rel="prev">Home</a>';
+            currentFooter.append(prevLink);
+        }
+        if (p < menu_list.length) {
+            //insert next link
+            var nextLink = '<a href="#' + menu_list[nextI].value + '" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-arrow-r ui-btn-icon-notext" rel="next">Next</a>';
+            currentFooter.append(nextLink);
+        }
+
+
+        //set menu panel
         var current_page_dom = currentPage.get(0);
         if (currentPage.find('[data-role=panel]').length == 0 && last_page_dom != current_page_dom) {
-            var panel = '<div data-role="panel" data-display="overlay" data-mini="true" class="menu" id="panel' + p + '" data-dismissible="true" data-swipe-close="true" data-position="left">';
-            panel = panel + '<h2>' + menu_header + '</h2><ol data-role="listview" data-inset="true" data-mini="true">' + panelItems + '</ol></div>';
+            var panelId = 'panel' + p++;
+            var panel = '<div data-role="panel" data-display="overlay" data-mini="true" class="menu" id="' + panelId + '" data-dismissible="true" data-swipe-close="true" data-position="right">';
+            panel = panel + '<h2>' + menu_header + '</h2><ol data-role="listview" data-inset="true" data-mini="true">' + menuLinks + '</ol></div>';
             currentPage.prepend(panel);
-            var panelBtn = '<a href="#panel' + p + '" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-bars ui-btn-icon-notext" rel="search">Menu</a>'
-            currentPage.find('[data-role=header]').append(panelBtn);
+            
+            var btnGroup = $('<div/>').addClass('ui-btn-right').attr('data-role', 'controlgroup').attr('data-type', 'horizontal').attr('data-mini', 'true');
+            var panelBtn = $('<a/>'); //   '<a href="#panel' + p + '" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-bars ui-btn-icon-notext" rel="search">Menu</a>'
+            panelBtn.attr('href', '#' +panelId)
+            panelBtn.addClass('ui-btn ui-btn-corner-all ui-icon-bars ui-btn-icon-notext');  //ui-btn-right
+            //panelBtn.attr('data-role', 'button');
+            //panelBtn.attr('data-icon', 'bars');
+            panelBtn.appendTo(btnGroup);
+            var exitBtn = $('<a/>');
+            exitBtn.attr('href', '#');
+            exitBtn.addClass('ui-btn  ui-btn-corner-all ui-icon-delete ui-btn-icon-notext exitApp');  //ui-btn-right
+            //exitBtn.attr('data-role', 'button');
+            //exitBtn.attr('data-icon', 'delete');
+            exitBtn.appendTo(btnGroup);
+            btnGroup.appendTo(currentHeader);
+            //currentPage.find('[data-role=header]').append(panelBtn);
         }
-        p++;
+        //p++;
     });
 }
 
