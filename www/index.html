@@ -7,12 +7,7 @@
         Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
         For details, see http://go.microsoft.com/fwlink/?LinkID=617521
     -->
-    <meta http-equiv="Content-Security-Policy" content="
-          default-src *;
-          style-src * 'unsafe-inline' ;
-          script-src * 'unsafe-inline' ;
-          media-src *; img-src * data:;
-          " />
+    <meta http-equiv="Content-Security-Policy" content="default-src *;style-src * 'unsafe-inline' ;script-src * 'unsafe-inline' ;media-src *; img-src * data:;" />
     <!--    <meta http-equiv="Content-Security-Policy" content="default-src	'self' api.courserv.com; 'self' data: gap: api.courserv.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
     <!-- IronRockApplication references -->
 
@@ -114,8 +109,9 @@
                     <select id="applicantIDType" name="applicantIDType">
                         <option value="national">National ID</option>
                         <option value="passport">Passport</option>
-                        <option value="TRN" selected>Driver's Licence</option>
+                        <option value="driverLicense" selected>Driver's Licence</option>
                     </select>
+                    <input type="hidden" id="dateFirstIssued" />
                     <label for="applicantIDNumber">ID Number:</label>
                     <input type="number" id="applicantIDNumber" name="applicantIDnumber" placeholder="Enter ID Number">
                     <label for="applicationIDExpirationDate">Expiration Date:</label>
@@ -125,9 +121,7 @@
             </form>
         </div>
 
-        <footer data-role="footer" data-position="fixed">
-            
-        </footer>
+        <footer data-role="footer" data-position="fixed"></footer>
     </div>
 
     <div data-role="page" id="personal-contact-page">
@@ -277,9 +271,7 @@
             </form>
 
         </div>
-        <footer data-role="footer" data-position="fixed">
-            
-        </footer>
+        <footer data-role="footer" data-position="fixed"></footer>
     </div>
 
     <div data-role="page" id="personal-employer-details-page">
@@ -395,9 +387,7 @@
             </form>
 
         </div>
-        <footer data-role="footer" data-position="fixed">
-            
-        </footer>
+        <footer data-role="footer" data-position="fixed"></footer>
     </div>
 
     <div data-role="page" data-dialog="true" id="taxOfficeVehicleDialog">
@@ -441,9 +431,7 @@
                     </div>
                 </div>
                 <a href="#vehicle-particulars-page" class="ui-btn ui-btn-inline ui-icon-back ui-btn-icon-right">Return</a>
-                <a href="#" id="dummyTaxiVehicle" class="ui-btn ui-btn-inline" data-inline="true">Dummy Vehicle Insert</a>
-                <a href="#" id="queryTaxiVehicle" class="ui-btn ui-btn-inline ui-icon-plus ui-btn-icon-right" data-textonly="false" data-textvisible="true" data-msgtext="Retrieving Data..." data-inline="true">Query</a>
-
+                <a href="#" id="queryTaxiVehicle" class="ui-btn ui-btn-inline ui-icon-plus ui-btn-icon-right" data-textonly="false" data-textvisible="true" data-msgtext="Retrieving Data..." data-inline="true">Add</a>
             </form>
 
         </div>
@@ -580,9 +568,7 @@
             </form>
 
         </div>
-        <footer data-role="footer" data-position="fixed">
-            
-        </footer>
+        <footer data-role="footer" data-position="fixed"></footer>
     </div>
 
     <div data-role="page" id="vehicle-insurance-coverage-page">
@@ -796,9 +782,7 @@
             </form>
         </div>
 
-        <footer data-role="footer" data-position="fixed">
-            
-        </footer>
+        <footer data-role="footer" data-position="fixed"></footer>
     </div>
 
 
@@ -950,9 +934,7 @@
             </form>
 
         </div>
-        <footer data-role="footer" data-position="fixed">
-            
-        </footer>
+        <footer data-role="footer" data-position="fixed"></footer>
     </div>
 
     <div data-role="page" id="vehicle-accidents-page">
@@ -987,7 +969,7 @@
                                     </div>
                                     <div class="ui-field-contain cost" title="Cost(Paid/Estimated)">
                                         <label for="accidentCost0">Cost:</label>
-                                        <input type="text" name="accidentCost0" id="accidentCost0" placeholder="Cost (Paid/Estimated)" value="">
+                                        <input type="number" name="accidentCost0" id="accidentCost0" placeholder="Cost (Paid/Estimated)" value="">
                                     </div>
                                 </div>
                                 <div class="ui-block-b">
@@ -1033,9 +1015,7 @@
             </form>
 
         </div>
-        <footer data-role="footer" data-position="fixed">
-            
-        </footer>
+        <footer data-role="footer" data-position="fixed"></footer>
     </div>
 
     <div data-role="page" id="vehicle-medical-history-page">
@@ -1213,9 +1193,7 @@
 
         </div>
 
-        <footer data-role="footer" data-position="fixed">
-            
-        </footer>
+        <footer data-role="footer" data-position="fixed"></footer>
     </div>
 
     <div data-role="page" id="home-particulars-page">
@@ -1225,10 +1203,38 @@
 
         <div data-role="main" class="ui-content">
             <form class="ProposalForm">
+
+                <h4>Property Address</h4>
                 <div class="ui-field-contain">
-                    <label for="homeRiskAddress">Risk Address:</label>
-                    <input type="text" name="homeRiskAddress" id="homeRiskAddress" value="">
+                    <label for="homeRiskAddressStreetNo">Apt No/Street No:</label>
+                    <input type="text" id="homeRiskAddressStreetNo" name="homeRiskAddressStreetNo" placeholder="Enter Apt No/Street Number">
+
+                    <label for="homeRiskAddressStreetName">Street Name:</label>
+                    <input type="text" id="homeRiskAddressStreetName" name="homeRiskAddressStreetName" placeholder="Enter Street Name">
+
+                    <label for="homeRiskAddressTown">City/Town/Postal Zone:</label>
+                    <input type="text" id="homeRiskAddressTown" name="homeRiskAddressTown" placeholder="Enter City, Town or Postal Zone">
+
+                    <label for="homeRiskAddressParish">Select Parish:</label>
+                    <select name="homeRiskAddressParish" id="homeRiskAddressParish" data-mini="true">
+                        <option value="Kingston">Kingston</option>
+                        <option value="St. Andrew">St. Andrew</option>
+                        <option value="St. Catherine">St. Catherine</option>
+                        <option value="Clarendon">Clarendon</option>
+                        <option value="Manchester">Manchester</option>
+                        <option value="St. Elizabeth">St. Elizabeth</option>
+                        <option value="Westmoreland">Westmoreland</option>
+                        <option value="Hanover">Hanover</option>
+                        <option value="St. James">St. James</option>
+                        <option value="Trelawny">Trelawny</option>
+                        <option value="St. Ann">St. Ann</option>
+                        <option value="St. Mary">St. Mary</option>
+                        <option value="Portland">Portland</option>
+                        <option value="St. Thomas">St. Thomas</option>
+                    </select>
                 </div>
+
+
                 <div class="ui-field-contain">
                     <label for="homeType">Type of home:</label>
                     <select name="homeType" id="homeType">
@@ -1236,6 +1242,10 @@
                         <option value="Apartment with seperate entrance">Apartment With Seperate Entrance</option>
                         <option value="Rooms not self-contained?">Rooms Not Self-Contained</option>
                     </select>
+                    <label for="homeRiskAddressStoreys">No of Storeys:</label>
+                    <input type="number" id="homeRiskAddressStoreys" name="homeRiskAddressStoreys" placeholder="Enter Number of Storeys">
+                    <label for="homeRiskAddressYearBuilt">Year Built:</label>
+                    <input type="number" id="homeRiskAddressYearBuilt" name="homeRiskAddressYearBuilt" placeholder="Enter Year Built">
                 </div>
 
 
@@ -1279,9 +1289,7 @@
 
         </div>
 
-        <footer data-role="footer" data-position="fixed">
-            
-        </footer>
+        <footer data-role="footer" data-position="fixed"></footer>
     </div>
 
     <div data-role="page" id="home-particulars-continued-page">
@@ -1395,9 +1403,7 @@
 
         </div>
 
-        <footer data-role="footer" data-position="fixed">
-            
-        </footer>
+        <footer data-role="footer" data-position="fixed"></footer>
     </div>
 
     <div data-role="page" id="home-property-details-page">
@@ -1538,13 +1544,11 @@
 
         </div>
 
-        <footer data-role="footer" data-position="fixed">
-            
-        </footer>
+        <footer data-role="footer" data-position="fixed"></footer>
     </div>
 
     <div data-role="page" id="home-all-risk-insurance-page">
-        <div data-role="header" class="header">            
+        <div data-role="header" class="header">
         </div>
 
         <div data-role="main" class="ui-content">
@@ -1565,7 +1569,7 @@
 
                         <div class="ui-field-contain article-value">
                             <label for="HomeAllRiskArticleValue0">Value</label>
-                            <input type="text" name="HomeAllRiskArticleValue0" id="HomeAllRiskArticleValue0" value="">
+                            <input type="number" name="HomeAllRiskArticleValue0" id="HomeAllRiskArticleValue0" value="">
                         </div>
 
                         <div data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -1754,9 +1758,7 @@
 
         </div>
 
-        <footer data-role="footer" data-position="fixed">
-            
-        </footer>
+        <footer data-role="footer" data-position="fixed"></footer>
     </div>
 
 
@@ -1783,7 +1785,7 @@
                         <a id="submit-btn" href="#" data-role="button" data-inline="true" data-icon="check" data-mini="true">Submit</a>
                     </div>
                 </form>
-                
+
                 <!--<div id="lowerControls">
                     <div id="feedback"></div>
                     <div id="buttonsContainer">
@@ -1802,11 +1804,10 @@
 
         </div>
 
-        <footer data-role="footer" data-position="fixed">            
-        </footer>
+        <footer data-role="footer" data-position="fixed"></footer>
     </div>
 
-   
+
     <script src="scripts/accounting.min.js"></script>
     <script src="scripts/jquery.validate.min.js"></script>
     <script src="cordova.js"></script>

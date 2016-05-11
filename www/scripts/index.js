@@ -135,7 +135,7 @@ function doPrimaryFunctions() {
             html: html
         });
 
-        var serverUrl = baseUrl + "/trn/?id=" + id;
+        var serverUrl = baseUrl + "/DriverLicense/?id=" + id;
         $.ajax({
             type: 'GET',
             contentType: 'application/json',
@@ -164,14 +164,14 @@ function doPrimaryFunctions() {
 
     ////create first driver from applicant details
     $(document).one("pagebeforeshow", "#vehicle-driver-details-page", function () {
-        if (!$('#regularDriversId').is(":visible") && $('#applicantIDType').val() == 'TRN') {
+        if (!$('#regularDriversId').is(":visible") && $('#applicantIDType').val() == 'driverLicense') {
             $('#regularDriversId').show();
             $('.regularDriversCls:last .name input').val($('#applicantFirstName').val() + ' ' + $('#applicantSurname').val());
             $('.regularDriversCls:last .occupation input').val($('#applicantOccupation').val());
             $('.regularDriversCls:last .DateOfBirth input').val($('#applicantDateOfBirth').val());
             $('.regularDriversCls:last .DriversDL input').val($('#applicantIDNumber').val());
             $('.regularDriversCls:last .DriversDLExpirationDate input').val($('#applicationIDExpirationDate').val());
-            $('.regularDriversCls:last .DriversDLOriginalDateOfIssue input').val('2000-06-22');
+            $('.regularDriversCls:last .DriversDLOriginalDateOfIssue input').val($('#dateFirstIssued').val());
         }
     });
 
@@ -256,7 +256,8 @@ function doPrimaryFunctions() {
     //});
 
 
-    ////TRN///////
+    ///
+    ///////
     $('#personal-main-page').on('click', '#getTRNDetails', function () {
         var $this = $(this),
             theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
@@ -273,7 +274,7 @@ function doPrimaryFunctions() {
         });
 
         var id = $('#applicantTRN').val();
-        var serverUrl = baseUrl + "/trn/?id=" + id;
+        var serverUrl = baseUrl + "/DriverLicense/?id=" + id;
         $.ajax({
             type: 'GET',
             contentType: 'application/json',
@@ -305,24 +306,26 @@ function doPrimaryFunctions() {
         $('#applicantTRNDetails input').val('');
         $('#applicantTRN').val('');
         $('#applicantIDNumber').val('');
+        $('#dateFirstIssued').val('');
         $('#applicationIDExpirationDate').val('');
         $('#applicantHomeStreetName').val('');
     });
 
     function populateApplicant(r) {
         //id
-        $('#applicantIDNumber').val(r.id);
-        $('#applicationIDExpirationDate').val('2010-01-01');
+        $('#applicantIDNumber').val(r.driversLicenceNo);
+        $('#dateFirstIssued').val(r.dateFirstIssued);
+        $('#applicationIDExpirationDate').val(r.expiryDate);
         //address
         $('#applicantSurname').val(r.lastName);
         $('#applicantFirstName').val(r.firstName);
         $('#applicantMiddleName').val(r.middleName);
-        $('#applicantDateOfBirth').val(r.birthDate.substring(0, 10));
-        $('#applicantTitle').val(r.genderType == 'M' ? 'Mr.' : 'Ms.');
+        $('#applicantDateOfBirth').val(r.dateOfBirth.substring(0, 10));
+        $('#applicantTitle').val(r.gender == 'M' ? 'Mr.' : 'Ms.');
         //$('#applicantHomeCountry').val(r.CountryCode.toLowerCase()=='jamaica'?'JM':).trigger("change");
         //        $('#applicantHomeCountry option[value=' + r.CountryCode + ']').prop('selected', 'selected');
         //        $('#applicantHomeParish option[value=' + r.ParishCode + ']').prop('selected', 'selected');
-        $('#applicantHomeStreetName').val(r.StreetNo + ' ' + r.StreetName);
+        $('#applicantHomeStreetName').val(r.AddressMark + ', ' + r.AddressStreetNumber + ' ' + r.AddressStreetName);
         SetTRnDetails(true);
     }
 
