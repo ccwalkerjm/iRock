@@ -980,20 +980,20 @@ function setmenu(menu_list, menu_header) {
             panel = panel + '<h2>' + menu_header + '</h2><ol data-role="listview" data-inset="true" data-mini="true">' + menuLinks + '</ol></div>';
             currentPage.prepend(panel);
             
-            var btnGroup = $('<div/>').addClass('ui-btn-right').attr('data-role', 'controlgroup').attr('data-type', 'horizontal').attr('data-mini', 'true');
+            //var btnGroup = $('<div/>').addClass('ui-btn-right').attr('data-role', 'controlgroup').attr('data-type', 'horizontal').attr('data-mini', 'true');
             var panelBtn = $('<a/>'); //   '<a href="#panel' + p + '" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-bars ui-btn-icon-notext" rel="search">Menu</a>'
             panelBtn.attr('href', '#' +panelId)
-            panelBtn.addClass('ui-btn ui-btn-corner-all ui-icon-bars ui-btn-icon-notext');  //ui-btn-right
+            panelBtn.addClass('ui-btn ui-btn-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-right');  //ui-btn-right
             //panelBtn.attr('data-role', 'button');
             //panelBtn.attr('data-icon', 'bars');
-            panelBtn.appendTo(btnGroup);
-            var exitBtn = $('<a/>');
-            exitBtn.attr('href', '#');
-            exitBtn.addClass('ui-btn  ui-btn-corner-all ui-icon-delete ui-btn-icon-notext exitApp');  //ui-btn-right
+            panelBtn.appendTo(currentHeader);
+            //var exitBtn = $('<a/>');
+            //exitBtn.attr('href', '#');
+            //exitBtn.addClass('ui-btn  ui-btn-corner-all ui-icon-delete ui-btn-icon-notext exitApp');  //ui-btn-right
             //exitBtn.attr('data-role', 'button');
             //exitBtn.attr('data-icon', 'delete');
-            exitBtn.appendTo(btnGroup);
-            btnGroup.appendTo(currentHeader);
+            //exitBtn.appendTo(btnGroup);
+            //btnGroup.appendTo(currentHeader);
             //currentPage.find('[data-role=header]').append(panelBtn);
         }
         //p++;

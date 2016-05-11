@@ -33,7 +33,7 @@ function onDeviceReady() {
     document.addEventListener('pause', onPause.bind(this), false);
     document.addEventListener('resume', onResume.bind(this), false);
 
-    
+
     doMiscellaneous();
     doPrimaryFunctions();
 
@@ -326,6 +326,8 @@ function doPrimaryFunctions() {
         //        $('#applicantHomeCountry option[value=' + r.CountryCode + ']').prop('selected', 'selected');
         //        $('#applicantHomeParish option[value=' + r.ParishCode + ']').prop('selected', 'selected');
         $('#applicantHomeStreetName').val(r.AddressMark + ', ' + r.AddressStreetNumber + ' ' + r.AddressStreetName);
+        //
+        $("#applicantPhoto").attr('src', 'data:image/png;base64,' + r.photograph);
         SetTRnDetails(true);
     }
 
@@ -388,6 +390,22 @@ function doPrimaryFunctions() {
         //serilize form and convert to json
         //var formData = $('form').serialize();
         var formData = JSON.stringify($('form').serializeObject());
+        //$.each(formData, function (index) {
+        //    var that = this;
+        //    $.each(that, function (key, value) {               
+
+        //        var newKey = $.trim(key);
+        //        if (newKey == 'signatureBytes') return;
+        //        if (typeof value === 'string') {
+        //            that[newKey] = $.trim(value);
+        //        }
+
+        //        if (newKey !== key) {
+        //            delete that[key];
+        //        }
+        //    });
+        //});
+
         //$.each(formData, function (key, value) {
         //    if (value === "" || value === null) {
         //        delete formData[key];
@@ -412,6 +430,7 @@ function doPrimaryFunctions() {
                 } else {
                     loadQuotation(r);
                     $('#page-signature').find('[data-role=footer] a').hide();
+                    $('#signatureExit').show();
                 }
             },
             error: function (err) {
@@ -449,7 +468,7 @@ function doPrimaryFunctions() {
                 delete formData[key];
             }
         });
-        
+
         var serverUrl = baseUrl + "/ironrockquote/";
         var data = JSON.stringify(formData);
         console.log(formData);
@@ -484,7 +503,7 @@ function doPrimaryFunctions() {
 
     });
 
-    
+
     function loadQuotation(r) {
         $('#signatureContainer').hide();
         $('#quotation-number').val(r.quotation_number);
@@ -638,17 +657,17 @@ function doPrimaryFunctions() {
 
 
         var htmlValues = '<span>' + r.plateNo + '</span>' +
-            '<input type="hidden" id="' + CaptionBaseVehicleRegistrationNo + cnt + '" name="' + CaptionBaseVehicleRegistrationNo + cnt + '" value="' + r.plateNo + '" />' +
-            '<input type="hidden" id="' + CaptionBaseVehicleChassisNo + cnt + '" name="' + CaptionBaseVehicleChassisNo + cnt + '" value="' + r.chassisNo + '" />' +
-            '<input type="hidden" id="' + CaptionBaseVehicleMake + cnt + '" name="' + CaptionBaseVehicleMake + cnt + '" value="' + r.make + '" />' +
-            '<input type="hidden" id="' + CaptionBaseVehicleModel + cnt + '" name="' + CaptionBaseVehicleModel + cnt + '" value="' + r.model + '" />' +
-            '<input type="hidden" id="' + CaptionBaseVehicleYear + cnt + '" name="' + CaptionBaseVehicleYear + cnt + '" value="' + r.year + '" />' +
-            '<input type="hidden" id="' + CaptionBaseVehicleBody + cnt + '" name="' + CaptionBaseVehicleBody + cnt + '" value="' + r.vehicleBodyType + '" />' +
-            '<input type="hidden" id="' + CaptionBaseVehicleType + cnt + '" name="' + CaptionBaseVehicleType + cnt + '" value="' + r.vehicleType + '" />' +
-            '<input type="hidden" id="' + CaptionBaseVehicleEngineNo + cnt + '" name="' + CaptionBaseVehicleEngineNo + cnt + '" value="' + r.engineNo + '" />' +
-            '<input type="hidden" id="' + CaptionBaseVehicleColour + cnt + '" name="' + CaptionBaseVehicleColour + cnt + '" value="' + r.colour + '" />' +
-            '<input type="hidden" id="' + CaptionBaseVehicleValue + cnt + '" name="' + CaptionBaseVehicleValue + cnt + '" value="' + r.sumInsured + '" />' +
-            '<input type="hidden" id="' + CaptionBaseVehicleStatus + cnt + '" name="' + CaptionBaseVehicleStatus + cnt + '" value="' + r.vehicleStatus + '" />';
+            '<input type="hidden" id="' + CaptionBaseVehicleRegistrationNo + cnt + '" name="' + CaptionBaseVehicleRegistrationNo + cnt + '" value="' + $.trim(r.plateNo) + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleChassisNo + cnt + '" name="' + CaptionBaseVehicleChassisNo + cnt + '" value="' + $.trim(r.chassisNo) + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleMake + cnt + '" name="' + CaptionBaseVehicleMake + cnt + '" value="' + $.trim(r.make) + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleModel + cnt + '" name="' + CaptionBaseVehicleModel + cnt + '" value="' + $.trim(r.model) + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleYear + cnt + '" name="' + CaptionBaseVehicleYear + cnt + '" value="' + $.trim(r.year) + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleBody + cnt + '" name="' + CaptionBaseVehicleBody + cnt + '" value="' + $.trim(r.vehicleBodyType) + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleType + cnt + '" name="' + CaptionBaseVehicleType + cnt + '" value="' + $.trim(r.vehicleType) + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleEngineNo + cnt + '" name="' + CaptionBaseVehicleEngineNo + cnt + '" value="' + $.trim(r.engineNo) + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleColour + cnt + '" name="' + CaptionBaseVehicleColour + cnt + '" value="' + $.trim(r.colour) + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleValue + cnt + '" name="' + CaptionBaseVehicleValue + cnt + '" value="' + $.trim(r.sumInsured) + '" />' +
+            '<input type="hidden" id="' + CaptionBaseVehicleStatus + cnt + '" name="' + CaptionBaseVehicleStatus + cnt + '" value="' + $.trim(r.vehicleStatus) + '" />';
 
 
         var gridRow = $('<div/>');
@@ -687,7 +706,7 @@ function doPrimaryFunctions() {
         }
     }
 
-    
+
 
     //check duplicate
     function IsDuplicate(val) {

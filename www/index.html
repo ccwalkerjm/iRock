@@ -38,6 +38,7 @@
             <div class="">
                 <a id="menu-vehicle" href="#" class="ui-btn">Motor Vehicle Insurance</a>
                 <a id="menu-property" href="#" class="ui-btn">Home Insurance</a>
+                <a href="#" class="ui-btn exitApp">Exit App</a>
             </div>
         </div>
     </div>
@@ -52,8 +53,7 @@
                 <input type="hidden" id="signatureBytes" name="signatureBytes" />
                 <input type="hidden" id="signatureImageType" name="signatureImageType" />
                 <input type="hidden" id="insuranceType" name="insuranceType" />
-
-
+                
                 <div class="form-inline">
                     <div class="ui-grid-a">
                         <div class="ui-block-a">
@@ -70,25 +70,38 @@
                     </div>
                 </div>
 
-
                 <hr />
 
-                <div class="ui-field-contain" id="applicantTRNDetails">
-                    <label for="applicantSurname">Surname:</label>
-                    <input type="text" id="applicantSurname" name="applicantSurname" placeholder="Enter Surname" readonly>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a" style="width:80%">
+                        <div class="ui-field-contain" id="applicantTRNDetails">
+                            <label for="applicantSurname">Surname:</label>
+                            <input type="text" id="applicantSurname" name="applicantSurname" placeholder="Enter Surname" readonly>
 
-                    <label for="applicantFirstName">FirstName:</label>
-                    <input type="text" id="applicantFirstName" name="FirstName" placeholder="Enter FirstName" readonly>
+                            <label for="applicantFirstName">FirstName:</label>
+                            <input type="text" id="applicantFirstName" name="FirstName" placeholder="Enter FirstName" readonly>
 
-                    <label for="applicantMiddleName">MiddleName:</label>
-                    <input type="text" id="applicantMiddleName" name="applicantMiddleName" placeholder="Enter MiddleName" readonly>
+                            <label for="applicantMiddleName">MiddleName:</label>
+                            <input type="text" id="applicantMiddleName" name="applicantMiddleName" placeholder="Enter MiddleName" readonly>
 
-                    <label for="applicantTitle">Title:</label>
-                    <input type="text" id="applicantTitle" name="applicantTitle" placeholder="Enter Title" readonly>
+                            <label for="applicantTitle">Title:</label>
+                            <input type="text" id="applicantTitle" name="applicantTitle" placeholder="Enter Title" readonly>
 
-                    <label for="applicantDateOfBirth">Date Of Birth:</label>
-                    <input type="date" id="applicantDateOfBirth" name="applicantDateOfBirth" placeholder="Enter Date of Birth" readonly>
+                            <label for="applicantDateOfBirth">Date Of Birth:</label>
+                            <input type="date" id="applicantDateOfBirth" name="applicantDateOfBirth" placeholder="Enter Date of Birth" readonly>
+                        </div>
+                    </div>
+                    <div class="ui-block-b" style="width:20%">
+                        <img id="applicantPhoto" height="150" width="120" style="margin-top:20px" />
+                    </div>
                 </div>
+
+
+
+
+
+
+
 
 
                 <div class="ui-field-contain">
@@ -1783,6 +1796,7 @@
                         <a href="#personal-main-page" data-role="button" data-inline="true" data-mini="true" data-icon="delete">Return</a>
                         <a id="clear-canvas" href="#" data-role="button" data-inline="true" data-icon="back" data-mini="true">Clear</a>
                         <a id="submit-btn" href="#" data-role="button" data-inline="true" data-icon="check" data-mini="true">Submit</a>
+                        <a href="#" class="exitApp" data-role="button" data-inline="true" data-icon="delete" data-mini="true">Exit App</a>
                     </div>
                 </form>
 
@@ -1798,6 +1812,7 @@
                 </div>-->
 
             </div>
+            <a href="#" class="exitApp" data-role="button" data-mini="true" style="display:none" id="signatureExit">Exit App</a>
             <input type="hidden" id="quotation-number" />
             <div id="quotation"></div>
 
