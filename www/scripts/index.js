@@ -396,14 +396,14 @@ function doPrimaryFunctions() {
 		///image source is src = "data:" + sig[0] + "," + sig[1]    
 		//serilize form and convert to r
 		//var formData = $('form').serialize();
-		var formData = JSON.stringify($('form .ProposalForm').serializeObject());
+		var formData = JSON.stringify($('form').serializeObject());
 
 		//var formData = JSON.stringify(formData);
 		console.log(formData);
 
 		_irService.submitQuote(formData, function (err, r) {
 			if (err) {
-				alert("error: " + err.statusText);
+				alert("error: " + err.message);
 				return;
 			}
 			//success handling
@@ -437,7 +437,7 @@ function doPrimaryFunctions() {
 		table.append('<tr><th style="text-align: right;">Tax:</th><td style="text-align: right;">' + accounting.formatMoney(r.premium_calculation.tax) + '</td></tr>');
 		table.append('<tr><th style="text-align: right;">Total Premium:</th><td style="text-align: right;">' + accounting.formatMoney(r.premium_calculation.total_premium) + '</td></tr>');
 		table.appendTo(container);
-		if (r.limits.length > 0) {
+		if (r.limits && r.limits.length > 0) {
 			var limitHeader = $('<h4/>').text('Limits');
 			limitHeader.appendTo(container);
 			var limittable = $('<table/>').attr('data-role', "table").addClass('ui-responsive').html('<tr><th>Code</th><th>Heading</th><th  style="text-align:right">Limit</th><th>Description</th></tr>');

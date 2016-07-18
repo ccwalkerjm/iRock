@@ -41,6 +41,9 @@ var ironrockcloudservice = (function () {
 		}
 	};
 
+
+
+
 	var _getAuth = function () {
 		var auth = {};
 		if (_cognitoUser) {
@@ -444,15 +447,21 @@ var ironrockcloudservice = (function () {
 			"auth": _getAuth()
 		};
 		var params = {
-			FunctionName: 'ironrockquote:2',
+			FunctionName: 'ironrockquote:3',
 			Payload: JSON.stringify(payload)
 		};
 		var _lambda = new AWS.Lambda();
 		_lambda.invoke(params, function (err, results) {
 			if (err)
 				callback(err);
-			else
-				callback(null, results.Payload);
+			else {
+				var payload = JSON.parse(results.Payload);
+				if (payload.errorMessage) {
+					callback(new Error(payload.errorMessage));
+				} else {
+					callback(null, results.Payload);
+				}
+			}
 		});
 	};
 
