@@ -1,0 +1,54 @@
+﻿#canvasContainer {
+	position:relative;
+	border: 2px solid #888888;
+	background-color: #EEEEEE;
+	border-radius: 25px;
+	width:100%;	
+  	height: 200px;
+}
+
+#signature {
+  height: 200px;
+  width: 100%;
+  border:1px solid #000000;
+}
+
+.error {
+    color:red;
+}
+
+
+.ui-btn.my-tooltip-btn,
+.ui-btn.my-tooltip-btn:hover,
+.ui-btn.my-tooltip-btn:active {
+    background: none;
+    border: 0;
+}
+
+
+
+
+/*Inline form*/
+.form-inline .ui-grid-a a{
+    float: left;
+}
+
+.form-inline .ui-block-b{
+    margin: 12px 0px;
+}
+
+.form-inline .ui-grid-a> .form-inline.ui-block-a{
+    width: 60%;
+}
+
+.form-inline .ui-grid-a>.form-inline .ui-block-b{
+    width: 40%;
+}
+
+/* mark readonly inputs */
+input[readonly]
+{    
+    cursor:auto;
+    background-color: #ededed;
+    color: #888;
+}
