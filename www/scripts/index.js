@@ -179,7 +179,8 @@ function doSpecialEvents() {
 
 	//exit app
 	$(document).on('click', '.exitApp', function (event, ui) {
-		navigator.app.exitApp();
+		if (navigator && navigator.app)
+			navigator.app.exitApp();
 	});
 
 
@@ -193,26 +194,49 @@ function doSpecialEvents() {
 		} else {
 			to = '#' + to.attr('id');
 		}
-
 		if (from) from = '#' + from.attr('id');
 
-		IsNext(from, to);
-		//	if (typeof to === 'string') {
-		//var u = $.mobile.path.parseUrl(to);
-		//to = u.hash || '#' + u.pathname.substring(1);
-		//if (from) from = '#' + from.attr('id');
+		var isValid = true;
+		if (IsNext(from, to)) {
+			var curInputs = $(from).find("input[type='text'],input[type='date'],input[type='url'],input[type='number'],input[type='email']");
 
-		//if (from === '#page1' && to === '#page3') {
-		/*alert('Cannot change to page 3 from page 1');
-e.preventDefault();
+			//$(".form-group").removeClass("has-error");
+			for (var i = 0; i < curInputs.length; i++) {
+				if (!curInputs[i].validity.valid) {
+					console.log(curInputs[i]);
+					isValid = false;
+					//$(curInputs[i]).closest(".form-group").addClass("has-error");
+				}
+			}
+			//custom 
+			//isValid = getSpecificValidation(curStep, isValid);
+			/*if (isValid)
+				nextStepWizard.removeAttr('disabled').trigger('click');
+			else {
+				$('#warning').fadeIn().delay(5000).fadeOut();
+				window.scrollTo(0, 0);
+			}
+			alert('Next');*/
+		}
+		/*else {
+			var curStep = $(this).closest("[data-role=page]"),	
+				curStepBtn = curStep.attr("id"),
+				prevStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().prev().children("a");
+			$(".form-group").removeClass("has-error");
+			prevStepWizard.removeAttr('disabled').trigger('click');
+			alert('Previous');
+			preventChange = true;
+		}*/
 
-// remove active class on button
-// otherwise button would remain highlighted
-$.mobile.activePage
-	.find('.ui-btn-active')
-	.removeClass('ui-btn-active');
-//}*/
-		//	}
+		if (!isValid) {
+			e.preventDefault();
+			// remove active class on button
+			// otherwise button would remain highlighted
+			$.mobile.activePage
+				.find('.ui-btn-active')
+				.removeClass('ui-btn-active');
+			alert("They are invalid entries!");
+		}
 	});
 
 

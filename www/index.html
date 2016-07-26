@@ -117,13 +117,13 @@
 
 				<div class="ui-field-contain">
 					<label for="applicantPlaceOfBirth">Place Of Birth:</label>
-					<input type="text" id="applicantPlaceOfBirth" name="applicantPlaceOfBirth" placeholder="Enter Place of Birth">
+					<input required type="text" id="applicantPlaceOfBirth" name="applicantPlaceOfBirth" placeholder="Enter Place of Birth">
 
 					<label for="applicantMothersMaidenName">Mother's Maiden Name:</label>
-					<input type="text" id="applicantMothersMaidenName" name="applicantMothersMaidenName" placeholder="Enter your Mother's Maiden Name">
+					<input required type="text" id="applicantMothersMaidenName" name="applicantMothersMaidenName" placeholder="Enter your Mother's Maiden Name">
 
 					<label for="applicantAlias">Other Names/Aliases:</label>
-					<input type="text" id="applicantAlias" name="applicantAlias" placeholder="Enter other name/alias">
+					<input required type="text" id="applicantAlias" name="applicantAlias" placeholder="Enter other name/alias">
 				</div>
 
 				<div class="ui-field-contain">
@@ -139,7 +139,7 @@
 					<label for="applicantIDNumber">ID Number:</label>
 					<input type="number" id="applicantIDNumber" name="applicantIDnumber" placeholder="Enter ID Number">
 					<label for="applicationIDExpirationDate">Expiration Date:</label>
-					<input type="date" id="applicationIDExpirationDate" name="applicationIDExpirationDate" placeholder="Enter Expiration Date" value="">
+					<input required type="date" id="applicationIDExpirationDate" name="applicationIDExpirationDate" placeholder="Enter Expiration Date" value="">
 				</div>
 
 			</form>
@@ -157,7 +157,7 @@
 			<form class="ProposalForm">
 				<div class="ui-field-contain">
 					<label for="SourceOfFunds">Source of Funds:</label>
-					<input type="text" id="SourceOfFunds" placeholder="Enter Source of Funds">
+					<input required type="text" id="SourceOfFunds" placeholder="Enter Source of Funds">
 				</div>
 
 				<div class="ui-field-contain">
@@ -184,12 +184,12 @@
 					<h4>Home Address</h4>
 					<div class="ui-field-contain">
 						<label for="applicantHomeStreetName">Street Number and Name:</label>
-						<input type="text" id="applicantHomeStreetName" name="applicantHomeStreetName" placeholder="Enter Street Number and Name">
+						<input required type="text" id="applicantHomeStreetName" name="applicantHomeStreetName" placeholder="Enter Street Number and Name">
 					</div>
 
 					<div class="ui-field-contain">
 						<label for="applicantHomeTown">City/Town/Postal Zone:</label>
-						<input type="text" id="applicantHomeTown" name="applicantHomeTown" placeholder="Enter City, Town or Postal Zone">
+						<input required type="text" id="applicantHomeTown" name="applicantHomeTown" placeholder="Enter City, Town or Postal Zone">
 					</div>
 
 					<div class="ui-field-contain jamaica">
@@ -559,7 +559,7 @@
 						<label for="startDate">Insurance Start Date:</label>
 					</div>
 					<div class="ui-block-b" style="width:60%">
-						<input name="startDate" type="date" id="startDate" placeholder="Start Date" />
+						<input required name="startDate" type="date" id="startDate" placeholder="Start Date" />
 					</div>
 				</div>
 
@@ -1292,10 +1292,10 @@
 					<input type="text" id="homeRiskAddressStreetNo" name="homeRiskAddressStreetNo" placeholder="Enter Apt No/Street Number">
 
 					<label for="homeRiskAddressStreetName">Street Name:</label>
-					<input type="text" id="homeRiskAddressStreetName" name="homeRiskAddressStreetName" placeholder="Enter Street Name">
+					<input required type="text" id="homeRiskAddressStreetName" name="homeRiskAddressStreetName" placeholder="Enter Street Name">
 
 					<label for="homeRiskAddressTown">City/Town/Postal Zone:</label>
-					<input type="text" id="homeRiskAddressTown" name="homeRiskAddressTown" placeholder="Enter City, Town or Postal Zone">
+					<input required type="text" id="homeRiskAddressTown" name="homeRiskAddressTown" placeholder="Enter City, Town or Postal Zone">
 
 					<label for="homeRiskAddressParish">Select Parish:</label>
 					<select name="homeRiskAddressParish" id="homeRiskAddressParish" data-mini="true">
@@ -1325,9 +1325,9 @@
 						<option value="Rooms not self-contained?">Rooms Not Self-Contained</option>
 					</select>
 					<label for="homeRiskAddressStoreys">No of Storeys:</label>
-					<input type="number" id="homeRiskAddressStoreys" name="homeRiskAddressStoreys" placeholder="Enter Number of Storeys">
+					<input required type="number" id="homeRiskAddressStoreys" name="homeRiskAddressStoreys" placeholder="Enter Number of Storeys">
 					<label for="homeRiskAddressYearBuilt">Year Built:</label>
-					<input type="number" id="homeRiskAddressYearBuilt" name="homeRiskAddressYearBuilt" placeholder="Enter Year Built">
+					<input required type="number" id="homeRiskAddressYearBuilt" name="homeRiskAddressYearBuilt" placeholder="Enter Year Built">
 				</div>
 
 
@@ -1507,7 +1507,7 @@
 
 				<div class="ui-field-contain">
 					<label for="startDate">Insurance Start Date:</label>
-					<input name="startDate" type="date" id="startDate" placeholder="Start Date" />
+					<input required name="startDate" type="date" id="startDate" placeholder="Start Date" />
 					<label for="currency">Currency:</label>
 					<select name="currency" id="currency" data-mini="true">
 						<option value="JA">Jamaican Dollar</option>
@@ -1528,11 +1528,11 @@
 							<label for="homeInsurancePropertyItem0">
 								Description:<a href="#homeInsurancePropertyDetails" data-rel="popup" data-transition="pop" class="my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-info ui-btn-icon-notext" title="Learn more">?</a>
 							</label>
-							<input type="text" name="homeInsurancePropertyItem0" id="homeInsurancePropertyItem0" value="">
+							<input required type="text" name="homeInsurancePropertyItem0" id="homeInsurancePropertyItem0" value="">
 						</div>
 						<div class="ui-field-contain article-value">
 							<label for="homeInsurancePropertyItemValue0">Value</label>
-							<input type="number" name="homeInsurancePropertyItemValue0" id="homeInsurancePropertyItemValue0" value="">
+							<input required type="number" name="homeInsurancePropertyItemValue0" id="homeInsurancePropertyItemValue0" value="">
 						</div>
 
 						<div data-role="controlgroup" data-type="horizontal" data-mini="true">
