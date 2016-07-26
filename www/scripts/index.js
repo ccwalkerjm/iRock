@@ -11,22 +11,26 @@
 //    $.mobile.autoInitializePage = false;
 //});
 
-var _apiBaseUrl = "https://api.courserv.com/ironrock"; //localhost:58633/api/";
-var _contentBaseUrl = "https://cdn.courserv.com/ironrock";
+//var _apiBaseUrl = "https://api.courserv.com/ironrock"; //localhost:58633/api/";
+//var _contentBaseUrl = "https://cdn.courserv.com/ironrock";
 var _PreliminaryData = "PreliminaryData";
-var _irService; //AWS services
+var g_ironrock_service; //AWS services
 
 $(document).ready(function (e) {
-	document.addEventListener('deviceready', onDeviceReady.bind(this), false);
-})
+	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+		document.addEventListener('deviceready', onDeviceReady.bind(this), false);
+	} else {
+		onDeviceReady();
+	}
+});
 
 function onPause() {
 	// TODO: This application has been suspended. Save application state here.
-};
+}
 
 function onResume() {
 	// TODO: This application has been reactivated. Restore application state here.
-};
+}
 
 
 function onDeviceReady() {
@@ -34,62 +38,35 @@ function onDeviceReady() {
 	document.addEventListener('pause', onPause.bind(this), false);
 	document.addEventListener('resume', onResume.bind(this), false);
 	/////////loading 
+	//doPrimaryFunctions();
+	//special events
+
+	////
+	loadingSpinner(true, $('#main-page'));
+
+	g_ironrock_service = new ironrockcloudservice(function (err, $this) {
+		if (err) {
+			loadingSpinner();
+			g_ironrock_service.signoff();
+			///show login page
+			$('#main-page-login').hide();
+			$('#main-page-selection').hide();
+			alert("Network/System Error Detected! Please reboot!")
+			return;
+		}
+		doPrimaryFunctions();
+		if ($this.getUsername()) {
+			//login
+			setUserProfile($this);
+		} else {
+			//not login
+			$('#main-page-login').show();
+			$('#main-page-selection').hide();
+			loadingSpinner();
+		}
+	});
 }
 
-
-$('#main-page').on('click', '#login-submit', function () {
-	//set loading
-	var $this = $(this),
-		theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
-		msgText = $this.jqmData("msgtext") || $.mobile.loader.prototype.options.text,
-		textVisible = $this.jqmData("textvisible") || $.mobile.loader.prototype.options.textVisible,
-		textonly = !!$this.jqmData("textonly");
-	html = $this.jqmData("html") || "";
-	$.mobile.loading("show", {
-		text: msgText,
-		textVisible: textVisible,
-		theme: theme,
-		textonly: textonly,
-		html: html
-	});
-	//end loading
-
-	var username = $('#main-page #username').val();
-	var password = $('#main-page #password').val();
-	_irService = new ironrockcloudservice(function (err, obj) {
-		obj.signin(username, password, function (err, obj) {
-			if (err) {
-				alert(err.message);
-				$.mobile.loading("hide");
-			} else {
-				var username = obj.getUsername();
-				obj.getUser(username, function (err, data) {
-					if (err) {
-						alert(err.message);
-						$.mobile.loading("hide");
-					} else {
-						//load miscellaneous items						
-						loadOptions(obj, function (err) {
-							//end loading
-							$.mobile.loading("hide");
-							if (!err) {
-								doMiscellaneous();
-								doPrimaryFunctions();
-								doSpecialEvents();
-								localStorage.setItem("ironrockUserProfile", data.Payload);
-								$('#main-page-login').hide();
-								$('#main-page-selection').show();
-							} else {
-								alert("error: " + err.statusText);
-							}
-						})
-					}
-				});
-				//location.reload();
-			}
-		});
-	});
-});
 
 
 
@@ -103,6 +80,38 @@ function ConvertToJson(r) {
 	}
 	return r;
 }
+
+
+//set when user is logged in
+function setUserProfile(obj) {
+	var username = obj.getUsername();
+	obj.getUser(username, function (err, data) {
+		if (err) {
+			alert(err.message);
+			loadingSpinner();
+		} else {
+			localStorage.setItem("ironrockUserProfile", data.Payload);
+			//load miscellaneous items	
+			loadOptions(obj, function (err) {
+				if (err) {
+					obj.signoff();
+					$('#main-page-login').show();
+					$('#main-page-selection').hide();
+					loadingSpinner();
+					alert("Network/System Error Detected! Please Try Again!")
+				} else {
+					$('#main-page-login').hide();
+					$('#main-page-selection').show();
+					doMiscellaneous();
+					doSpecialEvents();
+					loadingSpinner();
+				}
+			})
+		}
+	});
+}
+
+
 
 
 function loadOptions(obj, callback) {
@@ -123,10 +132,29 @@ function loadOptions(obj, callback) {
 }
 
 
+function loadingSpinner(state, $page) {
+	if (state) {
+		var $this = $page,
+			theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
+			msgText = $this.jqmData("msgtext") || $.mobile.loader.prototype.options.text,
+			textVisible = $this.jqmData("textvisible") || $.mobile.loader.prototype.options.textVisible,
+			textonly = !!$this.jqmData("textonly");
+		html = $this.jqmData("html") || "";
+		$.mobile.loading("show", {
+			text: msgText,
+			textVisible: textVisible,
+			theme: theme,
+			textonly: textonly,
+			html: html
+		});
+
+	} else {
+		$.mobile.loading("hide");
+	}
+}
 
 
 function doSpecialEvents() {
-
 	//initialize signature app
 	$('#page-signature').on('pageshow', function (e, data) {
 		if ($('#signature').find('.jSignature').length == 0) {
@@ -155,19 +183,105 @@ function doSpecialEvents() {
 	});
 
 
+	$(document).bind('pagebeforechange', function (e, data) {
+		var to = data.toPage,
+			from = data.options.fromPage;
+
+		if (typeof to === 'string') {
+			var u = $.mobile.path.parseUrl(to);
+			to = u.hash || '#' + u.pathname.substring(1);
+		} else {
+			to = '#' + to.attr('id');
+		}
+
+		if (from) from = '#' + from.attr('id');
+
+		IsNext(from, to);
+		//	if (typeof to === 'string') {
+		//var u = $.mobile.path.parseUrl(to);
+		//to = u.hash || '#' + u.pathname.substring(1);
+		//if (from) from = '#' + from.attr('id');
+
+		//if (from === '#page1' && to === '#page3') {
+		/*alert('Cannot change to page 3 from page 1');
+e.preventDefault();
+
+// remove active class on button
+// otherwise button would remain highlighted
+$.mobile.activePage
+	.find('.ui-btn-active')
+	.removeClass('ui-btn-active');
+//}*/
+		//	}
+	});
+
+
+
+
 	////////Reset Quotation Page////////////////
 	$(document).on("pagebeforeshow", "#page-quotation", function () { // When entering pagetwo
-		$('#quotation').html('');
-		$('#get-quotation').show();
-		$('#confirmQuotation').hide();
+		//$('#quotation').html('');
+		//$('#get-quotation').show();
+		//$('#confirmQuotation').hide();
 
 	});
+	///
 
 }
 
 
+function IsNext(fromPage, toPage) {
+	var toIdx = 0,
+		fromIdx = 0;
+
+	$("[data-role=page]").each(function (idx, obj) {
+		var objsle = "#" + $(obj).attr('id');
+		if (toPage == objsle) {
+			toIdx = idx;
+		}
+		if (fromPage == objsle) {
+			fromIdx = idx;
+		}
+	}); //data-role="page"
+	return toIdx > fromIdx;
+}
+
+
+
 //$(document).ready(function (e) {
 function doPrimaryFunctions() {
+
+	$('#main-page').on('click', '#login-submit', function () {
+		//set loading
+		loadingSpinner(true, $(this));
+		//var $this = $(this),
+		//    theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
+		//    msgText = $this.jqmData("msgtext") || $.mobile.loader.prototype.options.text,
+		//    textVisible = $this.jqmData("textvisible") || $.mobile.loader.prototype.options.textVisible,
+		//    textonly = !!$this.jqmData("textonly");
+		//html = $this.jqmData("html") || "";
+		//$.mobile.loading("show", {
+		//    text: msgText,
+		//    textVisible: textVisible,
+		//    theme: theme,
+		//    textonly: textonly,
+		//    html: html
+		//});
+		//end loading
+
+		var username = $('#main-page #username').val();
+		var password = $('#main-page #password').val();
+
+		g_ironrock_service.signin(username, password, function (err, $this) {
+			if (err) {
+				loadingSpinner();
+				alert(err.message);
+			} else {
+				setUserProfile($this);
+				//location.reload();
+			}
+		});
+	});
 
 
 	//add driver
@@ -185,7 +299,7 @@ function doPrimaryFunctions() {
 			html: html
 		});
 
-		_irService.getDriverLicenseDetails(id, function (err, json) {
+		g_ironrock_service.getDriverLicenseDetails(id, function (err, json) {
 			if (err) {
 				$.mobile.loading("hide");
 				callback(err);
@@ -283,7 +397,7 @@ function doPrimaryFunctions() {
 		});
 
 		var id = $('#applicantTRN').val();
-		_irService.getDriverLicenseDetails(id, function (err, r) {
+		g_ironrock_service.getDriverLicenseDetails(id, function (err, r) {
 			if (err) {
 				$.mobile.loading("hide");
 				callback(err);
@@ -401,7 +515,7 @@ function doPrimaryFunctions() {
 		//var formData = JSON.stringify(formData);
 		console.log(formData);
 
-		_irService.submitQuote(formData, function (err, r) {
+		g_ironrock_service.submitQuote(formData, function (err, r) {
 			if (err) {
 				alert("error: " + err.message);
 				return;
@@ -632,7 +746,7 @@ function doPrimaryFunctions() {
 		});
 
 		//use lambda to get vehcile details
-		_irService.getVehicleDetails(plateno, chassisno, function (err, data) {
+		g_ironrock_service.getVehicleDetails(plateno, chassisno, function (err, data) {
 			if (err) {
 				$.mobile.loading("hide");
 				alert("Err:" + err.statusText);
