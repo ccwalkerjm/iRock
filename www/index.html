@@ -35,7 +35,7 @@
 	<div data-role="page" id="main-page">
 		<div data-role="main" class="ui-content">
 			<img src="images/IronRockLogo.png" alt="image" style="width: 100%;" />
-			<div id="main-page-login">
+			<div id="main-page-login" style="display:none">
 				<h2>Login:</h2>
 				<div class="ui-field-contain">
 					<label for="username">UserName:</label>
@@ -1859,30 +1859,17 @@
 
 				<div id="signature" style="width:600px; height:150px;"></div>
 
-				<form class="ProposalForm">
-					<div data-role="controlgroup">
-						<a href="#personal-main-page" data-role="button" data-inline="true" data-mini="true" data-icon="delete">Return</a>
-						<a id="clear-canvas" href="#" data-role="button" data-inline="true" data-icon="back" data-mini="true">Clear</a>
-						<!--<a id="submit-btn" href="#" data-role="button" data-inline="true" data-icon="check" data-mini="true">Submit</a>-->
-						<button type="button" id="submit-btn" data-role="button" data-inline="true" data-icon="check" data-mini="true">Submit</button>
-						<a href="#" class="exitApp" data-role="button" data-inline="true" data-icon="delete" data-mini="true">Exit App</a>
-					</div>
-				</form>
-
-				<!--<div id="lowerControls">
-                    <div id="feedback"></div>
-                    <div id="buttonsContainer">
-                        <div data-role="controlgroup">
-                            <a href="#personal-main-page" data-role="button" data-inline="true" data-mini="true" data-icon="delete">Return</a>
-                            <a id="clear-canvas" href="#" data-role="button" data-inline="true" data-icon="back" data-mini="true">Clear</a>
-                            <a id="submit-btn" href="#" data-role="button" data-inline="true" data-icon="check" data-mini="true">Submit</a>
-                        </div>
-                    </div>
-                </div>-->
-
 			</div>
-			<a href="#" class="exitApp" data-role="button" data-mini="true" style="display:none" id="signatureExit">Exit App</a>
-			<input type="hidden" id="quotation-number" />
+			<div data-role="controlgroup">
+				<!--						<a href="#personal-main-page" data-role="button" data-inline="true" data-mini="true" data-icon="back">Return</a>-->
+				<a id="clear-canvas" href="#" data-role="button" data-inline="true" data-icon="back" data-mini="true">Clear</a>
+				<!--<a id="submit-btn" href="#" data-role="button" data-inline="true" data-icon="check" data-mini="true">Submit</a>-->
+				<button type="button" id="submit-btn" data-role="button" data-inline="true" data-icon="check" data-mini="true">Submit</button>
+				<a href="#" class="reload" data-role="button" data-inline="true" data-icon="back" data-mini="true">Return</a>
+				<a href="#" class="exitApp" data-role="button" data-inline="true" data-icon="delete" data-mini="true">Exit</a>
+			</div>
+
+			<input type="hidden" id="quotation_number" />
 			<div id="quotation"></div>
 
 

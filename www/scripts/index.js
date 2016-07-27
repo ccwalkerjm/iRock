@@ -16,6 +16,8 @@
 var _PreliminaryData = "PreliminaryData";
 var g_ironrock_service; //AWS services
 
+var g_signatureChangeCount = 0; //signature based data;
+
 $(document).ready(function (e) {
 	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 		document.addEventListener('deviceready', onDeviceReady.bind(this), false);
@@ -40,7 +42,7 @@ function onDeviceReady() {
 	/////////loading 
 	//doPrimaryFunctions();
 	//special events
-
+	//$(':mobile-pagecontainer').pagecontainer('change', '#main-page');
 	////
 	loadingSpinner(true, $('#main-page'));
 
@@ -67,7 +69,9 @@ function onDeviceReady() {
 	});
 }
 
-
+/*$(document).live('pagebeforeshow', function () {
+	alert($.mobile.activePage.attr('id'));
+});*/
 
 
 function ConvertToJson(r) {
@@ -157,11 +161,16 @@ function loadingSpinner(state, $page) {
 function doSpecialEvents() {
 	//initialize signature app
 	$('#page-signature').on('pageshow', function (e, data) {
-		if ($('#signature').find('.jSignature').length == 0) {
+		if ($('#signature').find('.jSignature').length === 0) {
 			$('#signature').jSignature({
 				'UndoButton': false,
 				color: "#000000",
 				lineWidth: 1
+			});
+			//check signature 
+			$("#signature").bind('change', function (e) {
+				/* 'e.target' will refer to div with "#signature" */
+				g_signatureChangeCount = g_signatureChangeCount + 1;
 			});
 		}
 	});
@@ -181,7 +190,16 @@ function doSpecialEvents() {
 	$(document).on('click', '.exitApp', function (event, ui) {
 		if (navigator && navigator.app)
 			navigator.app.exitApp();
+		else
+			window.close();
 	});
+
+	//reload app
+	$(document).on('click', '.reload', function (event, ui) {
+		$("form").trigger('reset');
+		location.reload();
+	});
+
 
 
 	$(document).bind('pagebeforechange', function (e, data) {
@@ -205,28 +223,20 @@ function doSpecialEvents() {
 				if (!curInputs[i].validity.valid) {
 					console.log(curInputs[i]);
 					isValid = false;
-					//$(curInputs[i]).closest(".form-group").addClass("has-error");
 				}
 			}
-			//custom 
-			//isValid = getSpecificValidation(curStep, isValid);
-			/*if (isValid)
-				nextStepWizard.removeAttr('disabled').trigger('click');
-			else {
-				$('#warning').fadeIn().delay(5000).fadeOut();
-				window.scrollTo(0, 0);
+			switch (from) {
+			case '#personal-main-page':
+				if ($('#getTRNDetails').is(":visible")) {
+					isValid = false;
+				}
+				break;
+			case '#vehicle-particulars-page':
+				if (isValid && $('#vehiclesToBeInsured .vehicle').length == 0)
+					isValid = false;
+				break;
 			}
-			alert('Next');*/
 		}
-		/*else {
-			var curStep = $(this).closest("[data-role=page]"),	
-				curStepBtn = curStep.attr("id"),
-				prevStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().prev().children("a");
-			$(".form-group").removeClass("has-error");
-			prevStepWizard.removeAttr('disabled').trigger('click');
-			alert('Previous');
-			preventChange = true;
-		}*/
 
 		if (!isValid) {
 			e.preventDefault();
@@ -237,19 +247,11 @@ function doSpecialEvents() {
 				.removeClass('ui-btn-active');
 			alert("They are invalid entries!");
 		}
-	});
-
-
-
-
-	////////Reset Quotation Page////////////////
-	$(document).on("pagebeforeshow", "#page-quotation", function () { // When entering pagetwo
-		//$('#quotation').html('');
-		//$('#get-quotation').show();
-		//$('#confirmQuotation').hide();
 
 	});
-	///
+
+
+
 
 }
 
@@ -278,20 +280,7 @@ function doPrimaryFunctions() {
 	$('#main-page').on('click', '#login-submit', function () {
 		//set loading
 		loadingSpinner(true, $(this));
-		//var $this = $(this),
-		//    theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
-		//    msgText = $this.jqmData("msgtext") || $.mobile.loader.prototype.options.text,
-		//    textVisible = $this.jqmData("textvisible") || $.mobile.loader.prototype.options.textVisible,
-		//    textonly = !!$this.jqmData("textonly");
-		//html = $this.jqmData("html") || "";
-		//$.mobile.loading("show", {
-		//    text: msgText,
-		//    textVisible: textVisible,
-		//    theme: theme,
-		//    textonly: textonly,
-		//    html: html
-		//});
-		//end loading
+
 
 		var username = $('#main-page #username').val();
 		var password = $('#main-page #password').val();
@@ -310,26 +299,15 @@ function doPrimaryFunctions() {
 
 	//add driver
 	function addDriver($this, id, callback) {
-		var theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
-			msgText = $this.jqmData("msgtext") || $.mobile.loader.prototype.options.text,
-			textVisible = $this.jqmData("textvisible") || $.mobile.loader.prototype.options.textVisible,
-			textonly = !!$this.jqmData("textonly");
-		html = $this.jqmData("html") || "";
-		$.mobile.loading("show", {
-			text: msgText,
-			textVisible: textVisible,
-			theme: theme,
-			textonly: textonly,
-			html: html
-		});
+		loadingSpinner(true, $this);
 
 		g_ironrock_service.getDriverLicenseDetails(id, function (err, json) {
 			if (err) {
-				$.mobile.loading("hide");
+				loadingSpinner();
 				callback(err);
 			} else {
 				//success handling
-				$.mobile.loading("hide");
+				loadingSpinner();
 				//var json = JSON.parse(r);
 				json = ConvertToJson(json);
 				if (json.error_message) {
@@ -406,28 +384,16 @@ function doPrimaryFunctions() {
 	///
 	///////
 	$('#personal-main-page').on('click', '#getTRNDetails', function () {
-		var $this = $(this),
-			theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
-			msgText = $this.jqmData("msgtext") || $.mobile.loader.prototype.options.text,
-			textVisible = $this.jqmData("textvisible") || $.mobile.loader.prototype.options.textVisible,
-			textonly = !!$this.jqmData("textonly");
-		html = $this.jqmData("html") || "";
-		$.mobile.loading("show", {
-			text: msgText,
-			textVisible: textVisible,
-			theme: theme,
-			textonly: textonly,
-			html: html
-		});
+		loadingSpinner(true, $(this));
 
 		var id = $('#applicantTRN').val();
 		g_ironrock_service.getDriverLicenseDetails(id, function (err, r) {
 			if (err) {
-				$.mobile.loading("hide");
+				loadingSpinner();
 				callback(err);
 			} else {
 				//success handling
-				$.mobile.loading("hide");
+				loadingSpinner();
 				//var json = JSON.parse(r);
 				r = ConvertToJson(r);
 				if (r.error_message) {
@@ -505,47 +471,39 @@ function doPrimaryFunctions() {
 	//clear signature
 	$('#page-signature').on('click', '#clear-canvas', function () {
 		$('#signature').jSignature('clear');
+		g_signatureChangeCount = 0;
 	});
+
 
 
 	/////Final//////////////////////
 	$('#page-signature').on('click', '#submit-btn', function () {
-		//var isvalid = $('form').valid();
-		//if (!isvalid) {
-		//    alert('There are invalid entries. Please examine each section carefully!')
-		//}
-		var $this = $(this),
-			theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
-			msgText = $this.jqmData("msgtext") || $.mobile.loader.prototype.options.text,
-			textVisible = $this.jqmData("textvisible") || $.mobile.loader.prototype.options.textVisible,
-			textonly = !!$this.jqmData("textonly");
-		html = $this.jqmData("html") || "";
-		$.mobile.loading("show", {
-			text: msgText,
-			textVisible: textVisible,
-			theme: theme,
-			textonly: textonly,
-			html: html
-		});
 		//add signature to form
 		var sig = $('#signature').jSignature("getData", "svgbase64"); // jSignature("getData", "base30");
+		if (g_signatureChangeCount == 0) {
+			alert('Please Enter Signature..');
+			return;
+		}
 		$('#signatureImageType').val(sig[0]);
 		$('#signatureBytes').val(sig[1]);
+
+		//test
+		console.log("signature count: " + g_signatureChangeCount);
 		///image source is src = "data:" + sig[0] + "," + sig[1]    
 		//serilize form and convert to r
 		//var formData = $('form').serialize();
 		var formData = JSON.stringify($('form').serializeObject());
 
 		//var formData = JSON.stringify(formData);
-		console.log(formData);
-
+		//console.log(formData);
+		loadingSpinner(true, $(this));
 		g_ironrock_service.submitQuote(formData, function (err, r) {
+			loadingSpinner();
 			if (err) {
 				alert("error: " + err.message);
 				return;
 			}
-			//success handling
-			$.mobile.loading("hide");
+
 			//var r = JSON.parse(data);
 			r = ConvertToJson(r);
 			if (!r.success) {
@@ -554,7 +512,8 @@ function doPrimaryFunctions() {
 			} else {
 				loadQuotation(r);
 				$('#page-signature').find('[data-role=footer] a').hide();
-				$('#signatureExit').show();
+				$('#clear-canvas').hide();
+				$('#submit-btn').hide();
 			}
 		});
 
@@ -563,7 +522,7 @@ function doPrimaryFunctions() {
 
 	function loadQuotation(r) {
 		$('#signatureContainer').hide();
-		$('#quotation-number').val(r.quotation_number);
+		$('#quotation_number').val(r.quotation_number);
 		var container = $('#quotation');
 		container.append('<h4>Note the Policy Limits</h4>');
 		var table = $('<table/>'); //data-role="table" class="ui-responsive"
@@ -755,27 +714,14 @@ function doPrimaryFunctions() {
 		}*/
 
 		//set loading
-		var $this = $(this),
-			theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
-			msgText = $this.jqmData("msgtext") || $.mobile.loader.prototype.options.text,
-			textVisible = $this.jqmData("textvisible") || $.mobile.loader.prototype.options.textVisible,
-			textonly = !!$this.jqmData("textonly");
-		html = $this.jqmData("html") || "";
-		$.mobile.loading("show", {
-			text: msgText,
-			textVisible: textVisible,
-			theme: theme,
-			textonly: textonly,
-			html: html
-		});
+		loadingSpinner(true, $(this));
 
 		//use lambda to get vehcile details
 		g_ironrock_service.getVehicleDetails(plateno, chassisno, function (err, data) {
+			loadingSpinner();
 			if (err) {
-				$.mobile.loading("hide");
 				alert("Err:" + err.statusText);
 			} else {
-				$.mobile.loading("hide");
 				//var json = JSON.parse(r);
 				r = ConvertToJson(data);
 				if (r.error_message || r.Message) {
@@ -797,7 +743,7 @@ function doPrimaryFunctions() {
 		});
 
 	}).on("click", "#queryVehicleSearchStop", function () {
-		$.mobile.loading("hide");
+		loadingSpinner();
 	});
 
 
