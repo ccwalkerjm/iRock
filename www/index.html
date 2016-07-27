@@ -31,6 +31,7 @@
 </head>
 
 <body>
+
 	<div data-role="page" id="main-page">
 		<div data-role="main" class="ui-content">
 			<img src="images/IronRockLogo.png" alt="image" style="width: 100%;" />
@@ -101,7 +102,7 @@
 							<input type="text" id="applicantSurname" name="applicantSurname" placeholder="Enter Surname" readonly>
 
 							<label for="applicantFirstName">FirstName:</label>
-							<input type="text" id="applicantFirstName" name="FirstName" placeholder="Enter FirstName" readonly>
+							<input type="text" id="applicantFirstName" name="applicantFirstName" placeholder="Enter FirstName" readonly>
 
 							<label for="applicantMiddleName">MiddleName:</label>
 							<input type="text" id="applicantMiddleName" name="applicantMiddleName" placeholder="Enter MiddleName" readonly>
@@ -157,7 +158,7 @@
 			<form class="ProposalForm">
 				<div class="ui-field-contain">
 					<label for="SourceOfFunds">Source of Funds:</label>
-					<input required type="text" id="SourceOfFunds" placeholder="Enter Source of Funds">
+					<input required type="text" id="SourceOfFunds" name="SourceOfFunds" placeholder="Enter Source of Funds">
 				</div>
 
 				<div class="ui-field-contain">
@@ -577,7 +578,7 @@
 
 					<div class="ui-block-c vehicleNameAddressOfOwner" style="width:50%;display:none">
 						<div class="ui-field-contain">
-							<label for=nameAddressOfOwner>Owner Details:</label>
+							<label for="nameAddressOfOwner">Owner Details:</label>
 							<textarea name="nameAddressOfOwner" id="nameAddressOfOwner" placeholder="Owner's Name/Address"></textarea>
 						</div>
 					</div>
@@ -676,7 +677,7 @@
 						<option value="CarriagePassengersHire">Carriage of Passengers for hire or reward</option>
 						<option value="SocialDomesticPleasure" selected>Social domestic and pleasure purposes only</option>
 						<option value="GeneralCartage">General Cartage</option>
-						<option value="SocialDomesticPleasureBusiness">Social domestic & pleasure purposes and Proposer’s business use</option>
+						<option value="SocialDomesticPleasureBusiness">Social domestic &amp; pleasure purposes and Proposer’s business use</option>
 						<option value="CommercialTravelling">Commercial travelling</option>
 					</select>
 				</div>
@@ -1242,18 +1243,17 @@
 
 				<fieldset class="ui-field-contain">
 					<label for="thirdPartyLimits">
-						Third Party Limits (Bodily Injury and Property Damage) Sums Insured
-						< $2M </label>
-							<select name="thirdPartyLimits" id="thirdPartyLimits">
-								<optgroup label="Standard Limit">
-									<option value="$3M/$5M/$5M">$3M/$5M/$5M</option>
-								</optgroup>
-								<optgroup label="Increased Limits">
-									<option value="$5M/$7.5M/$5M">$5M/$7.5M/$5M</option>
-									<option value="$5M/$10M/$5M">$5M/$10M/$5M</option>
-									<option value="$10M/$10M/$10M">$10M/$10M/$10M</option>
-								</optgroup>
-							</select>
+						Third Party Limits (Bodily Injury and Property Damage) Sums Insured greater than $2M </label>
+					<select name="thirdPartyLimits" id="thirdPartyLimits">
+						<optgroup label="Standard Limit">
+							<option value="$3M/$5M/$5M">$3M/$5M/$5M</option>
+						</optgroup>
+						<optgroup label="Increased Limits">
+							<option value="$5M/$7.5M/$5M">$5M/$7.5M/$5M</option>
+							<option value="$5M/$10M/$5M">$5M/$10M/$5M</option>
+							<option value="$10M/$10M/$10M">$10M/$10M/$10M</option>
+						</optgroup>
+					</select>
 				</fieldset>
 
 				<fieldset class="ui-field-contain">
@@ -1519,7 +1519,7 @@
 				<div id="homeInsuranceProperty">
 					<div data-role="popup" id="homeInsurancePropertyDetails">
 						<p>
-							The Buildings of the private dwelling together with its garages and outbuildings, including landlord’s fixtures and fittings together with patios, driveways and other paved areas, walls, gates and fences, underground water pipes and cables providing services to and from the home, fixed water storage tanks and sewage disposal systems. (NB. Swimming Pools & Waterside Structures are not included.)
+							The Buildings of the private dwelling together with its garages and outbuildings, including landlord’s fixtures and fittings together with patios, driveways and other paved areas, walls, gates and fences, underground water pipes and cables providing services to and from the home, fixed water storage tanks and sewage disposal systems. (NB. Swimming Pools &amp; Waterside Structures are not included.)
 						</p>
 					</div>
 					<div class="homeInsurancePropertyItems">
@@ -1910,6 +1910,7 @@
 	<script src="scripts/ironrockcloudservice.js"></script>
 	<script src="scripts/miscellaneous.js"></script>
 	<script src="scripts/index.js"></script>
+
 </body>
 
 </html>
