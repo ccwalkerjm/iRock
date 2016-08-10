@@ -547,12 +547,12 @@ function resetAllAccident() {
 
 function setAllAccidentsYears() {
 	var currentYear = new Date().getFullYear();
-	for (i = 1; i < 4; i++) {
-		currentYear = currentYear - i;
+	for (i = 0; i < 3; i++) {
+		var xYear = currentYear - i;
 		var option = $('<option/>');
-		option.attr('Value', currentYear);
-		option.text(currentYear);
-		option.appendTo($('#accidentYear'));
+		option.attr('value', xYear);
+		option.text(xYear);
+		option.appendTo($('#accidentYear0'));
 
 	}
 }
