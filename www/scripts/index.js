@@ -191,13 +191,14 @@ function doSpecialEvents() {
 		if (navigator && navigator.app)
 			navigator.app.exitApp();
 		else
-			window.close();
+			close();
 	});
 
 	//reload app
 	$(document).on('click', '.reload', function (event, ui) {
 		$("form").trigger('reset');
-		location.reload();
+		//location.ass.reload();
+		window.location = "index.html";
 	});
 
 
@@ -325,7 +326,7 @@ function doPrimaryFunctions() {
 
 	////create first driver from applicant details
 	$(document).one("pagebeforeshow", "#vehicle-driver-details-page", function () {
-		if (!$('#regularDriversId').is(":visible") && $('#applicantIDType').val() == 'driverLicense') {
+		if (!$('#regularDriversId').is(":visible")) {
 			//var occupation = $('#applicantOccupation').val();
 			var occupationIndex = $("#applicantOccupation option:selected").index()
 			var elel = $('.regularDriversCls:last .occupation select');
@@ -813,6 +814,26 @@ function doPrimaryFunctions() {
 			gridRow.appendTo($('#vehiclesToBeInsured'));
 			$('#taxOfficeVehicleRefresh').show();
 			$(':mobile-pagecontainer').pagecontainer('change', '#vehicle-particulars-page');
+		}
+		reIndexVehicles(CaptionBaseVehicleValue);
+	}
+
+
+	//need to index vehicles
+	function reIndexVehicles(baseValueCaption) {
+		var sumInsured = 0;
+		$('#vehiclesToBeInsured .vehicle').each(function (index, element) {
+			sumInsured = sumInsured + parseFloat($(element).find('#' + baseValueCaption + index).val());
+		});
+		var thirdPartyLimit = $('#vehicle-medical-history-page').find('#thirdPartyLimit').empty();
+		if (sumInsured < 2000000) {
+			thirdPartyLimit.append('<option value="standard1">Standard Limits-$3M/$5M/$5M</option>');
+			thirdPartyLimit.append('<option value="increased1Option1">Increased Limits-$5M/$7.5M/$5M</option>');
+			thirdPartyLimit.append('<option value="increased1Option2">Increased Limits-$5M/10M/$5M</option>');
+			thirdPartyLimit.append('<option value="increased1Option3">Increased Limits-$10M/$10M/$10M</option>');
+		} else {
+			thirdPartyLimit.append('<option value="standard2">Standard Limits-$5M/$10M/$5M</option>');
+			thirdPartyLimit.append('<option value="increased2Option1">Increased Limits-$10M/$10M/$10M</option>');
 		}
 	}
 

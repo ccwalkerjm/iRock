@@ -112,6 +112,14 @@
 
 							<label for="applicantDateOfBirth">Date Of Birth:</label>
 							<input type="date" id="applicantDateOfBirth" name="applicantDateOfBirth" placeholder="Enter Date of Birth" readonly>
+
+							<label for="applicantIDNumber">TRN:</label>
+							<input type="number" id="applicantIDNumber" name="applicantIDnumber" placeholder="Enter ID Number" readonly>
+
+							<input type="hidden" id="applicantIDType" name="applicantIDType" value="TRN" />
+							<input type="hidden" id="dateFirstIssued" />
+							<label for="applicationIDExpirationDate">Expiration Date:</label>
+							<input required type="date" id="applicationIDExpirationDate" name="applicationIDExpirationDate" placeholder="Enter Expiration Date" value="" readonly>
 						</div>
 					</div>
 				</div>
@@ -125,22 +133,9 @@
 
 					<label for="applicantAlias">Other Names/Aliases:</label>
 					<input required type="text" id="applicantAlias" name="applicantAlias" placeholder="Enter other name/alias">
-				</div>
 
-				<div class="ui-field-contain">
 					<label for="applicantNationality">Country of Nationality:</label>
 					<select name="applicantNationality" id="applicantNationality" class="countries"></select>
-					<label for="applicantIDType" class="select">ID Type:</label>
-					<select id="applicantIDType" name="applicantIDType">
-						<option value="national">National ID</option>
-						<option value="passport">Passport</option>
-						<option value="driverLicense" selected>Driver's Licence</option>
-					</select>
-					<input type="hidden" id="dateFirstIssued" />
-					<label for="applicantIDNumber">ID Number:</label>
-					<input type="number" id="applicantIDNumber" name="applicantIDnumber" placeholder="Enter ID Number">
-					<label for="applicationIDExpirationDate">Expiration Date:</label>
-					<input required type="date" id="applicationIDExpirationDate" name="applicationIDExpirationDate" placeholder="Enter Expiration Date" value="">
 				</div>
 
 			</form>
@@ -1184,26 +1179,12 @@
 					</div>
 				</div>
 
-				<div class="ui-grid-c">
-					<div class="ui-block-a" style="width:40%">
-						<label for="increasedLimits">Do you require increased limits (in excess of the Standard Limits)?</label>
-					</div>
-					<div class="ui-block-b" style="width:10%">
-						<select name="increasedLimits" id="increasedLimits" data-role="slider" data-mini="true">
-							<option value="no" selected>No</option>
-							<option value="yes">Yes</option>
-						</select>
-					</div>
-
-				</div>
-
-
-
+				<h4>Indicate Limits of Liablity Required</h4>
 				<fieldset class="ui-field-contain">
 					<label for="wreckerFee">Protection and Removal (Wrecker Fee):</label>
 					<select name="wreckerFee" id="wreckerFee">
 						<optgroup label="Standard Limit">
-							<option value="StandardLimit">$35,000 </option>
+							<option value="350000">$35,000 </option>
 						</optgroup>
 						<optgroup label="Increased Limits">
 							<option value="50000">$50,000</option>
@@ -1242,34 +1223,11 @@
 				</fieldset>
 
 				<fieldset class="ui-field-contain">
-					<label for="thirdPartyLimits">
-						Third Party Limits (Bodily Injury and Property Damage) Sums Insured greater than $2M </label>
-					<select name="thirdPartyLimits" id="thirdPartyLimits">
-						<optgroup label="Standard Limit">
-							<option value="$3M/$5M/$5M">$3M/$5M/$5M</option>
-						</optgroup>
-						<optgroup label="Increased Limits">
-							<option value="$5M/$7.5M/$5M">$5M/$7.5M/$5M</option>
-							<option value="$5M/$10M/$5M">$5M/$10M/$5M</option>
-							<option value="$10M/$10M/$10M">$10M/$10M/$10M</option>
-						</optgroup>
+					<label for="thirdPartyLimit">
+						Third Party Limits</label>
+					<select name="thirdPartyLimit" id="thirdPartyLimit">
 					</select>
 				</fieldset>
-
-				<fieldset class="ui-field-contain">
-					<label for="sumsInsured">Sums Insured ≥ $2M</label>
-					<select name="sumsInsured" id="sumsInsured">
-						<optgroup label="Standard Limit">
-							<option value="$5M/$10M/$5M">$5M/$10M/$5M</option>
-						</optgroup>
-						<optgroup label="Increased Limits">
-							<option value="$10M/$10M/$10M">$10M/$10M/$10M</option>
-						</optgroup>
-					</select>
-				</fieldset>
-
-
-
 
 			</form>
 
