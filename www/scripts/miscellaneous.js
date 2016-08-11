@@ -707,6 +707,10 @@ function resetRegularDriver() {
 			"name": "regularDriversDL"
         },
 		{
+			"class": "DriversDLExpirationDate",
+			"name": "regularDriversDLExpirationDate"
+        },
+		{
 			"class": "DriversDLOriginalDateOfIssue",
 			"name": "regularDriversDLOriginalDateOfIssue"
         },
@@ -2025,7 +2029,7 @@ function resetObjects(objectList, elementClass, addBtnName, delBtnName, elementT
 		var element = $(this);
 		//change ids and names
 		$.each(objectList, function (jIndex, item) {
-			element.find('.' + item.class + ' input').attr('id', item.name + i).attr('name', item.name + i);
+			element.find('.' + item.class + ' :input').attr('id', item.name + i).attr('name', item.name + i);
 			element.find('.' + item.class + ' label').attr('for', item.name + i);
 		})
 

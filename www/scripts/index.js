@@ -187,9 +187,9 @@ function doSpecialEvents() {
 
 
 	//exit app
-	$(document).on('click', '.exitApp', function (event, ui) {		
-			g_ironrock_service.signoff();
-			navigator.app.exitApp();		
+	$(document).on('click', '.exitApp', function (event, ui) {
+		//g_ironrock_service.signoff();
+		navigator.app.exitApp();
 	});
 
 	//reload app
