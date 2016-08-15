@@ -20,7 +20,7 @@ function doMiscellaneous() {
 		//$('.selDiv option:eq(1)').prop('selected', true)			
 		var driverOccupation = $('#vehicle-driver-details-page').find('#regularDriversOccupation0');
 		driverOccupation.find('option').eq(occupationIndex).prop('selected', true);
-	})
+	});
 
 
 
@@ -58,7 +58,7 @@ function doMiscellaneous() {
 				isChecked = true;
 				return true;
 			}
-		})
+		});
 		if (isChecked) {
 			$('#medicalConditionDetails').show();
 		} else {
@@ -615,7 +615,7 @@ function GetTotal(InputArray) {
 	var sum = 0;
 	$.each(InputArray, function (index, val) {
 		sum = sum + Number(val ? val : 0);
-	})
+	});
 	return '$' + sum.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 }
 
@@ -981,7 +981,7 @@ function setmenu(menu_list, menu_header) {
 
 		//set menu panel
 		var current_page_dom = currentPage.get(0);
-		if (currentPage.find('[data-role=panel]').length == 0 && last_page_dom != current_page_dom) {
+		if (currentPage.find('[data-role=panel]').length === 0 && last_page_dom != current_page_dom) {
 			var panelId = 'panel' + key;
 			var panel = '<div data-role="panel" data-display="overlay" data-mini="true" class="menu" id="' + panelId + '" data-dismissible="true" data-swipe-close="true" data-position="right">';
 			panel = panel + '<h2>' + menu_header + '</h2><ol data-role="listview" data-inset="true" data-mini="true">' + menuLinks + '</ol>';
@@ -990,7 +990,7 @@ function setmenu(menu_list, menu_header) {
 			currentPage.prepend(panel);
 
 			var panelBtn = $('<a/>');
-			panelBtn.attr('href', '#' + panelId)
+			panelBtn.attr('href', '#' + panelId);
 			panelBtn.addClass('ui-btn ui-btn-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-right');
 			panelBtn.appendTo(currentHeader);
 		}
@@ -1994,15 +1994,15 @@ function loadCountriesOptions() {
 function resetObjects(objectList, elementClass, addBtnName, delBtnName, elementTitle) {
 	var firstElement = elementClass.first();
 	var lastElement = elementClass.last();
-	var i = 0;
+	//var i = 0;
 
 	elementClass.each(function (index, e) {
 		var element = $(this);
 		//change ids and names
 		$.each(objectList, function (jIndex, item) {
-			element.find('.' + item.class + ' :input').attr('id', item.name + i).attr('name', item.name + i);
-			element.find('.' + item.class + ' label').attr('for', item.name + i);
-		})
+			element.find('.' + item.class + ' :input').attr('id', item.name + index).attr('name', item.name + index);
+			element.find('.' + item.class + ' label').attr('for', item.name + index);
+		});
 
 		//set controls
 		if (element.is(firstElement) && element.is(lastElement)) {
@@ -2019,7 +2019,7 @@ function resetObjects(objectList, elementClass, addBtnName, delBtnName, elementT
 			element.find('.' + addBtnName).hide();
 		}
 		//change title
-		element.find('h4').text(elementTitle + ' ' + ++i);
+		element.find('h4').text(elementTitle + ' ' + (index + 1));
 	});
 }
 
@@ -2033,7 +2033,7 @@ function setLastThreeYearsOwnership() {
 		YearHtml.addClass('ui-field-contain');
 		var YearLabel = $('<label/>');
 		YearLabel.attr('for', YearName);
-		YearLabel.text(previousYear + ':Number of vehicles owned:')
+		YearLabel.text(previousYear + ':Number of vehicles owned:');
 		YearLabel.appendTo(YearHtml);
 		var yearText = $('<input/>');
 		yearText.attr('type', 'number');
@@ -2712,4 +2712,4 @@ var _colours = [
 		"name": "Yellow Orange",
 		"rgb": "(255, 174, 66)"
     }
-]
+];

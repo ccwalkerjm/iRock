@@ -59,7 +59,7 @@ function onDeviceReady() {
 			///show login page
 			$('#main-page-login').hide();
 			$('#main-page-selection').hide();
-			alert("Network/System Error Detected! Please reboot!")
+			alert("Network/System Error Detected! Please reboot!");
 			return;
 		}
 		doPrimaryFunctions();
@@ -104,7 +104,7 @@ function setUserProfile(obj) {
 					$('#main-page-login').show();
 					$('#main-page-selection').hide();
 					loadingSpinner();
-					alert("Network/System Error Detected! Please Try Again!")
+					alert("Network/System Error Detected! Please Try Again!");
 				} else {
 					$('#main-page-login').hide();
 					$('#main-page-selection').show();
@@ -112,7 +112,7 @@ function setUserProfile(obj) {
 					doSpecialEvents();
 					loadingSpinner();
 				}
-			})
+			});
 		}
 	});
 }
@@ -145,7 +145,7 @@ function doPrimaryFunctions(callback) {
 	$(document).one("pagebeforeshow", "#vehicle-driver-details-page", function () {
 		if (!$('#regularDriversId').is(":visible")) {
 			//var occupation = $('#applicantOccupation').val();
-			var occupationIndex = $("#applicantOccupation option:selected").index()
+			var occupationIndex = $("#applicantOccupation option:selected").index();
 			var elel = $('.regularDriversCls:last .occupation select');
 			elel.eq(occupationIndex).prop('selected', true);
 
@@ -191,7 +191,7 @@ function doPrimaryFunctions(callback) {
 	$('#regularDriversBtns').on('click', '.Reset', function () {
 		$('.regularDriversCls').not('.regularDriversCls:first').remove();
 		$('.regularDriversCls').find('input:text').val('');
-		$('#regularDriversId').hide()
+		$('#regularDriversId').hide();
 		resetRegularDriver();
 	});
 
@@ -246,7 +246,7 @@ function doPrimaryFunctions(callback) {
 	$('#page-signature').on('click', '#submit-btn', function () {
 		//add signature to form
 		var sig = $('#signature').jSignature("getData", "svgbase64"); // jSignature("getData", "base30");
-		if (g_signatureChangeCount == 0) {
+		if (g_signatureChangeCount === 0) {
 			alert('Please Enter Signature..');
 			return;
 		}
@@ -361,11 +361,11 @@ function doPrimaryFunctions(callback) {
 
 
 	$('#taxOfficeVehicleDialog').on("click", "#queryVehicleSearch", function () {
-		var plateno = $('#QueryVehicleRegistrationNo').val();
+		var plateno = $('#QueryVehicleRegistrationNo').val().replace(/ /g, '').toUpperCase();
 		var chassisno = $('#QueryVehicleChassisNo').val();
 
 		//validate first
-		if (plateno == null && chassisno == null) {
+		if (plateno === null && chassisno === null) {
 			alert("Registration No and Chassis No cannot be blank");
 			return;
 		}
@@ -584,7 +584,7 @@ function doSpecialEvents() {
 				}
 				break;
 			case '#vehicle-particulars-page':
-				if (isValid && $('#vehiclesToBeInsured .vehicle').length == 0)
+				if (isValid && $('#vehiclesToBeInsured .vehicle').length === 0)
 					isValid = false;
 				break;
 			}
@@ -771,7 +771,7 @@ function loadBodyTypes() {
 	$('#QueryVehicleBodyType').empty();
 	$.each(options.makeModels.data, function (key, value) {
 		$.each(value.models, function (key, value) {
-			if ($('#QueryVehicleBodyType option[value="' + value.body_type + '"]').length == 0) {
+			if ($('#QueryVehicleBodyType option[value="' + value.body_type + '"]').length === 0) {
 				$('#QueryVehicleBodyType').append('<option value="' + value.body_type + '">' + value.body_type + '</option>');
 			}
 		});
@@ -788,7 +788,7 @@ function loadVehicleModels() {
 	$.each(options.makeModels.data, function (key, value) {
 		if (make == value.make) {
 			$.each(value.models, function (key, value) {
-				if ($('#QueryVehicleModel option[value="' + value.model + '"]').length == 0) {
+				if ($('#QueryVehicleModel option[value="' + value.model + '"]').length === 0) {
 					$('#QueryVehicleModel').append('<option value="' + value.model + '">' + value.model + '</option>');
 				}
 			});
