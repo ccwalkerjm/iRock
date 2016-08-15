@@ -931,8 +931,8 @@ function setmenu(menu_list, menu_header) {
 	//var p = 1;
 	$.each(menu_list, function (key, item) {
 		var currentPage = $('#' + item.value);
-		var currentHeader = currentPage.find('[data-role=header]').html('');
-		var currentFooter = currentPage.find('[data-role=footer]').html('');
+		var currentHeader = currentPage.find('[data-role=header]').empty(); //.html('');
+		var currentFooter = currentPage.find('[data-role=footer]').empty(); //html('');
 
 		//set title
 		var title = $('<h1/>').text(item.name);
@@ -945,19 +945,16 @@ function setmenu(menu_list, menu_header) {
 		logoLink.attr('style', 'border:none;background-color: transparent;');
 		logoLink.attr('href', '#');
 		logoLink.addClass('home');
-		var logo = $('<img/>').attr('border', '0');
-		logo.attr('alt', '');
-		//logo.attr('style', 'height:30px');
-		//
 		if (g_profile.brokerDetails && g_profile.brokerDetails.logo) {
+			var logo = $('<img/>').attr('border', '0').attr('alt', '');
 			logo.attr('src', g_profile.brokerDetails.logo);
-		} else {
-			logo.attr('src', 'images/IronRockLogoSmall.png');
+			logo.attr('style', 'vertical-align:middle;margin-top:-10px;height:30px');
+			logoLink.append(logo);
 		}
-		logo.attr("style", "margin-top:-10px");
-		logo.height(40);
-		logoLink.append(logo);
-		currentHeader.append('Powered By&nbsp;<img src="images/IronRockLogoSmall.png" height="30px" border="0" />');
+		logoLink.append('&nbsp;');
+		logoLink.append('<span style="vertical-align:middle;line-height:30px;">Powered By</span>');
+		logoLink.append('&nbsp;');
+		logoLink.append('<img src="images/IronRockLogoSmall.png" height="30px" border="0" style="vertical-align:middle"/>');
 		logoLink.appendTo(currentHeader);
 
 		//set footer copyright

@@ -63,11 +63,19 @@ function onDeviceReady() {
 			setUserProfile($this);
 		} else {
 			//not login
+			setBrokerLogo();
 			$('#main-page-login').show();
 			$('#main-page-selection').hide();
 			loadingSpinner();
 		}
 	});
+}
+
+function setBrokerLogo(imgData) {
+	if (imgData)
+		$('#brokerLogo').attr('src', imgData);
+	else
+		$('#brokerLogo').removeAttr('src');
 }
 
 //set when user is logged in
@@ -79,6 +87,11 @@ function setUserProfile(obj) {
 			loadingSpinner();
 		} else {
 			g_profile = data;
+			if (g_profile.brokerDetails && g_profile.brokerDetails.logo) {
+				setBrokerLogo(g_profile.brokerDetails.logo);
+			} else {
+				setBrokerLogo();
+			}
 			//load miscellaneous items	
 			loadOptions(obj, function (err) {
 				if (err) {
