@@ -965,17 +965,19 @@ function setmenu(menu_list, menu_header) {
 		//set footer prev and next links
 		var prevI = key - 1;
 		var nextI = key + 1;
+		var prevLink = '';
 		if (key > 0) {
 			//insert previous link               
-			var prevLink = '<a href="#' + menu_list[prevI].value + '" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-arrow-l ui-btn-icon-notext" rel="prev">Home</a>';
-			currentFooter.append(prevLink);
+			prevLink = '<a href="#' + menu_list[prevI].value + '" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-arrow-l ui-btn-icon-notext" rel="prev">Prev</a>';
+		} else {
+			prevLink = '<a href="#" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-arrow-l ui-btn-icon-notext reload">Prev</a>';
 		}
+		currentFooter.append(prevLink);
 		if (key < menu_list.length - 1) {
 			//insert next link
 			var nextLink = '<a href="#' + menu_list[nextI].value + '" class="ui-btn ui-btn-right ui-btn-corner-all ui-icon-arrow-r ui-btn-icon-notext" rel="next">Next</a>';
 			currentFooter.append(nextLink);
 		}
-
 
 		//set menu panel
 		var current_page_dom = currentPage.get(0);
@@ -983,6 +985,7 @@ function setmenu(menu_list, menu_header) {
 			var panelId = 'panel' + key;
 			var panel = '<div data-role="panel" data-display="overlay" data-mini="true" class="menu" id="' + panelId + '" data-dismissible="true" data-swipe-close="true" data-position="right">';
 			panel = panel + '<h2>' + menu_header + '</h2><ol data-role="listview" data-inset="true" data-mini="true">' + menuLinks + '</ol>';
+			panel = panel + '<a href="#" class="ui-btn ui-btn-inline reload">Reload</a><br/>';
 			panel = panel + '<a href="#" class="ui-btn ui-btn-inline exitApp">Exit</a></div>';
 			currentPage.prepend(panel);
 
