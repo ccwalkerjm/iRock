@@ -16,6 +16,7 @@ var ironrockcloudservice = (function () {
 	const AWS_REGION = 'us-east-1';
 	//private properties and methods
 
+	var _profile;
 
 	var _creds = new AWS.CognitoIdentityCredentials({
 		IdentityPoolId: IDENTITY_POOL
@@ -56,27 +57,88 @@ var ironrockcloudservice = (function () {
 				_cognitoUser.client.config.credentials.params) {
 				auth.credentials = _cognitoUser.client.config.credentials.params;
 			}
-			var profile = localStorage.getItem("ironrockUserProfile");
-			if (profile)
-				auth.profile = JSON.parse(profile);
+			auth.profile = _profile;
+			//			var profile = localStorage.getItem("ironrockUserProfile");
+			//			if (profile)
+			//				auth.profile = JSON.parse(profile);
 		}
 		return auth;
 	};
 
+
+	//get user
+	var getUser = function (username, callback) {
+		var jsonRequest = {};
+		jsonRequest.request = {
+			'cmd': 'getUser',
+			'data': {
+				'username': username
+			}
+		};
+		jsonRequest.auth = _getAuth();
+		var requestSerialized = JSON.stringify(jsonRequest);
+		var params = {
+			FunctionName: 'ironrockAdminFunc',
+			Payload: requestSerialized
+		};
+		var _lambda = new AWS.Lambda();
+		_lambda.invoke(params, function (err, results) {
+			callback(err, results);
+		});
+	};
+
+
+
 	//get session details	
-	var _updateSession = function (session) {
+	var _updateSession = function (session, callback) {
+		var profileKey = "ironrockUserProfile"; // 
 		if (session && session.isValid()) {
 			_creds.params.Logins = {};
 			_creds.params.Logins[PROVIDER_NAME] = session.getIdToken().getJwtToken();
 			_creds.expired = true;
 			console.log(_creds);
+			//get profile
+			var username = _cognitoUser.getUsername();
+			var currenttime = new Date().getTime();
+			//check if profile is stored
+			var profile = localStorage.getItem(profileKey);
+			if (profile) {
+				profile = JSON.parse(profile);
+				if (profile.username && profile.username == username && profile.timestamp && currenttime < profile.timestamp + 600 * 1000) {
+					callback(null, profile);
+				} else {
+					profile = null;
+					localStorage.removeItem(profileKey);
+				}
+			}
+			if (!profile) {
+				//get new profile and store
+				getUser(username, function (err, data) {
+					if (err) {
+						localStorage.removeItem(profileKey);
+						callback(err);
+					} else {
+						profile = JSON.parse(data.Payload);
+						if (profile.errorMessage) {
+							localStorage.removeItem(profileKey);
+							callback(new Error(profile.errorMessage));
+						} else {
+							//store profile and return							
+							profile.timestamp = currenttime;
+							localStorage.setItem(profileKey, JSON.stringify(profile));
+							callback(null, profile);
+						}
+					}
+				});
+			}
+			//end profile
 		}
 	};
 
 
+
 	//constructor
 	function ironrockcloudservice(callback) {
-
 		//AWS.config.credentials.get(function (err) {});
 		//must run last.  will check if user is valid...
 		//this.init = function (callback) {
@@ -95,24 +157,21 @@ var ironrockcloudservice = (function () {
 				_cognitoUser = null;
 				callback(new Error('Account has been expired!. Please login again!')); //   null, $this);
 			} else {
-				/*AWS.config.credentials.get(function (err) {
-					if (err) {
-						console.log(err);
-						_cognitoUser.signOut();
-						_cognitoUser = null;
-						callback(new Error('Account has been expired!. Please login again!')); //   null, $this);
-					} else {*/
-				_updateSession(session);
-				if (callback && typeof callback == "function") {
-					callback(null, $this);
-				}
-				/*}
-				});*/
+				_updateSession(session, function (err, profile) {
+					_profile = profile;
+					if (callback && typeof callback == "function") {
+						callback(err, err ? null : $this);
+					}
+				});
 			}
 		});
 	}
 
 
+	//get profile
+	ironrockcloudservice.prototype.getProfile = function () {
+		return _profile;
+	}
 
 	//public methods
 	ironrockcloudservice.prototype.setCredentials = function (callback) {
@@ -229,11 +288,16 @@ var ironrockcloudservice = (function () {
 
 		_cognitoUser.authenticateUser(authenticationDetails, {
 			onSuccess: function (result) {
-				_updateSession(result);
-				if (callback && typeof callback == "function") {
-					//callback();
-					callback(null, $this);
-				}
+				_updateSession(result, function (err, profile) {
+					if (err) {
+						if (callback && typeof callback == "function")
+							callback(err);
+					} else {
+						if (callback && typeof callback == "function")
+							callback(null, $this);
+					}
+				});
+
 			},
 			onFailure: function (err) {
 				//_cognitoUser = null;
@@ -303,67 +367,6 @@ var ironrockcloudservice = (function () {
 		var _lambda = new AWS.Lambda();
 		_lambda.invoke(params, function (err, results) {
 			callback(err, results);
-		});
-	};
-
-	//get user
-	ironrockcloudservice.prototype.getUser = function (username, callback) {
-		var jsonRequest = {};
-		jsonRequest.request = {
-			'cmd': 'getUser',
-			'data': {
-				'username': username
-			}
-		};
-		jsonRequest.auth = _getAuth();
-		var requestSerialized = JSON.stringify(jsonRequest);
-		var params = {
-			FunctionName: 'ironrockAdminFunc',
-			Payload: requestSerialized
-		};
-		var _lambda = new AWS.Lambda();
-		_lambda.invoke(params, function (err, results) {
-			callback(err, results);
-		});
-	};
-
-
-	//user profile
-	ironrockcloudservice.prototype.getProfile = function (callback) {
-		var username = this.getUsername();
-		var currenttime = new Date().getTime();
-		//check if profile is stored
-		var profile = localStorage.getItem("ironrockUserProfile");
-		if (profile) {
-			profile = JSON.parse(profile);
-			if (profile.username != username || !profile.timestamp) {
-				profile = null;
-			} else {
-				//check if expired.  1 hour				
-				if (currenttime > profile.timestamp + 600 * 1000) {
-					profile = null;
-				} else {
-					callback(null, profile);
-					return;
-				}
-			}
-		}
-
-		//get new profile and store
-		this.getUser(username, function (err, data) {
-			if (err) {
-				callback(err);
-			} else {
-				if (data.errorMessage) {
-					callback(new Error(data.errorMessage));
-				} else {
-					//store profile and return
-					profile = JSON.parse(data.Payload);
-					profile.timestamp = currenttime;
-					localStorage.setItem("ironrockUserProfile", JSON.stringify(profile));
-					callback(null, profile);
-				}
-			}
 		});
 	};
 
@@ -1045,11 +1048,27 @@ var ironrockcloudservice = (function () {
 		});
 	};
 
+	//add notifications
 	ironrockcloudservice.prototype.addNotification = function (emailAddresses, callback) {
 		var payload = {};
 		payload.emailAddresses = emailAddresses;
 		var params = {
 			FunctionName: 'ironrockNotificationAddressesUpdate',
+			Payload: JSON.stringify(payload)
+		};
+		var _lambda = new AWS.Lambda();
+		_lambda.invoke(params, function (err, results) {
+			callback(err, results);
+		});
+	};
+
+	//get certificate
+	ironrockcloudservice.prototype.getCertification = function (policy_id, risk_id, callback) {
+		var payload = {};
+		payload.policy_id = policy_id;
+		payload.risk_id = risk_id;
+		var params = {
+			FunctionName: 'ironRockGetCertificate',
 			Payload: JSON.stringify(payload)
 		};
 		var _lambda = new AWS.Lambda();

@@ -86,33 +86,26 @@ function setBrokerLogo(imgData) {
 //set when user is logged in
 function setUserProfile(obj) {
 	obj = obj || g_ironrock_service;
-	obj.getProfile(function (err, data) {
+	g_profile = obj.getProfile(); //data;
+	if (g_profile.brokerDetails && g_profile.brokerDetails.logo) {
+		setBrokerLogo(g_profile.brokerDetails.logo);
+	} else {
+		setBrokerLogo();
+	}
+	//load miscellaneous items	
+	loadOptions(obj, function (err) {
 		if (err) {
-			alert(err.message);
+			obj.signoff();
+			$('#main-page-login').show();
+			$('#main-page-selection').hide();
 			loadingSpinner();
+			alert("Network/System Error Detected! Please Try Again!");
 		} else {
-			g_profile = data;
-			if (g_profile.brokerDetails && g_profile.brokerDetails.logo) {
-				setBrokerLogo(g_profile.brokerDetails.logo);
-			} else {
-				setBrokerLogo();
-			}
-			//load miscellaneous items	
-			loadOptions(obj, function (err) {
-				if (err) {
-					obj.signoff();
-					$('#main-page-login').show();
-					$('#main-page-selection').hide();
-					loadingSpinner();
-					alert("Network/System Error Detected! Please Try Again!");
-				} else {
-					$('#main-page-login').hide();
-					$('#main-page-selection').show();
-					doMiscellaneous();
-					doSpecialEvents();
-					loadingSpinner();
-				}
-			});
+			$('#main-page-login').hide();
+			$('#main-page-selection').show();
+			doMiscellaneous();
+			doSpecialEvents();
+			loadingSpinner();
 		}
 	});
 }
@@ -434,39 +427,6 @@ function ConvertToJson(r) {
 	}
 	return r;
 }
-
-
-
-
-/*
-function setUserProfile(obj) {
-	var username = obj.getUsername();
-	obj.getUser(username, function (err, data) {
-		if (err) {
-			alert(err.message);
-			loadingSpinner();
-		} else {
-			localStorage.setItem("ironrockUserProfile", data.Payload);
-			//load miscellaneous items	
-			loadOptions(obj, function (err) {
-				if (err) {
-					obj.signoff();
-					$('#main-page-login').show();
-					$('#main-page-selection').hide();
-					loadingSpinner();
-					alert("Network/System Error Detected! Please Try Again!")
-				} else {
-					$('#main-page-login').hide();
-					$('#main-page-selection').show();
-					doMiscellaneous();
-					doSpecialEvents();
-					loadingSpinner();
-				}
-			})
-		}
-	});
-}
-*/
 
 
 
