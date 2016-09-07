@@ -33,7 +33,7 @@
 <body>
     <div data-role="page" id="main-page">
         <div data-role="main" class="ui-content">
-            <img id="brokerLogo" src="" alt="" style="width: 50%;" />
+            <img id="brokerLogo" alt="" style="width: 50%;" />
             <p style="margin: auto;width: 30%;border: 0;padding: 10px;font-size:160%;font-weight:bold"><span id="PoweredBy"></span></p>
             <img id="ironrockLogo" src="images/IronRockLogo.png" alt="IronRock Insurance" style="width: 50%;float:right" />
             <div style="clear: both"></div>
@@ -50,13 +50,13 @@
             </div>
             <div id="main-page-selection" style="display:none">
                 <a id="menu-vehicle" data-role="button" href="#" data-shadow="false" data-theme="none">
-                    <img src="images/motor.jpg" border="0" />
+                    Motor Insurance
                 </a>
                 <a id="menu-property" data-role="button" href="#" data-shadow="false" data-theme="none">
-                    <img src="images/house.jpg" border="0" />
+                    Home Ownership Insurance
                 </a>
                 <a class="exitApp" data-role="button" href="#" data-shadow="false" data-theme="none">
-                    <img src="images/exit.jpg" border="0" />
+                    Exit Application
                 </a>
             </div>
             <!--<a id="menu-vehicle" href="#" class="ui-btn ">Motor Vehicle Insurance</a>
@@ -193,6 +193,7 @@
                     <div class="ui-field-contain jamaica">
                         <label for="applicantHomeParish">Select Parish:</label>
                         <select name="applicantHomeParish" id="applicantHomeParish" data-mini="true">
+                            <option value=""></option>
                             <option value="Kingston">Kingston</option>
                             <option value="St. Andrew">St. Andrew</option>
                             <option value="St. Catherine">St. Catherine</option>
@@ -245,7 +246,7 @@
                     <h4>Mailing Address</h4>
                     <div class="ui-field-contain">
                         <label for="applicantMailStreetName">Street Number and Name:</label>
-                        <input type="text" id="applicantMailStreetName" name="appplicantMailStreetName" placeholder="Enter Street Number and Name">
+                        <input type="text" id="applicantMailStreetName" name="applicantMailStreetName" placeholder="Enter Street Number and Name">
                     </div>
 
                     <div class="ui-field-contain">
@@ -256,6 +257,7 @@
                     <div class="ui-field-contain jamaica">
                         <label for="applicantMailParish">Select Parish:</label>
                         <select name="applicantMailParish" id="applicantMailParish" data-mini="true">
+                            <option value=""></option>
                             <option value="Kingston">Kingston</option>
                             <option value="St. Andrew">St. Andrew</option>
                             <option value="St. Catherine">St. Catherine</option>
@@ -325,6 +327,7 @@
                     <div class="ui-field-contain jamaica">
                         <label for="employerParish">Select Parish:</label>
                         <select name="employerParish" id="employerParish" data-mini="true">
+                            <option value=""></option>
                             <option value="Kingston">Kingston</option>
                             <option value="St. Andrew">St. Andrew</option>
                             <option value="St. Catherine">St. Catherine</option>
@@ -354,7 +357,7 @@
                     </div>
 
                     <div class="ui-field-contain">
-                        <label for="employerNationality">Nationality:</label>
+                        <label for="employerNationality">Select Country:</label>
                         <select name="employerNationality" id="employerNationality" class="countries" data-mini="true"></select>
                     </div>
                 </div>
@@ -363,7 +366,7 @@
                 <div class="ui-grid-c">
                     <div class="ui-block-a" style="width: 75%">
                         <label for="applicantRelativeInPublicOffice">
-                            Have you or any relative or close associate been entrusted with prominent pubic functions(e.g. Member of Parliament, Senator or Mayor, Senior Government Official, Judiciary, Security forces)?
+                            Have you or any relative or close associate been entrusted with prominent public functions(e.g. Member of Parliament, Senator or Mayor, Senior Government Official, Judiciary, Security forces)?
                         </label>
                     </div>
                     <div class="ui-block-b" style="width: 25%">
@@ -395,8 +398,6 @@
                             <select name="applicantRelativeInPublicOfficeRelation0" id="applicantRelativeInPublicOfficeRelation0">
                                 <option value="spouse">Spouse</option>
                                 <option value="child">Child</option>
-                                <option value="father">Father</option>
-                                <option value="mother">Mother</option>
                             </select>
                         </div>
                         <div data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -527,7 +528,8 @@
         <div data-role="main" class="ui-content">
             <form class="ProposalForm" id="vehicleToBeInsuredCtrl">
                 <h4>PARTICULARS OF VEHICLE(S) TO BE INSURED</h4>
-                <p>You are required to ensure that the Sum Insured is revised annually to reflect the current market value. Claims will be settled based on the market value at the time of the loss. For total losses you will be paid based on the market value or Policy Sum Insured whichever is lesser.</p>
+                <p>You are required to ensure that the Sum Insured is revised annually to reflect the current market value. Claims will be settled based on the market value at the time of the loss. For total losses you will be paid based on the market value
+                    or Policy Sum Insured whichever is lesser.</p>
                 <a href="#taxOfficeVehicleDialog" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-right ui-btn-inline ui-mini">Add Vehicle</a>
                 <a href="#" id="taxOfficeVehicleRefresh" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right ui-btn-inline ui-mini" style="display:none">Refresh</a>
                 <div id="vehiclesToBeInsured">
@@ -624,6 +626,7 @@
                                 <div class="ui-field-contain">
                                     <label for="lienHolderParish">&nbsp;&nbsp;Parish:</label>
                                     <select name="lienHolderParish" id="lienHolderParish" data-mini="true">
+                                        <option value=""></option>
                                         <option value="Kingston">Kingston</option>
                                         <option value="St. Andrew">St. Andrew</option>
                                         <option value="St. Catherine">St. Catherine</option>
@@ -665,7 +668,7 @@
                     <select name="insuranceCoverage" id="insuranceCoverage" data-mini="true">
                         <option value="Comprehensive" title="Liability for Third Party Bodily Injury and Property Damage and loss of or damage to the Insured’s Motor Vehicle">Comprehensive</option>
                         <option value="ThirdPartyFireTheft" title="Liability for Third Party Bodily Injury and Property Damage and Loss of or damage to the Insured’s Motor Vehicle by Fire or Theft">Third Party Fire and Theft</option>
-                        <option value="ThirdParty" title="Liability for Third Party Bodily Injury and Property Damage">Third Party Liability</option>
+                        <option value="ThirdParty" title="Liability for Third Party Bodily Injury and Property Damage">Third Party</option>
                     </select>
                     <label for="vehicleUsedAs">Vehicle Used As:</label>
                     <select name="vehicleUsedAs" id="vehicleUsedAs" data-mini="true">
@@ -683,7 +686,7 @@
 
                 <div class="ui-grid-c">
                     <div class="ui-block-a" style="width:40%">
-                        <label>Is the vehicle fitted with an anti-theft device?:</label>
+                        <label>Is the vehicle fitted with an anti-theft device?</label>
                     </div>
                     <div class="ui-block-b" style="width:10%">
                         <select name="vehicleAntiTheftDevice" id="vehicleAntiTheftDevice" data-role="slider" data-mini="true">
@@ -706,7 +709,7 @@
 
                 <div class="ui-grid-c">
                     <div class="ui-block-a" style="width:40%">
-                        <label>Will you have regular custody of the vehicle?:</label>
+                        <label>Will you have regular custody of the vehicle?</label>
                     </div>
                     <div class="ui-block-b" style="width:10%">
                         <select name="vehicleRegularCustody" id="vehicleRegularCustody" data-role="slider" data-mini="true">
@@ -857,8 +860,8 @@
                             <option value="Any Authorized Driver">Any Authorized Driver</option>
                             <option value="Named Drivers Only">Named Drivers Only</option>
                             <option value="Insured only">Insured only</option>
-                            <option value="Insured Plus One">Insured Plus One</option>
-                            <option value="Insured Plus Two">Insured Plus Two</option>
+                            <option value="Insured Plus One ">Insured Plus One</option>
+                            <option value="Insured Plus Two ">Insured Plus Two</option>
                             <option value="The Insured(s) and Any Authorized Driver">The Insured(s) and Any Authorized Driver</option>
                         </select>
                     </div>
@@ -1177,7 +1180,7 @@
 
                 <fieldset class="ui-field-contain">
                     <label for="thirdPartyLimit">
-                        Third Party Limits</label>
+                        Third Party Limits:</label>
                     <select name="thirdPartyLimit" id="thirdPartyLimit">
                     </select>
                 </fieldset>
@@ -1210,6 +1213,7 @@
 
                     <label for="homeRiskAddressParish">Select Parish:</label>
                     <select name="homeRiskAddressParish" id="homeRiskAddressParish" data-mini="true">
+                        <option value=""></option>
                         <option value="Kingston">Kingston</option>
                         <option value="St. Andrew">St. Andrew</option>
                         <option value="St. Catherine">St. Catherine</option>
@@ -1411,7 +1415,9 @@
                 <div data-role="collapsible">
                     <h4>IMPORTANT NOTE</h4>
                     <p>
-                        The SUMS TO BE INSURED must represent the FULL NEW REPLACEMENT COST of the Property and should include adequate provision for demolition and debris removal costs in the event of major damage as well as professional fees that would be incurred in reinstatement. As the Company will pay up to 10% of the Sum insured in respect of Rent lost or reasonable costs of alternative accomodation if damage by an Insured Peril renders the home uninhabitable, provision for this should also be included in your Sums Insured.
+                        The SUMS TO BE INSURED must represent the FULL NEW REPLACEMENT COST of the Property and should include adequate provision for demolition and debris removal costs in the event of major damage as well as professional fees that would be incurred in reinstatement.
+                        As the Company will pay up to 10% of the Sum insured in respect of Rent lost or reasonable costs of alternative accomodation if damage by an Insured Peril renders the home uninhabitable, provision for this should also be included
+                        in your Sums Insured.
                     </p>
 
                 </div>
@@ -1430,7 +1436,8 @@
                 <div id="homeInsuranceProperty">
                     <div data-role="popup" id="homeInsurancePropertyDetails">
                         <p>
-                            The Buildings of the private dwelling together with its garages and outbuildings, including landlord’s fixtures and fittings together with patios, driveways and other paved areas, walls, gates and fences, underground water pipes and cables providing services to and from the home, fixed water storage tanks and sewage disposal systems. (NB. Swimming Pools &amp; Waterside Structures are not included.)
+                            The Buildings of the private dwelling together with its garages and outbuildings, including landlord’s fixtures and fittings together with patios, driveways and other paved areas, walls, gates and fences, underground water pipes and cables providing services
+                            to and from the home, fixed water storage tanks and sewage disposal systems. (NB. Swimming Pools &amp; Waterside Structures are not included.)
                         </p>
                     </div>
                     <div class="homeInsurancePropertyItems">
@@ -1476,12 +1483,15 @@
 
                     <div data-role="collapsible">
                         <h4>IMPORTANT NOTES</h4>
-                        <p>The SUMS TO BE INSURED must represent the FULL COST of replacing all the contents insured with NEW articles of similar size, style and specification. As the Company will pay up to 10% of the Sum Insured in respect of reasonable costs of alternative accommodation if damage by an Insured Peril renders the home uninhabitable, provision for this should be included in your Sum Insured.</p>
+                        <p>The SUMS TO BE INSURED must represent the FULL COST of replacing all the contents insured with NEW articles of similar size, style and specification. As the Company will pay up to 10% of the Sum Insured in respect of reasonable
+                            costs of alternative accommodation if damage by an Insured Peril renders the home uninhabitable, provision for this should be included in your Sum Insured.</p>
                         <p>
-                            Do not include in your Contents Sum Insured any Article which is to be insured under the All Risks Section Unspecified Valuables: Coverage is limited to one-third of the Total Sum Insured on Contents with coverage on individual articles limited to 5% of such Total Sum Insured. Individual articles worth more than 5% of the Total Sum Insured to be insured should be insured separately specified below.
+                            Do not include in your Contents Sum Insured any Article which is to be insured under the All Risks Section Unspecified Valuables: Coverage is limited to one-third of the Total Sum Insured on Contents with coverage on individual articles limited to 5%
+                            of such Total Sum Insured. Individual articles worth more than 5% of the Total Sum Insured to be insured should be insured separately specified below.
                         </p>
                         <p>
-                            Valuables include jewellery and other articles of gold, silver or other precious metal, clocks, watches, cameras, camcorders and other photographic equipment, electronic equipment (other than domestic appliances), furs, pictures and other works of art, curios, licensed fire-arms, collections of stamps, coins or other valuable objects.
+                            Valuables include jewellery and other articles of gold, silver or other precious metal, clocks, watches, cameras, camcorders and other photographic equipment, electronic equipment (other than domestic appliances), furs, pictures and other works of art,
+                            curios, licensed fire-arms, collections of stamps, coins or other valuable objects.
                         </p>
                     </div>
 
@@ -1489,7 +1499,8 @@
 
                     <div data-role="popup" id="HouseholdGoodsDetails">
                         <p>
-                            Contents: Household Goods, Personal Effects and Fixtures and Fittings which belong to or are the legal responsibility of any member of your household, including personal effects of non-paying guests temporarily staying with you but excluding Valuables which are to be individually specified.
+                            Contents: Household Goods, Personal Effects and Fixtures and Fittings which belong to or are the legal responsibility of any member of your household, including personal effects of non-paying guests temporarily staying with you but excluding Valuables
+                            which are to be individually specified.
                         </p>
                     </div>
 

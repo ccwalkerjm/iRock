@@ -17,7 +17,7 @@ function doMiscellaneous() {
         var applicantOccupation = $("#applicantOccupation option:selected");
         var occupationIndex = applicantOccupation.index();
         var occupationValue = applicantOccupation.val();
-        //$('.selDiv option:eq(1)').prop('selected', true)			
+        //$('.selDiv option:eq(1)').prop('selected', true)
         var driverOccupation = $('#vehicle-driver-details-page').find('#regularDriversOccupation0');
         driverOccupation.find('option').eq(occupationIndex).prop('selected', true);
     });
@@ -563,14 +563,14 @@ function setVehicleUsedAs(select_value) {
     //$('label[for=a], input#a').hide();
     //show relevant inputs
     switch (select_value) {
-    case "CarriageOwnGoods": //private commercial               
+    case "CarriageOwnGoods": //private commercial
     case "CarriagePassengersNotHire": //private commercial
     case "CarriagePassengersHire": //private commercial
     case "CommercialTravelling": //private commercial
         $('label[for=23YearsOldPrivateCommercial], input#23YearsOldPrivateCommercial').show();
         $('label[for=36MonthsGeneralLicencePrivateCommercial], input#36MonthsGeneralLicencePrivateCommercial').show();
         break;
-    case "GeneralCartage": //General Cartage  
+    case "GeneralCartage": //General Cartage
         $('label[for=25YearsOldGeneralCartage], input#25YearsOldGeneralCartage').show();
         $('label[for=5YearsGeneralLicencePublicCommercial], input#5YearsGeneralLicencePublicCommercial').show();
         break;
@@ -586,6 +586,7 @@ function setVehicleUsedAs(select_value) {
 function loadOccupations(isMotor) {
     var options = JSON.parse(localStorage.getItem(_PreliminaryData));
     $('#applicantOccupation').empty();
+    $('#applicantOccupation').append('<option value=""></option>');
     $.each(options.occupations.data, function (key, value) {
         $('#applicantOccupation').append('<option value="' + value.occupation.trim() + '">' + value.occupation + '</option>');
         if (isMotor) {
@@ -956,7 +957,7 @@ function setmenu(menu_list, menu_header) {
             logoLink.append('&nbsp;');
             logoLink.append('<img src="images/IronRockLogoSmall.png" height="30px" border="0" style="vertical-align:middle"/>');
             logoLink.appendTo(currentHeader);
-        } else {            
+        } else {
             logoLink.append('<img src="images/IronRockLogoSmall.png" height="30px" border="0" style="vertical-align:middle"/>');
             logoLink.appendTo(currentHeader);
         }
@@ -972,7 +973,7 @@ function setmenu(menu_list, menu_header) {
         var nextI = key + 1;
         var prevLink = '';
         if (key > 0) {
-            //insert previous link               
+            //insert previous link
             prevLink = '<a href="#' + menu_list[prevI].value + '" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-arrow-l ui-btn-icon-notext" rel="prev">Prev</a>';
         } else {
             prevLink = '<a href="#" class="ui-btn ui-btn-left ui-btn-corner-all ui-icon-arrow-l ui-btn-icon-notext reload">Prev</a>';
