@@ -33,7 +33,7 @@
 <body>
     <div data-role="page" id="main-page">
         <div data-role="main" class="ui-content">
-            <img id="brokerLogo" src="" alt="" style="width: 50%;" />
+            <img id="brokerLogo" alt="Broker" style="width: 50%;" />
             <p style="margin: auto;width: 30%;border: 0;padding: 10px;font-size:160%;font-weight:bold"><span id="PoweredBy"></span></p>
             <img id="ironrockLogo" src="images/IronRockLogo.png" alt="IronRock Insurance" style="width: 50%;float:right" />
             <div style="clear: both"></div>
@@ -187,26 +187,12 @@
 
                     <div class="ui-field-contain">
                         <label for="applicantHomeTown">City/Town/Postal Zone:</label>
-                        <input required type="text" id="applicantHomeTown" name="applicantHomeTown" placeholder="Enter City, Town or Postal Zone">
+                        <select id="applicantHomeTown" name="applicantHomeTown" data-mini="true"></select>
                     </div>
 
                     <div class="ui-field-contain jamaica">
                         <label for="applicantHomeParish">Select Parish:</label>
-                        <select name="applicantHomeParish" id="applicantHomeParish" data-mini="true">
-                            <option value="Kingston">Kingston</option>
-                            <option value="St. Andrew">St. Andrew</option>
-                            <option value="St. Catherine">St. Catherine</option>
-                            <option value="Clarendon">Clarendon</option>
-                            <option value="Manchester">Manchester</option>
-                            <option value="St. Elizabeth">St. Elizabeth</option>
-                            <option value="Westmoreland">Westmoreland</option>
-                            <option value="Hanover">Hanover</option>
-                            <option value="St. James">St. James</option>
-                            <option value="Trelawny">Trelawny</option>
-                            <option value="St. Ann">St. Ann</option>
-                            <option value="St. Mary">St. Mary</option>
-                            <option value="Portland">Portland</option>
-                            <option value="St. Thomas">St. Thomas</option>
+                        <select class="parish" name="applicantHomeParish" id="applicantHomeParish" data-mini="true">
                         </select>
                     </div>
 
@@ -250,26 +236,12 @@
 
                     <div class="ui-field-contain">
                         <label for="applicantMailTown">City/Town/Postal Zone:</label>
-                        <input type="text" id="applicantMailTown" name="applicantMailTown" placeholder="Enter City, Town or Postal Zone">
+                        <select id="applicantMailTown" name="applicantMailTown" data-mini="true"></select>
                     </div>
 
                     <div class="ui-field-contain jamaica">
                         <label for="applicantMailParish">Select Parish:</label>
-                        <select name="applicantMailParish" id="applicantMailParish" data-mini="true">
-                            <option value="Kingston">Kingston</option>
-                            <option value="St. Andrew">St. Andrew</option>
-                            <option value="St. Catherine">St. Catherine</option>
-                            <option value="Clarendon">Clarendon</option>
-                            <option value="Manchester">Manchester</option>
-                            <option value="St. Elizabeth">St. Elizabeth</option>
-                            <option value="Westmoreland">Westmoreland</option>
-                            <option value="Hanover">Hanover</option>
-                            <option value="St. James">St. James</option>
-                            <option value="Trelawny">Trelawny</option>
-                            <option value="St. Ann">St. Ann</option>
-                            <option value="St. Mary">St. Mary</option>
-                            <option value="Portland">Portland</option>
-                            <option value="St. Thomas">St. Thomas</option>
+                        <select class="parish" name="applicantMailParish" id="applicantMailParish" data-mini="true">
                         </select>
                     </div>
 
@@ -319,28 +291,13 @@
                     </div>
                     <div class="ui-field-contain">
                         <label for="employerTown">City/Town/Postal Zone:</label>
-                        <input type="text" name="employerTown" id="employerTown" placeholder="Enter City, Town or Postal Zone">
+                        <select name="employerTown" id="employerTown" data-mini="true"></select>
                     </div>
 
                     <div class="ui-field-contain jamaica">
                         <label for="employerParish">Select Parish:</label>
-                        <select name="employerParish" id="employerParish" data-mini="true">
-                            <option value="Kingston">Kingston</option>
-                            <option value="St. Andrew">St. Andrew</option>
-                            <option value="St. Catherine">St. Catherine</option>
-                            <option value="Clarendon">Clarendon</option>
-                            <option value="Manchester">Manchester</option>
-                            <option value="St. Elizabeth">St. Elizabeth</option>
-                            <option value="Westmoreland">Westmoreland</option>
-                            <option value="Hanover">Hanover</option>
-                            <option value="St. James">St. James</option>
-                            <option value="Trelawny">Trelawny</option>
-                            <option value="St. Ann">St. Ann</option>
-                            <option value="St. Mary">St. Mary</option>
-                            <option value="Portland">Portland</option>
-                            <option value="St. Thomas">St. Thomas</option>
+                        <select class="parish" name="employerParish" id="employerParish" data-mini="true">
                         </select>
-
                     </div>
 
                     <div class="ui-field-contain international" style="display:none">
@@ -529,27 +486,19 @@
                 <h4>PARTICULARS OF VEHICLE(S) TO BE INSURED</h4>
                 <p>You are required to ensure that the Sum Insured is revised annually to reflect the current market value. Claims will be settled based on the market value at the time of the loss. For total losses you will be paid based on the market value or Policy Sum Insured whichever is lesser.</p>
                 <a href="#taxOfficeVehicleDialog" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-right ui-btn-inline ui-mini">Add Vehicle</a>
-                <a href="#" id="taxOfficeVehicleRefresh" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right ui-btn-inline ui-mini" style="display:none">Refresh</a>
-                <div id="vehiclesToBeInsured">
-                    <div class="ui-grid-d" data-id="0">
-                        <div class="ui-block-a">
-                            <h4>Plate No</h4>
-                        </div>
-                        <div class="ui-block-b">
-                            <h4>Make/Model</h4>
-                        </div>
-                        <div class="ui-block-c">
-                            <h4>Year/Body/Colour</h4>
-                        </div>
-                        <div class="ui-block-d">
-                            <h4>Chassis/Engine</h4>
-                        </div>
-                        <div class="ui-block-e">
-                            <h4>Sum Insured</h4>
-                        </div>
-                    </div>
-                </div>
-
+                <table id="vehiclesToBeInsured" data-role="table" data-mode="columntoggle" class="ui-responsive">
+                      <thead>
+                        <tr data-id="0">
+                          <th data-priority="6">Plate No</th>
+                          <th>Make/Model</th>
+                          <th data-priority="1">Year/Body/Colour</th>
+                          <th data-priority="2">Chassis/Engine</th>
+                          <th data-priority="3">Sum Insured</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                </table>
                 <hr />
                 <div class="ui-grid-a">
                     <input type="hidden" name="currency" id="currency" value="JA" />
@@ -1206,24 +1155,10 @@
                     <input required type="text" id="homeRiskAddressStreetName" name="homeRiskAddressStreetName" placeholder="Enter Street Name">
 
                     <label for="homeRiskAddressTown">City/Town/Postal Zone:</label>
-                    <input required type="text" id="homeRiskAddressTown" name="homeRiskAddressTown" placeholder="Enter City, Town or Postal Zone">
+                    <select id="homeRiskAddressTown" name="homeRiskAddressTown" data-mini="true"></select>
 
                     <label for="homeRiskAddressParish">Select Parish:</label>
-                    <select name="homeRiskAddressParish" id="homeRiskAddressParish" data-mini="true">
-                        <option value="Kingston">Kingston</option>
-                        <option value="St. Andrew">St. Andrew</option>
-                        <option value="St. Catherine">St. Catherine</option>
-                        <option value="Clarendon">Clarendon</option>
-                        <option value="Manchester">Manchester</option>
-                        <option value="St. Elizabeth">St. Elizabeth</option>
-                        <option value="Westmoreland">Westmoreland</option>
-                        <option value="Hanover">Hanover</option>
-                        <option value="St. James">St. James</option>
-                        <option value="Trelawny">Trelawny</option>
-                        <option value="St. Ann">St. Ann</option>
-                        <option value="St. Mary">St. Mary</option>
-                        <option value="Portland">Portland</option>
-                        <option value="St. Thomas">St. Thomas</option>
+                    <select class="parish" name="homeRiskAddressParish" id="homeRiskAddressParish" data-mini="true">
                     </select>
                 </div>
 
