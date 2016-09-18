@@ -50,13 +50,13 @@
             </div>
             <div id="main-page-selection" style="display:none">
                 <a id="menu-vehicle" data-role="button" href="#" data-shadow="false" data-theme="none">
-                    <img src="images/motor.jpg" border="0" />
+                    Motor Insurance
                 </a>
                 <a id="menu-property" data-role="button" href="#" data-shadow="false" data-theme="none">
-                    <img src="images/house.jpg" border="0" />
+                    Home Ownership Insurance
                 </a>
                 <a class="exitApp" data-role="button" href="#" data-shadow="false" data-theme="none">
-                    <img src="images/exit.jpg" border="0" />
+                    Exit Application
                 </a>
             </div>
             <!--<a id="menu-vehicle" href="#" class="ui-btn ">Motor Vehicle Insurance</a>
@@ -231,7 +231,7 @@
                     <h4>Mailing Address</h4>
                     <div class="ui-field-contain">
                         <label for="applicantMailStreetName">Street Number and Name:</label>
-                        <input type="text" id="applicantMailStreetName" name="appplicantMailStreetName" placeholder="Enter Street Number and Name">
+                        <input type="text" id="applicantMailStreetName" name="applicantMailStreetName" placeholder="Enter Street Number and Name">
                     </div>
 
                     <div class="ui-field-contain">
@@ -311,7 +311,7 @@
                     </div>
 
                     <div class="ui-field-contain">
-                        <label for="employerNationality">Nationality:</label>
+                        <label for="employerNationality">Select Country:</label>
                         <select name="employerNationality" id="employerNationality" class="countries" data-mini="true"></select>
                     </div>
                 </div>
@@ -320,7 +320,7 @@
                 <div class="ui-grid-c">
                     <div class="ui-block-a" style="width: 75%">
                         <label for="applicantRelativeInPublicOffice">
-                            Have you or any relative or close associate been entrusted with prominent pubic functions(e.g. Member of Parliament, Senator or Mayor, Senior Government Official, Judiciary, Security forces)?
+                            Have you or any relative or close associate been entrusted with prominent public functions(e.g. Member of Parliament, Senator or Mayor, Senior Government Official, Judiciary, Security forces)?
                         </label>
                     </div>
                     <div class="ui-block-b" style="width: 25%">
@@ -352,8 +352,6 @@
                             <select name="applicantRelativeInPublicOfficeRelation0" id="applicantRelativeInPublicOfficeRelation0">
                                 <option value="spouse">Spouse</option>
                                 <option value="child">Child</option>
-                                <option value="father">Father</option>
-                                <option value="mother">Mother</option>
                             </select>
                         </div>
                         <div data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -484,29 +482,30 @@
         <div data-role="main" class="ui-content">
             <form class="ProposalForm" id="vehicleToBeInsuredCtrl">
                 <h4>PARTICULARS OF VEHICLE(S) TO BE INSURED</h4>
-                <p>You are required to ensure that the Sum Insured is revised annually to reflect the current market value. Claims will be settled based on the market value at the time of the loss. For total losses you will be paid based on the market value or Policy Sum Insured whichever is lesser.</p>
+                <p>You are required to ensure that the Sum Insured is revised annually to reflect the current market value. Claims will be settled based on the market value at the time of the loss. For total losses you will be paid based on the market value
+                    or Policy Sum Insured whichever is lesser.</p>
                 <a href="#taxOfficeVehicleDialog" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-right ui-btn-inline ui-mini">Add Vehicle</a>
                 <table id="vehiclesToBeInsured" data-role="table" data-mode="columntoggle" class="ui-responsive">
-                      <thead>
+                    <thead>
                         <tr data-id="0">
-                          <th data-priority="6">Plate No</th>
-                          <th>Make/Model</th>
-                          <th data-priority="1">Year/Body/Colour</th>
-                          <th data-priority="2">Chassis/Engine</th>
-                          <th data-priority="3">Sum Insured</th>
-                          <th></th>
+                            <th data-priority="6">Plate No</th>
+                            <th>Make/Model</th>
+                            <th data-priority="1">Year/Body/Colour</th>
+                            <th data-priority="2">Chassis/Engine</th>
+                            <th data-priority="3">Sum Insured</th>
+                            <th></th>
                         </tr>
-                      </thead>
-                      <tbody></tbody>
+                    </thead>
+                    <tbody></tbody>
                 </table>
                 <hr />
                 <div class="ui-grid-a">
-                    <input type="hidden" name="currency" id="currency" value="JA" />
+                    <input type="hidden" name="currency" class="currency" value="JA" />
                     <div class="ui-block-a" style="width:40%">
                         <label for="startDate">Insurance Start Date:</label>
                     </div>
                     <div class="ui-block-b" style="width:60%">
-                        <input required name="startDate" type="date" id="startDate" placeholder="Start Date" />
+                        <input required name="startDate" type="date" class="startDate" placeholder="Start Date" />
                     </div>
                 </div>
 
@@ -542,55 +541,12 @@
                     </div>
                 </div>
 
-
-                <div id="lien-holder">
-                    <h4>Lien Holder</h4>
-                    <div class="ui-field-contain">
-                        <label for="lienHolder">Is there a Lien Holder?</label>
-                        <select name="lienHolder" id="lienHolder" data-role="slider" data-mini="true">
-                            <option value="no" selected="">No</option>
-                            <option value="yes">Yes</option>
-                        </select>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a" style="width:40%">
+                        <label for="motorFinancialInstitutionCode">Institution with financial interest:</label>
                     </div>
-
-                    <div class="lienHolderClass" style="display:none">
-                        <div class="ui-grid-a">
-                            <div class="ui-block-a">
-                                <div class="ui-field-contain">
-                                    <label for="lienHolderNameInFull">&nbsp;&nbsp;Name:</label>
-                                    <input type="text" name="lienHolderNameInFull" id="lienHolderNameInFull" value="">
-                                </div>
-                                <div class="ui-field-contain">
-                                    <label for="lienHolderTown">&nbsp;&nbsp;Town:</label>
-                                    <input type="text" name="lienHolderTown" id="lienHolderTown" value="">
-                                </div>
-                            </div>
-                            <div class="ui-block-b">
-                                <div class="ui-field-contain">
-                                    <label for="lienHolderStreetName">&nbsp;&nbsp;Address:</label>
-                                    <input type="text" name="lienHolderStreetName" id="lienHolderStreetName" value="">
-                                </div>
-                                <div class="ui-field-contain">
-                                    <label for="lienHolderParish">&nbsp;&nbsp;Parish:</label>
-                                    <select name="lienHolderParish" id="lienHolderParish" data-mini="true">
-                                        <option value="Kingston">Kingston</option>
-                                        <option value="St. Andrew">St. Andrew</option>
-                                        <option value="St. Catherine">St. Catherine</option>
-                                        <option value="Clarendon">Clarendon</option>
-                                        <option value="Manchester">Manchester</option>
-                                        <option value="St. Elizabeth">St. Elizabeth</option>
-                                        <option value="Westmoreland">Westmoreland</option>
-                                        <option value="Hanover">Hanover</option>
-                                        <option value="St. James">St. James</option>
-                                        <option value="Trelawny">Trelawny</option>
-                                        <option value="St. Ann">St. Ann</option>
-                                        <option value="St. Mary">St. Mary</option>
-                                        <option value="Portland">Portland</option>
-                                        <option value="St. Thomas">St. Thomas</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="ui-block-b" style="width:60%">
+                        <select data-mini="true" name="motorFinancialInstitutionCode" id="motorFinancialInstitutionCode"></select>
                     </div>
                 </div>
 
@@ -611,28 +567,52 @@
             <form class="ProposalForm">
                 <div class="ui-field-contain">
                     <label for="insuranceCoverage">Insurance coverage:</label>
-                    <select name="insuranceCoverage" id="insuranceCoverage" data-mini="true">
-                        <option value="Comprehensive" title="Liability for Third Party Bodily Injury and Property Damage and loss of or damage to the Insured’s Motor Vehicle">Comprehensive</option>
-                        <option value="ThirdPartyFireTheft" title="Liability for Third Party Bodily Injury and Property Damage and Loss of or damage to the Insured’s Motor Vehicle by Fire or Theft">Third Party Fire and Theft</option>
-                        <option value="ThirdParty" title="Liability for Third Party Bodily Injury and Property Damage">Third Party Liability</option>
+                    <select name="insuranceCoverage" id="insuranceCoverage" data-mini="true" required>
+                        <option value=""></option>
+                        <option value="mpc" title="Liability for Third Party Bodily Injury and Property Damage and loss of or damage to the Insured’s Motor Vehicle">Comprehensive</option>
+                        <option value="mptft" title="Liability for Third Party Bodily Injury and Property Damage and Loss of or damage to the Insured’s Motor Vehicle by Fire or Theft">Third Party Fire and Theft</option>
+                        <option value="mpt" title="Liability for Third Party Bodily Injury and Property Damage">Third Party</option>
                     </select>
                     <label for="vehicleUsedAs">Vehicle Used As:</label>
-                    <select name="vehicleUsedAs" id="vehicleUsedAs" data-mini="true">
-                        <option value="CarriageOwnGoods">Carriage of own goods only (Private Commercial)</option>
-                        <option value="CarriagePassengersNotHire">Carriage of passengers not for hire or reward</option>
-                        <option value="CarriagePassengersHire">Carriage of Passengers for hire or reward</option>
-                        <option value="SocialDomesticPleasure" selected>Social domestic and pleasure purposes only</option>
-                        <option value="GeneralCartage">General Cartage</option>
-                        <option value="SocialDomesticPleasureBusiness">Social domestic &amp; pleasure purposes and Proposer’s business use</option>
-                        <option value="CommercialTravelling">Commercial travelling</option>
-                    </select>
+                    <select name="vehicleUsedAs" id="vehicleUsedAs" data-mini="true"></select>
                 </div>
 
+                <div class="ui-grid-a">
+                    <div class="ui-block-a" style="width:40%">
+                        <label for="noClaimDiscountCode">No Claim Discount Earned:</label>
+                    </div>
+                    <div class="ui-block-b" style="width:60%">
+                        <select data-mini="true" name="noClaimDiscountCode" id="noClaimDiscountCode">
+                            <option value="">None</option>
+                            <option value="oneyear">One Year</option>
+                            <option value="twoyears">Two Years</option>
+                            <option value="threeyears">Three Years</option>
+                            <option value="fouryears">Four Years and Over</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="ui-grid-a">
+                    <div class="ui-block-a" style="width:40%">
+                        <label for="authorized_driver_wording">Type of Authorized Driver Clause:</label>
+                    </div>
+                    <div class="ui-block-b" style="width:60%">
+                        <select name="authorized_driver_wording" id="authorized_driver_wording" data-mini="true">
+                            <option value="Any Authorized Driver">Any Authorized Driver</option>
+                            <option value="Named Drivers Only">Named Drivers Only</option>
+                            <option value="Insured only">Insured only</option>
+                            <option value="Insured Plus One ">Insured Plus One</option>
+                            <option value="Insured Plus Two ">Insured Plus Two</option>
+                            <option value="The Insured(s) and Any Authorized Driver">The Insured(s) and Any Authorized Driver</option>
+                        </select>
+                    </div>
+                </div>
 
 
                 <div class="ui-grid-c">
                     <div class="ui-block-a" style="width:40%">
-                        <label>Is the vehicle fitted with an anti-theft device?:</label>
+                        <label>Is the vehicle fitted with an anti-theft device?</label>
                     </div>
                     <div class="ui-block-b" style="width:10%">
                         <select name="vehicleAntiTheftDevice" id="vehicleAntiTheftDevice" data-role="slider" data-mini="true">
@@ -655,7 +635,7 @@
 
                 <div class="ui-grid-c">
                     <div class="ui-block-a" style="width:40%">
-                        <label>Will you have regular custody of the vehicle?:</label>
+                        <label>Will you have regular custody of the vehicle?</label>
                     </div>
                     <div class="ui-block-b" style="width:10%">
                         <select name="vehicleRegularCustody" id="vehicleRegularCustody" data-role="slider" data-mini="true">
@@ -690,28 +670,23 @@
                     </div>
                 </div>
 
-
                 <div class="ui-grid-c">
-                    <div class="ui-block-a" style="width:25%">
-                        <label for="vehicleKeptIn">Is Vehicle Kept In?</label>
+                    <div class="ui-block-a" style="width:40%">
+                        <label for="vehicleKeptInSecureArea">Is Vehicle Kept In a Locked Garage or Secure Compound?</label>
                     </div>
-                    <div class="ui-block-b" style="width:25%">
-                        <select name="vehicleKeptIn" id="vehicleKeptIn" data-mini="true">
-                            <option value="lockedgarage">Locked Garage</option>
-                            <option value="SecureCompound">Secure Compound</option>
-                            <option value="Other">Other</option>
+                    <div class="ui-block-b" style="width:10%">
+                        <select name="vehicleKeptInSecureArea" id="vehicleKeptInSecureArea" data-role="slider" data-mini="true">
+                            <option value="no">No</option>
+                            <option value="yes" selected>Yes</option>
                         </select>
                     </div>
-
-                    <div class="ui-block-c vehicleKeptInOtherClass" style="width:50%;display:none">
+                    <div class="ui-block-c vehicleLocationDetailsClass" style="width:50%;display:none">
                         <div class="ui-field-contain">
-                            <label for="vehicleKeptInOtherDetails" style="display:none">Details:</label>
-                            <textarea name="vehicleKeptInOtherDetails" id="vehicleKeptInOtherDetails" placeholder="Details" style="display:none"></textarea>
+                            <label for="vehicleLocationDetails">Details:</label>
+                            <textarea name="vehicleLocationDetails" id="vehicleLocationDetails"></textarea>
                         </div>
                     </div>
                 </div>
-
-
 
                 <div class="ui-grid-c">
                     <div class="ui-block-a" style="width:40%">
@@ -731,20 +706,6 @@
                     </div>
                 </div>
 
-                <div class="ui-grid-c">
-                    <div class="ui-block-a" style="width:40%">
-                        <label for="proposerEntitledToNOClaimDiscount">Is the proposer entitled to No Claim Discount from previous insurer(s) in respect of any vehicle(s) described in the proposal?</label>
-                    </div>
-                    <div class="ui-block-b" style="width:10%">
-                        <select name="proposerEntitledToNOClaimDiscount" id="proposerEntitledToNOClaimDiscount" data-role="slider" data-mini="true">
-                            <option value="no" selected>No</option>
-                            <option value="yes">Yes</option>
-                        </select>
-                    </div>
-                    <div class="ui-block-c" style="width:50%;display:none">
-                        <p id="proposerEntitledToNOClaimDiscountProof" style="display:none;color:red">Please submit proof of No Claim Discount Letter or Renewal Notice</p>
-                    </div>
-                </div>
 
 
                 <div class="ui-grid-c">
@@ -797,21 +758,7 @@
                 </div>
 
 
-                <div class="ui-grid-a">
-                    <div class="ui-block-a" style="width:40%">
-                        <label for="authorized_driver_wording">Type of Authorized Driver Clause:</label>
-                    </div>
-                    <div class="ui-block-b" style="width:60%">
-                        <select name="authorized_driver_wording" id="authorized_driver_wording" data-mini="true">
-                            <option value="Any Authorized Driver">Any Authorized Driver</option>
-                            <option value="Named Drivers Only">Named Drivers Only</option>
-                            <option value="Insured only">Insured only</option>
-                            <option value="Insured Plus One">Insured Plus One</option>
-                            <option value="Insured Plus Two">Insured Plus Two</option>
-                            <option value="The Insured(s) and Any Authorized Driver">The Insured(s) and Any Authorized Driver</option>
-                        </select>
-                    </div>
-                </div>
+
 
 
             </form>
@@ -850,7 +797,6 @@
                     <div class="ui-block-b">
                         <div data-role="controlgroup" data-type="horizontal" data-mini="true" style="margin-top:15px">
                             <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-right Add">Add Driver</a>
-                            <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right Reset">Reset</a>
                         </div>
                     </div>
                 </div>
@@ -886,6 +832,9 @@
                         <div class="ui-field-contain DriversRelationshipToProposer">
                             <label for="regularDriversRelationshipToProposer0">Relationship to Proposer:</label>
                             <input type="text" name="regularDriversRelationshipToProposer0" id="regularDriversRelationshipToProposer0" value="">
+                        </div>
+                        <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+                            <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right Delete">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -1008,36 +957,72 @@
             <form class="ProposalForm">
 
                 <p>To the best of your knowledge and belief have you, or any person who to your knowledge will drive, have suffered or now suffer from?:</p>
+
+
                 <div class="ui-grid-a">
-                    <div class="ui-block-a">
-                        <fieldset data-role="controlgroup">
-                            <legend>Medical Conditions:</legend>
-                            <input class="medicalCondition" type="checkbox" name="driverSufferFromDefectiveHearingOrVision" id="driverSufferFromDefectiveHearingOrVision">
-                            <label for="driverSufferFromDefectiveHearingOrVision">Defective vision or hearing?</label>
-
-                            <input class="medicalCondition" type="checkbox" name="driverSufferFromDiabetesEpilepsyHeartDisease" id="driverSufferFromDiabetesEpilepsyHeartDisease">
-                            <label for="driverSufferFromDiabetesEpilepsyHeartDisease">Diabetes, Epilepsy, complaints of the heart or any other disease</label>
-
-                            <input class="medicalCondition" type="checkbox" name="driverSufferFromPhysicalMentalInfirmity" id="driverSufferFromPhysicalMentalInfirmity">
-                            <label for="driverSufferFromPhysicalMentalInfirmity">Any other physical or mental infirmity</label>
-                        </fieldset>
+                    <div class="ui-block-a" style="width:40%">
+                        <label for="driverSufferFromDefectiveHearingOrVision">Defective vision or hearing?</label>
                     </div>
-                    <div class="ui-block-b">
-                        <br />
-                        <div id="medicalConditionDetails" style="display:none">
-                            <label for="driverSufferFromDetails">Details:</label>
-                            <textarea name="driverSufferFromDetails" id="driverSufferFromDetails" placeholder="Medical Condition Details"></textarea>
+                    <div class="ui-block-b" style="width:10%">
+                        <select name="driverSufferFromDefectiveHearingOrVision" id="driverSufferFromDefectiveHearingOrVision" data-role="slider" data-mini="true">
+                            <option value="no" selected>No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+                    <div class="ui-block-c" style="width:50%">
+                        <div id="divDriverSufferFromDefectiveHearingOrVisionDetails" style="display:none">
+                            <div class="ui-field-contain">
+                                <label for="driverSufferFromDefectiveHearingOrVisionDetails">Details:</label>
+                                <textarea name="driverSufferFromDefectiveHearingOrVisionDetails" id="driverSufferFromDefectiveHearingOrVisionDetails"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui-grid-a">
+                    <div class="ui-block-a" style="width:40%">
+                        <label for="driverSufferFromDiabetesEpilepsyHeartDisease">Diabetes, Epilepsy, complaints of the heart or any other disease?</label>
+                    </div>
+                    <div class="ui-block-b" style="width:10%">
+                        <select name="driverSufferFromDiabetesEpilepsyHeartDisease" id="driverSufferFromDiabetesEpilepsyHeartDisease" data-role="slider" data-mini="true">
+                            <option value="no" selected>No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+                    <div class="ui-block-c" style="width:50%">
+                        <div id="divDriverSufferFromDiabetesEpilepsyHeartDiseaseDetails"  style="display:none">
+                            <div class="ui-field-contain">
+                                <label for="driverSufferFromDiabetesEpilepsyHeartDiseaseDetails">Details:</label>
+                                <textarea name="driverSufferFromDiabetesEpilepsyHeartDiseaseDetails" id="driverSufferFromDiabetesEpilepsyHeartDiseaseDetails"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui-grid-a">
+                    <div class="ui-block-a" style="width:40%">
+                        <label for="driverSufferFromPhysicalMentalInfirmity">Any other physical or mental infirmity?</label>
+                    </div>
+                    <div class="ui-block-b" style="width:10%">
+                        <select name="driverSufferFromPhysicalMentalInfirmity" id="driverSufferFromPhysicalMentalInfirmity" data-role="slider" data-mini="true">
+                            <option value="no" selected>No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+                    <div class="ui-block-c" style="width:50%">
+                        <div id="divDriverSufferFromPhysicalMentalInfirmityDetails"  style="display:none">
+                            <div class="ui-field-contain">
+                                <label for="driverSufferFromPhysicalMentalInfirmityDetails">Details:</label>
+                                <textarea name="driverSufferFromPhysicalMentalInfirmityDetails" id="driverSufferFromPhysicalMentalInfirmityDetails"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
 
 
-
                 <div class="ui-grid-a">
                     <div class="ui-block-a" style="width:40%">
-
                         <label for="driverTrafficTicket">Have you or any person who to your knowledge will drive received any traffic ticket(s) and or have been convicted of any offence in connection with the driving of any motor vehicle within the last three (3) years?</label>
-
                     </div>
                     <div class="ui-block-b" style="width:10%">
                         <select name="driverTrafficTicket" id="driverTrafficTicket" data-role="slider" data-mini="true">
@@ -1045,11 +1030,8 @@
                             <option value="yes">Yes</option>
                         </select>
                     </div>
-
-
-
                     <div class="ui-block-c" style="width:50%">
-                        <div id="driverTrafficTicketDetailGroup">
+                        <div id="driverTrafficTicketDetailGroup"  style="display:none">
                             <div class="ui-field-contain">
                                 <label for="driverTrafficTicketDate">Date:</label>
                                 <input type="date" name="driverTrafficTicketDate" id="driverTrafficTicketDate">
@@ -1084,7 +1066,7 @@
                 <h4>Indicate Limits of Liablity Required</h4>
                 <fieldset class="ui-field-contain">
                     <label for="wreckerFee">Protection and Removal (Wrecker Fee):</label>
-                    <select name="wreckerFee" id="wreckerFee">
+                    <select name="wreckerFee" id="wreckerFee" disabled>
                         <optgroup label="Standard Limit">
                             <option value="350000">$35,000 </option>
                         </optgroup>
@@ -1098,7 +1080,7 @@
 
                 <fieldset class="ui-field-contain">
                     <label for="medicalExpenses">Medical Expenses (Including Passengers):</label>
-                    <select name="medicalExpenses" id="medicalExpenses">
+                    <select name="medicalExpenses" id="medicalExpenses" disabled>
                         <optgroup label="Standard Limit">
                             <option value="30000">$30,000</option>
                         </optgroup>
@@ -1112,7 +1094,7 @@
 
                 <fieldset class="ui-field-contain">
                     <label for="manslaughterDefenceCosts">Manslaughter Defense Costs:</label>
-                    <select name="manslaughterDefenceCosts" id="manslaughterDefenceCosts">
+                    <select name="manslaughterDefenceCosts" id="manslaughterDefenceCosts"  disabled>
                         <optgroup label="Standard Limit">
                             <option value="250000">$250,000</option>
                         </optgroup>
@@ -1126,7 +1108,7 @@
 
                 <fieldset class="ui-field-contain">
                     <label for="thirdPartyLimit">
-                        Third Party Limits</label>
+                        Third Party Limits:</label>
                     <select name="thirdPartyLimit" id="thirdPartyLimit">
                     </select>
                 </fieldset>
@@ -1346,16 +1328,18 @@
                 <div data-role="collapsible">
                     <h4>IMPORTANT NOTE</h4>
                     <p>
-                        The SUMS TO BE INSURED must represent the FULL NEW REPLACEMENT COST of the Property and should include adequate provision for demolition and debris removal costs in the event of major damage as well as professional fees that would be incurred in reinstatement. As the Company will pay up to 10% of the Sum insured in respect of Rent lost or reasonable costs of alternative accomodation if damage by an Insured Peril renders the home uninhabitable, provision for this should also be included in your Sums Insured.
+                        The SUMS TO BE INSURED must represent the FULL NEW REPLACEMENT COST of the Property and should include adequate provision for demolition and debris removal costs in the event of major damage as well as professional fees that would be incurred in reinstatement.
+                        As the Company will pay up to 10% of the Sum insured in respect of Rent lost or reasonable costs of alternative accomodation if damage by an Insured Peril renders the home uninhabitable, provision for this should also be included
+                        in your Sums Insured.
                     </p>
 
                 </div>
 
                 <div class="ui-field-contain">
                     <label for="startDate">Insurance Start Date:</label>
-                    <input required name="startDate" type="date" id="startDate" placeholder="Start Date" />
+                    <input required name="startDate" type="date" class="startDate" placeholder="Start Date" />
                     <label for="currency">Currency:</label>
-                    <select name="currency" id="currency" data-mini="true">
+                    <select name="currency" class="currency" data-mini="true">
                         <option value="JA">Jamaican Dollar</option>
                         <option value="USD">United States Dollar</option>
                     </select>
@@ -1365,7 +1349,8 @@
                 <div id="homeInsuranceProperty">
                     <div data-role="popup" id="homeInsurancePropertyDetails">
                         <p>
-                            The Buildings of the private dwelling together with its garages and outbuildings, including landlord’s fixtures and fittings together with patios, driveways and other paved areas, walls, gates and fences, underground water pipes and cables providing services to and from the home, fixed water storage tanks and sewage disposal systems. (NB. Swimming Pools &amp; Waterside Structures are not included.)
+                            The Buildings of the private dwelling together with its garages and outbuildings, including landlord’s fixtures and fittings together with patios, driveways and other paved areas, walls, gates and fences, underground water pipes and cables providing services
+                            to and from the home, fixed water storage tanks and sewage disposal systems. (NB. Swimming Pools &amp; Waterside Structures are not included.)
                         </p>
                     </div>
                     <div class="homeInsurancePropertyItems">
@@ -1411,12 +1396,15 @@
 
                     <div data-role="collapsible">
                         <h4>IMPORTANT NOTES</h4>
-                        <p>The SUMS TO BE INSURED must represent the FULL COST of replacing all the contents insured with NEW articles of similar size, style and specification. As the Company will pay up to 10% of the Sum Insured in respect of reasonable costs of alternative accommodation if damage by an Insured Peril renders the home uninhabitable, provision for this should be included in your Sum Insured.</p>
+                        <p>The SUMS TO BE INSURED must represent the FULL COST of replacing all the contents insured with NEW articles of similar size, style and specification. As the Company will pay up to 10% of the Sum Insured in respect of reasonable
+                            costs of alternative accommodation if damage by an Insured Peril renders the home uninhabitable, provision for this should be included in your Sum Insured.</p>
                         <p>
-                            Do not include in your Contents Sum Insured any Article which is to be insured under the All Risks Section Unspecified Valuables: Coverage is limited to one-third of the Total Sum Insured on Contents with coverage on individual articles limited to 5% of such Total Sum Insured. Individual articles worth more than 5% of the Total Sum Insured to be insured should be insured separately specified below.
+                            Do not include in your Contents Sum Insured any Article which is to be insured under the All Risks Section Unspecified Valuables: Coverage is limited to one-third of the Total Sum Insured on Contents with coverage on individual articles limited to 5%
+                            of such Total Sum Insured. Individual articles worth more than 5% of the Total Sum Insured to be insured should be insured separately specified below.
                         </p>
                         <p>
-                            Valuables include jewellery and other articles of gold, silver or other precious metal, clocks, watches, cameras, camcorders and other photographic equipment, electronic equipment (other than domestic appliances), furs, pictures and other works of art, curios, licensed fire-arms, collections of stamps, coins or other valuable objects.
+                            Valuables include jewellery and other articles of gold, silver or other precious metal, clocks, watches, cameras, camcorders and other photographic equipment, electronic equipment (other than domestic appliances), furs, pictures and other works of art,
+                            curios, licensed fire-arms, collections of stamps, coins or other valuable objects.
                         </p>
                     </div>
 
@@ -1424,7 +1412,8 @@
 
                     <div data-role="popup" id="HouseholdGoodsDetails">
                         <p>
-                            Contents: Household Goods, Personal Effects and Fixtures and Fittings which belong to or are the legal responsibility of any member of your household, including personal effects of non-paying guests temporarily staying with you but excluding Valuables which are to be individually specified.
+                            Contents: Household Goods, Personal Effects and Fixtures and Fittings which belong to or are the legal responsibility of any member of your household, including personal effects of non-paying guests temporarily staying with you but excluding Valuables
+                            which are to be individually specified.
                         </p>
                     </div>
 

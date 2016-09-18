@@ -1,6 +1,6 @@
 // For an introduction to the Blank template, see the following documentation:
 // http://go.microsoft.com/fwlink/?LinkID=397704
-// To debug code on page load in Ripple or on Android devices/emulators: launch your app, set breakpoints, 
+// To debug code on page load in Ripple or on Android devices/emulators: launch your app, set breakpoints,
 // and then run "window.location.reload()" in the JavaScript Console.
 ////////////outside functions
 
@@ -13,7 +13,7 @@
 
 //var _apiBaseUrl = "https://api.courserv.com/ironrock"; //localhost:58633/api/";
 //var _contentBaseUrl = "https://cdn.courserv.com/ironrock";
-var _PreliminaryData = "PreliminaryData";
+var _IronRockPreliminaryData = "PreliminaryData";
 var g_ironrock_service; //AWS services
 var g_profile;
 
@@ -45,7 +45,7 @@ function onDeviceReady() {
     document.addEventListener('pause', onPause.bind(this), false);
     document.addEventListener('resume', onResume.bind(this), false);
     document.addEventListener('backbutton', onBack.bind(this), false);
-    /////////loading 
+    /////////loading
     //doPrimaryFunctions();
     //special events
     //$(':mobile-pagecontainer').pagecontainer('change', '#main-page');
@@ -97,7 +97,7 @@ function setUserProfile(obj) {
 	} else {
 		setBrokerLogo();
 	}
-	//load miscellaneous items	
+	//load miscellaneous items
 	loadOptions(obj, function (err) {
 		if (err) {
 			obj.signoff();
@@ -164,13 +164,13 @@ function doPrimaryFunctions(callback) {
         var id = $('#regularDriverQueryID').val();
         addDriver($this, id, function (err, r) {
             if (err) {
-                alert("error: " + err.statusText);
+                alert("error: " + err.message);
             }
             if (!err) {
                 $('#regularDriverQueryID').val('');
                 var elementGroup = $('.regularDriversCls:last');
                 if ($('#regularDriversId').is(':visible')) {
-                    elementGroup.clone().insertAfter(elementGroup).show().find('input:text').val('');
+                    cloneElement(elementGroup);
                     resetRegularDriver();
                 } else {
                     $('#regularDriversId').show();
@@ -180,17 +180,22 @@ function doPrimaryFunctions(callback) {
                 $('.regularDriversCls:last .DateOfBirth input').val(r.dateOfBirth.substring(0, 10));
                 $('.regularDriversCls:last .DriversDL input').val(id);
 
-                $('.regularDriversCls:last .DriversDLExpirationDate input').val('2020-06-22');
-                $('.regularDriversCls:last .DriversDLOriginalDateOfIssue input').val('2000-06-22');
+                $('.regularDriversCls:last .DriversDLExpirationDate input').val(r.expiryDate);
+                $('.regularDriversCls:last .DriversDLOriginalDateOfIssue input').val(r.dateFirstIssued);
             }
         });
     });
 
-    $('#regularDriversBtns').on('click', '.Reset', function () {
-        $('.regularDriversCls').not('.regularDriversCls:first').remove();
-        $('.regularDriversCls').find('input:text').val('');
-        $('#regularDriversId').hide();
-        resetRegularDriver();
+    $('#regularDriversId').on('click', '.Delete', function() {
+        var elementGroup = $(this).closest('.regularDriversCls');
+        var allElements = $('#regularDriversId').find('.regularDriversCls');
+        if (allElements.length == 1) {
+            elementGroup.find('input:text').val('');
+            $('#regularDriversId').hide();
+        } else {
+            elementGroup.remove();
+            resetRegularDriver();
+        }
     });
 
     ///
@@ -253,7 +258,7 @@ function doPrimaryFunctions(callback) {
 
         //test
         console.log("signature count: " + g_signatureChangeCount);
-        ///image source is src = "data:" + sig[0] + "," + sig[1]    
+        ///image source is src = "data:" + sig[0] + "," + sig[1]
         //serilize form and convert to r
         //var formData = $('form').serialize();
         var formData = JSON.stringify($('form').serializeObject());
@@ -261,7 +266,7 @@ function doPrimaryFunctions(callback) {
         //var formData = JSON.stringify(formData);
         //console.log(formData);
         loadingSpinner(true, $(this));
-        g_ironrock_service.submitQuote(formData, function (err, r) {
+        g_ironrock_service.submitQuote2(formData, function (err, r) {
             loadingSpinner();
             if (err) {
                 alert("error: " + err.message);
@@ -285,9 +290,9 @@ function doPrimaryFunctions(callback) {
 
 
     //////////////////////////////////Insert vehicle
-    $('#taxOfficeVehicleRefresh').click(function () {
-        $('#vehiclesToBeInsured .vehicle').remove();
-        $('#taxOfficeVehicleRefresh').hide();
+    $('#taxOfficeVehicleDelete').click(function () {
+        $(this).nearest('.vehicle').remove();
+        reIndexVehicles(CaptionBaseVehicleValue);
     });
 
     //check whether new
@@ -372,21 +377,13 @@ function doPrimaryFunctions(callback) {
             alert('Invalid Sum Insured!');
             return;
         }
-
-        /*if (!VehicleRegistrationNo) {
-            alert("Not valid!");
-        } else if (IsDuplicate(VehicleRegistrationNo)) {
-            alert('Duplicate!');
-        }*/
-
         //set loading
         loadingSpinner(true, $(this));
-
         //use lambda to get vehcile details
         g_ironrock_service.getVehicleDetails(plateno, chassisno, function (err, data) {
             loadingSpinner();
             if (err) {
-                alert("Err:" + err.statusText);
+                alert("Err:" + err.message);
             } else {
                 //var json = JSON.parse(r);
                 r = ConvertToJson(data);
@@ -403,6 +400,7 @@ function doPrimaryFunctions(callback) {
                 } else {
                     r.sumInsured = $('#QueryVehicleSumInsured').val();
                     insertVehicle(r);
+                    $(':mobile-pagecontainer').pagecontainer('change', '#vehicle-particulars-page');
                 }
 
             }
@@ -424,9 +422,10 @@ function doPrimaryFunctions(callback) {
 
 function ConvertToJson(r) {
     try {
-        r = JSON.parse(r);
-        r = JSON.parse(r);
-        r = JSON.parse(r);
+        var i =0;
+        while (i++ < 10) {
+            r = JSON.parse(r);
+        }
     } catch (e) {
         // not json
     }
@@ -437,8 +436,13 @@ function ConvertToJson(r) {
 
 
 function loadOptions(obj, callback) {
-    var prelimData = localStorage.getItem(_PreliminaryData);
-    if (prelimData && prelimData != "null") {
+  var timeInDay = 1000 * 60 * 60 * 24;
+  var d = new Date();
+  var currentTimeStamp = d.getTime();
+
+    var prelimData = localStorage.getItem(_IronRockPreliminaryData);
+
+    if (prelimData) {
         callback(null);
     } else {
         obj.getMiscOptions(function (err, json) {
@@ -446,7 +450,7 @@ function loadOptions(obj, callback) {
                 callback(err);
             } else {
                 json = ConvertToJson(json);
-                localStorage.setItem(_PreliminaryData, JSON.stringify(json));
+                localStorage.setItem(_IronRockPreliminaryData, JSON.stringify(json));
                 callback(null);
             }
         });
@@ -485,7 +489,7 @@ function doSpecialEvents() {
                 color: "#000000",
                 lineWidth: 1
             });
-            //check signature 
+            //check signature
             $("#signature").bind('change', function (e) {
                 /* 'e.target' will refer to div with "#signature" */
                 g_signatureChangeCount = g_signatureChangeCount + 1;
@@ -724,7 +728,7 @@ function loadColours() {
 
 //make/model
 function loadVehicleMakes() {
-    var options = JSON.parse(localStorage.getItem(_PreliminaryData));
+    var options = JSON.parse(localStorage.getItem(_IronRockPreliminaryData));
     $('#QueryVehicleMake').empty();
     $.each(options.makeModels.data, function (key, value) {
         $('#QueryVehicleMake').append('<option value="' + value.make + '">' + value.make + '</option>');
@@ -732,7 +736,7 @@ function loadVehicleMakes() {
 }
 
 function loadBodyTypes() {
-    var options = JSON.parse(localStorage.getItem(_PreliminaryData));
+    var options = JSON.parse(localStorage.getItem(_IronRockPreliminaryData));
     $('#QueryVehicleBodyType').empty();
     $.each(options.makeModels.data, function (key, value) {
         $.each(value.models, function (key, value) {
@@ -746,7 +750,7 @@ function loadBodyTypes() {
 
 
 function loadVehicleModels() {
-    var options = JSON.parse(localStorage.getItem(_PreliminaryData));
+    var options = JSON.parse(localStorage.getItem(_IronRockPreliminaryData));
     var models = [];
     var make = $('#QueryVehicleMake').val();
     $('#QueryVehicleModel').empty();
@@ -763,11 +767,87 @@ function loadVehicleModels() {
 }
 
 
-
 //insert vehicle
-function insertVehicle(r) {
+function insertVehicle(r, rowIndex) {
+    var tbl = $('#vehiclesToBeInsured tbody');
+    var rows = $('tr', tbl);
 
-    var cnt = $('#vehiclesToBeInsured .vehicle').length;
+    if (typeof rowIndex === "undefined") {
+        rowIndex = rows.length;
+    }
+
+    if (IsDuplicateVehicle(r.chassisNo, rowIndex)) {
+        bootbox.alert('Duplicate Vehicle!');
+        return;
+    }
+
+    var xRow;
+    if (rowIndex == rows.length) {
+        xRow = $('<tr/>').appendTo(tbl);
+    } else {
+        xRow = rows.eq(rowIndex).html('');
+    }
+
+    //motorVehicleID
+
+    var htmlValues = '<span>' + r.plateNo + '</span>' +
+        '<input type="hidden" class="ValueVehicleRegistrationNo" value="' + $.trim(r.plateNo) + '" />' +
+        '<input type="hidden" class="ValueVehicleChassisNo" value="' + $.trim(r.chassisNo) + '" />' +
+        '<input type="hidden" class="ValueVehicleMake" value="' + $.trim(r.make) + '" />' +
+        '<input type="hidden" class="ValueVehicleModel" value="' + $.trim(r.model) + '" />' +
+        '<input type="hidden" class="ValueVehicleYear" value="' + $.trim(r.year) + '" />' +
+        '<input type="hidden" class="ValueVehicleBody" value="' + $.trim(r.vehicleBodyType) + '" />' +
+        '<input type="hidden" class="ValueVehicleType" value="' + $.trim(r.vehicleType) + '" />' +
+        '<input type="hidden" class="ValueVehicleEngineNo" value="' + $.trim(r.engineNo) + '" />' +
+        '<input type="hidden" class="ValueVehicleColour" value="' + $.trim(r.colour) + '" />' +
+        '<input type="hidden" class="ValueVehicleValue" value="' + $.trim(r.sumInsured) + '" />' +
+        '<input type="hidden" class="ValueVehicleID" value="' + $.trim(r.motorVehicleID) + '" />';
+
+    xRow.addClass('vehicle').attr('data-id', r.chassisNo);
+    var registrationCell = $('<td/>');
+    registrationCell.html(htmlValues);
+    registrationCell.appendTo(xRow);
+    //
+    var makeModelCell = $('<td/>');
+    makeModelCell.html(r.make + ' ' + r.model);
+    makeModelCell.appendTo(xRow);
+    //
+    var detailsCell = $('<td/>');
+    detailsCell.html(r.year + ' ' + r.vehicleBodyType + ' ' + r.colour);
+    detailsCell.appendTo(xRow);
+    //
+    var chassisCell = $('<td/>');
+    chassisCell.html(r.chassisNo + '/' + r.engineNo);
+    chassisCell.appendTo(xRow);
+    //
+    var sumInsuredCell = $('<td/>');
+    var sumInsuredHtml = '<div class="input-group"><input type="text" class="form-control" value="' + accounting.formatMoney(r.sumInsured) + '" disabled><span class="input-group-btn"><button class="btn btn-default adjust" type="button">Chg</button></span></div>';
+    sumInsuredCell.html(sumInsuredHtml);
+    sumInsuredCell.appendTo(xRow);
+    //
+    var deleteCell = $('<td/>');
+    deleteCell.html('<button type="button" class="btn btn-link deleteVehicleRow">Delete</button>');
+    deleteCell.appendTo(xRow);
+
+    //
+    reIndexVehicles();
+}
+
+//check duplicate
+function IsDuplicateVehicle(chassisNo, idx) {
+    var returnVal = false;
+    $('#vehiclesToBeInsured tbody tr').each(function(xIndex, element) {
+        var xChassisNo = $(this).attr('data-id');
+        if (xChassisNo && chassisNo.trim() == xChassisNo.trim() && idx != xIndex) {
+            returnVal = true;
+            return false;
+        }
+    });
+    return returnVal;
+}
+
+//need to index vehicles
+function reIndexVehicles() {
     var CaptionBaseVehicleRegistrationNo = 'vehicleRegistrationNo';
     var CaptionBaseVehicleChassisNo = 'vehicleChassisNo';
     var CaptionBaseVehicleMake = 'vehicleMake';
@@ -777,70 +857,25 @@ function insertVehicle(r) {
     var CaptionBaseVehicleBody = 'vehicleBody';
     var CaptionBaseVehicleType = 'vehicleType';
     var CaptionBaseVehicleColour = 'vehicleColour';
-    var CaptionBaseVehicleStatus = 'vehicleStatus';
+    var CaptionBaseVehicleID = 'motorVehicleID';
     var CaptionBaseVehicleValue = 'vehicleValue';
-
-
-
-    var htmlValues = '<span>' + r.plateNo + '</span>' +
-        '<input type="hidden" id="' + CaptionBaseVehicleRegistrationNo + cnt + '" name="' + CaptionBaseVehicleRegistrationNo + cnt + '" value="' + $.trim(r.plateNo) + '" />' +
-        '<input type="hidden" id="' + CaptionBaseVehicleChassisNo + cnt + '" name="' + CaptionBaseVehicleChassisNo + cnt + '" value="' + $.trim(r.chassisNo) + '" />' +
-        '<input type="hidden" id="' + CaptionBaseVehicleMake + cnt + '" name="' + CaptionBaseVehicleMake + cnt + '" value="' + $.trim(r.make) + '" />' +
-        '<input type="hidden" id="' + CaptionBaseVehicleModel + cnt + '" name="' + CaptionBaseVehicleModel + cnt + '" value="' + $.trim(r.model) + '" />' +
-        '<input type="hidden" id="' + CaptionBaseVehicleYear + cnt + '" name="' + CaptionBaseVehicleYear + cnt + '" value="' + $.trim(r.year) + '" />' +
-        '<input type="hidden" id="' + CaptionBaseVehicleBody + cnt + '" name="' + CaptionBaseVehicleBody + cnt + '" value="' + $.trim(r.vehicleBodyType) + '" />' +
-        '<input type="hidden" id="' + CaptionBaseVehicleType + cnt + '" name="' + CaptionBaseVehicleType + cnt + '" value="' + $.trim(r.vehicleType) + '" />' +
-        '<input type="hidden" id="' + CaptionBaseVehicleEngineNo + cnt + '" name="' + CaptionBaseVehicleEngineNo + cnt + '" value="' + $.trim(r.engineNo) + '" />' +
-        '<input type="hidden" id="' + CaptionBaseVehicleColour + cnt + '" name="' + CaptionBaseVehicleColour + cnt + '" value="' + $.trim(r.colour) + '" />' +
-        '<input type="hidden" id="' + CaptionBaseVehicleValue + cnt + '" name="' + CaptionBaseVehicleValue + cnt + '" value="' + $.trim(r.sumInsured) + '" />' +
-        '<input type="hidden" id="' + CaptionBaseVehicleStatus + cnt + '" name="' + CaptionBaseVehicleStatus + cnt + '" value="' + $.trim(r.vehicleStatus) + '" />';
-
-
-    var gridRow = $('<div/>');
-    gridRow.addClass('ui-grid-d vehicle').attr('data-id', r.chassisNo);
-    var registrationCell = $('<div/>');
-    registrationCell.addClass('ui-block-a');
-    registrationCell.html(htmlValues);
-    registrationCell.appendTo(gridRow);
-    //
-    var makeModelCell = $('<div/>');
-    makeModelCell.addClass('ui-block-b');
-    makeModelCell.html(r.make + ' ' + r.model);
-    makeModelCell.appendTo(gridRow);
-    //
-    var detailsCell = $('<div/>');
-    detailsCell.addClass('ui-block-c');
-    detailsCell.html(r.year + ' ' + r.vehicleBodyType + ' ' + r.colour);
-    detailsCell.appendTo(gridRow);
-    //            
-    var chassisCell = $('<div/>');
-    chassisCell.addClass('ui-block-d');
-    chassisCell.html(r.chassisNo + '/' + r.engineNo);
-    chassisCell.appendTo(gridRow);
-    //
-    var sumInsuredCell = $('<div/>');
-    sumInsuredCell.addClass('ui-block-e');
-    sumInsuredCell.html('<input type="text" "style="margin-left:auto; margin-right:0;" value="' + accounting.formatMoney(r.sumInsured) + '" disabled/>');
-    sumInsuredCell.appendTo(gridRow);
-    //
-    if (IsDuplicate(r.chassisNo)) {
-        alert('Duplicate!');
-    } else {
-        gridRow.appendTo($('#vehiclesToBeInsured'));
-        $('#taxOfficeVehicleRefresh').show();
-        $(':mobile-pagecontainer').pagecontainer('change', '#vehicle-particulars-page');
-    }
-    reIndexVehicles(CaptionBaseVehicleValue);
-}
-
-
-//need to index vehicles
-function reIndexVehicles(baseValueCaption) {
     var sumInsured = 0;
-    $('#vehiclesToBeInsured .vehicle').each(function (index, element) {
-        sumInsured = sumInsured + parseFloat($(element).find('#' + baseValueCaption + index).val());
+    $('#vehiclesToBeInsured tbody tr').each(function(index, element) {
+        var xRow = $(element);
+        xRow.find('.ValueVehicleRegistrationNo').attr("id", CaptionBaseVehicleRegistrationNo + index).attr("name", CaptionBaseVehicleRegistrationNo + index);
+        xRow.find('.ValueVehicleChassisNo').attr("id", CaptionBaseVehicleChassisNo + index).attr("name", CaptionBaseVehicleChassisNo + index);
+        xRow.find('.ValueVehicleMake').attr("id", CaptionBaseVehicleMake + index).attr("name", CaptionBaseVehicleMake + index);
+        xRow.find('.ValueVehicleModel').attr("id", CaptionBaseVehicleModel + index).attr("name", CaptionBaseVehicleModel + index);
+        xRow.find('.ValueVehicleYear').attr("id", CaptionBaseVehicleYear + index).attr("name", CaptionBaseVehicleYear + index);
+        xRow.find('.ValueVehicleBody').attr("id", CaptionBaseVehicleBody + index).attr("name", CaptionBaseVehicleBody + index);
+        xRow.find('.ValueVehicleType').attr("id", CaptionBaseVehicleType + index).attr("name", CaptionBaseVehicleType + index);
+        xRow.find('.ValueVehicleEngineNo').attr("id", CaptionBaseVehicleEngineNo + index).attr("name", CaptionBaseVehicleEngineNo + index);
+        xRow.find('.ValueVehicleColour').attr("id", CaptionBaseVehicleColour + index).attr("name", CaptionBaseVehicleColour + index);
+        xRow.find('.ValueVehicleValue').attr("id", CaptionBaseVehicleValue + index).attr("name", CaptionBaseVehicleValue + index);
+        xRow.find('.ValueVehicleID').attr("id", CaptionBaseVehicleID + index).attr("name", CaptionBaseVehicleID + index);
+        sumInsured = sumInsured + parseFloat(xRow.find('.ValueVehicleValue').val());
     });
-    var thirdPartyLimit = $('#vehicle-medical-history-page').find('#thirdPartyLimit').empty();
+    var thirdPartyLimit = $('#thirdPartyLimit').empty();
     if (sumInsured < 2000000) {
         thirdPartyLimit.append('<option value="standard1">Standard Limits-$3M/$5M/$5M</option>');
         thirdPartyLimit.append('<option value="increased1Option1">Increased Limits-$5M/$7.5M/$5M</option>');
@@ -853,31 +888,5 @@ function reIndexVehicles(baseValueCaption) {
 }
 
 
-
-//check duplicate
-function IsDuplicate(val) {
-    var returnVal = false;
-    $('#vehiclesToBeInsured .ui-grid-d').each(function (index, element) {
-        var rowVal = $(this).attr('data-id');
-        if (rowVal == val) {
-            returnVal = true;
-            return false;
-        }
-    });
-    return returnVal;
-}
-
-//return count
-function GetCount() {
-    var i = 0;
-    $('#vehiclesToBeInsured .ui-grid-d').each(function (index, element) {
-        var rowVal = $(this).attr('data-id');
-        if (rowVal == val) {
-            returnVal = true;
-            return false;
-        }
-    });
-    return returnVal;
-}
 
 //driver Licence
