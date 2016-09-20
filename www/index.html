@@ -180,14 +180,20 @@
 
                 <div id="homeAddress">
                     <h4>Home Address</h4>
-                    <div class="ui-field-contain">
-                        <label for="applicantHomeStreetName">Street Number and Name:</label>
-                        <input required type="text" id="applicantHomeStreetName" name="applicantHomeStreetName" placeholder="Enter Street Number and Name">
-                    </div>
 
                     <div class="ui-field-contain">
-                        <label for="applicantHomeTown">City/Town/Postal Zone:</label>
-                        <select id="applicantHomeTown" name="applicantHomeTown" data-mini="true"></select>
+                        <label for="applicantHomeCountry">Select Country:</label>
+                        <select name="applicantHomeCountry" id="applicantHomeCountry" class="countries" data-mini="true"></select>
+                    </div>
+
+                    <div class="ui-field-contain international" style="display:none">
+                        <label for="applicantHomeState">State/Province:</label>
+                        <input type="text" id="applicantHomeState" name="applicantHomeState" placeholder="Enter State/Province/County">
+                    </div>
+
+                    <div class="ui-field-contain international" style="display:none">
+                        <label for="applicantHomeCity">City:</label>
+                        <input type="text" id="applicantHomeCity" name="applicantHomeCity" placeholder="Enter City">
                     </div>
 
                     <div class="ui-field-contain jamaica">
@@ -196,20 +202,27 @@
                         </select>
                     </div>
 
+                    <div class="ui-field-contain jamaica">
+                        <label for="applicantHomeTown">Town/Postal Zone:</label>
+                        <select id="applicantHomeTown" name="applicantHomeTown" data-mini="true"></select>
+                    </div>
+
                     <div class="ui-field-contain international" style="display:none">
                         <label for="applicantHomePostalCode">Postal Code:</label>
                         <input type="text" id="applicantHomePostalCode" name="applicantHomePostalCode" placeholder="Enter Postal/ZIP Code">
                     </div>
 
-                    <div class="ui-field-contain international" style="display:none">
-                        <label for="applicantHomeState">State/Province:</label>
-                        <input type="text" id="applicantHomeState" name="applicantHomeState" placeholder="Enter State/Province/County">
+                    <div class="ui-field-contain">
+                        <label for="applicantHomeStreetName">Street Name:</label>
+                        <input required type="text" id="applicantHomeStreetName" name="applicantHomeStreetName" placeholder="Enter Street Name">
                     </div>
 
                     <div class="ui-field-contain">
-                        <label for="applicantHomeCountry">Select Country:</label>
-                        <select name="applicantHomeCountry" id="applicantHomeCountry" class="countries" data-mini="true"></select>
+                        <label for="applicantHomeStreetNumber">Apt No/Street No:</label>
+                        <input required type="text" id="applicantHomeStreetNumber" name="applicantHomeStreetNumber" placeholder="Enter Apt No/Street No">
                     </div>
+
+
                 </div>
 
 
@@ -230,24 +243,8 @@
                 <div id="mailingAddress" style="display:none">
                     <h4>Mailing Address</h4>
                     <div class="ui-field-contain">
-                        <label for="applicantMailStreetName">Street Number and Name:</label>
-                        <input type="text" id="applicantMailStreetName" name="applicantMailStreetName" placeholder="Enter Street Number and Name">
-                    </div>
-
-                    <div class="ui-field-contain">
-                        <label for="applicantMailTown">City/Town/Postal Zone:</label>
-                        <select id="applicantMailTown" name="applicantMailTown" data-mini="true"></select>
-                    </div>
-
-                    <div class="ui-field-contain jamaica">
-                        <label for="applicantMailParish">Select Parish:</label>
-                        <select class="parish" name="applicantMailParish" id="applicantMailParish" data-mini="true">
-                        </select>
-                    </div>
-
-                    <div class="ui-field-contain international" style="display:none">
-                        <label for="applicantMailPostalCode">Postal Code:</label>
-                        <input type="text" id="applicantMailPostalCode" name="applicantMailPostalCode" placeholder="Enter Postal/ZIP Code">
+                        <label for="applicantMailCountry">Select Country:</label>
+                        <select name="applicantMailCountry" id="applicantMailCountry" class="countries" data-mini="true"></select>
                     </div>
 
                     <div class="ui-field-contain international" style="display:none">
@@ -255,11 +252,37 @@
                         <input type="text" id="applicantMailState" name="applicantMailState" placeholder="Enter State/Province/County">
                     </div>
 
-                    <div class="ui-field-contain">
-                        <label for="applicantMailCountry">Select Country:</label>
-                        <select name="applicantMailCountry" id="applicantMailCountry" class="countries" data-mini="true"></select>
+                    <div class="ui-field-contain international" style="display:none">
+                        <label for="applicantMailCity">City:</label>
+                        <input type="text" id="applicantMailCity" name="applicantMailCity" placeholder="Enter City">
                     </div>
 
+
+                    <div class="ui-field-contain jamaica">
+                        <label for="applicantMailParish">Select Parish:</label>
+                        <select class="parish" name="applicantMailParish" id="applicantMailParish" data-mini="true">
+                        </select>
+                    </div>
+
+                    <div class="ui-field-contain jamaica">
+                        <label for="applicantMailTown">Town/Postal Zone:</label>
+                        <select id="applicantMailTown" name="applicantMailTown" data-mini="true"></select>
+                    </div>
+
+                    <div class="ui-field-contain international" style="display:none">
+                        <label for="applicantMailPostalCode">Postal Code:</label>
+                        <input type="text" id="applicantMailPostalCode" name="applicantMailPostalCode" placeholder="Enter Postal/ZIP Code">
+                    </div>
+
+                    <div class="ui-field-contain">
+                        <label for="applicantMailStreetName">Street Name:</label>
+                        <input type="text" id="applicantMailStreetName" name="applicantMailStreetName" placeholder="Enter Street Name">
+                    </div>
+
+                    <div class="ui-field-contain">
+                        <label for="applicantMailStreetNumber">Apt No/Street No:</label>
+                        <input type="text" id="applicantMailStreetNumber" name="applicantMailStreetNumber" placeholder="Enter Apt No/Street No">
+                    </div>
                 </div>
 
             </form>
@@ -285,13 +308,20 @@
                         <label for="employerName">Company Name:</label>
                         <input type="text" name="employerName" id="employerName" placeholder="Enter Name In Full">
                     </div>
+
                     <div class="ui-field-contain">
-                        <label for="employerStreetName">Street Number and Name:</label>
-                        <input type="text" name="employerStreetName" id="employerStreetName" placeholder="Enter Street Number and Name">
+                        <label for="employerNationality">Select Country:</label>
+                        <select name="employerNationality" id="employerNationality" class="countries" data-mini="true"></select>
                     </div>
-                    <div class="ui-field-contain">
-                        <label for="employerTown">City/Town/Postal Zone:</label>
-                        <select required name="employerTown" id="employerTown" data-mini="true"></select>
+
+                    <div class="ui-field-contain international" style="display:none">
+                        <label for="employerState">State/Province:</label>
+                        <input type="text" id="employerState" name="employerState" placeholder="Enter State/Province/County">
+                    </div>
+
+                    <div class="ui-field-contain international" style="display:none">
+                        <label for="employerCity">City:</label>
+                        <input type="text" id="employerCity" name="employerCity" placeholder="Enter City">
                     </div>
 
                     <div class="ui-field-contain jamaica">
@@ -300,20 +330,26 @@
                         </select>
                     </div>
 
+                    <div class="ui-field-contain jamaica">
+                        <label for="employerTown">Town/Postal Zone:</label>
+                        <select required name="employerTown" id="employerTown" data-mini="true"></select>
+                    </div>
+
                     <div class="ui-field-contain international" style="display:none">
                         <label for="employerPostalCode">Postal Code:</label>
                         <input type="text" id="employerPostalCode" name="employerPostalCode" placeholder="Enter Postal/ZIP Code">
                     </div>
 
-                    <div class="ui-field-contain international" style="display:none">
-                        <label for="employerState">State/Province:</label>
-                        <input type="text" id="employerState" name="employerState" placeholder="Enter State/Province/County">
+                    <div class="ui-field-contain">
+                        <label for="employerStreetName">Street Name:</label>
+                        <input type="text" name="employerStreetName" id="employerStreetName" placeholder="Enter Street Name">
                     </div>
 
                     <div class="ui-field-contain">
-                        <label for="employerNationality">Select Country:</label>
-                        <select name="employerNationality" id="employerNationality" class="countries" data-mini="true"></select>
+                        <label for="employerStreetNumber">Apt No/Street No:</label>
+                        <input type="text" name="employerStreetNumber" id="employerStreetNumber" placeholder="Enter Apt No/Street No">
                     </div>
+
                 </div>
                 <hr />
 
@@ -388,6 +424,14 @@
                     </div>
                     <div class="ui-block-b">
                         <input type="text" name="QueryVehicleRegistrationNo" id="QueryVehicleRegistrationNo" value="">
+                    </div>
+                </div>
+
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                    </div>
+                    <div class="ui-block-b">
+                        <span>OR</span>
                     </div>
                 </div>
 
@@ -1142,19 +1186,46 @@
 
                 <h4>Property Address</h4>
                 <div class="ui-field-contain">
-                    <label for="homeRiskAddressStreetNo">Apt No/Street No:</label>
-                    <input type="text" id="homeRiskAddressStreetNo" name="homeRiskAddressStreetNo" placeholder="Enter Apt No/Street Number">
-
-                    <label for="homeRiskAddressStreetName">Street Name:</label>
-                    <input required type="text" id="homeRiskAddressStreetName" name="homeRiskAddressStreetName" placeholder="Enter Street Name">
-
-                    <label for="homeRiskAddressTown">City/Town/Postal Zone:</label>
-                    <select required id="homeRiskAddressTown" name="homeRiskAddressTown" data-mini="true"></select>
-
-                    <label for="homeRiskAddressParish">Select Parish:</label>
-                    <select required class="parish" name="homeRiskAddressParish" id="homeRiskAddressParish" data-mini="true">
-                    </select>
+                  <label for="homeRiskAddressCountry">Select Country:</label>
+                  <select name="homeRiskAddressCountry" id="homeRiskAddressCountry" class="countries" data-mini="true"></select>
                 </div>
+
+                <div class="ui-field-contain international" style="display:none">
+                    <label for="homeRiskAddressState">State/Province:</label>
+                    <input type="text" id="homeRiskAddressState" name="homeRiskAddressState" placeholder="Enter State/Province/County">
+                </div>
+
+                <div class="ui-field-contain international" style="display:none">
+                    <label for="homeRiskAddressCity">City:</label>
+                    <input type="text" id="homeRiskAddressCity" name="homeRiskAddressCity" placeholder="Enter City">
+                </div>
+
+                <div class="ui-field-contain jamaica">
+                  <label for="homeRiskAddressParish">Select Parish:</label>
+                  <select required class="parish" name="homeRiskAddressParish" id="homeRiskAddressParish" data-mini="true">
+                  </select>
+                </div>
+
+                <div class="ui-field-contain jamaica">
+                  <label for="homeRiskAddressTown">Town/Postal Zone:</label>
+                  <select required id="homeRiskAddressTown" name="homeRiskAddressTown" data-mini="true"></select>
+                </div>
+
+                <div class="ui-field-contain international" style="display:none">
+                    <label for="homeRiskAddressPostalCode">Postal Code:</label>
+                    <input type="text" id="homeRiskAddressPostalCode" name="homeRiskAddressPostalCode" placeholder="Enter Postal/ZIP Code">
+                </div>
+
+                <div class="ui-field-contain">
+                  <label for="homeRiskAddressStreetName">Street Name:</label>
+                  <input required type="text" id="homeRiskAddressStreetName" name="homeRiskAddressStreetName" placeholder="Enter Street Name">
+                </div>
+
+
+                <div class="ui-field-contain">
+                    <label for="homeRiskAddressStreetNo">Apt No/Street No:</label>
+                    <input type="text" id="homeRiskAddressStreetNo" name="homeRiskAddressStreetNo" placeholder="Enter Apt No/Street No">
+                  </div>
 
 
                 <div class="ui-field-contain">
@@ -1638,7 +1709,7 @@
                         </label>
                     </div>
                     <div class="ui-block-b" style="width: 10%">
-                        <select name="HomeInsurancePerilsSuffer" id="HomeInsurancePerilsSuffer"  data-role="slider" data-mini="true">
+                        <select name="HomeInsurancePerilsSuffer" id="HomeInsurancePerilsSuffer" data-role="slider" data-mini="true">
                             <option value="no" selected>No</option>
                             <option value="yes">Yes</option>
                         </select>
@@ -1658,7 +1729,7 @@
                         </label>
                     </div>
                     <div class="ui-block-b" style="width: 10%">
-                        <select name="HomeInsuranceSufferLoss" id="HomeInsuranceSufferLoss"  data-role="slider" data-mini="true">
+                        <select name="HomeInsuranceSufferLoss" id="HomeInsuranceSufferLoss" data-role="slider" data-mini="true">
                             <option value="no" selected>No</option>
                             <option value="yes">Yes</option>
                         </select>
