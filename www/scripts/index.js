@@ -627,40 +627,63 @@ function setPrimaryEvents(callback) {
     });
 
 
-    $('#applicantHomeCountry').change(function() {
+
+    $('.countries').change(function() {
         var select_value = $(this).val();
         if (select_value == "Jamaica") {
-            $('#homeAddress .jamaica').show();
-            $('#homeAddress .international').hide();
+            $('.address .jamaica').show();
+            $('.address .international').hide();
+            $('.address .international :input').val("");
+            $('.address .parish').prop("required", true);
+            $('.address .town').prop("required", true);
+            $('.address .state').prop("required", false);
+            $('.address .city').prop("required", false);
         } else {
-            $('#homeAddress .jamaica').hide();
-            $('#homeAddress .international').show();
+            $('.address .jamaica').hide();
+            $('.address .international').show();
+            $('.address .jamaica :input').val("");
+            $('.address .parish').prop("required", false);
+            $('.address .town').prop("required", false);
+            $('.address .state').prop("required", true);
+            $('.address .city').prop("required", true);
         }
     });
 
 
-    $('#applicantMailCountry').change(function() {
-        var select_value = $(this).val();
-        if (select_value == "Jamaica") {
-            $('#mailingAddress').find('.jamaica').show();
-            $('#mailingAddress').find('.international').hide();
-        } else {
-            $('#mailingAddress').find('.jamaica').hide();
-            $('#mailingAddress').find('.international').show();
-        }
-    });
+    // $('#applicantHomeCountry').change(function() {
+    //     var select_value = $(this).val();
+    //     if (select_value == "Jamaica") {
+    //         $('#homeAddress .jamaica').show();
+    //         $('#homeAddress .international').hide();
+    //     } else {
+    //         $('#homeAddress .jamaica').hide();
+    //         $('#homeAddress .international').show();
+    //     }
+    // });
 
 
-    $('#employerNationality').change(function() {
-        var select_value = $(this).val();
-        if (select_value == "Jamaica") {
-            $('#employer').find('.jamaica').show();
-            $('#employer').find('.international').hide();
-        } else {
-            $('#employer').find('.jamaica').hide();
-            $('#employer').find('.international').show();
-        }
-    });
+    // $('#applicantMailCountry').change(function() {
+    //     var select_value = $(this).val();
+    //     if (select_value == "Jamaica") {
+    //         $('#mailingAddress').find('.jamaica').show();
+    //         $('#mailingAddress').find('.international').hide();
+    //     } else {
+    //         $('#mailingAddress').find('.jamaica').hide();
+    //         $('#mailingAddress').find('.international').show();
+    //     }
+    // });
+    //
+    //
+    // $('#employerNationality').change(function() {
+    //     var select_value = $(this).val();
+    //     if (select_value == "Jamaica") {
+    //         $('#employer').find('.jamaica').show();
+    //         $('#employer').find('.international').hide();
+    //     } else {
+    //         $('#employer').find('.jamaica').hide();
+    //         $('#employer').find('.international').show();
+    //     }
+    // });
 
     //general toggle for all on/off sliders
     $('select[data-role="slider"]').change(function() {
@@ -1441,6 +1464,9 @@ function setVehicleUsedAs(select_value) {
 function loadOccupations(isMotor) {
     var options = JSON.parse(localStorage.getItem(_IronRockPreliminaryData));
     $('#applicantOccupation').html('<option value=""></option>');
+    if (isMotor) {
+        $('#regularDriversOccupation0').html('<option value=""></option>');
+    }
     $.each(options.occupations.data, function(key, value) {
         $('#applicantOccupation').append('<option value="' + value.occupation.trim() + '">' + value.occupation + '</option>');
         if (isMotor) {
@@ -1462,13 +1488,13 @@ function loadFinanceCodes(isMotor) {
 function loadRoofWallsTypes() {
     var options = JSON.parse(localStorage.getItem(_IronRockPreliminaryData));
     //wall
-    $('#constructionExternalWalls').empty();
+    $('#constructionExternalWalls').html('<option value=""></option>');
     $.each(options.wallTypes.data, function(key, value) {
         $('#constructionExternalWalls').append('<option value="' + value + '">' + value + '</option>');
     });
 
     //roof
-    $('#constructionRoof').empty();
+    $('#constructionRoof').html('<option value=""></option>');
     $.each(options.roofTypes.data, function(key, value) {
         $('#constructionRoof').append('<option value="' + value + '">' + value + '</option>');
     });
