@@ -722,7 +722,7 @@ function setSpecialEvents() {
                     var mStartDate = new Date($('#motorStartDate').val());
                     var mCurrentDate = new Date();
                     if (mStartDate < mCurrentDate) {
-                        $valid = false;
+                        isValid = false;
                         console.log("Start Date must be today or in the future!");
                         alert("Start Date must be today or in the future!");
                     }
@@ -735,7 +735,7 @@ function setSpecialEvents() {
                             $('#vehiclesToBeInsured .ValueVehicleValue').each(function(i, obj) {
                                 var vehValue = parseFloat($(this).val());
                                 if (!vehValue || vehValue <= 0) {
-                                    $valid = false;
+                                    isValid = false;
                                     var coverage = $("#insuranceCoverage option:selected").text();
                                     var errorMessage = coverage + " coverage requires a Motor Vehicle with a value";
                                     console.log(errorMessage);
@@ -747,7 +747,7 @@ function setSpecialEvents() {
                     break;
                 case '#vehicle-driver-details-page':
                     if (!$('#regularDriversId').is(":visible")) {
-                        $valid = false;
+                        isValid = false;
                         console.log("Driver is required");
                         alert("Driver is required");
                     }
@@ -756,7 +756,7 @@ function setSpecialEvents() {
                     var startDate = new Date($('#homeStartDate').val());
                     var currentDate = new Date();
                     if (startDate < currentDate) {
-                        $valid = false;
+                        isValid = false;
                         console.log("Start Date must be today or in the future!");
                         alert("Start Date must be today or in the future!");
                     }
