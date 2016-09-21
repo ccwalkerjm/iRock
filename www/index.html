@@ -204,12 +204,12 @@
 
                     <div class="ui-field-contain jamaica">
                         <label for="applicantHomeTown">Town/Postal Zone:</label>
-                        <select class="town" id="applicantHomeTown" name="applicantHomeTown" data-mini="true"></select>
+                        <select required class="town" id="applicantHomeTown" name="applicantHomeTown" data-mini="true"></select>
                     </div>
 
                     <div class="ui-field-contain international" style="display:none">
                         <label for="applicantHomePostalCode">Postal Code:</label>
-                        <input type="text" id="applicantHomePostalCode" name="applicantHomePostalCode" placeholder="Enter Postal/ZIP Code">
+                        <input  type="text" id="applicantHomePostalCode" name="applicantHomePostalCode" class="postalcode" placeholder="Enter Postal/ZIP Code">
                     </div>
 
                     <div class="ui-field-contain">
@@ -260,18 +260,18 @@
 
                     <div class="ui-field-contain jamaica">
                         <label for="applicantMailParish">Select Parish:</label>
-                        <select class="parish" name="applicantMailParish" id="applicantMailParish" data-mini="true">
+                        <select required class="parish" name="applicantMailParish" id="applicantMailParish" data-mini="true">
                         </select>
                     </div>
 
                     <div class="ui-field-contain jamaica">
                         <label for="applicantMailTown">Town/Postal Zone:</label>
-                        <select class="town" id="applicantMailTown" name="applicantMailTown" data-mini="true"></select>
+                        <select required class="town" id="applicantMailTown" name="applicantMailTown" data-mini="true"></select>
                     </div>
 
                     <div class="ui-field-contain international" style="display:none">
                         <label for="applicantMailPostalCode">Postal Code:</label>
-                        <input type="text" id="applicantMailPostalCode" name="applicantMailPostalCode" placeholder="Enter Postal/ZIP Code">
+                        <input type="text" id="applicantMailPostalCode" name="applicantMailPostalCode" class="postalcode" placeholder="Enter Postal/ZIP Code">
                     </div>
 
                     <div class="ui-field-contain">
@@ -337,7 +337,7 @@
 
                     <div class="ui-field-contain international" style="display:none">
                         <label for="employerPostalCode">Postal Code:</label>
-                        <input type="text" id="employerPostalCode" name="employerPostalCode" placeholder="Enter Postal/ZIP Code">
+                        <input type="text" id="employerPostalCode" name="employerPostalCode" class="postalcode" placeholder="Enter Postal/ZIP Code">
                     </div>
 
                     <div class="ui-field-contain">
@@ -373,15 +373,15 @@
                         <hr />
                         <div class="ui-field-contain office">
                             <label for="applicantRelativeTypePublicOffice0">Type of Public Office</label>
-                            <input type="text" name="applicantRelativeTypePublicOffice0" id="applicantRelativeTypePublicOffice0" value="">
+                            <input required type="text" name="applicantRelativeTypePublicOffice0" id="applicantRelativeTypePublicOffice0" value="">
                         </div>
                         <div class="ui-field-contain name">
                             <label for="applicantRelativeInPublicOfficeName0">Name</label>
-                            <input type="text" name="applicantRelativeInPublicOfficeName0" id="applicantRelativeInPublicOfficeName0" value="">
+                            <input required type="text" name="applicantRelativeInPublicOfficeName0" id="applicantRelativeInPublicOfficeName0" value="">
                         </div>
                         <div class="ui-field-contain address">
                             <label for="applicantRelativeInPublicOfficeAddress0">Address</label>
-                            <input type="text" name="applicantRelativeInPublicOfficeAddress0" id="applicantRelativeInPublicOfficeAddress0" value="">
+                            <input required type="text" name="applicantRelativeInPublicOfficeAddress0" id="applicantRelativeInPublicOfficeAddress0" value="">
                         </div>
                         <div class="ui-field-contain relation">
                             <label for="applicantRelativeInPublicOfficeRelation0">Relation</label>
@@ -960,7 +960,7 @@
                                     </div>
                                     <div class="ui-field-contain cost" title="Cost(Paid/Estimated)">
                                         <label for="accidentCost0">Cost:</label>
-                                        <input type="number" name="accidentCost0" id="accidentCost0" placeholder="Cost (Paid/Estimated)" value="">
+                                        <input required type="number" name="accidentCost0" id="accidentCost0" placeholder="Cost (Paid/Estimated)" value="">
                                     </div>
                                 </div>
                                 <div class="ui-block-b">
@@ -983,13 +983,13 @@
                                     </div>
                                     <div class="ui-field-contain driver">
                                         <label for="accidentDriver0">&nbsp;&nbsp;Driver:</label>
-                                        <input type="text" name="accidentDriver0" id="accidentDriver0" value="">
+                                        <input required type="text" name="accidentDriver0" id="accidentDriver0" value="">
                                     </div>
                                 </div>
                             </div>
                             <div class="ui-field-contain brief">
                                 <label for="accidentBrief0" style="width:9%">Brief Details:</label>
-                                <textarea name="accidentBrief0" id="accidentBrief0" placeholder="Brief Details of Accident/Incident/Losses"></textarea>
+                                <textarea required name="accidentBrief0" id="accidentBrief0" placeholder="Brief Details of Accident/Incident/Losses"></textarea>
                             </div>
                             <div data-role="controlgroup" data-type="horizontal" data-mini="true">
                                 <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left Add">Add Accident</a>
@@ -1214,7 +1214,7 @@
 
                     <div class="ui-field-contain international" style="display:none">
                         <label for="homeRiskAddressPostalCode">Postal Code:</label>
-                        <input type="text" id="homeRiskAddressPostalCode" name="homeRiskAddressPostalCode" placeholder="Enter Postal/ZIP Code">
+                        <input type="text" id="homeRiskAddressPostalCode" name="homeRiskAddressPostalCode" class="postalcode" placeholder="Enter Postal/ZIP Code">
                     </div>
 
                     <div class="ui-field-contain">

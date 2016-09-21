@@ -616,74 +616,20 @@ function setPrimaryEvents(callback) {
     });
 
 
-    //vehicleKeptIn
-    $('input[type=radio][name=vehicleKeptIn]').change(function() {
-        var select_value = $(this).val();
-        if (select_value == 'vehicleKeptInOther') {
-            $('.vehicleKeptInOtherClass').show();
-        } else {
-            $('.vehicleKeptInOtherClass').hide();
-        }
-    });
-
 
 
     $('.countries').change(function() {
-        var select_value = $(this).val();
-        if (select_value == "Jamaica") {
-            $('.address .jamaica').show();
-            $('.address .international').hide();
-            $('.address .international :input').val("");
-            $('.address .parish').prop("required", true);
-            $('.address .town').prop("required", true);
-            $('.address .state').prop("required", false);
-            $('.address .city').prop("required", false);
-        } else {
-            $('.address .jamaica').hide();
-            $('.address .international').show();
-            $('.address .jamaica :input').val("");
-            $('.address .parish').prop("required", false);
-            $('.address .town').prop("required", false);
-            $('.address .state').prop("required", true);
-            $('.address .city').prop("required", true);
-        }
+        var $addressHolder = $(this).closest(".address");
+        var jamaicaSelected = $(this).val() == "Jamaica";
+        $addressHolder.find('.jamaica').css("display", jamaicaSelected ? "" : "none");
+        $addressHolder.find('.international').css("display", !jamaicaSelected ? "" : "none");
+        $addressHolder.find('.state').val('').prop("required", !jamaicaSelected);
+        $addressHolder.find('.city').val('').prop("required", !jamaicaSelected);
+        $addressHolder.find('.parish').val('').prop("required", jamaicaSelected);
+        $addressHolder.find('.town').val('').prop("required", jamaicaSelected);
+        $addressHolder.find('.postalcode').val('').prop("required", !jamaicaSelected);
     });
 
-
-    // $('#applicantHomeCountry').change(function() {
-    //     var select_value = $(this).val();
-    //     if (select_value == "Jamaica") {
-    //         $('#homeAddress .jamaica').show();
-    //         $('#homeAddress .international').hide();
-    //     } else {
-    //         $('#homeAddress .jamaica').hide();
-    //         $('#homeAddress .international').show();
-    //     }
-    // });
-
-
-    // $('#applicantMailCountry').change(function() {
-    //     var select_value = $(this).val();
-    //     if (select_value == "Jamaica") {
-    //         $('#mailingAddress').find('.jamaica').show();
-    //         $('#mailingAddress').find('.international').hide();
-    //     } else {
-    //         $('#mailingAddress').find('.jamaica').hide();
-    //         $('#mailingAddress').find('.international').show();
-    //     }
-    // });
-    //
-    //
-    // $('#employerNationality').change(function() {
-    //     var select_value = $(this).val();
-    //     if (select_value == "Jamaica") {
-    //         $('#employer').find('.jamaica').show();
-    //         $('#employer').find('.international').hide();
-    //     } else {
-    //         $('#employer').find('.jamaica').hide();
-    //         $('#employer').find('.international').show();
-    //     }
-    // });
 
     //general toggle for all on/off sliders
     $('select[data-role="slider"]').change(function() {
@@ -751,7 +697,7 @@ function setSpecialEvents() {
 
         var isValid = true;
         if (IsNext(from, to)) {
-            var curInputs = $(from).find(":input");
+            var curInputs = $(from).find(":input:visible");
 
             //$(".form-group").removeClass("has-error");
             for (var i = 0; i < curInputs.length; i++) {
@@ -764,11 +710,56 @@ function setSpecialEvents() {
                 case '#personal-main-page':
                     if ($('#getTRNDetails').is(":visible")) {
                         isValid = false;
+                        alert("TRN needs to be validated!");
                     }
                     break;
+                    //vehicle-particulars-page
                 case '#vehicle-particulars-page':
-                    if (isValid && $('#vehiclesToBeInsured tbody tr').length === 0)
+                    if (isValid && $('#vehiclesToBeInsured tbody tr').length === 0) {
                         isValid = false;
+                        alert("A Vehicle is required");
+                    }
+                    var mStartDate = new Date($('#motorStartDate').val());
+                    var mCurrentDate = new Date();
+                    if (mStartDate < mCurrentDate) {
+                        $valid = false;
+                        console.log("Start Date must be today or in the future!");
+                        alert("Start Date must be today or in the future!");
+                    }
+                    break;
+                case '#vehicle-insurance-coverage-page':
+                    switch ($('#insuranceCoverage').val()) {
+                        case "mpt":
+                            break;
+                        default:
+                            $('#vehiclesToBeInsured .ValueVehicleValue').each(function(i, obj) {
+                                var vehValue = parseFloat($(this).val());
+                                if (!vehValue || vehValue <= 0) {
+                                    $valid = false;
+                                    var coverage = $("#insuranceCoverage option:selected").text();
+                                    var errorMessage = coverage + " coverage requires a Motor Vehicle with a value";
+                                    console.log(errorMessage);
+                                    alert(errorMessage);
+                                }
+                            });
+                            break;
+                    }
+                    break;
+                case '#vehicle-driver-details-page':
+                    if (!$('#regularDriversId').is(":visible")) {
+                        $valid = false;
+                        console.log("Driver is required");
+                        alert("Driver is required");
+                    }
+                    break;
+                case "#home-property-details-page":
+                    var startDate = new Date($('#homeStartDate').val());
+                    var currentDate = new Date();
+                    if (startDate < currentDate) {
+                        $valid = false;
+                        console.log("Start Date must be today or in the future!");
+                        alert("Start Date must be today or in the future!");
+                    }
                     break;
             }
         }
@@ -1044,7 +1035,7 @@ function insertVehicle(r, rowIndex) {
     }
 
     if (IsDuplicateVehicle(r.chassisNo, rowIndex)) {
-        bootbox.alert('Duplicate Vehicle!');
+        alert('Duplicate Vehicle!');
         return;
     }
 
