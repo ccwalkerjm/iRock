@@ -684,6 +684,8 @@ function setSpecialEvents() {
 
 
     $(document).bind('pagebeforechange', function(e, data) {
+        var currentDate = new Date();
+        var currentDateJson = getDateJson(currentDate);
         var to = data.toPage,
             from = data.options.fromPage;
 
@@ -719,9 +721,10 @@ function setSpecialEvents() {
                         isValid = false;
                         alert("A Vehicle is required");
                     }
-                    var mStartDate = new Date($('#motorStartDate').val());
-                    var mCurrentDate = new Date();
-                    if (mStartDate < mCurrentDate) {
+
+                    var mStartDateJson = getDateJson($('#motorStartDate').val());
+                    if ((mStartDateJson.year * 12 * 31 + mStartDateJson.month * 31 + mStartDateJson.day) <
+                        (currentDateJson.year * 12 * 31 + currentDateJson.month * 31 + currentDateJson.day)) {
                         isValid = false;
                         console.log("Start Date must be today or in the future!");
                         alert("Start Date must be today or in the future!");
@@ -753,9 +756,9 @@ function setSpecialEvents() {
                     }
                     break;
                 case "#home-property-details-page":
-                    var startDate = new Date($('#homeStartDate').val());
-                    var currentDate = new Date();
-                    if (startDate < currentDate) {
+                    var hStartDateJson = getDateJson($('#homeStartDate').val());
+                    if ((hStartDateJson.year * 12 * 31 + hStartDateJson.month * 31 + hStartDateJson.day) <
+                        (currentDateJson.year * 12 * 31 + currentDateJson.month * 31 + currentDateJson.day)) {
                         isValid = false;
                         console.log("Start Date must be today or in the future!");
                         alert("Start Date must be today or in the future!");
@@ -775,6 +778,22 @@ function setSpecialEvents() {
         }
     });
 }
+
+
+function getDateJson(date) {
+    var json = {};
+    if (typeof date === 'string') {
+        json.day = parseInt(date.substring(8, 10));
+        json.month = parseInt(date.substring(5, 7));
+        json.year = parseInt(date.substring(0, 4));
+    } else if (date instanceof Date) {
+        json.day = date.getDate();
+        json.month = date.getMonth() + 1;
+        json.year = date.getFullYear();
+    }
+    return json;
+}
+
 
 function ConvertToJson(r) {
     try {
@@ -1805,6 +1824,7 @@ function loadParishes() {
 function cloneElement(elementGroup) {
     var clone = elementGroup.clone().insertAfter(elementGroup);
     clone.find("input[type=text],input[type=number],textarea").val("");
+    if (clone.tagName === 'SELECT') clone[0].selectedIndex = 0;
     clone.show();
 }
 
