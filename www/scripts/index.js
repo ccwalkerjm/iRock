@@ -94,7 +94,7 @@ function setUserProfile(obj) {
             $('#main-page-login').hide();
             $('#main-page-selection').show();
             ////
-            setVehicleUsedAs();
+            //setVehicleUsedAs();
             //vehicle-all-accidents
             setAllAccidentsYears();
             //validate function
@@ -440,10 +440,10 @@ function setPrimaryEvents(callback) {
     });
 
     //vehicle Used As
-    $('#vehicleUsedAs').change(function() {
-        var select_value = $(this).val();
-        setVehicleUsedAs(select_value);
-    });
+    // $('#vehicleUsedAs').change(function() {
+    //     var select_value = $(this).val();
+    //     setVehicleUsedAs(select_value);
+    // });
 
     ///
     $('#personal-employer-details-page').on('change', '#applicantOccupation', function() {
@@ -477,10 +477,10 @@ function setPrimaryEvents(callback) {
 
 
     //vehicle Used As
-    $('#vehicleUsedAs').change(function() {
-        var select_value = $(this).val();
-        setVehicleUsedAs(select_value);
-    });
+    // $('#vehicleUsedAs').change(function() {
+    //     var select_value = $(this).val();
+    //     setVehicleUsedAs(select_value);
+    // });
 
 
     $('#vehicle-all-accidents').on('click', '.Add', function() {
@@ -1443,11 +1443,14 @@ function setAllAccidentsYears() {
 
 function setVehicleUsedAs(select_value) {
     //hide and uncheck all inexperinecd driver elements
-    $('#InexperiencedDriverBlock input').prop('checked', false); // Unchecks it
-    $('#InexperiencedDriverBlock label, #InexperiencedDriverBlock input').hide();
-
-    $('label[for=21YearsOldPrivateCars], input#21YearsOldPrivateCars').show();
-    $('label[for=24MonthsPrivateLicence], input#24MonthsPrivateLicence').show();
+    //$('#InexperiencedDriverBlock input').prop('checked', false); // Unchecks it
+    // var block = $('#InexperiencedDriverBlock');
+    // block.find('label').hide();
+    // block.find('.inexperiencedDriver').hide();
+    // block.find('#21YearsOldPrivateCars').show();
+    // block.find('label[for=21YearsOldPrivateCars]').show();
+    // block.find('#24MonthsPrivateLicence').show();
+    // block.find('label[for=24MonthsPrivateLicence]').show();
     //$('label[for=a], input#a').hide();
     //show relevant inputs
     // switch (select_value) {

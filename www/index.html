@@ -209,7 +209,7 @@
 
                     <div class="ui-field-contain international" style="display:none">
                         <label for="applicantHomePostalCode">Postal Code:</label>
-                        <input  type="text" id="applicantHomePostalCode" name="applicantHomePostalCode" class="postalcode" placeholder="Enter Postal/ZIP Code">
+                        <input type="text" id="applicantHomePostalCode" name="applicantHomePostalCode" class="postalcode" placeholder="Enter Postal/ZIP Code">
                     </div>
 
                     <div class="ui-field-contain">
@@ -894,32 +894,56 @@
                         </div>
                     </div>
                 </div>
-
-
-
                 <h4>Will anyone driving your motor vehicle:</h4>
-                <div id="InexperiencedDriverBlock" class="ui-grid-a">
+                <div id="InexperiencedDriverBlock" class="ui-grid-c">
                     <div class="ui-block-a">
-                        <fieldset data-role="controlgroup">
-                            <legend>Be under the age of:</legend>
-                            <input class="inexperiencedDriver" type="checkbox" name="21YearsOldPrivateCars" id="21YearsOldPrivateCars">
-                            <label for="21YearsOldPrivateCars">21 Years Old</label>
-                            <input class="inexperiencedDriver" type="checkbox" name="23YearsOldPrivateCommercial" id="23YearsOldPrivateCommercial">
-                            <label for="23YearsOldPrivateCommercial">23 Years Old</label>
-                            <input class="inexperiencedDriver" type="checkbox" name="25YearsOldGeneralCartage" id="25YearsOldGeneralCartage">
-                            <label for="25YearsOldGeneralCartage">25 Years Old</label>
-                        </fieldset>
+                        <label for="21YearsOldPrivateCars">Be under the age of 21 Years Old</label>
                     </div>
                     <div class="ui-block-b">
-                        <fieldset data-role="controlgroup">
-                            <legend>Have Driving Experience less than:</legend>
-                            <input class="inexperiencedDriver" type="checkbox" name="24MonthsPrivateLicence" id="24MonthsPrivateLicence">
-                            <label for="24MonthsPrivateLicence">24 Months Private Licence</label>
-                            <input class="inexperiencedDriver" type="checkbox" name="36MonthsGeneralLicencePrivateCommercial" id="36MonthsGeneralLicencePrivateCommercial">
+                        <select id="21YearsOldPrivateCars" name="21YearsOldPrivateCars" data-role="slider" data-mini="true">
+                                <option value="no" selected>No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+
+                        <!-- <div class="ui-field-contain" id="23YearsOldPrivateCommercial">
+                            <label for="23YearsOldPrivateCommercial">23 Years Old</label>
+                            <select name="23YearsOldPrivateCommercial" data-role="slider" data-mini="true">
+                                <option value="no" selected>No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                        <div class="ui-field-contain" id="25YearsOldGeneralCartage">
+                            <label for="25YearsOldGeneralCartage">25 Years Old</label>
+                            <select name="25YearsOldGeneralCartage" data-role="slider" data-mini="true">
+                                <option value="no" selected>No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div> -->
+
+                    </div>
+                    <div class="ui-block-c">
+                        <label for="24MonthsPrivateLicence">Have Driving Experience less than 24 Months Private Licence</label>
+                    </div>
+                    <div class="ui-block-d">
+                        <select id="24MonthsPrivateLicence" name="24MonthsPrivateLicence" data-role="slider" data-mini="true">
+                                <option value="no" selected>No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+
+                        <!-- <div class="ui-field-contain" id="36MonthsGeneralLicencePrivateCommercial">
                             <label for="36MonthsGeneralLicencePrivateCommercial">36 Months General Licence-Private Commercial</label>
-                            <input class="inexperiencedDriver" type="checkbox" name="5YearsGeneralLicencePublicCommercial" id="5YearsGeneralLicencePublicCommercial">
+                            <select name="36MonthsGeneralLicencePrivateCommercial" data-role="slider" data-mini="true">
+                                <option value="no" selected>No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                        <div class="ui-field-contain" id="5YearsGeneralLicencePublicCommercial">
                             <label for="5YearsGeneralLicencePublicCommercial">5 Years General Licence-Public Commercial</label>
-                        </fieldset>
+                            <select name="5YearsGeneralLicencePublicCommercial" data-role="slider" data-mini="true">
+                                <option value="no" selected>No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div> -->
                     </div>
                 </div>
             </form>
