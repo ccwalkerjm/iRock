@@ -53,7 +53,7 @@
                     Motor Insurance
                 </a>
                 <a id="menu-property" data-role="button" href="#" data-shadow="false" data-theme="none">
-                    Home Ownership Insurance
+                    Home Insurance
                 </a>
                 <a class="exitApp" data-role="button" href="#" data-shadow="false" data-theme="none">
                     Exit Application
@@ -326,13 +326,13 @@
 
                     <div class="ui-field-contain jamaica">
                         <label for="employerParish">Select Parish:</label>
-                        <select required class="parish" name="employerParish" id="employerParish" data-mini="true">
+                        <select class="parish" name="employerParish" id="employerParish" data-mini="true">
                         </select>
                     </div>
 
                     <div class="ui-field-contain jamaica">
                         <label for="employerTown">Town/Postal Zone:</label>
-                        <select required name="employerTown" class="town" id="employerTown" data-mini="true"></select>
+                        <select name="employerTown" class="town" id="employerTown" data-mini="true"></select>
                     </div>
 
                     <div class="ui-field-contain international" style="display:none">
@@ -372,20 +372,20 @@
                         <h4>Relative 1</h4>
                         <hr />
                         <div class="ui-field-contain office">
-                            <label for="applicantRelativeTypePublicOffice0">Type of Public Office</label>
-                            <input required type="text" name="applicantRelativeTypePublicOffice0" id="applicantRelativeTypePublicOffice0" value="">
+                            <label for="applicantRelativePublicOffice0">Type of Public Office</label>
+                            <input required type="text" name="applicantRelativePublicOffice0" id="applicantRelativePublicOffice0" value="">
                         </div>
                         <div class="ui-field-contain name">
-                            <label for="applicantRelativeInPublicOfficeName0">Name</label>
-                            <input required type="text" name="applicantRelativeInPublicOfficeName0" id="applicantRelativeInPublicOfficeName0" value="">
+                            <label for="applicantRelativePublicName0">Name</label>
+                            <input required type="text" name="applicantRelativePublicName0" id="applicantRelativePublicName0" value="">
                         </div>
                         <div class="ui-field-contain address">
-                            <label for="applicantRelativeInPublicOfficeAddress0">Address</label>
-                            <input required type="text" name="applicantRelativeInPublicOfficeAddress0" id="applicantRelativeInPublicOfficeAddress0" value="">
+                            <label for="applicantRelativePublicAddress0">Address</label>
+                            <input required type="text" name="applicantRelativePublicAddress0" id="applicantRelativePublicAddress0" value="">
                         </div>
                         <div class="ui-field-contain relation">
-                            <label for="applicantRelativeInPublicOfficeRelation0">Relation</label>
-                            <select name="applicantRelativeInPublicOfficeRelation0" id="applicantRelativeInPublicOfficeRelation0">
+                            <label for="applicantRelativePublicRelation0">Relation</label>
+                            <select name="applicantRelativePublicRelation0" id="applicantRelativePublicRelation0">
                                 <option value="spouse">Spouse</option>
                                 <option value="child">Child</option>
                             </select>
@@ -897,53 +897,22 @@
                 <h4>Will anyone driving your motor vehicle:</h4>
                 <div id="InexperiencedDriverBlock" class="ui-grid-c">
                     <div class="ui-block-a">
-                        <label for="21YearsOldPrivateCars">Be under the age of 21 Years Old</label>
+                        <label for="InexperiencedDriverAge21PrivateCars">Be under the age of 21 Years Old</label>
                     </div>
                     <div class="ui-block-b">
-                        <select id="21YearsOldPrivateCars" name="21YearsOldPrivateCars" data-role="slider" data-mini="true">
-                                <option value="no" selected>No</option>
-                                <option value="yes">Yes</option>
-                            </select>
-
-                        <!-- <div class="ui-field-contain" id="23YearsOldPrivateCommercial">
-                            <label for="23YearsOldPrivateCommercial">23 Years Old</label>
-                            <select name="23YearsOldPrivateCommercial" data-role="slider" data-mini="true">
-                                <option value="no" selected>No</option>
-                                <option value="yes">Yes</option>
-                            </select>
-                        </div>
-                        <div class="ui-field-contain" id="25YearsOldGeneralCartage">
-                            <label for="25YearsOldGeneralCartage">25 Years Old</label>
-                            <select name="25YearsOldGeneralCartage" data-role="slider" data-mini="true">
-                                <option value="no" selected>No</option>
-                                <option value="yes">Yes</option>
-                            </select>
-                        </div> -->
-
+                        <select id="InexperiencedDriverAge21PrivateCars" name="InexperiencedDriverAge21PrivateCars" data-role="slider" data-mini="true">
+                            <option value="no" selected>No</option>
+                            <option value="yes">Yes</option>
+                        </select>
                     </div>
                     <div class="ui-block-c">
-                        <label for="24MonthsPrivateLicence">Have Driving Experience less than 24 Months Private Licence</label>
+                        <label for="InexperiencedDriver24MonthsPrivate">Have Driving Experience less than 24 Months Private Licence</label>
                     </div>
                     <div class="ui-block-d">
-                        <select id="24MonthsPrivateLicence" name="24MonthsPrivateLicence" data-role="slider" data-mini="true">
-                                <option value="no" selected>No</option>
-                                <option value="yes">Yes</option>
-                            </select>
-
-                        <!-- <div class="ui-field-contain" id="36MonthsGeneralLicencePrivateCommercial">
-                            <label for="36MonthsGeneralLicencePrivateCommercial">36 Months General Licence-Private Commercial</label>
-                            <select name="36MonthsGeneralLicencePrivateCommercial" data-role="slider" data-mini="true">
-                                <option value="no" selected>No</option>
-                                <option value="yes">Yes</option>
-                            </select>
-                        </div>
-                        <div class="ui-field-contain" id="5YearsGeneralLicencePublicCommercial">
-                            <label for="5YearsGeneralLicencePublicCommercial">5 Years General Licence-Public Commercial</label>
-                            <select name="5YearsGeneralLicencePublicCommercial" data-role="slider" data-mini="true">
-                                <option value="no" selected>No</option>
-                                <option value="yes">Yes</option>
-                            </select>
-                        </div> -->
+                        <select id="InexperiencedDriver24MonthsPrivate" name="InexperiencedDriver24MonthsPrivate" data-role="slider" data-mini="true">
+                            <option value="no" selected>No</option>
+                            <option value="yes">Yes</option>
+                        </select>
                     </div>
                 </div>
             </form>
@@ -1483,7 +1452,7 @@
                         </p>
                     </div>
                     <div class="ui-field-contain">
-                        <label for="homeInsurancePropertySum">The Total Sum Insured:</label>
+                        <label for="homeInsurancePropertySum">The Total Buildings and Strictures Insured:</label>
                         <input type="text" name="homeInsurancePropertySum" id="homeInsurancePropertySum" readonly value="">
                     </div>
 
@@ -1552,7 +1521,7 @@
                     </div>
 
                     <div class="ui-field-contain">
-                        <label for="HomeInsuranceContentTotalAmount">The Total Sum Insured:</label>
+                        <label for="HomeInsuranceContentTotalAmount">The Total Content Insured:</label>
                         <input type="text" name="HomeInsuranceContentTotalAmount" id="HomeInsuranceContentTotalAmount" value="" readonly>
                     </div>
                 </div>
@@ -1594,7 +1563,7 @@
                         </div>
                     </div>
                     <div class="ui-field-contain">
-                        <label for="HomeAllRiskTotalAmount">Total Sum Insured:</label>
+                        <label for="HomeAllRiskTotalAmount">Total All Risks Insured:</label>
                         <input type="text" name="HomeAllRiskTotalAmount" id="HomeAllRiskTotalAmount" value="" readonly>
                     </div>
                     <hr />
@@ -1827,6 +1796,7 @@
     <script src="scripts/platformOverrides.js"></script>
     <!--Custom js-->
     <script src="scripts/ironrockcloudservice.js"></script>
+    <script src="scripts/countries.js"></script>
     <script src="scripts/index.js"></script>
 
 </body>

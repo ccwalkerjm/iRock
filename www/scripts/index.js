@@ -523,12 +523,6 @@ function setPrimaryEvents(callback) {
         SetHomeAllRiskInsuredValue();
     });
 
-
-    $('#HomeAllRiskInsured').on('keyup', '.article-value input', function() {
-        SetHomeAllRiskInsuredValue();
-    });
-
-
     //HomeInsurance
     $('#homeInsuranceProperty').on('click', '.Add', function() {
         var elementGroup = $(this).closest('.homeInsurancePropertyItems');
@@ -550,18 +544,27 @@ function setPrimaryEvents(callback) {
         SetHomeInsuranceValue();
     });
 
+    $('#HomeAllRiskInsured').on('keyup', '.article-value input', function() {
+        SetHomeAllRiskInsuredValue();
+    });
+
     $('#homeInsuranceProperty').on('keyup', '.article-value input', function() {
         SetHomeInsuranceValue();
     });
 
 
     $('#HomeInsuranceContent .article-value').on('keyup', 'input', function() {
+        SetContentTotalAmount();
+    });
+
+    //set home insurance values
+    function SetContentTotalAmount() {
         var valList = [];
         $('#HomeInsuranceContent .article-value').find('input').each(function(index, element) {
             valList.push($(element).val());
         });
         $('#HomeInsuranceContentTotalAmount').val(GetTotal(valList));
-    });
+    }
 
 
     $('#publicofficerelation').on('click', '.Add', function() {
@@ -620,14 +623,15 @@ function setPrimaryEvents(callback) {
 
     $('.countries').change(function() {
         var $addressHolder = $(this).closest(".address");
+        var isRequiredNecessary = $addressHolder.attr('id') != "employer";
         var jamaicaSelected = $(this).val() == "Jamaica";
         $addressHolder.find('.jamaica').css("display", jamaicaSelected ? "" : "none");
         $addressHolder.find('.international').css("display", !jamaicaSelected ? "" : "none");
-        $addressHolder.find('.state').val('').prop("required", !jamaicaSelected);
-        $addressHolder.find('.city').val('').prop("required", !jamaicaSelected);
-        $addressHolder.find('.parish').val('').prop("required", jamaicaSelected);
-        $addressHolder.find('.town').val('').prop("required", jamaicaSelected);
-        $addressHolder.find('.postalcode').val('').prop("required", !jamaicaSelected);
+        $addressHolder.find('.state').val('').prop("required", isRequiredNecessary && !jamaicaSelected);
+        $addressHolder.find('.city').val('').prop("required", isRequiredNecessary && !jamaicaSelected);
+        $addressHolder.find('.parish').val('').prop("required", isRequiredNecessary && jamaicaSelected);
+        $addressHolder.find('.town').val('').prop("required", isRequiredNecessary && jamaicaSelected);
+        $addressHolder.find('.postalcode').val('').prop("required", isRequiredNecessary && !jamaicaSelected);
     });
 
 
@@ -1804,6 +1808,15 @@ function loadCountriesOptions() {
             selectObj.append(optionStr);
         });
     });
+    //load nationality separately
+    var nationality = $('#applicantNationality').empty();
+    $.each(_countries, function(i, country) {
+        if (country.name == 'Jamaica') {
+            nationality.append('<option value="' + country.name + '" selected>' + country.name + '</option>');
+        } else {
+            nationality.append('<option value="' + country.name + '">' + country.name + '</option>');
+        }
+    });
 }
 
 function loadParishes() {
@@ -1825,9 +1838,17 @@ function loadParishes() {
 
 //clone element
 function cloneElement(elementGroup) {
-    var clone = elementGroup.clone().insertAfter(elementGroup);
+    var clone = elementGroup.clone();
     clone.find("input[type=text],input[type=number],textarea").val("");
-    if (clone.tagName === 'SELECT') clone[0].selectedIndex = 0;
+    var selectElements = clone.find("select");
+    selectElements.each(function(idx, obj) {
+        $(obj).closest('.ui-select').replaceWith($(obj));
+        $(obj)[0].selectedIndex = 0;
+    });
+    clone.insertAfter(elementGroup);
+    selectElements.parent().enhanceWithin();
+
+    //if (clone.tagName === 'SELECT') clone[0].selectedIndex = 0;
     clone.show();
 }
 
