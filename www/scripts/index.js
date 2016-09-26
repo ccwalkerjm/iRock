@@ -266,7 +266,7 @@ function setPrimaryEvents(callback) {
         //var formData = JSON.stringify(formData);
         //console.log(formData);
         loadingSpinner(true, $(this));
-        g_ironrock_service.submitQuote2(formData, function(err, r) {
+        g_ironrock_service.submitQuote(formData, function(err, r) {
             loadingSpinner();
             if (err) {
                 alert("error: " + err.message);
