@@ -37,7 +37,7 @@ function onDeviceReady() {
     ////
     loadingSpinner(true, $('#main-page'));
 
-    g_ironrock_service = new ironrockcloudservice(function(err, $this) {
+    g_ironrock_service = new ironrockcloudservice(ENVIRONMENT_TYPE_PRODUCTION, function(err, $this) {
         if (err) {
             loadingSpinner();
             g_ironrock_service.signoff();
