@@ -77,7 +77,7 @@ function setBrokerLogo(imgData) {
 function setUserProfile(obj) {
     obj = obj || g_ironrock_service;
     g_profile = obj.getProfile(); //data;
-    if (g_profile.brokerDetails && g_profile.brokerDetails.logo) {
+    if (g_profile && g_profile.brokerDetails && g_profile.brokerDetails.logo) {
         setBrokerLogo(g_profile.brokerDetails.logo);
     } else {
         setBrokerLogo();
@@ -1735,7 +1735,7 @@ function setmenu(menu_list, menu_header) {
         logoLink.attr('style', 'border:none;background-color: transparent;');
         logoLink.attr('href', '#');
         logoLink.addClass('home');
-        if (g_profile.brokerDetails && g_profile.brokerDetails.logo) {
+        if (g_profile && g_profile.brokerDetails && g_profile.brokerDetails.logo) {
             var logo = $('<img/>').attr('border', '0').attr('alt', '');
             logo.attr('src', g_profile.brokerDetails.logo);
             logo.attr('style', 'vertical-align:middle;margin-top:-10px;height:30px');
