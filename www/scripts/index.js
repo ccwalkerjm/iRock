@@ -1,6 +1,6 @@
 var _IronRockPreliminaryData = "PreliminaryData";
 var g_ironrock_service; //AWS services
-var g_profile;
+var g_profile = {};
 
 var g_signatureChangeCount = 0; //signature based data;
 
@@ -37,7 +37,7 @@ function onDeviceReady() {
     ////
     loadingSpinner(true, $('#main-page'));
 
-    g_ironrock_service = new ironrockcloudservice(ENVIRONMENT_TYPE_PRODUCTION, function(err, $this) {
+    g_ironrock_service = new ironrockcloudservice(ENVIRONMENT_TYPE_TESTING, function(err, $this) {
         if (err) {
             loadingSpinner();
             g_ironrock_service.signoff();
@@ -132,8 +132,9 @@ function setPrimaryEvents(callback) {
                 loadingSpinner();
                 alert(err.message);
             } else {
-                setUserProfile($this);
-                //location.reload();
+                //setUserProfile($this);                
+                $("form").trigger('reset');
+                window.location = "index.html";
             }
         });
     });
@@ -205,22 +206,15 @@ function setPrimaryEvents(callback) {
 
         var id = $('#applicantTRN').val();
         g_ironrock_service.getDriverLicenseDetails(id, function(err, r) {
+            loadingSpinner();
             if (err) {
-                loadingSpinner();
-                callback(err);
+                alert(err.message);
             } else {
                 //success handling
-                loadingSpinner();
                 //var json = JSON.parse(r);
                 r = ConvertToJson(r);
-                if (r.error_message) {
-                    alert("Invalid ID!!");
-                } else if (r.Message) {
-                    alert("Invalid ID!!");
-                } else {
-                    r.id = id;
-                    populateApplicant(r);
-                }
+                r.id = id;
+                populateApplicant(r);
             }
         });
 
@@ -268,22 +262,13 @@ function setPrimaryEvents(callback) {
         loadingSpinner(true, $(this));
         g_ironrock_service.submitQuote(formData, function(err, r) {
             loadingSpinner();
-            if (err) {
-                alert("error: " + err.message);
-                return;
-            }
-
+            if (err) return                 alert("error: " + err.message);
             //var r = JSON.parse(data);
             r = ConvertToJson(r);
-            if (!r.success) {
-                console.log(r);
-                alert(r.error_message ? r.error_message : '' + r.Message ? r.Message : '');
-            } else {
-                loadQuotation(r);
-                $('#page-signature').find('[data-role=footer] a').hide();
-                $('#clear-canvas').hide();
-                $('#submit-btn').hide();
-            }
+            loadQuotation(r);
+            $('#page-signature').find('[data-role=footer] a').hide();
+            $('#clear-canvas').hide();
+            $('#submit-btn').hide();
         });
 
     });
@@ -378,13 +363,13 @@ function setPrimaryEvents(callback) {
         //set loading
         loadingSpinner(true, $(this));
         //use lambda to get vehcile details
-        g_ironrock_service.getVehicleDetails(plateno, chassisno, function(err, data) {
+        g_ironrock_service.getVehicleDetails(plateno, chassisno, function(err, r) {
             loadingSpinner();
             if (err) {
-                alert("Err:" + err.message);
+                alert(err.message);
             } else {
                 //var json = JSON.parse(r);
-                r = ConvertToJson(data);
+                r = ConvertToJson(r);
                 if (r.error_message || r.Message) {
                     if (confirm("Chassis/Plate Number Not Found! Press OK to enter the details manually?")) {
                         $('#queryVehicleAdd').show();
@@ -879,7 +864,7 @@ function IsNext(fromPage, toPage) {
 function addDriver($this, id, callback) {
     loadingSpinner(true, $this);
 
-    g_ironrock_service.getDriverLicenseDetails(id, function(err, json) {
+    g_ironrock_service.getDriverLicenseDetails(id, function(err, r) {
         if (err) {
             loadingSpinner();
             callback(err);
@@ -887,15 +872,8 @@ function addDriver($this, id, callback) {
             //success handling
             loadingSpinner();
             //var json = JSON.parse(r);
-            json = ConvertToJson(json);
-            if (json.error_message) {
-                callback(new Error("Invalid ID!!"));
-            } else if (json.Message) {
-                callback(new Error("Invalid ID!!"));
-            } else {
-                callback(null, json);
-            }
-
+            r = ConvertToJson(r);
+            callback(null, r);
         }
     });
 }
