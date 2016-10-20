@@ -37,7 +37,7 @@ function onDeviceReady() {
     ////
     loadingSpinner(true, $('#main-page'));
 
-    g_ironrock_service = new ironrockcloudservice(ENVIRONMENT_TYPE_TESTING, function(err, $this) {
+    g_ironrock_service = new ironrockcloudservice(ENVIRONMENT_TYPE_DEVELOPMENT, function(err, $this) {
         if (err) {
             loadingSpinner();
             g_ironrock_service.signoff();
@@ -132,7 +132,7 @@ function setPrimaryEvents(callback) {
                 loadingSpinner();
                 alert(err.message);
             } else {
-                //setUserProfile($this);                
+                //setUserProfile($this);
                 $("form").trigger('reset');
                 window.location = "index.html";
             }
