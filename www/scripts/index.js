@@ -37,7 +37,7 @@ function onDeviceReady() {
     ////
     loadingSpinner(true, $('#main-page'));
 
-    g_ironrock_service = new ironrockcloudservice(ENVIRONMENT_TYPE_DEVELOPMENT, function(err, $this) {
+    g_ironrock_service = new ironrockcloudservice(ENVIRONMENT_TYPE_PRODUCTION, function(err, $this) {
         if (err) {
             loadingSpinner();
             g_ironrock_service.signoff();
@@ -823,19 +823,20 @@ function setGroupLimits(policy_prefix) {
     });
     var thirdPartyLimit = $('#thirdPartyLimit').empty();
     $.each(group_limits, function(idx, value) {
-        if (vehValue >= options.limit_group_cutoff_value) {
-            if (value.toLowerCase().indexOf("and above") >= 0 ||
-                (value.toLowerCase().indexOf("under") < 0 &&
-                    value.toLowerCase().indexOf("up to") < 0)) {
-                thirdPartyLimit.append('<option value="' + value + '">' + value + '</option>');
-            }
-        } else {
-            if (value.toLowerCase().indexOf("under") >= 0 ||
-                value.toLowerCase().indexOf("up to") >= 0 ||
-                value.toLowerCase().indexOf("and above") < 0) {
-                thirdPartyLimit.append('<option value="' + value + '">' + value + '</option>');
-            }
-        }
+        thirdPartyLimit.append('<option value="' + value + '">' + value + '</option>');
+        // if (vehValue >= options.limit_group_cutoff_value) {
+        //     if (value.toLowerCase().indexOf("and above") >= 0 ||
+        //         (value.toLowerCase().indexOf("under") < 0 &&
+        //             value.toLowerCase().indexOf("up to") < 0)) {
+        //         thirdPartyLimit.append('<option value="' + value + '">' + value + '</option>');
+        //     }
+        // } else {
+        //     if (value.toLowerCase().indexOf("under") >= 0 ||
+        //         value.toLowerCase().indexOf("up to") >= 0 ||
+        //         value.toLowerCase().indexOf("and above") < 0) {
+        //         thirdPartyLimit.append('<option value="' + value + '">' + value + '</option>');
+        //     }
+        // }
     });
 }
 
