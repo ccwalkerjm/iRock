@@ -37,7 +37,7 @@ function onDeviceReady() {
     ////
     loadingSpinner(true, $('#main-page'));
 
-    g_ironrock_service = new ironrockcloudservice(ENVIRONMENT_TYPE_PRODUCTION, function(err, $this) {
+    g_ironrock_service = new ironrockcloudservice(ENVIRONMENT_TYPE_DEVELOPMENT, function(err, $this) {
         if (err) {
             loadingSpinner();
             g_ironrock_service.signoff();
@@ -404,6 +404,7 @@ function setPrimaryEvents(callback) {
     $('#insuranceCoverage').change(function() {
         var options = ConvertToJson(localStorage.getItem(_IronRockPreliminaryData));
         var usages;
+        setGroupLimits($(this).val());
         switch ($(this).val()) {
             case "mpc":
                 usages = options.usagelist_mpc;
@@ -796,6 +797,48 @@ function ConvertToJson(r) {
     return r;
 }
 
+//set group limits
+function setGroupLimits(policy_prefix) {
+    var options = ConvertToJson(localStorage.getItem(_IronRockPreliminaryData));
+    var group_limits;
+
+    switch (policy_prefix) {
+        case "mpc":
+            group_limits = options.limit_group_mpc.groups;
+            break;
+        case "mptft":
+            group_limits = options.limit_group_mptft.groups;
+            break;
+        case "mpt":
+            group_limits = options.limit_group_mpt.groups;
+            break;
+        default:
+            group_limits = [];
+            break;
+    }
+
+    var vehValue = 0;
+    $('#vehiclesToBeInsured .ValueVehicleValue').each(function(i, obj) {
+        vehValue += parseFloat($(this).val());
+    });
+    var thirdPartyLimit = $('#thirdPartyLimit').empty();
+    $.each(group_limits, function(idx, value) {
+        if (vehValue >= options.limit_group_cutoff_value) {
+            if (value.toLowerCase().indexOf("and above") >= 0 ||
+                (value.toLowerCase().indexOf("under") < 0 &&
+                    value.toLowerCase().indexOf("up to") < 0)) {
+                thirdPartyLimit.append('<option value="' + value + '">' + value + '</option>');
+            }
+        } else {
+            if (value.toLowerCase().indexOf("under") >= 0 ||
+                value.toLowerCase().indexOf("up to") >= 0 ||
+                value.toLowerCase().indexOf("and above") < 0) {
+                thirdPartyLimit.append('<option value="' + value + '">' + value + '</option>');
+            }
+        }
+    });
+}
+
 
 
 
@@ -1134,16 +1177,17 @@ function reIndexVehicles() {
         xRow.find('.ValueVehicleID').attr("id", CaptionBaseVehicleID + index).attr("name", CaptionBaseVehicleID + index);
         sumInsured = sumInsured + parseFloat(xRow.find('.ValueVehicleValue').val());
     });
-    var thirdPartyLimit = $('#thirdPartyLimit').empty();
-    if (sumInsured < 2000000) {
-        thirdPartyLimit.append('<option value="standard1">Standard Limits-$3M/$5M/$5M</option>');
-        thirdPartyLimit.append('<option value="increased1Option1">Increased Limits-$5M/$7.5M/$5M</option>');
-        thirdPartyLimit.append('<option value="increased1Option2">Increased Limits-$5M/10M/$5M</option>');
-        thirdPartyLimit.append('<option value="increased1Option3">Increased Limits-$10M/$10M/$10M</option>');
-    } else {
-        thirdPartyLimit.append('<option value="standard2">Standard Limits-$5M/$10M/$5M</option>');
-        thirdPartyLimit.append('<option value="increased2Option1">Increased Limits-$10M/$10M/$10M</option>');
-    }
+    setGroupLimits($('#insuranceCoverage').val());
+    //var thirdPartyLimit = $('#thirdPartyLimit').empty();
+    // if (sumInsured < 2000000) {
+    //     thirdPartyLimit.append('<option value="standard1">Standard Limits-$3M/$5M/$5M</option>');
+    //     thirdPartyLimit.append('<option value="increased1Option1">Increased Limits-$5M/$7.5M/$5M</option>');
+    //     thirdPartyLimit.append('<option value="increased1Option2">Increased Limits-$5M/10M/$5M</option>');
+    //     thirdPartyLimit.append('<option value="increased1Option3">Increased Limits-$10M/$10M/$10M</option>');
+    // } else {
+    //     thirdPartyLimit.append('<option value="standard2">Standard Limits-$5M/$10M/$5M</option>');
+    //     thirdPartyLimit.append('<option value="increased2Option1">Increased Limits-$10M/$10M/$10M</option>');
+    // }
 }
 
 
